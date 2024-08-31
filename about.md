@@ -10,7 +10,7 @@ As a Software Engineer, I focus primarily on designing, implementing and deployi
 
 I value work environments where meritocracy, proactivity and open communication are valued - being a direct communicator and an individual with a strong focus on problem-solving and deliverables, I find it far more important to arrive at an optimal solution based on analytical and factual inputs, rather than to preserve the status quo or protect anyone's ego - including mine. It is not uncommon for me to hold strong opinions and get into heated discussions, however I am also able to pivot and support an idea I initially disagreed with in face of facts and evidence.
 
-# Proffesional experience
+# Professional experience
 
 My first proffessional experiences date back to mid-2016, and I have been continuously present on the job market since mid-2017, initially as a working student. The first projects I participated in were exceptionally diverse - from simple REST APIs, through data science to working with compilers - and required me to learn new technology stacks from the ground up - be it Assembly language for an exotic architecture, Python, Java/Kotlin. This ability to adapt to various technologies and languages shaped my mindset as a Software Engineer, seeing frameworks and languages as tools meant to accomplish a task at hand and which can be learnt, rather than something to be used for the sake of using it, and committing oneself to only one of them.
 
