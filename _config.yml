@@ -37,7 +37,7 @@ plugins:
   - jemoji
 timezone: Europe/Warsaw
 lsi: false
-safe: true
+safe: false
 source: .
 incremental: false
 highlighter: rouge
