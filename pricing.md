@@ -48,6 +48,8 @@ For best value, consider the areas I am most experienced in:
 
 To learn about my current availability, please contact me via LinkedIn or e-mail.
 
+Please do not hesitate to let me know how would you like to verify my qualifications before starting collaboration. I am open to provide references or participate in a relevant recruitment process if needed, such as system design sessions or live coding, however I might not be interested in time-consuming processes free of charge. Especially, I generally withdraw from processes requiring me to complete a "homework" assignment, as the scope usually requires from several hours to days.
+
 ## Disclaimer
 
 Please note that the contents of this website, and especially of this page, do not constitute a commercial offer as specified by article 66 of Polish Civil Code. The purpose of above price lists is to provide prospective clients with an estimated cost of my services, however the final rates are subject to negotiation by either party, depending on circumstances.
