@@ -27,8 +27,8 @@ I have a MSc degree in Applied Computer Science, attained in 2019 at AGH Univers
 
 ## Trivia
 
-- Many times I had been asked what made me choose this odd `superdurszlak` nickname. The story is rather simple - I was looking for a username for my Gmail account and `name.surname@gmail.com` was already taken. Not being a fan of email addresses including digits, I typed the first thing that came to my mind and hat similar initials to mine - and it was free!
-- Even though my nickname includes a reference to a sieve - `durszlak` in Polish - I am not affiliated with Flying Spaghetti Monster followers in any way :)
-- I find it challenging to navigate work environments where direct communication is to be avoided, and a lot of things are to be read between the lines. In such circumstances, it is almost guaranteed I would commit one faux pas after another and not even realise it.
+- Many times I had been asked what made me choose this odd `superdurszlak` nickname. The story is rather simple - I was looking for a username for my Gmail account and `name.surname@gmail.com` was already taken. Not being a fan of email addresses including digits, I typed the first thing that came to my mind and had similar initials to mine - and it was free!
+- Even though my nickname includes a reference to a sieve - `durszlak` in Polish - I am not affiliated with Flying Spaghetti Monster followers in any way :wink:
+- I find it challenging to navigate work environments where direct communication is to be avoided, and a lot of things should be read between the lines. In such circumstances, it is almost guaranteed I would commit one faux pas after another and not even realise it.
 - Yes, I am aware of the [rather embarrassing meaning](https://en.wiktionary.org/wiki/%D0%B4%D1%83%D1%80%D0%B0%D0%BA) of my last name - and haven't changed it regardless. 
 

@@ -28,7 +28,7 @@ For best value, consider the areas I am most experienced in:
 | Service | <nobr>Rate in PLN</nobr> | <nobr>Rate in EUR</nobr> | Unit | Notes |
 | :---- | ----: | ----: | :---: | :---- |
 | Systems Auditing & Consultancy | 250-500 | 60-120 | hourly | Includes system analysis, knowledge transfer meetings, design work, preparation of reports, documentation and diagramming, participation in / facilitation of brainstorming and similar sessions |
-| Trainings | >= 2000 | >= 500 | session | Recordable sessions, rates depend on scope and audience size |
+| Trainings | $\ge$ 2000 | $\ge$ 500 | session | Recordable sessions, rates depend on scope and audience size |
 | Software Engineering | 200-300 | 45-75 | hourly | Includes development work, project documentation, setting up project infrastructure, attending Scrum / Kanban and similar meetings |
 
 ### Time management fees
@@ -41,8 +41,8 @@ For best value, consider the areas I am most experienced in:
 | Uproductive meeting fee | 500 | 120 | occurrence | Required to attend a meeting which lacks agenda, and/or not concluded with action items, decisions nor other constructive output | Only require attendance when agenda and expected outputs are set |
 | Ad-hoc meeting attendance fee | 500 | 120 | occurrence | Required to attend a meeting scheduled or re-scheduled to less than 24h / 1 full business day ahead | Schedule meetings with required presence at least 24h / 1 business day ahead |
 | Ad-hoc meeting cancellation fee | 300 | 75 | occurrence | A previously agreed meeting with required attendance is cancelled less than 24h / 1 full business day ahead | Avoid last-minute changes and meeting cancellations |
-| Micromanagement fee | >= 250 | >= 120 | occurrence | A contractor's representative e.g. project manager does not respect professional boundaries and exerts excessive control | Agreements on timelines (if needed) and functional / non-functional requirements should be made and documented ahead, ongoing status updates should be limited to typical Scrum / Kanban practices |
-| Off-hours services fee | >= 250 | >= 60 | hourly | Required to provide services before 7am CET/CEST or after 6pm CET / CEST | Only request services to be provided within 7am-6pm CET / CEST | 
+| Micromanagement fee | $\ge$ 250 | $\ge$ 120 | occurrence | A contractor's representative e.g. project manager does not respect professional boundaries and exerts excessive control | Agreements on timelines (if needed) and functional / non-functional requirements should be made and documented ahead, ongoing status updates should be limited to typical Scrum / Kanban practices |
+| Off-hours services fee | $\ge$ 250 | $\ge$ 60 | hourly | Required to provide services before 7am CET/CEST or after 6pm CET / CEST | Only request services to be provided within 7am-6pm CET / CEST | 
 
 ## Availability
 

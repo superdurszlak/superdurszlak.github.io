@@ -32,6 +32,9 @@ linkedin_username: szymon-durak
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-spaceship
+  - jekyll-toc
+  - jemoji
 timezone: Europe/Warsaw
 lsi: false
 safe: true
@@ -43,6 +46,13 @@ gist:
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "posts" # previously `post` in Jekyll 2.2.
+    values:
+      toc: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.
