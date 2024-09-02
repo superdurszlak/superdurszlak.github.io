@@ -14,3 +14,22 @@ layout: default
 <p><i> Posted on {{ page.date | date: '%a, %Y-%m-%d' }} | {{ read_duration }}m to read</i></p>
 
 {{ content | toc }}
+
+{% if site.giscus.enabled %}
+<script src="https://giscus.app/client.js"
+        data-repo="{{ site.giscus.data_repo }}"
+        data-repo-id="{{ site.giscus.data_repo_id }}"
+        data-category="{{ site.giscus.data_category }}"
+        data-category-id="{{ site.giscus.data_category_id }}"
+        data-mapping="{{ site.giscus.data_mapping }}"
+        data-strict="{{ site.giscus.data_strict }}"
+        data-reactions-enabled="{{ site.giscus.data_reactions_enabled }}"
+        data-emit-metadata="{{ site.giscus.data_emit_metadata }}"
+        data-input-position="{{ site.giscus.data_input_position }}"
+        data-theme="{{ site.giscus.data_theme }}"
+        data-lang="{{ site.giscus.data_lang }}"
+        data-loading="{{ site.giscus.data_loading }}"
+        crossorigin="{{ site.giscus.cross_origin }}"
+        async>
+</script>
+{% endif %}

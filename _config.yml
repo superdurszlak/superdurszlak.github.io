@@ -54,6 +54,21 @@ defaults:
     values:
       permalink: /posts/:slug/
       toc: true
+giscus:
+  enabled: true
+  data_repo: "superdurszlak/superdurszlak.github.io"
+  data_repo_id: "R_kgDOMq4ilg"
+  data_category: "Announcements"
+  data_category_id: "DIC_kwDOMq4ils4CiJ6m"
+  data_mapping: "url"
+  data_strict: "1"
+  data_reactions_enabled: "1"
+  data_emit_metadata: "0"
+  data_input_position: "top"
+  data_theme: "light"
+  data_lang: "en"
+  data_loading: "lazy"
+  cross_origin: "anonymous"
 
 # Exclude from processing.
 # The following items will not be processed, by default.

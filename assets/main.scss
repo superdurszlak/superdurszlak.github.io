@@ -1,5 +1,5 @@
 ---
 ---
-$content-width: max(75%, 1080px);
+$content-width: max(75%, min(100%, 800px));
 
 @import "{{ site.theme }}";
