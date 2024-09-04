@@ -313,6 +313,7 @@ DEPENDENCIES
   github-pages
   http_parser.rb (~> 0.6.0)
   jekyll-feed (~> 0.12)
+  jekyll-seo-tag (~> 2.8.0)
   jekyll-spaceship (~> 0.10)
   jekyll-toc (~> 0.19)
   jemoji (~> 0.13)
