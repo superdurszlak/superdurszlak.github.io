@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Distributed Systems by Szymon Durak
+title: superdurszlak - Distributed Systems by Szymon Durak
 email: szymon@superdurszlak.dev
 tagline: Szymon Durak - a Software Engineer for distributed systems.
 description: >- # this means to ignore newlines until "baseurl:"
@@ -61,6 +61,12 @@ defaults:
       path: ""
     values:
       image: 
+        path: /assets/images/logo.svg
+        alt: >
+          Website logo, in the form of a dark teal colander with light gray inside. 
+          Within the colander, dark teal 'SD' initials are visible, referring to both 
+          'superdurszlak' nickname and 'Szymon Durak' full name, stylized after a diagram 
+          in reference to distributed systems and system design.
       seo:
         type: WebSite
       seo_description_max_words: 150
