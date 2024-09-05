@@ -18,13 +18,14 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Distributed Systems by Szymon Durak
+title: superdurszlak - Distributed Systems by Szymon Durak
 email: szymon@superdurszlak.dev
+tagline: Szymon Durak - a Software Engineer for distributed systems.
 description: >- # this means to ignore newlines until "baseurl:"
   I am a Software Engineer operating in Kraków, Poland, and specialized in designing,
   implementing and deploying distributed systems.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "www.superdurszlak.dev" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://www.superdurszlak.dev" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: superdurszlak
 linkedin_username: szymon-durak
 
@@ -32,6 +33,7 @@ linkedin_username: szymon-durak
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
   - jekyll-spaceship
   - jekyll-toc
   - jemoji
@@ -47,13 +49,29 @@ kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
 defaults:
-  -
-    scope:
+  - scope:
       path: "" # an empty string here means all files in the project
       type: "posts" # previously `post` in Jekyll 2.2.
     values:
       permalink: /posts/:slug/
       toc: true
+      seo:
+        type: BlogPosting
+  - scope:
+      path: ""
+    values:
+      image: 
+        path: /assets/images/logo.svg
+        alt: >
+          Website logo, in the form of a dark teal colander with light gray inside. 
+          Within the colander, dark teal 'SD' initials are visible, referring to both 
+          'superdurszlak' nickname and 'Szymon Durak' full name, stylized after a diagram 
+          in reference to distributed systems and system design.
+      seo:
+        type: WebSite
+      seo_description_max_words: 150
+
+# Giscus properties
 giscus:
   enabled: true
   data_repo: "superdurszlak/superdurszlak.github.io"
@@ -69,6 +87,13 @@ giscus:
   data_lang: "en"
   data_loading: "lazy"
   cross_origin: "anonymous"
+
+# SEO
+social:
+  name: Szymon Durak
+  links:
+   - https://github.com/superdurszlak
+   - https://www.linkedin.com/in/szymon-durak/
 
 # Exclude from processing.
 # The following items will not be processed, by default.
