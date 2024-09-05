@@ -3,6 +3,10 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: post
 title: "On distributed systems"
+tags: 
+  - "distributed systems"
+  - "cloud"
+  - "microservices"
 ---
 
 ## What are these distributed systems, after all?

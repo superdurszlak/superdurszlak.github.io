@@ -60,6 +60,7 @@ defaults:
   - scope:
       path: ""
     values:
+      case_study: false
       image: 
         path: /assets/images/logo.svg
         alt: >
