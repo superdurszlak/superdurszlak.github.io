@@ -14,7 +14,7 @@ layout: default
 <p><i> Posted on {{ page.date | date: '%a, %Y-%m-%d' }} | {{ read_duration }}m to read</i></p>
 
 {% if page.case_study %}
-{% include case-study-disclaimer.md %}
+{% include case-study-header.html %}
 {% endif %}
 
 {{ content | toc }}
