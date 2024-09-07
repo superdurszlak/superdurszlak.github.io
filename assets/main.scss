@@ -20,7 +20,7 @@ $border-radius: 3mm;
     &::before {
       content: '';
       display: block;
-      width: $border-radius * 2;
+      width: $border-radius;
       background-color: $note-color;
       position: absolute;
       left: 0;
