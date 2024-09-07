@@ -34,14 +34,89 @@ The misconception here is that in order to adopt cloud computing, you need to gi
 top to bottom direction
 skinparam linetype ortho
 
-together {
-  frame classicDC as "Non Cloud DC" {
+actor infrastructureEngineer as "Infrastructure Engineer"
+note left of infrastructureEngineer
+  Needs to deploy "Billing Service" with:
+  - at least 1 vCPU core
+  - at least 1GB vRAM
+  - Windows host
+  - reachable at https://api.vanilla.com/billing
+  - 3 instances for HA
+  - load balanced
+end note
+
+actor softwareEngineer as "Software Engineer"
+note right of softwareEngineer
+  Needs to know the base URL of billing-service
+end note
+
+rectangle cloudDC as "On-premise data centre" {
+  
+  cloud cloud as "Private Cloud" {
+    agent appDeploy as "Deploy application"
+    agent appDNS as "Service discovery"
+    together {
+      node nodeDNS as "DNS"
+      node appScheduler as "Control Plane / Scheduler"
+    }
+
+    agent loadBalancer [
+      <<Load Balancer>>
+      ....
+      Billing Service
+    ]
+    collections billingService [
+      <<instances>>
+      ....
+      Biling Service
+    ]
+    note right of billingService
+      baseUrl: https://api.vanilla.com/billing
+      service: billing-service
+      hosts:
+      - dc-virtual-001-001
+      instances: 3
+    end note
+    loadBalancer -r- billingService
+
+    frame nodes as "Nodes" {
+      node vm1 [
+        id: dc-virtual-001-001
+        ====
+        IPv4: 10.117.34.51
+        vCPU: 2 cores
+        vRAM: 4GB
+        vDisk: 50G
+        OS: Windows Server 2016
+      ]
+      node vm2 [
+        id: dc-virtual-001-002
+        ====
+        IPv4: 10.117.34.53
+        vCPU: 4 cores
+        vRAM: 8GB
+        vDisk: 100G
+        OS: Ubuntu Server 22.04 LTS
+      ]
+      vm1 -d[hidden]- vm2
+    }
+
+    nodes -r- appScheduler
   }
-  frame cloudDC as "On-premise Cloud" {
-  }
+
+  billingService -d[dotted]- vm1
+
+  appScheduler -d[dashed]-> nodeDNS
+  appDNS -d[dashed]-> appScheduler
+  appDeploy -d[dashed]-> appScheduler
+
+  infrastructureEngineer -[dashed]-> appDeploy
+  softwareEngineer -[dashed]-> appDNS
 }
+
 ```
-This is a perfectly good 
+
+This is a simplified example of private cloud infrastructure. Despite the fact it is operating in an on-premise data centre, we can rather confidently say it is a private cloud since the real computing resources are abstracted away from the actors accessing them.
 
 ### What is a cloud, then?
 
