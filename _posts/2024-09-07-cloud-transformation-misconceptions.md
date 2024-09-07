@@ -18,7 +18,11 @@ Whether your organization is a tech company or not, you have probably heard of *
 
 In a nutshell, *Cloud Transformation* is an organization's strategic effort to adopt cloud computing for its external or internal operations and can be considered another stage of modernization, similar to and often following *Digital Transformation*. While, principally, such efforts should be taken with certain practical benefits in mind, it is not unheard of companies committing to *Cloud Transformation* simply to be perceived as modern and cutting-edge by the customers and/or shareholders.
 
-For the sake of this case study, let us consider a company called Vanilla Solutions. It is already past its *Digital Transformation* phase, and is now exploring how it could leverage cloud computing and Internet of Things to build better products for their customers on top of a unified, company-wide cloud platform. Vanilla Solutions hired me to contribute with my cloud experience in their R&D department.
+{% capture abstract %}
+For the sake of this case study, let us consider a company called Vanilla Solutions. It is already digitalized, and is now exploring how it could leverage cloud computing and Internet of Things to build better products for their customers on top of a unified, company-wide cloud platform. Vanilla Solutions hired me to contribute with my cloud experience in their R&D department.
+{% endcapture %}
+{% include case-study-context.html content=abstract %}
+
 
 ## Cloud as an opposite of on-premise
 
@@ -298,17 +302,49 @@ To be more specific, just about any program can be executed "in the cloud" as lo
 - Ideally, the program in question should be runnable from command-line in non-interactive mode,
 - Optionally, the program can be containerized to improve portability.
 
-In fact, running a non-cloud application in the cloud is usually far easier, than vice versa. The reason is that some cloud applications follow [cloud-native](https://cloud.google.com/learn/what-is-cloud-native) practices, which may lead to high coupling to cloud-specific abstractions or even services offered by a particular cloud vendor as a result of using dedicated cloud libraries, integrations and SDKs. Such applications may be inherently difficult to reliably execute outside of cloud environments. An opposite approach is called [cloud-agnostic](https://www.synopsys.com/blogs/chip-design/cloud-native-vs-cloud-agnostic.html#2), where coupling is kept as low as practical, and cloud resources are utilized with interoperability in mind. This kind of software is typically easier to run in another vendor's cloud, and it is not uncommon for the applications themselves to be literally cloud-agnostic - dependencies on specific cloud resources are contained in infrastructure as code definitions.
+In fact, running a non-cloud application in the cloud is usually far easier, than vice versa. The reason is that some cloud applications follow [cloud-native](https://cloud.google.com/learn/what-is-cloud-native) practices, which may lead to high coupling to cloud-specific abstractions or even services offered by a particular cloud vendor as a result of using dedicated cloud libraries, integrations and SDKs. Such applications may be inherently difficult to reliably execute outside of cloud environments. An opposite approach is called [cloud-agnostic](https://www.synopsys.com/blogs/chip-design/cloud-native-vs-cloud-agnostic.html#2), where coupling is kept as low as practical, and cloud resources are utilized with interoperability in mind. This kind of software is typically easier to run in another vendor's cloud, and it is not uncommon for the applications themselves to be literally cloud-agnostic - dependencies on specific cloud resources are contained in infrastructure as code definitions. A good example of literature covering distributed design patterns that help adapt software to cloud computing is [Designing Distributed Systems](https://www.oreilly.com/library/view/designing-distributed-systems/9781098156343/) by Brendan Burns. 
 
 ### Hardware and software requirements
 
+In a nutshell, not all software is fully multi-platform, and even multi-platform programs typically need a runtime environment or to be compiled for target environment.
+
+As a rule of thumb, third-party cloud vendors offer extensive support for cloud computing resources based on Linux distributions, and Windows or even MacOS virtual machines are also available. Software that is compiled to binaries rather than bytecode, or executed by an interpreter might require specific CPU architecture - and until recently the most readily available cloud resources were based on x86 (more specifically, x86-64). This has changed in the recent years, however, and ARM-based cloud resources have become available, making the offering more diverse.
+
+In case of private cloud, however, what it has to offer in terms of hardware and software depends entirely on the owner. If you already run software tailored for a specific OS or hardware configuration, in principle there is no reason why this specific setup should not be incorporated into your private cloud as well.
+
 ### Application configurability
+
+Most software does not run in complete isolation, and has at least some dependencies to the so-called external world - upstream APIs, databases, message queues and file storage to name a few.
+
+In the ideal world, such dependencies are configurable so that they can be adjusted to specific scenarios without having to modify the codebase and re-build or re-compile. Most notably, this approach can be used to allow configuring environment-specific URLs to databases and upstream services. Similarly, environment-specific certificates or secrets can be bundled with the executable at the deployment stage, or an integration with a secret vault can be set up to provision these sensitive values without putting them into configuration, which could lead to leaks and security incidents.
+
+If your application is capable of all of this, there are pretty good chances it can already run in the cloud without changes - other than providing relevant configuration.
 
 ### Non-interactive command-line invocation
 
+Due to the somewhat ephemeral nature of cloud-based computing resources, applications should be able to start without human intervention. As such, it is advisable that all context required to start an application should be provided by:
+- command-line arguments,
+- environments variables,
+- configuration files,
+- other non-interactive measures.
+
+If an application invariably requires interactive input to run, it requires workarounds, and becomes a nuisance when configuring a cloud service that should self-recover from crashes or auto-scale, or when you need to schedule a cron job that is supposed to trigger every so often. If you are familiar with `systemd` on Linux or with services on Windows, this should sound familiar - in cloud computing, the problem is analogous to scheduling daemons or background services in an OS, only to find out the program asks the user for an `stdin` input.
+
 ### Containerization
 
-### Why is that bias damaging?
+This trait is not strictly mandatory to run software in the cloud in general, however many computing resources, cloud services, and orchestrators require applications to be containerized according to [OCI specification](https://opencontainers.org/). There are several reasons for this:
+- Containerization ensures a fairly uniform interface to run applications written in any language, with any dependencies, and thus it is easier to support a single OCI specification rather than dozens of programming languages and hundreds of frameworks,
+- Apart from executable itself, container images come with all the dependencies bundled within an image - most notably, system libraries, specific OS / distribution and build tools,
+- Containers are somewhat easier to manage en masse than dedicated virtual machines per application, and typically have less significant overhead than a VM.
+
+### Why is this bias damaging?
+
+The belief that cloud computing requires *special* software leads to excessive focus on software implementation, and may distract an organization from modernizing the infrastructure and its processes. Apart from under-appreciating if not overlooking the modernization efforts, this kind of mindset discourages code reusability, leading organizations to commit their limited resources and talent pools to efforts that might be unnecessary, and miss the opportunities to achieve better results with less effort and at a lower risk.
+
+{% capture cloud_software_bias_insight %}
+The attitude shown by Vanilla Solutions indicates that the organization - or at least parts of it - did not have a good understanding of cloud computing before committing themselves to a Cloud Transformation. As a result, the company missed a number of opportunities to build its cloud platform in a more efficient manner, and to simply re-use available software components in a new setting. The most striking consequence was hiring software developers for cloud applications, which did not always need to be written, while overlooking the fact there is no available infrastructure to run them on in the first place.
+{% endcapture %}
+{% include case-study-insight.html content=cloud_software_bias_insight %}
 
 ## Summary
 
