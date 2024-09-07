@@ -279,7 +279,7 @@ For Vanilla Solutions, it would likely be more beneficial to focus on delivery o
 ## Cloud infrastructure requires implementing new, dedicated applications
 
 {% capture cloud_software_bias %}
-When I joined Vanilla Solutions, the very first assignment I got was to develop "some cloud service" and "run it in the cloud". As this task seemed rather unclear confusing and unclear for me, I started asking questions to clarify what exactly am I expected to deliver - and it turned out my managers wanted me to implement just about any "Hello World" application and "somehow" run it in the cloud, in order to prove it is possible. I tried to argue that from my experience, the most difficult part of cloud computing is infrastructure management, rather than writing dedicated software, and in fact as a PoC we could deploy an existing application on cloud computing resources and focus on smooth deployment and meeting certain expectations. Sadly, it turned out cloud computing was severely misunderstood in the organization, to the point existing software would likely be rewritten for the sake of "making it tun in the cloud", and the company expected that "cloud applications" would be written for the cloud platform, but later each division or business unit would have to build and maintain their own infrastructure to run instances of the software, in their own way - at best following my "reference" implementation. As a result, I organized basic training sessions for the team to establish at least minimal understanding of what cloud computing actually is.
+When I joined Vanilla Solutions, the very first assignment I got was to develop "a cloud service" and "run it in the cloud". As this requirement seemed rather confusing and vague for me, I started asking questions to clarify what exactly am I expected to deliver - and it turned out it was supposed to be a proof of concept that running a program in the cloud is possible. I tried to argue that from my experience, the most difficult part of cloud computing is infrastructure management, rather than writing software, and in fact as a PoC we could deploy an existing application on cloud computing resources, focusing on smooth deployment and meeting certain expectations. Sadly, it turned out cloud computing was severely misunderstood in the organization, to the point the company expected that cloud applications would be written anew to make them run in the cloud, and then each division or business unit would build and maintain their own infrastructure to run instances of the software, in their own way - at best following my "reference" implementation.
 {% endcapture %}
 {% include case-study-context.html content=cloud_software_bias %}
 
@@ -290,7 +290,31 @@ The misunderstanding here was the assumption that the most difficult and labor-i
 The short answer is **no**. In cloud computing, countless programs, applications and operating systems are used, which were created long before the "cloud" term was first coined. Most notable examples include:
 - Linux and Windows OS families,
 - Common Linux/Unix utilities such as `cURL`, `grep`, `bash`,
-- Most mainstream programming languages, including C and Java.
+- Most mainstream programming languages, including Python, C, JavaScript, C# and Java.
+
+To be more specific, just about any program can be executed "in the cloud" as long as a number of requirements is met, most notably:
+- The cloud infrastructure is capable of provisioning computing resources with required hardware and software,
+- The program can be configured to use resources provisioned through the cloud infrastructure,
+- Ideally, the program in question should be runnable from command-line in non-interactive mode,
+- Optionally, the program can be containerized to improve portability.
+
+In fact, running a non-cloud application in the cloud is usually far easier, than vice versa. The reason is that some cloud applications follow [cloud-native](https://cloud.google.com/learn/what-is-cloud-native) practices, which may lead to high coupling to cloud-specific abstractions or even services offered by a particular cloud vendor as a result of using dedicated cloud libraries, integrations and SDKs. Such applications may be inherently difficult to reliably execute outside of cloud environments. An opposite approach is called [cloud-agnostic](https://www.synopsys.com/blogs/chip-design/cloud-native-vs-cloud-agnostic.html#2), where coupling is kept as low as practical, and cloud resources are utilized with interoperability in mind. This kind of software is typically easier to run in another vendor's cloud, and it is not uncommon for the applications themselves to be literally cloud-agnostic - dependencies on specific cloud resources are contained in infrastructure as code definitions.
+
+### Hardware and software requirements
+
+### Application configurability
+
+### Non-interactive command-line invocation
+
+### Containerization
 
 ### Why is that bias damaging?
 
+## Summary
+
+To conclude, among the consequences of misunderstanding cloud computing, day-to-day communication inefficiencies and misunderstandings are probably the least severe. Far more concerning are the possible long term consequences for the organization:
+- excessive spending on Cloud Transformation,
+- missed opportunities that could be leveraged by a successful transformation,
+- creating new organizational challenges,
+- exacerbating existing inefficiencies,
+- disappointment of stakeholders who showed initial interest in the company's modernization.
