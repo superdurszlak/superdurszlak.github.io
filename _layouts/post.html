@@ -16,6 +16,9 @@ layout: default
 {% if page.case_study %}
 {% include case-study-header.html %}
 {% endif %}
+{% if page.jargon_heavy %}
+{% include jargon-warning.html %}
+{% endif %}
 
 {{ content | toc }}
 
