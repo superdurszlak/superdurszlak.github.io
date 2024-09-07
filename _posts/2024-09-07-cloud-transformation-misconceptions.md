@@ -4,6 +4,7 @@
 layout: post
 title: "Cloud Transformation misconceptions"
 case_study: true
+jargon_heavy: true
 tags: 
   - "cloud transformation"
   - "cloud"
@@ -24,7 +25,7 @@ For the sake of this case study, let us consider a company called Vanilla Soluti
 {% include case-study-context.html content=abstract %}
 
 
-## Cloud as an opposite of on-premise
+## Misconception 1: Cloud as an opposite of on-premise
 
 {% capture infra_management %}
 The organization has extensive on-premise infrastructure, however for its Cloud Transformation it decides to build its platform on top of a third-party, public cloud - desiring to be truly cloud-enabled. Unfortunately, this decision proves problematic - the company's cloud platform would be handling highly sensitive data on 3rd party infrastructure, and the organization is concerned this may have negative impact on their customers' trust in security. As a result, the organization takes questionable steps, such as committing significant resources to build a cloud platform while preventing the platform from achieving production readiness, or requiring numerous business units to build and manage their own cloud infrastructure and host their own instances of cloud platform there.
@@ -122,7 +123,7 @@ rectangle cloudDC as "On-premise data center" {
 
 This is a simplified example of private cloud infrastructure. Despite the fact it is operating in an on-premise data center, we can rather confidently say it is a private cloud since the real computing resources are abstracted away from the actors accessing them.
 
-### What is a cloud, then?
+### What does cloud mean, then?
 
 The essence of *cloud computing* is that the computing resources - for example, servers - are abstracted away from software running on them. Rather than having to track which application runs on which servers (... in which server room, on which floor, in which office), cloud computing allows to allocate certain computing resources to a specific application from a pool of resources including these servers. Rather than micro-managing the infrastructure to ensure FizzBuzz Service runs on `192.168.244.112` for some arcane reason making it one of few suitable ones, those pooled computing resources are often orchestrated by a solution such as [Kubernetes](https://kubernetes.io/) or [HashiCorp Nomad](https://www.nomadproject.io/), and server nodes are labeled to ensure only resources meeting certain criteria can be used for a certain purpose:
 - You might want to run a daemon process on every server you have,
@@ -137,7 +138,7 @@ Conversely, *on-premise* is all about *who* and *where* runs and owns the infras
 
 As you can see, both concepts are practically independent of each other, and there is no reason why *cloud computing* could not be leveraged to manage *on-premise* computing resources. In fact, as the *on-premise* infrastructure keeps growing, it becomes increasingly difficult and labor-intensive to efficiently manage all of the resources without introducing higher levels of abstraction, separation of concerns between applications and infrastructure - and, ideally, automation of infrastructure management.
 
-### Then, is on-premise or third-party objectively better?
+### Is on-premise or third-party cloud objectively better?
 
 There is no straightforward answer for this as both have their strengths and limitations. The choice should also depend on whether the organization is already running its own data centers.
 
@@ -150,7 +151,7 @@ In case of Vanilla Solutions, it would likely be reasonable to build its cloud p
 {% endcapture %}
 {% include case-study-insight.html content=infra_management_insight %}
 
-## Modernizing the infrastructure without modernizing the processes
+## Misconception 2: Cloud Transformation can be done without modernizing the processes
 
 {% capture legacy_infrastructure %}
 Vanilla Solutions had a tendency to micro-manage the infrastructure resources, at least in some departments. The servers were configured and set up for applications manually, and so was done the maintenance. When the organization started building applications in the third-party cloud, the ways of working were preserved - leading to hand-crafting the low-level infrastructure components, and even though rudimentary Terraform scripts were in place, they were ridden with "magic IP addresses", excessively bloated codebase and similar problems. In one instance, it took two months and thousands of lines of Terraform code for Cloud IT team to deploy a third-party test reporting software, which did not even have enough dependencies to justify the timeline and challenges encountered.
@@ -239,10 +240,10 @@ In case of Vanilla Solutions, introduction of cloud computing did not help strea
 {% endcapture %}
 {% include case-study-insight.html content=legacy_infrastructure_insight %}
 
-## Well-known problems call for in-house solutions
+## Misconception 3: Well-known problems call for in-house solutions
 
 {% capture in_house_bias %}
-It cannot be denied that Vanilla Solutions proved innovative in its own field, contributing to or even establishing standards and protocols to be followed by others. For its Cloud Transformation, however, despite not having even remotely as extensive experience as with their core business areas, Vanilla Solutions decided to establish its own, custom protocols for communication and cloud standards - long before gaining any substantial experience in the field. Moreover, the standards and protocols were mostly established by subject matter experts in its core areas of expertise, rather than in cloud computing. As a result, in one case an assembly of Software Architects loosely defined a communication protocol for cloud applications and Internet of Things, and while in principle it somewhat resembled Protocol Buffers, it was naturally unsupported by any cloud-based software, frameworks or infrastructure components in existence, and came with challenges already addressed by well-established protocols a long time ago, and the feedback loop for addressing challenges was not well established due to top-down decision making.
+It cannot be denied that Vanilla Solutions proved innovative in its own field, contributing to or even establishing standards and protocols to be followed by others. For its Cloud Transformation, however, despite not having even remotely as extensive experience as with their core business areas, Vanilla Solutions decided to establish its own, custom protocols for communication and cloud standards - long before gaining any substantial experience in the field. Moreover, the standards and protocols were mostly established by subject matter experts in its core areas of expertise, rather than in cloud computing. As a result, in one case an assembly of Software Architects loosely defined a communication protocol for cloud applications and Internet of Things, and while in principle it was similar to a certain, industry-standard counterpart, it was naturally unsupported by any cloud-based software, frameworks or infrastructure components in existence, and came with challenges already addressed by well-established protocols a long time ago, and the feedback loop for addressing challenges was not well established due to top-down decision making.
 {% endcapture %}
 {% include case-study-context.html content=in_house_bias %}
 
@@ -280,7 +281,7 @@ For Vanilla Solutions, it would likely be more beneficial to focus on delivery o
 {% endcapture %}
 {% include case-study-insight.html content=in_house_bias_insight %}
 
-## Cloud infrastructure requires implementing new, dedicated applications
+## Misconception 4: Cloud requires implementing new, dedicated applications
 
 {% capture cloud_software_bias %}
 When I joined Vanilla Solutions, the very first assignment I got was to develop "a cloud service" and "run it in the cloud". As this requirement seemed rather confusing and vague for me, I started asking questions to clarify what exactly am I expected to deliver - and it turned out it was supposed to be a proof of concept that running a program in the cloud is possible. I tried to argue that from my experience, the most difficult part of cloud computing is infrastructure management, rather than writing software, and in fact as a PoC we could deploy an existing application on cloud computing resources, focusing on smooth deployment and meeting certain expectations. Sadly, it turned out cloud computing was severely misunderstood in the organization, to the point the company expected that cloud applications would be written anew to make them run in the cloud, and then each division or business unit would build and maintain their own infrastructure to run instances of the software, in their own way - at best following my "reference" implementation.
@@ -342,7 +343,7 @@ This trait is not strictly mandatory to run software in the cloud in general, ho
 The belief that cloud computing requires *special* software leads to excessive focus on software implementation, and may distract an organization from modernizing the infrastructure and its processes. Apart from under-appreciating if not overlooking the modernization efforts, this kind of mindset discourages code reusability, leading organizations to commit their limited resources and talent pools to efforts that might be unnecessary, and miss the opportunities to achieve better results with less effort and at a lower risk.
 
 {% capture cloud_software_bias_insight %}
-The attitude shown by Vanilla Solutions indicates that the organization - or at least parts of it - did not have a good understanding of cloud computing before committing themselves to a Cloud Transformation. As a result, the company missed a number of opportunities to build its cloud platform in a more efficient manner, and to simply re-use available software components in a new setting. The most striking consequence was hiring software developers for cloud applications, which did not always need to be written, while overlooking the fact there is no available infrastructure to run them on in the first place.
+The attitude shown by Vanilla Solutions indicates that the organization - or at least parts of it - did not have a good understanding of cloud computing before committing themselves to a Cloud Transformation. As a result, the company missed a number of opportunities to build its cloud platform in a more efficient manner, and to simply re-use available software components in a new setting. The most striking consequence was hiring software developers for cloud applications, which did not always need to be written, while overlooking the fact there is no available infrastructure to run them on in the first place. A more economical approach would be to start building some cloud-based infrastructure, and evaluate which software applications could be onboarded to cloud as-is, and which would require adjustments or - as a last resort - rewriting.
 {% endcapture %}
 {% include case-study-insight.html content=cloud_software_bias_insight %}
 

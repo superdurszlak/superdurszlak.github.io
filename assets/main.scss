@@ -2,6 +2,7 @@
 ---
 $content-width: max(75%, min(100%, 800px));
 $note-color: #216778;
+$warning-color: #b09000;
 $border-radius: 3mm;
 
 @import "{{ site.theme }}";
@@ -43,3 +44,41 @@ $border-radius: 3mm;
       margin-left: $border-radius * 2;
     }
   }
+
+  .warning {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      position: relative;
+      color: $warning-color;
+      background-color: rgba($color: $warning-color, $alpha: 0.1);
+      width: 100%;
+      border-radius: $border-radius;
+      margin-bottom: 5mm;
+    
+      &::before {
+        content: '';
+        display: block;
+        width: $border-radius;
+        background-color: $warning-color;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
+    
+      // "Warning" header
+      .warning-header {
+        font-weight: bold;
+        color: $warning-color;
+        margin-bottom: 2mm;
+        margin-left: $border-radius * 2;
+      }
+    
+      // Inner content
+      .warning-content {
+        margin-left: $border-radius * 2;
+      }
+    }
