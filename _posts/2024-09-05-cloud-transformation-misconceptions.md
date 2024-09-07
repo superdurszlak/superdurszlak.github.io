@@ -29,6 +29,20 @@ The organization has extensive on-premise infrastructure, however for its Cloud 
 
 The misconception here is that in order to adopt cloud computing, you need to give up the physical control of underlying computing resources and migrate your - possibly sensitive - business operations or product to infrastructure controlled by a 3rd party. While it is certainly a valid option in some scenarios, it is crucial to acknowledge on-premise infrastructure can be, and has been successfully leveraged by organizations to build their own, private cloud infrastructure.
 
+```plantuml!
+!theme mono
+top to bottom direction
+skinparam linetype ortho
+
+together {
+  frame classicDC as "Non Cloud DC" {
+  }
+  frame cloudDC as "On-premise Cloud" {
+  }
+}
+```
+This is a perfectly good 
+
 ### What is a cloud, then?
 
 The essence of *cloud computing* is that the computing resources - for example, servers - are abstracted away from software running on them. Rather than having to track which application runs on which servers (... in which server room, on which floor, in which office), cloud computing allows to allocate certain computing resources to a specific application from a pool of resources including these servers. Rather than micro-managing the infrastructure to ensure FizzBuzz Service runs on `192.168.244.112` for some arcane reason making it one of few suitable ones, those pooled computing resources are often orchestrated by a solution such as [Kubernetes](https://kubernetes.io/) or [Nomad](https://www.nomadproject.io/), and server nodes are labeled to ensure only resources meeting certain criteria can be used for a certain purpose:
@@ -63,6 +77,55 @@ In case of Vanilla Solutions, it would likely be reasonable to build its cloud p
 Vanilla Solutions had a tendency to micro-manage the infrastructure resources, at least in some departments. The servers were configured and set up for applications manually, and so was done the maintenance. When the organization started building applications in the third-party cloud, the ways of working were preserved - leading to hand-crafting the low-level infrastructure components, and even though rudimentary Terraform scripts were in place, they were ridden with "magic IP addresses", excessively bloated codebase and similar problems. In one instance, it took two months and thousands of lines of Terraform code for Cloud IT team to deploy a third-party test reporting software, which did not even have enough dependencies to justify the timeline and challenges encountered.
 {% endcapture %}
 {% include case-study-context.html content=legacy_infrastructure %}
+
+The problem in this case is that Vanilla Solutions made investments to become cloud-enabled, however the engineering decisions - or lack of them - prevented the organization from leveraging the benefits of cloud computing. It was also a missed opportunity to modernize and streamline existing processes, which would only allow for more efficient cloud operations, but also could be transferred back to non-cloud infrastructure to some extent.
+
+```plantuml!
+!theme mono
+top to bottom direction
+skinparam linetype ortho
+
+together {
+  frame nonCloud as "Non Cloud infra" {
+    node nonCloudNodeB as "10.117.91.43" {
+      agent nonCloudAppB as "Billing Service"
+      database nonCloudDBA as "Billing Database"
+      nonCloudAppB -[dashed]-> nonCloudDBA
+    }
+    node nonCloudNodeA as "10.117.47.222" {
+      agent nonCloudAppA as "Website"
+      agent nonCloudPrometheusA as "Prometheus Agent"
+      nonCloudPrometheusA -l[dotted]- nonCloudAppA
+      nonCloudAppA -l[dashed]-> nonCloudAppB
+    }
+    node nonCloudNodeC as "10.117.85.106" {
+      agent nonCloudAppC as "Prometheus Server"
+    }
+    nonCloudPrometheusA -r[dotted]-> nonCloudAppC
+  }
+  cloud cloud as "Cloud infra" {
+    node cloudNodeB as "10.98.21.99" {
+      agent cloudAppB as "Billing Service"
+      database cloudDBA as "Billing Database"
+      cloudAppB -[dashed]-> cloudDBA
+    }
+    node cloudNodeA as "10.98.100.58" {
+      agent cloudAppA as "Website"
+      agent cloudPrometheusA as "Prometheus Agent"
+      cloudPrometheusA -l[dotted]- cloudAppA
+      cloudAppA -l[dashed]-> cloudAppB
+    }
+    node cloudNodeC as "10.98.32.236" {
+      agent cloudAppC as "Prometheus Server"
+    }
+    cloudPrometheusA -r[dotted]-> cloudAppC
+  }
+}
+```
+
+If you struggle to see any fundamental difference between *Non Cloud infra* and *Cloud infra* in the diagram above - worry not, this is because both infrastructures are essentially the same, and neither is cloud-enabled, regardless of where it is hosted or whether it had been set up with Terraform, from command line, or with shell scripts.
+
+### Why is that an issue?
 
 ## Well-known problems call for in-house solutions
 
