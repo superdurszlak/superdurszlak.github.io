@@ -6,11 +6,10 @@ title: "Cloud Transformation misconceptions"
 case_study: true
 jargon_heavy: true
 tags: 
-  - "cloud transformation"
+  - "cloud-transformation"
   - "cloud"
   - "infrastructure"
-  - "transformation"
-  - "case study"
+  - "case-study"
 ---
 
 ## Abstract

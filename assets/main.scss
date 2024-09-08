@@ -1,9 +1,14 @@
 ---
 ---
 $content-width: max(75%, min(100%, 800px));
-$note-color: #216778;
+$primary-color: #216778;
+$note-color: $primary-color;
+$default-opacity: 0.1;
 $warning-color: #b09000;
 $border-radius: 3mm;
+$base-margin: 6mm;
+$double-margin: $base-margin * 2;
+$half-margin: $base-margin / 2;
 
 @import "{{ site.theme }}";
 
@@ -13,10 +18,10 @@ $border-radius: 3mm;
     padding: 10px;
     position: relative;
     color: $note-color;
-    background-color: rgba($color: $note-color, $alpha: 0.1);
+    background-color: rgba($color: $note-color, $alpha: $default-opacity);
     width: 100%;
     border-radius: $border-radius;
-    margin-bottom: 5mm;
+    margin-bottom: $base-margin;
   
     &::before {
       content: '';
@@ -36,12 +41,12 @@ $border-radius: 3mm;
       font-weight: bold;
       color: $note-color;
       margin-bottom: 2mm;
-      margin-left: $border-radius * 2;
+      margin-left: $base-margin;
     }
   
     // Inner content
     .note-content {
-      margin-left: $border-radius * 2;
+      margin-left: $base-margin;
     }
   }
 
@@ -51,10 +56,10 @@ $border-radius: 3mm;
       padding: 10px;
       position: relative;
       color: $warning-color;
-      background-color: rgba($color: $warning-color, $alpha: 0.1);
+      background-color: rgba($color: $warning-color, $alpha: $default-opacity);
       width: 100%;
       border-radius: $border-radius;
-      margin-bottom: 5mm;
+      margin-bottom: $base-margin;
     
       &::before {
         content: '';
@@ -74,11 +79,72 @@ $border-radius: 3mm;
         font-weight: bold;
         color: $warning-color;
         margin-bottom: 2mm;
-        margin-left: $border-radius * 2;
+        margin-left: $base-margin;
       }
     
       // Inner content
       .warning-content {
-        margin-left: $border-radius * 2;
+        margin-left: $base-margin;
       }
+    }
+
+    :is(h1, h2, h3, h4, h5, h6) {
+      font-weight: bold;
+      color: $primary-color;
+      position: relative;
+    }
+
+    :is(h1, h2) {
+      margin-left: $base-margin;
+      &::before {
+        content: '';
+        width: $border-radius;
+        background-color: $primary-color;
+        position: absolute;
+        left: - $base-margin;
+        top: 0;
+        bottom: 0;
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
+    }
+
+    h1 {
+      margin-bottom: $double-margin;
+    }
+
+    h2 {
+      margin-top: $double-margin;
+      margin-bottom: $base-margin;
+    }
+
+    h3 {
+      margin-top: $base-margin;
+      margin-bottom: $half-margin;
+    }
+
+    .tags {
+      display: flex;
+    }
+    .tags span {
+      font-weight: bold;
+      color: $primary-color;
+      margin-right: $half-margin;
+    }
+
+    .tags ul {
+      list-style: none;
+      font-style: italic;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    
+    .tags ul li {
+      margin-right: $half-margin;
+    }
+    
+    .tags ul li:not(:last-child)::after {
+      content: "|";
+      margin-left: $half-margin;
     }

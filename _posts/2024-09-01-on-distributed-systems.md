@@ -4,7 +4,7 @@
 layout: post
 title: "On distributed systems"
 tags: 
-  - "distributed systems"
+  - "distributed-systems"
   - "cloud"
   - "microservices"
 ---

@@ -22,6 +22,17 @@ layout: default
 
 {{ content | toc }}
 
+{% if page.tags %}
+<div class="tags">
+        <span>Tags:</span>
+        <ul>
+        {% for tag in page.tags %}
+                <li>#{{ tag }}</li>        
+        {% endfor %}
+        </ul>
+</div>
+{% endif %}
+
 {% if site.giscus.enabled %}
 <script src="https://giscus.app/client.js"
         data-repo="{{ site.giscus.data_repo }}"
