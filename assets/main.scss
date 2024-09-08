@@ -95,7 +95,7 @@ $half-margin: $base-margin / 2;
       position: relative;
     }
 
-    :is(h1, h2):not(.footer-heading) {
+    h2:not(.footer-heading) {
       margin-left: $base-margin;
       &::before {
         content: '';
