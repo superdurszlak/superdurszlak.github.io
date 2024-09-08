@@ -10,8 +10,8 @@ layout: default
 {% assign slow_read = word_count | divided_by: slow_wpm %}
 {% assign read_duration = fast_read | append: separator | append: slow_read | split: separator | uniq | join: separator %}
 
-<h1>{{ page.title }}</h1>
 <p><i> Posted on {{ page.date | date: '%a, %Y-%m-%d' }} | {{ read_duration }}m to read</i></p>
+<h1>{{ page.title }}</h1>
 
 {% if page.case_study %}
 {% include case-study-header.html %}

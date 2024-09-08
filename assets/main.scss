@@ -2,9 +2,10 @@
 ---
 $content-width: max(75%, min(100%, 800px));
 $primary-color: #216778;
+$gray-color: #3a3a3a;
 $note-color: $primary-color;
 $default-opacity: 0.1;
-$warning-color: #b09000;
+$warning-color: $gray-color;
 $border-radius: 3mm;
 $base-margin: 6mm;
 $double-margin: $base-margin * 2;
@@ -94,7 +95,7 @@ $half-margin: $base-margin / 2;
       position: relative;
     }
 
-    :is(h1, h2) {
+    :is(h1, h2):not(.footer-heading) {
       margin-left: $base-margin;
       &::before {
         content: '';
@@ -113,7 +114,7 @@ $half-margin: $base-margin / 2;
       margin-bottom: $double-margin;
     }
 
-    h2 {
+    h2:not(.footer-heading) {
       margin-top: $double-margin;
       margin-bottom: $base-margin;
     }
@@ -147,4 +148,26 @@ $half-margin: $base-margin / 2;
     .tags ul li:not(:last-child)::after {
       content: "|";
       margin-left: $half-margin;
+    }
+
+    a {
+      font-weight: bold;
+      color: $primary-color;
+    }
+
+    a:is(.post-link, .page-link, .site-title) {
+      font-weight: bold;
+      color: $primary-color;
+    }
+
+    a:visited {
+        color: $gray-color;
+    }
+
+    .p-name {
+      color: $gray-color;
+    }
+
+    .footer-col p {
+      color: $gray-color;
     }

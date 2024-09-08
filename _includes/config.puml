@@ -1,0 +1,10 @@
+!theme mono
+!define DARK_COLOR #216778
+!define LIGHT_COLOR #E6EEEF
+top to bottom direction
+skinparam linetype ortho
+skinparam backgroundColor LIGHT_COLOR
+skinparam defaultFontColor DARK_COLOR
+skinparam arrowColor DARK_COLOR
+skinparam lineColor DARK_COLOR
+skinparam shadowing false
