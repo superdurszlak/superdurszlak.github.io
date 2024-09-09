@@ -1,6 +1,6 @@
 ---
 ---
-$content-width: max(75%, min(100%, 800px));
+$content-width: 75%;
 $primary-color: #216778;
 $gray-color: #3a3a3a;
 $note-color: $primary-color;
@@ -170,4 +170,10 @@ $half-margin: $base-margin / 2;
 
     .footer-col p {
       color: $gray-color;
+    }
+
+    svg.plantuml {
+      display: block;
+      max-width: 100%;
+      height: auto;
     }
