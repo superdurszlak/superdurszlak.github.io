@@ -48,6 +48,7 @@ $half-margin: $base-margin / 2;
     // Inner content
     .note-content {
       margin-left: $base-margin;
+      margin-right: $half-margin;
     }
   }
 
@@ -86,6 +87,7 @@ $half-margin: $base-margin / 2;
       // Inner content
       .warning-content {
         margin-left: $base-margin;
+        margin-right: $half-margin;
       }
     }
 
