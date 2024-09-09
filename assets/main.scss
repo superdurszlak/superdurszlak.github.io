@@ -177,3 +177,8 @@ $half-margin: $base-margin / 2;
       max-width: 100%;
       height: auto;
     }
+
+    .page-content {
+      text-align: justify;
+      text-align-last: left;
+    }
