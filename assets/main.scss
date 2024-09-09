@@ -53,41 +53,16 @@ $half-margin: $base-margin / 2;
   }
 
   .warning {
-      display: flex;
-      flex-direction: column;
-      padding: 10px;
-      position: relative;
-      color: $warning-color;
-      background-color: rgba($color: $warning-color, $alpha: $default-opacity);
-      width: 100%;
-      border-radius: $border-radius;
-      margin-bottom: $base-margin;
+    color: $warning-color;  
+    background-color: rgba($color: $warning-color, $alpha: $default-opacity);
     
       &::before {
-        content: '';
-        display: block;
-        width: $border-radius;
         background-color: $warning-color;
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        border-top-left-radius: $border-radius;
-        border-bottom-left-radius: $border-radius;
       }
     
       // "Warning" header
-      .warning-header {
-        font-weight: bold;
+      .note-header {
         color: $warning-color;
-        margin-bottom: 2mm;
-        margin-left: $base-margin;
-      }
-    
-      // Inner content
-      .warning-content {
-        margin-left: $base-margin;
-        margin-right: $half-margin;
       }
     }
 
