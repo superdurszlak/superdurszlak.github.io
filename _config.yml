@@ -92,6 +92,7 @@ giscus:
   cross_origin: "anonymous"
 
 # SEO
+logo: /assets/images/logo.svg
 social:
   name: Szymon Durak
   links:
