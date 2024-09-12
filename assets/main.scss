@@ -1,6 +1,29 @@
 ---
 ---
-$content-width: 75%;
+
+@mixin respond-to($media) {
+  @if $media == desktop {
+    @media (min-width: 1920px) and (orientation: landscape) {
+      @content;
+    }
+  }
+  @else if $media == mobile {
+    @media (max-width: 1024px) and (orientation: portrait) {
+      @content;
+    }
+  }
+  @else if $media == tablet {
+    @media (min-width: 1024px) and (max-width: 1920px) {
+      @content;
+    }
+  }
+}
+
+$desktop-content-width: 70%;
+$default-content-width: 80%;
+$tablet-content-width: 80%;
+$mobile-content-width: 90%;
+
 $primary-color: #216778;
 $gray-color: #3a3a3a;
 $note-color: $primary-color;
@@ -11,7 +34,24 @@ $base-margin: 6mm;
 $double-margin: $base-margin * 2;
 $half-margin: $base-margin / 2;
 
+
 @import "{{ site.theme }}";
+
+.wrapper {
+  max-width: $default-content-width;
+
+  @include respond-to(desktop) {
+    max-width: $desktop-content-width;
+  }
+  
+  @include respond-to(mobile) {
+    max-width: $mobile-content-width;
+  }
+  
+  @include respond-to(tablet) {
+    max-width: $tablet-content-width;
+  }
+}
 
 .note {
     display: flex;
