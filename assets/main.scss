@@ -24,18 +24,29 @@ $default-content-width: 80%;
 $tablet-content-width: 80%;
 $mobile-content-width: 90%;
 
+$desktop-font-size: 4.9mm;
+$default-font-size: 4.3mm;
+
 $primary-color: #216778;
 $gray-color: #3a3a3a;
 $note-color: $primary-color;
 $default-opacity: 0.1;
 $warning-color: $gray-color;
-$border-radius: 3mm;
-$base-margin: 6mm;
+$border-radius: 0.6em;
+$base-margin: 1.2em;
 $double-margin: $base-margin * 2;
 $half-margin: $base-margin / 2;
 
 
 @import "{{ site.theme }}";
+
+html {
+  font-size: $default-font-size;
+
+  @include respond-to(desktop) {
+    font-size: $desktop-font-size;
+  }
+}
 
 .wrapper {
   max-width: $default-content-width;
@@ -44,12 +55,24 @@ $half-margin: $base-margin / 2;
     max-width: $desktop-content-width;
   }
   
+  @include respond-to(tablet) {
+    max-width: $tablet-content-width;
+  }
+  
   @include respond-to(mobile) {
     max-width: $mobile-content-width;
   }
+}
+
+body {
+  font-size: 1rem;
+}
+
+.site-title {
+  font-size: 1.5em;
   
-  @include respond-to(tablet) {
-    max-width: $tablet-content-width;
+  @include respond-to(mobile) {
+    font-size: 1.25em;
   }
 }
 
@@ -112,8 +135,23 @@ $half-margin: $base-margin / 2;
       position: relative;
     }
 
+    h1 {
+      margin-bottom: $base-margin;
+      @include respond-to(mobile) {
+        font-size: 1.5em;
+      }
+    }
+
+    h2 {
+      @include respond-to(mobile) {
+        font-size: 1.25em;
+      }
+    }
+
     h2:not(.footer-heading) {
       margin-left: $base-margin;
+      margin-top: $double-margin;
+      margin-bottom: $base-margin;
       &::before {
         content: '';
         width: $border-radius;
@@ -127,18 +165,13 @@ $half-margin: $base-margin / 2;
       }
     }
 
-    h1 {
-      margin-bottom: $double-margin;
-    }
-
-    h2:not(.footer-heading) {
-      margin-top: $double-margin;
-      margin-bottom: $base-margin;
-    }
-
     h3 {
       margin-top: $base-margin;
       margin-bottom: $half-margin;
+      
+      @include respond-to(mobile) {
+        font-size: 1.12em;
+      }
     }
 
     .tags {
@@ -204,10 +237,14 @@ $half-margin: $base-margin / 2;
       background-color: rgba($color: $primary-color, $alpha: $default-opacity);
     }
 
+    li.post-listing:nth-child(2n) {
+      background-color: rgba($color: $gray-color, $alpha: $default-opacity);
+    }
+
     li.post-listing {
       padding: $base-margin $border-radius;
       border-radius: $border-radius;
-      margin: 0;
+      margin: 0.5em 0;
     }
 
     li.post-listing h3 {
