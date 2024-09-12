@@ -1,0 +1,9 @@
+{% assign separator = '-' %}
+{% assign word_count = include.post.content | strip_html | strip_newlines | split: ' ' | size %}
+{% assign fast_wpm = 300 %}
+{% assign slow_wpm = 180 %}
+{% assign fast_read = word_count | divided_by: fast_wpm %}
+{% assign slow_read = word_count | divided_by: slow_wpm %}
+{% assign read_duration = fast_read | append: separator | append: slow_read | split: separator | uniq | join: separator %}
+
+<span class="post-meta"> Posted on {{ include.post.date | date: '%a, %Y-%m-%d' }} | {{ read_duration }}m to read</span>
