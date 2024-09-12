@@ -2,15 +2,8 @@
 layout: default
 ---
 
-{% assign separator = '-' %}
-{% assign word_count = content | strip_html | strip_newlines | split: ' ' | size %}
-{% assign fast_wpm = 300 %}
-{% assign slow_wpm = 180 %}
-{% assign fast_read = word_count | divided_by: fast_wpm %}
-{% assign slow_read = word_count | divided_by: slow_wpm %}
-{% assign read_duration = fast_read | append: separator | append: slow_read | split: separator | uniq | join: separator %}
+{% include post-meta.html post=page %}
 
-<p><i> Posted on {{ page.date | date: '%a, %Y-%m-%d' }} | {{ read_duration }}m to read</i></p>
 <h1>{{ page.title }}</h1>
 
 {% if page.case_study %}
@@ -22,16 +15,7 @@ layout: default
 
 {{ content | toc }}
 
-{% if page.tags %}
-<div class="tags">
-        <span>Tags:</span>
-        <ul>
-        {% for tag in page.tags %}
-                <li>#{{ tag }}</li>        
-        {% endfor %}
-        </ul>
-</div>
-{% endif %}
+{% include tags.html tags=page.tags %}
 
 {% if site.giscus.enabled %}
 <script src="https://giscus.app/client.js"

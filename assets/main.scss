@@ -154,3 +154,22 @@ $half-margin: $base-margin / 2;
       text-align: justify;
       text-align-last: left;
     }
+
+    .post-meta {
+      color: $gray-color;
+      font-style: oblique;
+    }
+
+    li.post-listing:nth-child(2n - 1) {
+      background-color: rgba($color: $primary-color, $alpha: $default-opacity);
+    }
+
+    li.post-listing {
+      padding: $base-margin $border-radius;
+      border-radius: $border-radius;
+      margin: 0;
+    }
+
+    li.post-listing h3 {
+      margin-top: 0;
+    }
