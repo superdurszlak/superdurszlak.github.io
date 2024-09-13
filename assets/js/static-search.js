@@ -4,16 +4,23 @@
   }
 
   function postListing(item) {
+    const sep = " ";
+    const excerpt = item.content.split(sep)
+      .slice(0, 40)
+      .join(sep)
     return `
       <li class="post-listing">
-      <h3>
-        <a class="post-link" href="${item.url}">
-          ${item.title}
-        </a>
-      </h3>
-      ${item.postMeta}
-      ${item.tagsMeta}
-      <p class="post-excerpt">${item.content.substring(0, 150)}</p>
+        <h3>
+          <a class="post-link" href="${item.url}">
+            ${item.title}
+          </a>
+        </h3>
+        ${item.postMeta}
+        <div class="post-excerpt">
+          <span>Excerpt: </span><p>${excerpt}</p>
+        </div>
+        ${item.tagsMeta}
+      </li>
     `;
   }
 
@@ -47,9 +54,9 @@
 
   function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
-    var vars = query.split("&");
+    var params = query.split("&");
 
-    return vars
+    return params.filter((param) => param.includes("="))
       .map((element) => {
         var pair = element.split("=");
 
@@ -59,7 +66,7 @@
         };
       })
       .filter((element) => element.key === variable)
-      .map((element) => element.value)[0];
+      .map((element) => element.value)[0] || "";
   }
 
   var searchTerm = getQueryVariable("query");
