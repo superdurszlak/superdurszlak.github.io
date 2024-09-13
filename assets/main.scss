@@ -268,3 +268,30 @@ body {
     li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
       color: $gray-color;
     }
+    
+    .search-bar {
+      display: flex;        // Use flexbox for the form layout
+      flex: 1;              // Make the form take up remaining space
+    }
+
+    .search-box {
+      background-color: rgba($color: $primary-color, $alpha: $default-opacity);
+      border-color: $primary-color;
+      border-radius: $border-radius;
+      border-width: 0.75mm;
+      border-style: solid;
+      padding: 0.5em;
+      font-size: 1.12em;
+      color: $gray-color;
+      flex: 1;
+      margin-right: 1em;
+    } 
+
+    .search-button {
+      display: inline;
+      background-color: rgba($color: $primary-color, $alpha: $default-opacity);
+      border-color: $primary-color;
+      border-radius: $border-radius;
+      border-width: 0.75mm;
+      border-style: solid;
+    }

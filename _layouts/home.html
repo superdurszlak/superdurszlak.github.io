@@ -13,5 +13,11 @@ layout: default
 
   {% include search-feed.html %}
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  <p class="rss-subscribe">
+    subscribe <a href="{{ "/feed.xml" | relative_url }}">
+      via RSS <svg class="svg-icon">
+        <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+      </svg>
+    </a>
+  </p>
 </div>
