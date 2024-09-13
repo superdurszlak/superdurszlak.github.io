@@ -1,11 +1,14 @@
+<h2 class="post-list-heading">Posts</h2>
+
+{%- if site.posts.size > 0 -%}
+<ul id="search-results" class="post-list"></ul>
+{%- endif -%}
+
 <script>
     window.store = {
       {% for post in site.posts %}
-        {% capture post_meta %}
-          {% include post-meta.html post=post %}
-        {% endcapture %}
-        {% capture tags_meta %}
-          {% include tags.html tags=post.tags %}
+        {% capture card_html %}
+          {% include post-card.html post=post %}
         {% endcapture %}
         "{{ post.url | slugify }}": {
           "title": "{{ post.title | xml_escape }}",
@@ -14,8 +17,7 @@
           "content": {{ post.content | strip_html | jsonify }},
           "url": "{{ post.url | xml_escape }}",
           "tags": "{{ post.tags | xml_escape }}",
-          "postMeta": {{ post_meta | strip_newlines | jsonify }},
-          "tagsMeta": {{ tags_meta | strip_newlines | jsonify }}
+          "html": {{ card_html | strip_newlines | jsonify }}
         }
         {% unless forloop.last %},{% endunless %}
       {% endfor %}

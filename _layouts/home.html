@@ -11,11 +11,7 @@ layout: default
 
   {{ content }}
 
-  {%- if site.posts.size > 0 -%}
-  <div id="search-results"></div>
-  {%- endif -%}
+  {% include search-feed.html %}
 
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
 </div>
-
-{% include search-feed.html %}

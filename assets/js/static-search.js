@@ -1,54 +1,27 @@
 (function () {
-  function heading(text) {
-    return `<h2 class="post-list-heading">${text}</h2>`;
-  }
-
-  function postListing(item) {
-    const sep = " ";
-    const excerpt = item.content.split(sep)
-      .slice(0, 40)
-      .join(sep)
-    return `
-      <li class="post-listing">
-        <h3>
-          <a class="post-link" href="${item.url}">
-            ${item.title}
-          </a>
-        </h3>
-        ${item.postMeta}
-        <div class="post-excerpt">
-          <span>Excerpt: </span><p>${excerpt}</p>
-        </div>
-        ${item.tagsMeta}
-      </li>
-    `;
-  }
 
   function postList(results, store) {
     var listings = results
       .map((element) => {
         // Iterate over the results
         var item = store[element.ref];
-        return postListing(item);
+        return item.html;
       })
       .join("");
-    return `
-      <ul class="post-list">
-      ${listings}
-      </ul>
-    `;
+    return listings;
+  }
+
+  function noResults() {
+    return "<li>No results found. Try a different search term.</li>";
   }
 
   function displaySearchResults(results, store) {
     var searchResults = document.getElementById("search-results");
 
     if (results.length) {
-      searchResults.innerHTML = `
-        ${heading("Posts")}
-        ${postList(results, store)}
-      `;
+      searchResults.innerHTML = postList(results, store);
     } else {
-      searchResults.innerHTML = heading("No search results");
+      searchResults.innerHTML = noResults();
     }
   }
 
@@ -56,17 +29,20 @@
     var query = window.location.search.substring(1);
     var params = query.split("&");
 
-    return params.filter((param) => param.includes("="))
-      .map((element) => {
-        var pair = element.split("=");
+    return (
+      params
+        .filter((param) => param.includes("="))
+        .map((element) => {
+          var pair = element.split("=");
 
-        return {
-          key: pair[0],
-          value: decodeURIComponent(pair[1].replace(/\+/g, "%20")),
-        };
-      })
-      .filter((element) => element.key === variable)
-      .map((element) => element.value)[0] || "";
+          return {
+            key: pair[0],
+            value: decodeURIComponent(pair[1].replace(/\+/g, "%20")),
+          };
+        })
+        .filter((element) => element.key === variable)
+        .map((element) => element.value)[0] || ""
+    );
   }
 
   var searchTerm = getQueryVariable("query");
