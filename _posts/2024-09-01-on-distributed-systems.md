@@ -3,6 +3,8 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: post
 title: "On distributed systems"
+redirect_from:
+  - "/intro/"
 tags: 
   - "distributed-systems"
   - "cloud"

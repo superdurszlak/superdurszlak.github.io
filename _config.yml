@@ -33,6 +33,7 @@ linkedin_username: szymon-durak
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-redirect-from
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-spaceship
@@ -105,6 +106,10 @@ jekyll-spaceship:
     mode: pre-fetch
     src: http://www.plantuml.com/plantuml/svg/
     output_dir: "assets/plantuml"
+
+# Redirects
+redirect_from:
+  json: false
 
 # Exclude from processing.
 # The following items will not be processed, by default.
