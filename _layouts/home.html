@@ -14,32 +14,8 @@ layout: default
   {%- if site.posts.size > 0 -%}
   <div id="search-results"></div>
   {%- endif -%}
-  
+
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
 </div>
 
-<script>
-  window.store = {
-    {% for post in site.posts %}
-      {% capture post_meta %}
-        {% include post-meta.html post=post %}
-      {% endcapture %}
-      {% capture tags_meta %}
-        {% include tags.html tags=post.tags %}
-      {% endcapture %}
-      "{{ post.url | slugify }}": {
-        "title": "{{ post.title | xml_escape }}",
-        "author": "{{ post.author | xml_escape }}",
-        "category": "{{ post.category | xml_escape }}",
-        "content": {{ post.content | strip_html | jsonify }},
-        "url": "{{ post.url | xml_escape }}",
-        "tags": "{{ post.tags | xml_escape }}",
-        "postMeta": {{ post_meta | strip_newlines | jsonify }},
-        "tagsMeta": {{ tags_meta | strip_newlines | jsonify }}
-      }
-      {% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  };
-</script>
-<script src="https://unpkg.com/lunr/lunr.js"></script>
-<script src="/assets/js/static-search.js"></script>
+{% include search-feed.html %}
