@@ -68,14 +68,6 @@ body {
   font-size: 1rem;
 }
 
-.site-title {
-  font-size: 1.5em;
-  
-  @include respond-to(mobile) {
-    font-size: 1.25em;
-  }
-}
-
 .note {
     display: flex;
     flex-direction: column;
@@ -270,8 +262,21 @@ body {
     }
     
     .search-bar {
-      display: flex;        // Use flexbox for the form layout
-      flex: 1;              // Make the form take up remaining space
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+      flex-grow: 1;
+      width: auto;
+      height: 100%;
+      margin: $half-margin $double-margin;
+    }
+    
+    .search-bar form {
+      display: inline-flex;
+      align-items: center;
+      flex-grow: 1;
+      width: auto;
+      height: 100%;
     }
 
     .search-box {
@@ -283,15 +288,38 @@ body {
       padding: 0.5em;
       font-size: 1.12em;
       color: $gray-color;
-      flex: 1;
-      margin-right: 1em;
+      margin-right: 0.5em;
+      width: 100%;
+      &::placeholder {
+        color: $primary-color;
+        font-style: italic;
+      }
     } 
 
     .search-button {
-      display: inline;
-      background-color: rgba($color: $primary-color, $alpha: $default-opacity);
-      border-color: $primary-color;
-      border-radius: $border-radius;
-      border-width: 0.75mm;
-      border-style: solid;
+      display: inline-flex;
+      background-color: transparent;
+      border-style: none;
+      align-items: center;
+      height: 100%;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .search-icon {
+      height: 3em;
+    }
+
+    .site-header .wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-title {
+      font-size: 1.5em;
+      
+      @include respond-to(mobile) {
+        font-size: 1.25em;
+      }
     }
