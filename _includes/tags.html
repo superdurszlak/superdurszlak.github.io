@@ -4,7 +4,7 @@
   <ul>
     {% for tag in include.tags %}
     <li>
-      <a href="/?query={{ tag | slugify }}">#{{ tag }}</a>
+      <a class="tag" href="/?query={{ tag | slugify }}">#{{ tag }}</a>
     </li>
     {% endfor %}
   </ul>

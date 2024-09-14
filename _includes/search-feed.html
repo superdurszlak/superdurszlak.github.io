@@ -4,7 +4,7 @@
 <ul id="search-results" class="post-list"></ul>
 {%- endif -%}
 
-<script>
+<script async>
     window.store = {
       {% for post in site.posts %}
         {% capture card_html %}
@@ -23,5 +23,5 @@
       {% endfor %}
     };
   </script>
-  <script src="https://unpkg.com/lunr/lunr.js"></script>
-  <script src="/assets/js/static-search.js"></script>
+  <script src="https://unpkg.com/lunr/lunr.js" async></script>
+  <script src="/assets/js/static-search.js" async></script>
