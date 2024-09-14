@@ -6,13 +6,11 @@
     @media (min-width: 1920px) and (orientation: landscape) {
       @content;
     }
-  }
-  @else if $media == mobile {
+  } @else if $media == mobile {
     @media (max-width: 1024px) and (orientation: portrait) {
       @content;
     }
-  }
-  @else if $media == tablet {
+  } @else if $media == tablet {
     @media (min-width: 1024px) and (max-width: 1920px) {
       @content;
     }
@@ -29,6 +27,7 @@ $default-font-size: 4.3mm;
 
 $primary-color: #216778;
 $gray-color: #3a3a3a;
+$background-color: #f8f8f8;
 $note-color: $primary-color;
 $default-opacity: 0.1;
 $warning-color: $gray-color;
@@ -36,7 +35,6 @@ $border-radius: 0.6em;
 $base-margin: 1.2em;
 $double-margin: $base-margin * 2;
 $half-margin: $base-margin / 2;
-
 
 @import "{{ site.theme }}";
 
@@ -54,11 +52,11 @@ html {
   @include respond-to(desktop) {
     max-width: $desktop-content-width;
   }
-  
+
   @include respond-to(tablet) {
     max-width: $tablet-content-width;
   }
-  
+
   @include respond-to(mobile) {
     max-width: $mobile-content-width;
   }
@@ -69,257 +67,278 @@ body {
 }
 
 .note {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    position: relative;
-    color: $note-color;
-    background-color: rgba($color: $note-color, $alpha: $default-opacity);
-    width: 100%;
-    border-radius: $border-radius;
-    margin-bottom: $base-margin;
-  
-    &::before {
-      content: '';
-      display: block;
-      width: $border-radius;
-      background-color: $note-color;
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      border-top-left-radius: $border-radius;
-      border-bottom-left-radius: $border-radius;
-    }
-  
-    // "Note" header
-    .note-header {
-      font-weight: bold;
-      color: $note-color;
-      margin-bottom: 2mm;
-      margin-left: $base-margin;
-    }
-  
-    // Inner content
-    .note-content {
-      margin-left: $base-margin;
-      margin-right: $half-margin;
-    }
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  position: relative;
+  color: $note-color;
+  background-color: rgba($color: $note-color, $alpha: $default-opacity);
+  width: 100%;
+  border-radius: $border-radius;
+  margin-bottom: $base-margin;
+
+  &::before {
+    content: "";
+    display: block;
+    width: $border-radius;
+    background-color: $note-color;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
   }
 
-  .warning {
-    color: $warning-color;  
-    background-color: rgba($color: $warning-color, $alpha: $default-opacity);
-    
-      &::before {
-        background-color: $warning-color;
-      }
-    
-      // "Warning" header
-      .note-header {
-        color: $warning-color;
-      }
-    }
+  // "Note" header
+  .note-header {
+    font-weight: bold;
+    color: $note-color;
+    margin-bottom: 2mm;
+    margin-left: $base-margin;
+  }
 
-    :is(h1, h2, h3, h4, h5, h6) {
-      font-weight: bold;
-      color: $primary-color;
-      position: relative;
-    }
+  // Inner content
+  .note-content {
+    margin-left: $base-margin;
+    margin-right: $half-margin;
+  }
+}
 
-    h1 {
-      margin-bottom: $base-margin;
-      @include respond-to(mobile) {
-        font-size: 1.5em;
-      }
-    }
+.warning {
+  color: $warning-color;
+  background-color: rgba($color: $warning-color, $alpha: $default-opacity);
 
-    h2 {
-      @include respond-to(mobile) {
-        font-size: 1.25em;
-      }
-    }
+  &::before {
+    background-color: $warning-color;
+  }
 
-    h2:not(.footer-heading) {
-      margin-left: $base-margin;
-      margin-top: $double-margin;
-      margin-bottom: $base-margin;
-      &::before {
-        content: '';
-        width: $border-radius;
-        background-color: $primary-color;
-        position: absolute;
-        left: - $base-margin;
-        top: 0;
-        bottom: 0;
-        border-top-left-radius: $border-radius;
-        border-bottom-left-radius: $border-radius;
-      }
-    }
+  // "Warning" header
+  .note-header {
+    color: $warning-color;
+  }
+}
 
-    h3 {
-      margin-top: $base-margin;
-      margin-bottom: $half-margin;
-      
-      @include respond-to(mobile) {
-        font-size: 1.12em;
-      }
-    }
+:is(h1, h2, h3, h4, h5, h6) {
+  font-weight: bold;
+  color: $primary-color;
+  position: relative;
+}
 
-    .tags {
-      display: flex;
-    }
+h1 {
+  margin-bottom: $base-margin;
+  @include respond-to(mobile) {
+    font-size: 1.5em;
+  }
+}
 
-    .tags ul {
-      list-style-type: none;
-      font-style: italic;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-wrap: wrap;
-    }
-    
-    .tags ul li {
-      margin-left: $half-margin;
-    }
+h2 {
+  @include respond-to(mobile) {
+    font-size: 1.25em;
+  }
+}
 
-    a {
-      font-weight: bold;
-      color: $primary-color;
-    }
+h2:not(.footer-heading) {
+  margin-left: $base-margin;
+  margin-top: $double-margin;
+  margin-bottom: $base-margin;
+  &::before {
+    content: "";
+    width: $border-radius;
+    background-color: $primary-color;
+    position: absolute;
+    left: -$base-margin;
+    top: 0;
+    bottom: 0;
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
+}
 
-    a:is(.post-link, .page-link, .site-title) {
-      font-weight: bold;
-      color: $primary-color;
-    }
+h3 {
+  margin-top: $base-margin;
+  margin-bottom: $half-margin;
 
-    a:visited {
-        color: $gray-color;
-    }
+  @include respond-to(mobile) {
+    font-size: 1.12em;
+  }
+}
 
-    .p-name {
-      color: $gray-color;
-    }
+.tags {
+  display: flex;
+}
 
-    .footer-col p {
-      color: $gray-color;
-    }
+.tags ul {
+  list-style-type: none;
+  font-style: italic;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
 
-    svg.plantuml {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      margin-left: auto;
-      margin-right: auto;
-    }
+.tags ul li {
+  margin-left: $half-margin;
+}
 
-    .page-content {
-      text-align: justify;
-      text-align-last: left;
-    }
+a {
+  font-weight: bold;
+  color: $primary-color;
+}
 
-    .post-meta {
-      color: $gray-color;
-      font-style: oblique;
-    }
+a:is(.post-link, .page-link, .site-title) {
+  font-weight: bold;
+  color: $primary-color;
+}
 
-    li.post-listing:nth-child(2n - 1) {
-      background-color: rgba($color: $primary-color, $alpha: $default-opacity);
-    }
+a:visited {
+  color: $gray-color;
+}
 
-    li.post-listing:nth-child(2n) {
-      background-color: rgba($color: $gray-color, $alpha: $default-opacity);
-    }
+a:visited:is(.site-title, .page-link) {
+  color: $primary-color;
+}
 
-    li.post-listing {
-      padding: $base-margin $border-radius;
-      border-radius: $border-radius;
-      margin: 0.5em 0;
-    }
+.p-name {
+  color: $gray-color;
+}
 
-    li.post-listing h3 {
-      margin-top: 0;
-    }
+.footer-col p {
+  color: $gray-color;
+}
 
-    .post-excerpt p {
-      margin: 0.5em 0;
-      font-style: italic;
-      display: inline;
+svg.plantuml {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-      &::after {
-        content: ' [...]';
-        display: inline;
-      }
-    }
+.page-content {
+  text-align: justify;
+  text-align-last: left;
+  padding-top: 80px;
+}
 
-    :is(.post-excerpt, .tags) span {
-      font-weight: bold;
-      color: $primary-color;
-    }
+.post-meta {
+  color: $gray-color;
+  font-style: oblique;
+}
 
-    li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
-      color: $gray-color;
-    }
-    
-    .search-bar {
-      display: flex;
-      align-items: center;
-      max-width: 100%;
-      flex-grow: 1;
-      width: auto;
-      height: 100%;
-      margin: $half-margin $double-margin;
-    }
-    
-    .search-bar form {
-      display: inline-flex;
-      align-items: center;
-      flex-grow: 1;
-      width: auto;
-      height: 100%;
-    }
+li.post-listing:nth-child(2n - 1) {
+  background-color: rgba($color: $primary-color, $alpha: $default-opacity);
+}
 
-    .search-box {
-      background-color: rgba($color: $primary-color, $alpha: $default-opacity);
-      border-color: $primary-color;
-      border-radius: $border-radius;
-      border-width: 0.75mm;
-      border-style: solid;
-      padding: 0.5em;
-      font-size: 1.12em;
-      color: $gray-color;
-      margin-right: 0.5em;
-      width: 100%;
-      &::placeholder {
-        color: $primary-color;
-        font-style: italic;
-      }
-    } 
+li.post-listing:nth-child(2n) {
+  background-color: rgba($color: $gray-color, $alpha: $default-opacity);
+}
 
-    .search-button {
-      display: inline-flex;
-      background-color: transparent;
-      border-style: none;
-      align-items: center;
-      height: 100%;
-      padding: 0;
-      cursor: pointer;
-    }
+li.post-listing {
+  padding: $base-margin $border-radius;
+  border-radius: $border-radius;
+  margin: 0.5em 0;
+}
 
-    .search-icon {
-      height: 3em;
-    }
+li.post-listing h3 {
+  margin-top: 0;
+}
 
-    .site-header .wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.post-excerpt p {
+  margin: 0.5em 0;
+  font-style: italic;
+  display: inline;
 
-    .site-title {
-      font-size: 1.5em;
-      
-      @include respond-to(mobile) {
-        font-size: 1.25em;
-      }
-    }
+  &::after {
+    content: " [...]";
+    display: inline;
+  }
+}
+
+:is(.post-excerpt, .tags) span {
+  font-weight: bold;
+  color: $primary-color;
+}
+
+li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
+  color: $gray-color;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  flex-grow: 1;
+  width: auto;
+  height: 100%;
+  margin: $half-margin;
+  @include respond-to(mobile) {
+    margin-right: $double-margin;
+  }
+}
+
+.search-bar form {
+  display: inline-flex;
+  align-items: center;
+  flex-grow: 1;
+  width: auto;
+  height: 100%;
+}
+
+.search-box {
+  background-color: rgba($color: $primary-color, $alpha: $default-opacity);
+  border-color: $primary-color;
+  border-radius: $border-radius;
+  border-width: 0.25mm;
+  border-style: solid;
+  padding: 0.5em;
+  font-size: 1.12em;
+  color: $gray-color;
+  margin-right: 0.5em;
+  width: 100%;
+  &::placeholder {
+    color: $primary-color;
+    font-style: italic;
+  }
+}
+
+.search-button {
+  display: inline-flex;
+  background-color: transparent;
+  border-style: none;
+  align-items: center;
+  height: 100%;
+  padding: 0;
+  cursor: pointer;
+}
+
+.search-icon {
+  height: 3em;
+}
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: $background-color;
+  border-width: 0;
+  border-bottom-width: 0.25em;
+  border-color: $primary-color;
+  border-style: solid;
+}
+
+.site-header .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 1.5em;
+
+  @include respond-to(mobile) {
+    font-size: 1.25em;
+  }
+}
