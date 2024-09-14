@@ -1,0 +1,15 @@
+
+<li class="post-listing">
+    <h3>
+      <a class="post-link" href="{{ include.post.url }}">
+        {{ include.post.title }}
+      </a>
+    </h3>
+
+    {% include post-meta.html post=include.post %}
+
+    {% include post-excerpt.html post=include.post %}
+
+    {% include tags.html tags=include.post.tags %}
+
+  </li>

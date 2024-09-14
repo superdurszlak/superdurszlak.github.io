@@ -1,0 +1,11 @@
+{% assign post_words = include.post.content | strip_html | split: ' ' %}
+
+{% assign excerpt_limit = site.excerpt_limit | default: 40 %}
+
+{% assign excerpt_words = post_words | slice: 0, excerpt_limit %}
+{% assign excerpt = excerpt_words | join: ' ' %}
+
+
+<div class="post-excerpt">
+    <span>Excerpt: </span><p>{{ excerpt }}</p>
+</div>
