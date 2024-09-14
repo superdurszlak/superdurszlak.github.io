@@ -65,6 +65,7 @@ defaults:
     values:
       case_study: false
       jargon_heavy: false
+      highly_subjective: false
       image: 
         path: /assets/images/logo.svg
         alt: >
