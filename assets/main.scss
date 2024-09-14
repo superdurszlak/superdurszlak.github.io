@@ -21,6 +21,8 @@ $desktop-content-width: 70%;
 $default-content-width: 80%;
 $tablet-content-width: 80%;
 $mobile-content-width: 90%;
+$header-height: 64px;
+$body-header-padding: $header-height * 1.25;
 
 $desktop-font-size: 4.9mm;
 $default-font-size: 4.3mm;
@@ -31,6 +33,7 @@ $background-color: #f8f8f8;
 $note-color: $primary-color;
 $default-opacity: 0.1;
 $warning-color: $gray-color;
+
 $border-radius: 0.6em;
 $base-margin: 1.2em;
 $double-margin: $base-margin * 2;
@@ -186,16 +189,24 @@ a {
   color: $primary-color;
 }
 
-a:is(.post-link, .page-link, .site-title) {
+.site-nav a.page-link {
+  font-size: 1.25em;
+  color: $primary-color;
+  &:visited {
+    color: $primary-color;
+  }
+}
+
+a:is(.post-link, .site-title) {
   font-weight: bold;
   color: $primary-color;
 }
 
-a:visited {
+a:visited:not(.site-title) {
   color: $gray-color;
 }
 
-a:visited:is(.site-title, .page-link) {
+a:visited:is(.site-title) {
   color: $primary-color;
 }
 
@@ -218,7 +229,7 @@ svg.plantuml {
 .page-content {
   text-align: justify;
   text-align-last: left;
-  padding-top: 80px;
+  padding-top: $body-header-padding;
 }
 
 .post-meta {
@@ -320,6 +331,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   position: fixed;
   top: 0;
   left: 0;
+  height: $header-height;
   width: 100%;
   z-index: 1000;
   background-color: $background-color;
