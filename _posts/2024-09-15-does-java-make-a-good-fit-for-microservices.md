@@ -60,9 +60,17 @@ The excessiveness of Java applications' memory requirements become even more app
 
 To make matters worse, JVM defaults do not typically encourage utilizing available memory to their fullest - putting aside the intricacies of how exactly te default value depends on available hardware, the rule of thumb is [heap size is capped at 25% of available RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781). This might have made sense when Java server applications ran on desktops or alongside other software on the same server or virtual machine, however it becomes problematic when used with containers. As you can imagine, if your containerized K8s Deployment has memory limits set at 2GB per pod, what it means that the Java application would allocate at most 500MB for its heap, if the default behavior is not explicitly overridden. As a result, one of the first things I do when containerizing a Java application is to add `-XX:MaxRAMPercentage=90.0` or similar line to the startup command.
 
-### Startup times
+### Startup times and inconsistent CPU usage
 
-Application startup 
+Application startup times are another problematic aspect of Java applications - to the point entire projects are devoted to improve on this, among other issues: [GraalVM Native Image as an example](https://blogs.oracle.com/javamagazine/post/pedal-to-the-metal-high-performance-java-with-graalvm-native-image). While this shows reasonable performance can be attained with Java, the typical Java Microservice reality is rather disappointing:
+- You bootstrap a Spring Boot app, it starts within 5s, maybe 2s on a good day - after all, it has all the runtime context to set up.
+- As your team keeps working on your microservice, the startup time grows to 10-20s - there is so much more runtime stuff to be set up by Spring...
+- You notice the problem and start tinkering - to fine-tune embedded server or swap it with a more lightweight alternative, remove excessive dependencies and beans and such. After some time, you bring down the startup time to 5-10s.
+
+The problem with this feat of Spring Boot microservices is at least twofold. It generates a tremendous CPU spike at the application start - it would easily consume a full 1 CPU core for a few seconds, compared to that mere 1-2% it otherwise needs. If you cut on CPU allocation, the startup time becomes longer, sometimes to the point it becomes problematic. I have seen cases where this led to infinite restarts as the Java server did not start serving traffic before Kubernetes killed the pod for not satisfying liveness probe for too long. What is worse, this problem can easily snowball in case of a major outage, when multiple pods need to restart around the same time. Another factor is that longer startup time slows down all the operations, including:
+- Application deployments,
+- Application (auto)scaling,
+- Disaster recovery.
 
 ### Wasteful defaults
 
@@ -71,3 +79,37 @@ First of all, Spring / Spring Boot remains the most popular Java backend framewo
 What it means is that while Java (or JVM overall) microservices definitely *can* be made more efficient, most of the time they *don't*. Perhaps for similar reasons why companies chose Java in the first place, they then pick Spring / Spring Boot as their go-to microservices framework, and the more efficient ones remain a curiosity for most.
 
 The efficiency problems are [gradually addressed with newer JDK versions](https://kstefanj.github.io/2023/12/13/jdk-21-the-gcs-keep-getting-better.html), and unfortunately the _industry default_ disappoints us again. As of 2023 Jetbrains survey, Java 8 remained as the most popular Java version, exceeding the popularity of other LTS versions available at the time - Java 17 released in 2021, and Java 11 released in 2018.
+
+{% capture efficiency_insight %}
+In general, while Java at its core is remarkably efficient for a language running on a virtual machine, the same cannot be said about the staple framework used for backend server development. Spring, due to its complexity and the tendency to do things at runtime rather than compile-time is simply too wasteful to build efficient microservices. It remains a go-to choice for the companies, however, most likely for reasons similar to why Java is being chosen in the first place.
+{% endcapture %}
+{% include key-takeaway.html content=efficiency_insight %}
+
+## Developers mindset
+
+Simply put, microservices architecture calls for certain ways of working to be able to deliver them reliably and efficiently:
+- Agile development and delivering small, frequent increments rather than big chunks of changes,
+- Being able to deliver microservices as _truly_ independent deployment units, with their deployments to be carried out arbitrarily,
+- At this scale, human error is unavoidable, and manual tasks become a bottleneck, hence the processes need to be automated as much as feasible,
+- Microservices landscape is inherently dynamic as new services are being onboarded and the deprecated ones decommissioned, and the system architecture needs to embrace this dynamism.
+
+Chris Richardson wrote a great article on [Microservices adoption anti-patterns](https://microservices.io/microservices/antipatterns/-/the/series/2019/06/18/microservices-adoption-antipatterns.html) that I often refer to in technical discussions about how microservices should (not) be done.
+
+Unfortunately, many Java Developers and Software Architects coming from the enterprise Java background come with an entirely different mindset:
+- Deliverables are planned in terms of bi-weekly, monthly, if not quarterly release trains, and multiple changes piggyback on each train that leaves the station,
+- Such big, combined changes releases at a fixed time lead to a plethora of mutual dependencies between microservices in the system, to the point they must be deployed in a very particular order to avoid the system from experiencing an outage,
+- The SDLC relies heavily on manual labour, checks, processes and paperwork, with little room for automation,
+- The architecture is often decided at the start of the project, and changing the design decisions may become difficult if not possible, not necessarily for technical reasons.
+
+Even though this is gradually changing as more and more companies adopt microservices and (hopefully) learn from their mistakes, I consider it somewhat symptomatic that despite microservices are likely far beyond their _early adopters_ stage and should have reached their maturity, this enterprise, labour-intensive and inelastic mindset remains quite prevalent.
+
+{% capture developers_mindset %}
+In general, while Java at its core is remarkably efficient for a language running on a virtual machine, the same cannot be said about the staple framework used for backend server development. Spring, due to its complexity and the tendency to do things at runtime rather than compile-time is simply too wasteful to build efficient microservices. It remains a go-to choice for the companies, however, most likely for reasons similar to why Java is being chosen in the first place.
+{% endcapture %}
+{% include key-takeaway.html content=developers_mindset %}
+
+## Summary
+
+Long story short, immense popularity of Java, combined with its plentiful integrations and other resources, as well as noteworthy nominal performance could make it a great go-to solution for microservices. Unfortunately, other factors associated with Java ecosystem prove to be strongly disadvantageous in terms of microservices architecture - most notably, resource-intensive mainstream frameworks and inefficient ways of working carried over from previous generations of enterprise software and development processes.
+
+In order to take full advantage of possible strenghts of Java - or JVM in broader terms - an organization would need to step out of its comfort zone and adopt rather niche technology stack that are not as extensively supported - such as Micronaut, Quarkus, Vert.x and/or GraalVM. This, in turn, makes the choice of a mainstream language for the sake of its sheer popularity rather questionable - as similar, if not better results could be attained with a mainstream framework of a less popular, better optimized language.
