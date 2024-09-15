@@ -30,9 +30,9 @@ $default-font-size: 4.3mm;
 $primary-color: #216778;
 $gray-color: #3a3a3a;
 $background-color: #f8f8f8;
-$note-color: $primary-color;
 $default-opacity: 0.1;
-$warning-color: $gray-color;
+$primary-transparent-color: rgba($color: $primary-color, $alpha: $default-opacity);
+$gray-transparent-color: rgba($color: $gray-color, $alpha: $default-opacity);
 
 $border-radius: 0.6em;
 $base-margin: 1.2em;
@@ -74,8 +74,8 @@ body {
   flex-direction: column;
   padding: 10px;
   position: relative;
-  color: $note-color;
-  background-color: rgba($color: $note-color, $alpha: $default-opacity);
+  color: $primary-color;
+  background-color: $primary-transparent-color;
   width: 100%;
   border-radius: $border-radius;
   margin-bottom: $base-margin;
@@ -84,7 +84,7 @@ body {
     content: "";
     display: block;
     width: $border-radius;
-    background-color: $note-color;
+    background-color: $primary-color;
     position: absolute;
     left: 0;
     top: 0;
@@ -96,7 +96,7 @@ body {
   // "Note" header
   .note-header {
     font-weight: bold;
-    color: $note-color;
+    color: $primary-color;
     margin-bottom: 2mm;
     margin-left: $base-margin;
   }
@@ -109,16 +109,16 @@ body {
 }
 
 .warning {
-  color: $warning-color;
-  background-color: rgba($color: $warning-color, $alpha: $default-opacity);
+  color: $gray-color;
+  background-color: $gray-transparent-color;
 
   &::before {
-    background-color: $warning-color;
+    background-color: $gray-color;
   }
 
   // "Warning" header
   .note-header {
-    color: $warning-color;
+    color: $gray-color;
   }
 }
 
@@ -245,11 +245,11 @@ svg.plantuml {
 }
 
 li.post-listing:nth-child(2n - 1) {
-  background-color: rgba($color: $primary-color, $alpha: $default-opacity);
+  background-color: $primary-transparent-color;
 }
 
 li.post-listing:nth-child(2n) {
-  background-color: rgba($color: $gray-color, $alpha: $default-opacity);
+  background-color: $gray-transparent-color;
 }
 
 li.post-listing {
@@ -304,7 +304,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
 }
 
 .search-box {
-  background-color: rgba($color: $primary-color, $alpha: $default-opacity);
+  background-color: $primary-transparent-color;
   border-color: $primary-color;
   border-radius: $border-radius;
   border-width: 0.25mm;
@@ -360,4 +360,24 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   @include respond-to(mobile) {
     font-size: 1.25em;
   }
+}
+
+thead tr th {
+  color: $primary-color;
+  font-weight: bold;
+  background-color: $primary-transparent-color;
+  border-color: $primary-color;
+  border-width: 0.1em;
+  border-style: solid;
+}
+
+tbody tr td {
+  color: $gray-color;
+  border-color: $gray-color;
+  border-width: 0.1em;
+  border-style: solid;
+}
+
+tbody tr:nth-child(2n) {
+  background-color: $gray-transparent-color;
 }

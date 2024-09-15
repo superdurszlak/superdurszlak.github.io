@@ -12,6 +12,9 @@ layout: default
 {% if page.jargon_heavy %}
 {% include jargon-warning.html %}
 {% endif %}
+{% if page.highly_subjective %}
+{% include subjective-warning.html %}
+{% endif %}
 
 {{ content | toc }}
 
