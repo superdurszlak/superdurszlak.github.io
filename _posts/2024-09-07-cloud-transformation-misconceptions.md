@@ -1,6 +1,4 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: post
 title: "Cloud Transformation misconceptions"
 case_study: true
@@ -148,7 +146,7 @@ Conversely, leveraging third-party cloud infrastructure provided by a vendor can
 {% capture infra_management_insight %}
 In case of Vanilla Solutions, it would likely be reasonable to build its cloud platform on top of existing on-premise resources, given their extensive involvement in existing computing infrastructure and security concerns. On the other hand, if they were a start-up looking forward to establish presence globally without significant up-front investment in setting up their own data centers, relying on a third-party cloud vendor would likely be a more reasonable choice, at least until the organization builds capability to start on-premise data centers.
 {% endcapture %}
-{% include case-study-insight.html content=infra_management_insight %}
+{% include key-takeaway.html content=infra_management_insight %}
 
 ## Misconception 2: Cloud Transformation can be done without modernizing the processes
 
@@ -237,7 +235,7 @@ The implications of resorting to a highly complex solution - from end users pers
 {% capture legacy_infrastructure_insight %}
 In case of Vanilla Solutions, introduction of cloud computing did not help streamline infrastructure management, in fact the result was opposite. The key reason is that the crucial part of Cloud Transformation was omitted - Vanilla Solutions architects and engineers did not introduce higher levels of abstraction to describe and handle the infrastructure, and the way infrastructure was managed was labor-intensive. The time invested to hand-craft and troubleshoot all the "magic IP" mappings and low-level components could have been better spent on improving and automating on-premise infrastructure management.
 {% endcapture %}
-{% include case-study-insight.html content=legacy_infrastructure_insight %}
+{% include key-takeaway.html content=legacy_infrastructure_insight %}
 
 ## Misconception 3: Well-known problems call for in-house solutions
 
@@ -278,7 +276,7 @@ As for licensing of software, most digital companies already have policies regar
 {% capture in_house_bias_insight %}
 For Vanilla Solutions, it would likely be more beneficial to focus on delivery of an MVP cloud platform - even with limited functionality and room for improvement in terms of performance and other aspects. A practical approach would be to start with initial assessment of available solutions for a task, for instance communication protocols, and choose one that best addresses concerns anticipated by an organization, even if not a perfect match. This would allow to shorted the time to first deliverables, allowing in turn to gather more practical experience and validate the design. With this knowledge, solutions could be further evaluated, and if needs be, specific components could be strategically substituted with tailored, in-house solutions.
 {% endcapture %}
-{% include case-study-insight.html content=in_house_bias_insight %}
+{% include key-takeaway.html content=in_house_bias_insight %}
 
 ## Misconception 4: Cloud requires implementing new, dedicated applications
 
@@ -344,7 +342,7 @@ The belief that cloud computing requires *special* software leads to excessive f
 {% capture cloud_software_bias_insight %}
 The attitude shown by Vanilla Solutions indicates that the organization - or at least parts of it - did not have a good understanding of cloud computing before committing themselves to a Cloud Transformation. As a result, the company missed a number of opportunities to build its cloud platform in a more efficient manner, and to simply re-use available software components in a new setting. The most striking consequence was hiring software developers for cloud applications, which did not always need to be written, while overlooking the fact there is no available infrastructure to run them on in the first place. A more economical approach would be to start building some cloud-based infrastructure, and evaluate which software applications could be onboarded to cloud as-is, and which would require adjustments or - as a last resort - rewriting.
 {% endcapture %}
-{% include case-study-insight.html content=cloud_software_bias_insight %}
+{% include key-takeaway.html content=cloud_software_bias_insight %}
 
 ## Summary
 
