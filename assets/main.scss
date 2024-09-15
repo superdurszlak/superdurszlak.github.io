@@ -34,6 +34,7 @@ $default-opacity: 0.1;
 $primary-transparent-color: rgba($color: $primary-color, $alpha: $default-opacity);
 $gray-transparent-color: rgba($color: $gray-color, $alpha: $default-opacity);
 
+$thin-border: 0.1em;
 $border-radius: 0.6em;
 $base-margin: 1.2em;
 $double-margin: $base-margin * 2;
@@ -231,6 +232,10 @@ svg.plantuml {
   height: auto;
   margin-left: auto;
   margin-right: auto;
+  border-width: $thin-border;
+  border-radius: $border-radius;
+  border-color: $primary-color;
+  border-style: solid;
 }
 
 .page-content {
@@ -367,14 +372,14 @@ thead tr th {
   font-weight: bold;
   background-color: $primary-transparent-color;
   border-color: $primary-color;
-  border-width: 0.1em;
+  border-width: $thin-border;
   border-style: solid;
 }
 
 tbody tr td {
   color: $gray-color;
   border-color: $gray-color;
-  border-width: 0.1em;
+  border-width: $thin-border;
   border-style: solid;
 }
 
