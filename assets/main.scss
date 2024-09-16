@@ -31,8 +31,14 @@ $primary-color: #216778;
 $gray-color: #3a3a3a;
 $background-color: #f8f8f8;
 $default-opacity: 0.1;
-$primary-transparent-color: rgba($color: $primary-color, $alpha: $default-opacity);
-$gray-transparent-color: rgba($color: $gray-color, $alpha: $default-opacity);
+$primary-transparent-color: rgba(
+  $color: $primary-color,
+  $alpha: $default-opacity,
+);
+$gray-transparent-color: rgba(
+  $color: $gray-color,
+  $alpha: $default-opacity,
+);
 
 $thin-border: 0.1em;
 $border-radius: 0.6em;
@@ -365,6 +371,15 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
 
   @include respond-to(mobile) {
     font-size: 1.25em;
+  }
+}
+
+table {
+  @include respond-to(mobile) {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }
 
