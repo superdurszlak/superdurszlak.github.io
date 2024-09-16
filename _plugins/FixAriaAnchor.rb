@@ -20,8 +20,8 @@ module Jekyll
         end
   
         # Save the modified HTML back to the same file
-        Jekyll.logger.debug self.marker, "Processed #{file_path}"
         File.write(file_path, doc.to_html)
+        Jekyll.logger.debug self.marker, "Processed #{file_path}"
       end
   
       def self.process_anchor(anchor)
