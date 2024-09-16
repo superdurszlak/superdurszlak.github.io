@@ -1,4 +1,4 @@
-<div class="search-bar">
+<div class="search-bar" id="search-bar" style="visibility: hidden;">
   <form action="/" method="get">
     <input
       class="search-box"
@@ -16,3 +16,10 @@
     </button>
   </form>
 </div>
+
+<script>
+  // Show the search bar when JavaScript is enabled
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('#search-bar').style.visibility = 'visible';
+  });
+</script>

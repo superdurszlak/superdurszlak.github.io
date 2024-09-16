@@ -4,6 +4,12 @@
 <ul id="search-results" class="post-list"></ul>
 {%- endif -%}
 
+<noscript>
+  {% for post in site.posts %}
+    {% include post-card.html post=post %}
+  {% endfor %}
+</noscript>
+
 <script>
     window.store = {
       {% for post in site.posts %}
