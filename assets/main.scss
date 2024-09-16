@@ -79,7 +79,7 @@ body {
 .note {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: $half-margin 0;
   position: relative;
   color: $primary-color;
   background-color: $primary-transparent-color;
