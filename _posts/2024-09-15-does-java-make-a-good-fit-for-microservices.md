@@ -118,7 +118,7 @@ Unfortunately, many Java Developers and Software Architects coming from the ente
 Even though this is gradually changing as more and more companies adopt microservices and (hopefully) learn from their mistakes, I consider it somewhat symptomatic that despite microservices are likely far beyond their _early adopters_ stage and should have reached their maturity, this enterprise, labour-intensive and inelastic mindset remains quite prevalent.
 
 {% capture developers_mindset %}
-In general, while Java at its core is remarkably efficient for a language running on a virtual machine, the same cannot be said about the staple framework used for backend server development. Spring, due to its complexity and the tendency to do things at runtime rather than compile-time is simply too wasteful to build efficient microservices. It remains a go-to choice for the companies, however, most likely for reasons similar to why Java is being chosen in the first place.
+Java community and enterprise software systems have a long tradition of lengthy and labor-intensive processes. Even though this is gradually changing, this remains a major burden for microservice-based systems.
 {% endcapture %}
 {% include key-takeaway.html content=developers_mindset %}
 
