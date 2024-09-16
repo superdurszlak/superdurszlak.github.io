@@ -65,15 +65,16 @@ This is an extreme variant of the previous point - and perhaps stems from assump
 For your convenience, I assembled a table to help highlight the key differences there:
 
 | : Trait : | : Autistic person : | : Psychopath : |
-| :-------- | ------------------: | -------------: |
+| --------- | ------------------- | -------------- |
 | Where it comes from | Neurodevelopmental disorder | Personality traits (belongs to the [dark triad](https://en.wikipedia.org/wiki/Dark_triad)) |
 | First impression | Often awkward | Often charming |
 | How they see others | As unpredictable, irrational beings | As means to achieve personal goals |
 | Ability to understand others' emotions | Generally poor | Generally good |
-| Manipulativeness | May manipulate physical objects while speaking to you to ease their stress | May bend you to their will without you realizing |
+| Manipulativeness | May manipulate physical objects while speaking to reduce stress | May bend you to their will without you realizing |
 | Morality and ethics | From ethics-agnostic to excessively zealous | Ethics are there to control the others |
-| Attitude to rules | Usually follows written rules to the letter, or chooses to ignore ones that seem irrational | Rules do not apply to them \
-|                   | Often misses social, unwritten rules for the most part                                      |                            |
+| Attitude to rules | Usually follows written rules to the letter                   | Rules do not apply to them \
+|                   | May choose to ignore ones that seem irrational                |                            \
+|                   | Often misses social, unwritten rules unless explained to them |                            |
 | Why they hurt you | Usually they did not even realize                                     | You got in their way, or it was convenient \
 |                   | Typically would feel bad about it if they knew, or when you tell them | Will do this again if needs be             |
 | Guilt | Often gets blamed                             | Will often blame you \
