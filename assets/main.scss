@@ -21,7 +21,7 @@ $desktop-content-width: 70%;
 $default-content-width: 80%;
 $tablet-content-width: 80%;
 $mobile-content-width: 90%;
-$header-height: 64px;
+$header-height: 4em;
 $body-header-padding: $header-height * 1.25;
 
 $desktop-font-size: 4.9mm;
@@ -133,6 +133,7 @@ body {
   font-weight: bold;
   color: $primary-color;
   position: relative;
+  scroll-margin-top: $header-height;
 }
 
 h1 {
@@ -355,7 +356,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   position: fixed;
   top: 0;
   left: 0;
-  height: $header-height;
+  max-height: $header-height;
   width: 100%;
   z-index: 1000;
   background-color: $background-color;
