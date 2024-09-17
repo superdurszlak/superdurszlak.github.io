@@ -53,13 +53,18 @@ kramdown:
   syntax_highlighter: rouge
 defaults:
   - scope:
-      path: "" # an empty string here means all files in the project
-      type: "posts" # previously `post` in Jekyll 2.2.
+      path: ""
+      type: "posts"
     values:
       permalink: /posts/:slug/
       toc: true
       seo:
         type: BlogPosting
+  - scope:
+      path: ""
+      type: "pages" 
+    values:
+      show_in_nav: true
   - scope:
       path: ""
     values:
