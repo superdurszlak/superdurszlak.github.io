@@ -18,7 +18,7 @@ The privacy policy of this website is outlined on this page.
 
 ## Cookies usage
 
-1. This website does not directly nor deliberately use any cookies.
+1. This website does not use any cookies, directly nor deliberately.
 2. In particular, cookies are not used to identify or track individual visitors by the maintainer of this website.
 3. This website uses 3rd party dependencies (i.e. JS scripts) which might use cookies:
    1. Cookies that serve a solely technical purpose (e.g. choices, Github auth tokens) are tolerated.
@@ -46,7 +46,7 @@ The privacy policy of this website is outlined on this page.
    5. If the user wishes to review, access, correct or delete the data shared via giscus comments, this can be done via GitHub website and according to GitHub policies.
    6. GitHub may store user data in various EU, non-EU, US and non-US locations according to their policies and technical capabilities, and the maintainer of this website has no influence on how and where user data and comments shared via giscus on this website would be stored by GitHub.
 3. By commenting via giscus, users make the contents of their comments visible on both this website and GitHub Discussions under their GitHub usernames.
-4. As the comments are linked to their authors via GitHub user account, if they directly or indirectly any personal data in their comments or GitHub accounts, this becomes visible to the visitors of this website. Examples of such disclosures include:
+4. As the comments are linked to their authors via GitHub user account, if they directly or indirectly disclose any personal data in their comments or GitHub accounts, this becomes visible to the visitors of this website. Examples of such disclosures include, but are not limited to:
    1. Mentioning their personal data directly,
    2. Including their full name in GitHub profiles,
    3. Providing links to their LinkedIn, Facebook or any other social media accounts.
