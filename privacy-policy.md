@@ -2,7 +2,6 @@
 layout: page
 title: Privacy policy
 permalink: /privacy-policy/
-show_in_nav: false
 ---
 
 The privacy policy of this website is outlined on this page.
