@@ -46,6 +46,11 @@ $base-margin: 1.2em;
 $double-margin: $base-margin * 2;
 $half-margin: $base-margin / 2;
 
+$stock-max-height-default: 6cm;
+$stock-max-height-desktop: 8cm;
+$stock-max-height-mobile: 4cm;
+$stock-max-height-tablet: 6cm;
+
 @import "{{ site.theme }}";
 
 html {
@@ -411,4 +416,44 @@ tbody tr td {
 
 tbody tr:nth-child(2n) {
   background-color: $gray-transparent-color;
+}
+
+.stock-photo {
+  display: block;
+  width: 100%;
+  margin-bottom: $double-margin;
+}
+
+.stock {
+  max-height: $stock-max-height-default;
+  @include respond-to(desktop) {
+    max-height: $stock-max-height-desktop;
+  }
+  @include respond-to(mobile) {
+    max-height: $stock-max-height-mobile;
+  }
+  @include respond-to(tablet) {
+    max-height: $stock-max-height-tablet;
+  }
+  overflow: hidden;
+  
+}
+
+.stock :is(img, video) {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: cover;
+}
+
+.stock-photo-credit {
+  font-size: 0.9em;
+}
+
+blockquote {
+  color: $gray-color;
+  border-left-color: $primary-color;
+  border-left-width: $border-radius;
+  border-radius: $border-radius;
 }

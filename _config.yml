@@ -71,6 +71,7 @@ defaults:
       case_study: false
       jargon_heavy: false
       highly_subjective: false
+      stock: ""
       image: 
         path: /assets/images/logo.svg
         alt: >
@@ -117,6 +118,17 @@ jekyll-spaceship:
 # Redirects
 redirect_from:
   json: false
+
+stocks:
+  - name: server-rack
+    src_full: /assets/stock/server-rack.jpg
+    src_small: /assets/stock/server-rack-small.jpg
+    alt: Photo of server racks full of colorful Ethernet wires and green diodes
+    credit: >
+      Photo by 
+      <a href="https://unsplash.com/@tvick?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Taylor Vick</a> 
+      on 
+      <a href="https://unsplash.com/photos/cable-network-M5tzZtFCOfs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 
 # Exclude from processing.
 # The following items will not be processed, by default.

@@ -1,0 +1,14 @@
+{% if include.stock %} 
+{% assign stock = site.stocks | where: "name", include.stock | first %} 
+{% if stock %}
+<div class="stock-photo">
+  <div class="stock">
+    <picture>
+      <source srcset="{{ stock.src_small }}" media="(max-width: 1024px)" />
+      <img src="{{ stock.src_full }}" alt="{{ stock.alt }}" />
+    </picture>
+  </div>
+  <div class="stock-photo-credit">{{ stock.credit }}</div>
+</div>
+{% endif %}
+{% endif %}
