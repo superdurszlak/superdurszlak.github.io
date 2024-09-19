@@ -3,16 +3,12 @@
 {% assign stock_basedir = site.stocks_dir | append: stock.name | append: "/" %}
 {% assign thumbnail = stock_basedir | append: "thumbnail.jpg" %} 
 {% if stock %}
-<div class="stock-photo">
-  <div class="stock">
-    <picture>
-      <source srcset="{{ mobile }}" media="(max-width: 800px)" />
-      <source srcset="{{ tablet }}" media="(min-width:801px, max-width: 1600px)" />
-      <a href="{{ include.url }}">
-        <img src="{{ thumbnail }}" alt="{{ stock.alt }}" />
-      </a>
-    </picture>
-  </div>
-</div>
+<picture>
+  <source srcset="{{ mobile }}" media="(max-width: 800px)" />
+  <source srcset="{{ tablet }}" media="(min-width:801px, max-width: 1600px)" />
+  <a href="{{ include.url }}">
+    <img src="{{ thumbnail }}" alt="{{ stock.alt }}" />
+  </a>
+</picture>
 {% endif %}
 {% endif %}
