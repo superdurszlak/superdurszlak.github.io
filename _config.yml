@@ -121,6 +121,27 @@ redirect_from:
 
 stocks_dir: /assets/stock/
 stocks:
+  - name: autism-letters
+    alt: Photo of colorful letters lined up to form 'Autism' word, surrounded by scattered letters
+    credit: >
+      Photo by 
+      <a href="https://unsplash.com/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a> 
+      on 
+      <a href="https://unsplash.com/photos/text-nP9J7O90HfY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  - name: cloud-thunderstorm
+    alt: Photo of a night sky lit up by lightning, giving it a deep violet hue
+    credit: >
+      Photo by 
+      <a href="https://unsplash.com/@noaa?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">NOAA</a> 
+      on 
+      <a href="https://unsplash.com/photos/lightning-at-night-p9BRX1mBfe4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  - name: java-code-screen
+    alt: Photo of a computer screen, showing mostly blurred out Java code in an IDE window
+    credit: >
+      Photo by 
+      <a href="https://unsplash.com/@orbtalmedia?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">orbtal media</a>
+      on 
+      <a href="https://unsplash.com/photos/monitor-showing-computer-application-1td5Iq5IvNc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   - name: server-rack
     alt: Photo of server racks full of colorful Ethernet wires and green diodes
     credit: >
