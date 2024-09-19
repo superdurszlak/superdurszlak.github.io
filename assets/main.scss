@@ -466,6 +466,9 @@ tbody tr:nth-child(2n) {
   margin-right: auto;
   object-fit: cover;
   border-radius: $border-radius;
+  border-width: $thin-border;
+  border-color: $primary-color;
+  border-style: solid;
 }
 
 .stock-photo-credit {
