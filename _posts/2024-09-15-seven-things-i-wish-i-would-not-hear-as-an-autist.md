@@ -2,6 +2,7 @@
 layout: post
 title: "Seven things I wish I would not hear as an autist"
 highly_subjective: true
+stock: autism-letters
 tags: 
   - "autism"
   - "asperger"

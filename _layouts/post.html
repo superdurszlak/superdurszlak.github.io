@@ -5,6 +5,9 @@ layout: default
 {% include post-meta.html post=page %}
 
 <h1>{{ page.title }}</h1>
+{% if page.stock %}
+{% include stock-photo.html stock=page.stock %}
+{% endif %}
 
 {% if page.case_study %}
 {% include case-study-header.html %}

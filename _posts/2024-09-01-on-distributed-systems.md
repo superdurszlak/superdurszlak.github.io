@@ -3,6 +3,7 @@ layout: post
 title: "On distributed systems"
 redirect_from:
   - "/intro/"
+stock: server-rack
 tags: 
   - "distributed-systems"
   - "cloud"
