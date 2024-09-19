@@ -80,6 +80,54 @@ body {
   font-size: 1rem;
 }
 
+.previous-and-next {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin: $base-margin 0;
+
+  :is(.previous-post, .next-post) {
+    background-color: $primary-transparent-color;
+    border-radius: $border-radius;
+    padding: $half-margin;
+  }
+
+  .previous-post {
+    position: relative;
+    padding-left: $base-margin;
+    &::before {
+      content: "";
+      display: block;
+      width: $border-radius;
+      background-color: $primary-color;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+  }
+
+  .next-post {
+    position: relative;
+    padding-right: $base-margin;
+    &::after {
+      content: "";
+      display: block;
+      width: $border-radius;
+      background-color: $primary-color;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+}
+
 .note {
   display: flex;
   flex-direction: column;
@@ -330,8 +378,9 @@ li.post-listing h3 {
   display: inline;
 
   &::after {
-    content: " [...]";
+    content: "...";
     display: inline;
+    margin-right: $half-margin;
   }
 }
 

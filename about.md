@@ -7,7 +7,7 @@ permalink: /about/
 {% assign about_page = site.pages | where: "path", "about.md" | first %}
 {% assign intro_post = site.posts | where: "slug", "on-distributed-systems" | first %}
 
-## Hello! Cześć! Tschüs!
+## Hello! Cześć! Hallo!
 
 I am happy to see you visit my website :smiley: As you can see, it looks rather dry and is not particularly content-rich - I hope to address the latter over time. As far as aesthetics go - I have nothing to do with front-end development after all, and there is not much I am able to do just yet, except for, say, picking a nicer Jekyll theme, or using a fancier diagramming tool than PlantUML :see_no_evil:
 
