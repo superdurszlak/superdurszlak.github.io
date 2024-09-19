@@ -1,0 +1,10 @@
+{% if include.page.tags %}
+<div id="related-posts-wrapper">
+  <ul id="related-posts"></ul>
+</div>
+
+<script id="post-tags" type="application/json">
+  {{ include.page.tags | jsonify }}
+</script>
+<script src="/assets/js/find-related-posts.js"></script>
+{% endif %}

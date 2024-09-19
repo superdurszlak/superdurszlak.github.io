@@ -28,6 +28,8 @@ layout: default
 
 {% include previous-and-next.html page=page %}
 
+{% include related-posts.html page=page %}
+
 {% if site.giscus.enabled %}
 <script src="https://giscus.app/client.js"
         data-repo="{{ site.giscus.data_repo }}"
