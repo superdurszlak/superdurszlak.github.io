@@ -459,11 +459,13 @@ tbody tr:nth-child(2n) {
   margin-bottom: $double-margin;
 }
 
-.stock :is(img, video) {
+.stock img {
   width: 100%;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+  object-fit: cover;
+  border-radius: $border-radius;
 }
 
 .stock-photo-credit {

@@ -3,6 +3,7 @@ layout: post
 title: "Cloud Transformation misconceptions"
 case_study: true
 jargon_heavy: true
+stock: cloud-thunderstorm
 tags: 
   - "cloud-transformation"
   - "cloud"

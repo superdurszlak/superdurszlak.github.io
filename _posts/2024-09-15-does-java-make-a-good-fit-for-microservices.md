@@ -2,6 +2,7 @@
 layout: post
 title: "Does Java make a good fit for microservices?"
 jargon_heavy: true
+stock: java-code-screen
 tags: 
   - "java"
   - "efficiency"
