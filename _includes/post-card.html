@@ -1,15 +1,19 @@
-
 <li class="post-listing">
-    <h3>
-      <a class="post-link" href="{{ include.post.url }}">
-        {{ include.post.title }}
-      </a>
-    </h3>
-
-    {% include post-meta.html post=include.post %}
-
-    {% include post-excerpt.html post=include.post %}
-
-    {% include tags.html tags=include.post.tags %}
-
-  </li>
+  <div class="post-card-content">
+    <div class="post-thumbnail">
+      {% if include.post.stock %}
+      {% include stock-thumbnail.html stock=include.post.stock url=include.post.url %}
+      {% endif %}
+    </div>
+    <div>
+      <h3>
+        <a class="post-link" href="{{ include.post.url }}">
+          {{ include.post.title }}
+        </a>
+      </h3>
+      {% include post-meta.html post=include.post %} 
+      {% include post-excerpt.html post=include.post %} 
+      {% include tags.html tags=include.post.tags %}
+    </div>
+  </div>
+</li>

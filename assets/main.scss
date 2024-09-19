@@ -289,6 +289,19 @@ li.post-listing h3 {
   margin-top: 0;
 }
 
+.post-card-content {
+  display: flex;
+}
+
+.post-thumbnail {
+  margin-right: $base-margin;
+  overflow: hidden;
+}
+
+.post-thumbnail img {
+  border-radius: $border-radius;
+}
+
 .post-excerpt p {
   margin: 0.5em 0;
   font-style: italic;
@@ -424,27 +437,11 @@ tbody tr:nth-child(2n) {
   margin-bottom: $double-margin;
 }
 
-.stock {
-  max-height: $stock-max-height-default;
-  @include respond-to(desktop) {
-    max-height: $stock-max-height-desktop;
-  }
-  @include respond-to(mobile) {
-    max-height: $stock-max-height-mobile;
-  }
-  @include respond-to(tablet) {
-    max-height: $stock-max-height-tablet;
-  }
-  overflow: hidden;
-  
-}
-
 .stock :is(img, video) {
   width: 100%;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  object-fit: cover;
 }
 
 .stock-photo-credit {
