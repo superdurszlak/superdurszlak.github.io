@@ -4,7 +4,10 @@
 </div>
 
 <script id="post-tags" type="application/json">
-  {{ include.page.tags | jsonify }}
+  {
+    "tags": {{ include.page.tags | jsonify }},
+    "ref": "{{ include.page.url | slugify }}"
+  }
 </script>
 <script src="/assets/js/find-related-posts.js"></script>
 {% endif %}
