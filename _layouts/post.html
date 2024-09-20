@@ -5,9 +5,12 @@ layout: default
 {% include post-meta.html post=page %}
 
 <h1>{{ page.title }}</h1>
+
 {% if page.stock %}
 {% include stock-photo.html stock=page.stock %}
 {% endif %}
+
+{% include previous-and-next.html page=page %}
 
 {% if page.case_study %}
 {% include case-study-header.html %}
@@ -21,7 +24,11 @@ layout: default
 
 {{ content | toc }}
 
+{% include related-posts.html page=page %}
+
 {% include tags.html tags=page.tags %}
+
+{% include previous-and-next.html page=page %}
 
 {% if site.giscus.enabled %}
 <script src="https://giscus.app/client.js"
