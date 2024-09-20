@@ -1,13 +1,28 @@
 {% if include.page.tags %}
 <div id="related-posts-wrapper">
-  <ul id="related-posts"></ul>
+  <span class="further-reading">Read more on this topic</span>
+  <ul id="related-posts" class="post-list"></ul>
 </div>
 
-<script id="post-tags" type="application/json">
-  {
+
+<script>
+  window.store = {};
+  window.store.current = {
     "tags": {{ include.page.tags | jsonify }},
     "ref": "{{ include.page.url | slugify }}"
-  }
+  };
+  window.store.posts = {
+    {% for post in site.posts %}
+      {% capture card_html %}
+        {% include post-card.html post=post %}
+      {% endcapture %}
+      "{{ post.url | slugify }}": {
+        "tags": {{ post.tags | jsonify }},
+        "html": {{ card_html | strip_newlines | jsonify }}
+      }
+      {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  };
 </script>
 <script src="/assets/js/find-related-posts.js"></script>
 {% endif %}

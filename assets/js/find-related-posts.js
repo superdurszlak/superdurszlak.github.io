@@ -1,22 +1,24 @@
 (function () {
-  const data = JSON.parse(document.getElementById('post-tags').textContent);
-  const basePost = data.ref;
-  const postTags = data.tags;
+  const data = window.store.current || {};
+  const basePost = data.ref || "";
+  const postTags = data.tags || [];
 
   const relatedPosts = allResults()
     .filter((result) => {
-      return basePost == result.ref;
+      return basePost != result.ref;
     })
     .filter((result) => {
       return matchesByTags(result.tags, postTags);
     })
     .map((result) => {
-      result.html;
+      return result.html;
     });
+
 
   const relatedPostsUl = document.getElementById('related-posts');
   
   relatedPostsUl.innerHTML = shuffleResults(relatedPosts)
+    .slice(0, 3)
     .join("");
 
   enableRelatedPosts();
@@ -27,17 +29,21 @@
 
   function matchesByTags(foundTags, relevantTags) {
     const relevantTagsSet = new Set(relevantTags);
-    return foundTags.some((tag) => {
+    console.log("Looking for matches: %s vs %s", foundTags, relevantTags);
+    const hasMatch = foundTags.some((tag) => {
       return relevantTagsSet.has(tag);
     });
+    console.log("Match result: %s", hasMatch);
+    return hasMatch;
   }
 
   function allResults() {
-    return Object.keys(window.store).map((key) => {
+    const posts = window.store.posts;
+    return Object.keys(posts).map((key) => {
       return {
         ref: key,
-        tags: window.store[key].tags,
-        html: window.store[key].html,
+        tags: posts[key].tags,
+        html: posts[key].html,
       };
     });
   }

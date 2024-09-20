@@ -86,19 +86,33 @@ body {
   justify-content: space-between;
   align-items: center;
   margin: $base-margin 0;
+  @include respond-to(mobile) {
+    display: block;
+  }
 
   :is(.previous-post, .next-post) {
     background-color: $primary-transparent-color;
     border-radius: $border-radius;
     padding: $half-margin;
-  }
-
-  .previous-post {
-    position: relative;
-    padding-left: $base-margin;
+    max-width: 45%;
+    flex: 0 1 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: $base-margin 0;
+    @include respond-to(mobile) {
+      box-sizing: border-box;
+      max-width: 100%;
+      position: relative;
+      width: 100%;
+      display: block;
+      white-space: normal;
+      overflow: auto;
+      text-overflow: ellipsis;
+    }
     &::before {
       content: "";
-      display: block;
+      display: none;
       width: $border-radius;
       background-color: $primary-color;
       position: absolute;
@@ -108,14 +122,9 @@ body {
       border-top-left-radius: $border-radius;
       border-bottom-left-radius: $border-radius;
     }
-  }
-
-  .next-post {
-    position: relative;
-    padding-right: $base-margin;
     &::after {
       content: "";
-      display: block;
+      display: none;
       width: $border-radius;
       background-color: $primary-color;
       position: absolute;
@@ -126,10 +135,43 @@ body {
       border-bottom-right-radius: $border-radius;
     }
   }
+
+  .previous-post {
+    position: relative;
+    padding-left: $base-margin;
+    &::before {
+      display: block;
+    }
+  }
+
+  .next-post {
+    position: relative;
+    padding-right: $base-margin;
+    &::after {
+      display: block;
+    }
+    @include respond-to(mobile) {
+      padding-left: $base-margin;
+      padding-right: $half-margin;
+      &::before {
+        display: block;
+      }
+      &::after {
+        display: none;
+      }
+    }
+  }
 }
 
 #related-posts-wrapper {
   display: none;
+  margin: $double-margin 0;
+}
+
+.further-reading {
+  color: $primary-color;
+  font-weight: bold;
+  font-size: 1.25em;
 }
 
 .note {
@@ -263,6 +305,7 @@ a.tag {
 .site-nav a.page-link {
   font-size: 1.25em;
   color: $primary-color;
+  white-space: nowrap;
   &:visited {
     color: $primary-color;
   }

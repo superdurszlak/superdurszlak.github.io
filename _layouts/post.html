@@ -24,11 +24,11 @@ layout: default
 
 {{ content | toc }}
 
+{% include related-posts.html page=page %}
+
 {% include tags.html tags=page.tags %}
 
 {% include previous-and-next.html page=page %}
-
-{% include related-posts.html page=page %}
 
 {% if site.giscus.enabled %}
 <script src="https://giscus.app/client.js"
