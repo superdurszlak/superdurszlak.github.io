@@ -1,0 +1,15 @@
+{% assign page = include.page %}
+<ul class="social-share">
+  {% for target in site.share %}
+  <li class="social-link">
+    <button
+      class="button"
+      data-title="{{ page.title }}"
+      data-sharer="{{ target.type }}"
+      data-url="{{ page.url | absolute_url }}"
+    >
+      {{ target.text }}
+    </button>
+  </li>
+  {% endfor %}
+</ul>

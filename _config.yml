@@ -119,6 +119,7 @@ jekyll-spaceship:
 redirect_from:
   json: false
 
+# Stock photos
 stocks_dir: /assets/stock/
 stocks:
   - name: autism-letters
@@ -156,6 +157,18 @@ stocks:
       <a href="https://unsplash.com/@tvick?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Taylor Vick</a> 
       on 
       <a href="https://unsplash.com/photos/cable-network-M5tzZtFCOfs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
+share:
+  - text: Share on LinkedIn
+    type: linkedin
+  - text: Share on Twitter/X
+    type: x
+  - text: Share on Facebook
+    type: facebook
+  - text: Share on Reddit
+    type: reddit
+  - text: Share on HackerNews
+    type: hackernews
 
 # Exclude from processing.
 # The following items will not be processed, by default.
