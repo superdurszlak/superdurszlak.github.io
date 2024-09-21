@@ -205,7 +205,7 @@ rectangle PotsTeam as "Pots Team" {
   PotsQA -u-> PotsEM : reports to
   PotsSec -u-> PotsEM : reports to
 
-  PotsSec -r[dashed]-> PotsDev : calls for action
+  PotsSec -r[dashed]-> PotsDev : calls to action
 }
 
 actor CeramicsDirector as "Director of Ceramics"
