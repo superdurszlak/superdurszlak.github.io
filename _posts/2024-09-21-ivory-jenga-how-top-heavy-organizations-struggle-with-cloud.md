@@ -300,3 +300,72 @@ It is often helpful if an organization has a dedicated Platform Team, delivering
 At Round Plates, some teams had dedicated Software Architects, while others did not. One team we worked with quite closely got tasked with designing and implementing a system to handle dynamic configurations for enterprise applications, which were supposed to have a rather complex lifecycle. A certain Software Architect, Jeff, was going to help them. As it turned out - Jeff had a <i>my way or highway</i> mindset, and was not particularly interested in seeking or accepting developers' feedback about his designs. 
 {% endcapture %}
 {% include case-study-context.html content=hierarchy %}
+
+This kind of attitude is typical for strongly hierarchical organizations, and large companies with long traditions are quite susceptible to hierarchical mindset. Unfortunately, this has manifold negative effects, such as:
+- Rejecting feedback based on position in hierarchy, rather than merit, means that it is no longer important whether the decision is right, what matters is _who_ made it,
+- Conflicts of interest arise, as one needs to choose between taking the risk of challenging the hierarchy, and sacrificing one's own and organization's opportunities for the sake of maintaining peace,
+- It creates a non-inclusive work environment, where team members are not able to contribute according to their individual skills,
+- It limits the growth of individual contributors, as they miss the opportunities to learn, contribute and be recognized,
+- In a work environment where individual engineers have no say regardless of their merit, they are unlikely to be as committed as if they could get more involved.
+
+### Controller Service, Service Service, Database Service
+
+{% capture hierarchy_services %}
+The design Jeff came up with closely reflected his individual, hierarchical mindset. In order to retrieve dynamic configurations, the enterprise systems would need to poll the first layer of services, responsible for exposing APIs for the enterprise system to consume. They would then orchestrate the "logical" layer of the microservices to figure out if a newer version of configuration was rolled out, and to do this they would all call a couple of "data" services which actually held the databases, and then combine the results to produce a response. Both teams - ours and the one to implement this system - raised multiple concerns about this design, most notably on the exponential cascades of API calls this design required, and the fact that in that case polling would likely be less efficient than pushing messages about new configurations.
+{% endcapture %}
+{% include case-study-context.html content=hierarchy_services %}
+
+Needless to say, the Software Architect dismissed the feedback received from the engineering teams, as he was the entity to both create and approve the architecture design. It did not take long for all the concerns raised by the teams to become reality - first, in an MVP version a single API call the from enterprise system led to no less than a dozen internal API requests, some of them cascaded and some looped. A few months later, a dozen became almost a hundred, and the system was visibly struggling due to increasing latency and low reliability, as none of the 100 or so API calls were allowed to fail in order for the operation to be successful.
+
+This situation could have been avoided if the Software Architect would be more open to feedback from those _below_ him, and included them in the design sessions in a more collaborative manner.
+
+### Solution: Collaborative design
+
+The most robust, reliable and maintainable systems I have ever built were ones where all of the team members - regardless of their seniority level - were included in the system design, and were encouraged to participate. In some cases, the design was a result of a peaceful consensus, and sometimes it was born in heated discussions and arguments about various side effects, trade-offs and priorities that happened to be mutually exclusive. In either case, what mattered was that everyone felt included and was aligned with the design, rather than suppressed and uttering _I knew it would happen_ to themselves.
+
+There are many ways the team can collaborate on distributed system design:
+- A team member may become a subject matter expert, driving particular initiatives while receiving design review from remaining team members,
+- _Architecture Decision Records_ or similar design documents help preserve the rationale for certain decisions, and can even checked into version control,
+- Brainstorming sessions are a great way to discuss and confront various ideas and designs before committing to a particular decision,
+- Most of the design work can be split into separate _tasks_, _spikes_ or other actionable items, which can be worked on individually or collaboratively.
+
+This approach works well both within the boundary of a single team, as well as within initiatives crossing the team boundaries, such as internal tech communities.
+
+{% capture hierarchy_insights %}
+In my experience, collaborative design of system architecture yields best results. This approach can work both with and without a dedicated Software Architect role, as long as the Architect takes a role of an advisor supporting the team with his experience and insight, rather than imposing his will on the team. Likewise, it requires a certain level of maturity from the team, not only in the sense of being experienced, but also being mindful of all the implications their designs would have.
+{% endcapture %}
+{% include key-takeaway.html content=hierarchy_insights %}
+
+## One deployment to rule them all
+
+{% capture deployment %}
+One of the most critical, impactful and hardest to undo decisions made at the onset of Round Plate's SaaS solution was that since it is a single SaaS platform, all microservices comprising it should be deployed together, in an orchestrated manner. The engineering teams warned that this would lead to higher, unintended coupling between microservice versions, as breaking changes could easily go unnoticed. The deployment was scheduled bi-weekly in the early morning on a business day, and our team predicted within a few months the deployment would be re-scheduled to weekend, and the deployment window would probably grow beyond control. Not long after submitting this report, we observed the deployments started taking up to 4h instead of planned 2h and had to be moved to Saturdays, and over the next half-year this number grew to a staggering <b>12h</b> - for only a dozen of microservices. 
+{% endcapture %}
+{% include case-study-context.html content=deployment %}
+
+The decision to orchestrate deployments of a distributed system is one of the most dangerous anti-patterns - the [Red Flag Law](https://microservices.io/post/antipatterns/2019/06/07/antipattern-red-flag-law.html). There are multiple disadvantages of this deployment strategy in the context of distributed systems:
+- Big-bang deployments involving multiple deployment units create room for human error, which in turn can lead to severe outages if deployment units strongly depend on each other,
+- Multiple, not necessarily related changes build up to become part of a single deployment, and only one of them needs to have defects to make deployment fail or cause an outage,
+- In case of an deployment-related outage or failed deployment, it becomes harder to investigate the root cause of failure,
+- Breaking changes can be accidentally introduced, not only creating further opportunities for human error, but creating a risk that a failed or partial deployment may turn out to be difficult to rollback.
+
+### Solution: Independently deployable components
+
+Similar to the idea of having mostly autonomous teams, software components in a distributed system should be deployed independent of each other. In order to achieve this, deployments should be atomic, and any changes, including breaking changes, should be rolled out in such a way that it does not require immediate orchestration with deployments of other deployment units. Some of the deployment strategies that enable this include:
+- Breaking up a breaking change into a series of mutually compatible changes - so that in case of deployment failure, the deployment unit can always be reverted to its previous version,
+- If changes in multiple deployment units require coordination, the deployment effort should again be broken into compatible stages, which preserve some order of introducing changes, but do not require strict timing for the system to remain available,
+- Oftentimes, leveraging feature flags is useful as related changes can be deployed without having immediate effects on the system. Thanks to this, deployments of related changes no longer need to occur in a particular order, and can remain inactive until needed or possible to enable.
+
+{% capture deployment_insights_independence %}
+While orchestrated deployments of distributed systems increase the risk of failures, and make root cause analysis more difficult, independent and atomic deployments have the opposite effect. Since the scope of changes is smaller, the risk of an incident as a result of a deployment is reduced, and in case it occurs it is easier to identify the change that led to an outage, and can be rolled back more easily.
+{% endcapture %}
+{% include key-takeaway.html content=deployment_insights_independence %}
+
+### Solution: Frequent, unscheduled deployments
+
+To prevent multiple changes from compounding, it is reasonable to deploy the change as soon as it reaches production readiness, even if that means multiple deployments a day. 
+
+{% capture deployment_insights_frequency %}
+Some of the most resilient systems I have maintained were deployed multiple times a day. While we had several times more deployments than an average team at our organization, we experienced only a fraction of incidents the systems deployed in a more traditional manner had. One of the key factors to enable this approach is that _mainline_ branch needs to stay production-ready at all times, and merging a change into _mainline_ means it has passed strict, thorough quality gates, giving us confidence that we can deploy immediately rather than let the changes pile up.
+{% endcapture %}
+{% include key-takeaway.html content=deployment_insights_frequency %}
