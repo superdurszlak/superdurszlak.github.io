@@ -31,7 +31,7 @@ Anybody who has worked for a large organization with a headcount in the thousand
 - Get stuck for a week because the CI/CD pipeline got misconfigured - DevOps Team misunderstood that they need to prepare a JavaScript pipeline, and now your Java application cannot be built as it needs Maven... but got NPM.
 
 Sadly, this way of working is not only inefficient and frustrating, but also prevalent to the point it is taken for granted in the large organizations. Oftentimes, it is justified with statements such as:
-> We have always worked this way
+> We have always worked this way, you have to get used to this
 
 > This is a serious business, we cannot just get things done like a startup
 
@@ -229,18 +229,74 @@ As a rule of thumb, a more effective approach is to organize according to domain
 ## We need it, we reinvent it
 
 {% capture reinvention %}
-<p>When I joined Round Plates, each team solved the same problems on their own. To give just one example, we had around <b>seven</b> competing libraries for logging alone - and absurdly enough, almost all of them had <i>common</i> somewhere in their names. When we needed to provision a Kubernetes cluster for ourselves, we learned how to do this from scratch - and it in a rather inefficient manner, having to tinker a lot with AWS Route53, manage AWS EC2 instances serving as worker and control plane nodes, deal with duplication of Terraform code, and soon enough we ran out of our rather small private network's IP address pool.</p>
+When I joined Round Plates, each team solved the same problems on their own. To give just one example, we had around <b>seven</b> competing libraries for logging alone - and absurdly enough, almost all of them had <i>common</i> somewhere in their names. When we needed to provision a Kubernetes cluster for ourselves, we learned how to do this from scratch - and it in a rather inefficient manner, having to tinker a lot with AWS Route53, manage AWS EC2 instances serving as worker and control plane nodes, deal with duplication of Terraform code, and soon enough we ran out of our rather small private network's IP address pool.
 {% endcapture %}
 {% include case-study-context.html content=reinvention %}
 
-### Platform team catering to everyone
+This is an experience most Software Engineers can relate to. We start a project, we start running into challenges... if we are lucky enough, we get to know someone has already addressed this before in the company, otherwise we get our hands dirty and proudly solve problems nobody told us do not need solving. This indicates a number of problems:
+- Lack of alignment across engineering teams, as all of them have their own, in-house solutions to address similar problems,
+- Considerable efforts are committed by teams to address the same challenge independently,
+- Individual solutions are of varying quality, as smaller audience and narrower scope mean fewer opportunities for feedback. Some teams may arrive at brilliant solutions, while others would not,
+- Communication gaps, as most of the time the teams are unaware of each other's struggles, and thus cannot cooperate to arrive at a solution together.
+
+### Solution: Chapters, Guilds and Communities of Practice
+
+It doesn't really matter how exactly an organization names it, or what particular framework this is built around. The crucial aspect is to give room for engineering teams to gather and discuss particular topics of interest. It also creates an opportunity to showcase what kind of challenges the team ran into, and how they get addressed - this way, such solutions can spread and receive more substantial feedback, and it increases the chances the teams would re-use each other's solutions, rather than keep themselves busy reinventing the wheel.
+
+```plantuml!
+!theme mono
+top to bottom direction
+skinparam linetype polyline
+
+rectangle PlatesTeam as "Plates Team" {
+  actor PlateEM as "Line Manager"
+  actor PlateSecurity as "Security"
+  actor PlateDev as "Developer"
+  actor PlateInfra as "DevOps"
+  actor PlateQA as "QA"
+
+  PlateSecurity -r[hidden]- PlateDev
+  PlateDev -r[hidden]- PlateInfra
+  PlateInfra -r[hidden]- PlateQA
+
+  PlateDev -u-> PlateEM : reports to
+  PlateInfra -u-> PlateEM : reports to
+  PlateQA -u-> PlateEM : reports to
+  PlateSecurity -u-> PlateEM : reports to
+}
+agent CommunityEM as "Leadership group"
+agent CommunityQA as "QA chapter"
+agent CommunityArchitecture as "Architecture guild"
+agent CommunitySecurity as "Security champions"
+
+PlateEM -u[dotted]- CommunityEM
+PlateDev -d[dotted]- CommunityArchitecture
+PlateInfra -d[dotted]- CommunityArchitecture
+PlateQA -r[dotted]- CommunityQA
+PlateSecurity -l[dotted]- CommunitySecurity
+```
+
+The most successful solutions - ones that got the most traction, proved to be reliable and liked by the engineering teams - can be further refined and adopted company-wide. This can lead to gradual creation of _the_ company platform, maintained and owned by _the_ platform team(s) as enablers for domain teams. As an added benefit, in my experience the ability to participate in such initiatives enhances engagement, and helps build a sense of belonging to the organization.
+
+{% capture reinvention_insights_community %}
+Encouraging exchange of ideas and communication between the teams within themed groups - such as Security, Quality Assurance, Architecture - enables an organization to deliver more effectively and at a more consistent quality, while strengthening the internal community.
+{% endcapture %}
+{% include key-takeaway.html content=reinvention_insights_community %}
+
+### Solution: Platform team catering to everyone
 
 These kinds of problems got gradually addressed as the company invested in building a platform team delivering enablers for the rest of us - such as high-level Terraform modules to provision required resources, running dedicated Kubernetes clusters in AWS EKS to be used by domain teams, and delivering a high-level CLI that allowed to easier integrate local environment with cloud resources for easier management. While some of these platform solutions were not great - the microservices generator was almost universally contested as insanely impractical - in general having such team greatly increased our productivity and alignment across teams.
 
 One of the most important aspects of this approach was that it was built with self-service in mind - rather than sending tickets over to the Platform Team to do the necessary work for us, the team delivered technical enablers that allowed us to manage the infrastructure on our own easier and faster, while adhering to company's security standards and keeping roughly uniform infrastructure.
 
-
 {% capture reinvention_insights_platform %}
 It is often helpful if an organization has a dedicated Platform Team, delivering technical enablers for domain teams - ideally on a self-service basis. This allows teams to focus on their key deliverables rather than solving common problems independently - without the need to line up with their tickets to provision a database.
 {% endcapture %}
 {% include key-takeaway.html content=reinvention_insights_platform %}
+
+## Hierarchical structure, hierarchical outcomes
+
+{% capture hierarchy %}
+At Round Plates, some teams had dedicated Software Architects, while others did not. One team we worked with quite closely got tasked with designing and implementing a system to handle dynamic configurations for enterprise applications, which were supposed to have a rather complex lifecycle. A certain Software Architect, Jeff, was going to help them. As it turned out - Jeff had a <i>my way or highway</i> mindset, and was not particularly interested in seeking or accepting developers' feedback about his designs. 
+{% endcapture %}
+{% include case-study-context.html content=hierarchy %}
