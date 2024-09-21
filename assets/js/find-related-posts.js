@@ -29,12 +29,9 @@
 
   function matchesByTags(foundTags, relevantTags) {
     const relevantTagsSet = new Set(relevantTags);
-    console.log("Looking for matches: %s vs %s", foundTags, relevantTags);
-    const hasMatch = foundTags.some((tag) => {
+    return foundTags.some((tag) => {
       return relevantTagsSet.has(tag);
     });
-    console.log("Match result: %s", hasMatch);
-    return hasMatch;
   }
 
   function allResults() {
