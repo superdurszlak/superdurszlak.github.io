@@ -370,6 +370,9 @@ li.post-listing:nth-child(2n - 1) {
 
 li.post-listing:nth-child(2n) {
   background-color: $gray-transparent-color;
+  .post-thumbnail img {
+    border-color: $gray-color;
+  }
 }
 
 li.post-listing {
@@ -392,6 +395,7 @@ li.post-listing h3 {
 }
 
 .post-thumbnail {
+  cursor: pointer;
   margin: $half-margin;
   margin-right: $base-margin;
   flex-shrink: 0; /* Prevent shrinking */
@@ -417,6 +421,9 @@ li.post-listing h3 {
   height: 100%;
   object-fit: cover;
   border-radius: $border-radius;
+  border-color: $primary-color;
+  border-style: solid;
+  border-width: $thin-border;
 }
 
 .post-excerpt p {
