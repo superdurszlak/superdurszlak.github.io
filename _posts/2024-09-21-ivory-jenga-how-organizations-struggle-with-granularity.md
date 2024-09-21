@@ -363,9 +363,26 @@ While orchestrated deployments of distributed systems increase the risk of failu
 
 ### Solution: Frequent, unscheduled deployments
 
-To prevent multiple changes from compounding, it is reasonable to deploy the change as soon as it reaches production readiness, even if that means multiple deployments a day. 
+To prevent multiple changes from compounding, it is reasonable to deploy the change as soon as it reaches production readiness, even if that means multiple deployments a day. One may ask, however, a number of valid questions:
+- How do we know a change is production ready?
+- What to do if some changes are production ready, and some are not?
+
+The answer to the first question is thorough testing and rigorous quality gates - ideally before even letting the change to be merged into the deployment unit's mainline branch. A crucial aspect of this approach is extensive automation and minimizing the labour-intensiveness of enforcing the quality gate, as well as removing opportunities to bypass them:
+- Strong branch protection, with no exception for administrators,
+- Required code review before merging,
+- Required CI quality gates that must pass, including passing tests, security scans, linters and deployment dry-runs,
+- Pre-merge quality gates should be as extensive as possible, to reduce the risk of finding out the change has defects only after merging. Deployment to staging / pre-production from PR branch for E2E tests is advisable.
+Additionally, it helps to require all PR branches to be up-to-date with base branch before merging - this way, unexpected and untested interactions between independent changes are avoided.
+
+With thorough validation of a change before integrating it into our mainline branch, we gain high level of confidence that our mainline branch is always deployable.
+
+In case not all changes on mainline branch are deployable, or we simply do not want them to take effect just yet, we can avoid blocking the mainline branch or rendering it non-deployable by disabling such changes with feature flags. Once the change is considered good to deploy, we can re-deploy with feature flag turned on - and we are one flag away from reverting the change in case it has severe defects causing incidents. Lastly, once we are certain the change is going to stay with us and no longer needs its feature flag, the flag can be removed altogether.
 
 {% capture deployment_insights_frequency %}
 Some of the most resilient systems I have maintained were deployed multiple times a day. While we had several times more deployments than an average team at our organization, we experienced only a fraction of incidents the systems deployed in a more traditional manner had. One of the key factors to enable this approach is that _mainline_ branch needs to stay production-ready at all times, and merging a change into _mainline_ means it has passed strict, thorough quality gates, giving us confidence that we can deploy immediately rather than let the changes pile up.
 {% endcapture %}
 {% include key-takeaway.html content=deployment_insights_frequency %}
+
+## Summary
+
+Defining effective ways of working around a distributed system is a challenging endeavor, and it only becomes harder if the organization itself is large and already has its own procedures. It is not impossible, though, to adopt some good practices to gradually improve, leading to better results for the organization and improved experience for its engineering teams.
