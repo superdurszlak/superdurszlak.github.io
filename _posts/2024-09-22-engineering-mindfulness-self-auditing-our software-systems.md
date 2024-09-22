@@ -86,6 +86,8 @@ What we didn't know, though, was that some attackers found a way to brute-force 
 
 After realizing how severe this blunder was, we blew the horns for the alarm and started a more thorough investigation. We identified the paths the attackers took, and thanks to a few of their mistakes we were also able to discover a number of signatures, allowing us to identify affected users and take action. Unfortunately, the damage was done.
 
+The lesson learned from this incident was that we need to audit our system's entrypoints and SIEM solution, in order to ensure not a single long-forgotten endpoint is overlooked and unprotected. We also had to do a better job at detecting anomalies, as this time it only brought our attention when the anomaly disappeared.
+
 {% capture hackers_insights %}
 Similarly to the previous scenario, collecting logs and metrics was not enough, as a lot of valuable - or even critical - insights were getting lost in the thicket of information flowing in. This could have been avoided if only we audited our SIEM and o11y stacks to see if we have alerting set up on all critical entry points to the system, and if we had the ability to spot the anomalies automatically rather than by chance.
 {% endcapture %}
