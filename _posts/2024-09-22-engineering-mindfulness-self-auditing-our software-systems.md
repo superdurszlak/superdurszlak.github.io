@@ -36,6 +36,20 @@ Even though the migration audit at Walnut Donuts was rushed due to tight deadlin
 
 ## Secretly committed secrets
 
+{% capture secrets_overlooked %}
+At Kravitz, accidentally committing one's credentials into company repositories was something so prevalent the Security Team has written down an entire procedure on how to remove and rotate the leaked credentials - but even then, when I did that mistake too and committed some test environment API key, there was no secret scanning in place. I had to realize I did, in fact, commit that API key and then self-report to the Security Team, who guided me through manual removal of the secret from the server's git history (sic!) and rotation of the credential. Unsurprisingly, when going through the history we even managed to find some other secrets committed and later reverted - and who knows if they ever got rotated anyway...
+{% endcapture %}
+{% include case-study-context.html content=secrets_overlooked %}
+
+{% capture secrets_scanning %}
+The story was entirely different with Turing Systems, though. There, Security Team rolled out automated secret scans for repositories - initially as an opt-in feature - ant sent out reports to the service owners about how many secrets were found in each repo. In case secrets were found, service owners would be urged to revoke and rotate all leaked credentials, and of course to remove the old credentials from the repository, but without rewriting the history. The company shared statistics on the progress of credentials removal on a regular basis, even. 
+{% endcapture %}
+{% include case-study-context.html content=secrets_scanning %}
+
+Acknowledging that a company lags behind in terms of security is a hard pill to swallow, however it is a crucial first step towards improving the situation. In the world where companies, hospitals and government organizations fall victim to security breaches, data theft and ransomware attacks building security awareness within an organization is of utmost importance.
+
+
+
 ## We provision what we need, and quadruple that for a good measure
 
 ## This is not how our users behave
