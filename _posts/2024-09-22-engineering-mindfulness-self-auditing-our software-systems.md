@@ -16,7 +16,7 @@ Time and again, we take each other and our future selves by surprise - by not co
 
 We all learn from mistakes, though it is only as effective as our ability to spot them - and we should rather spot and correct them before they cause significant damage. In this post, we will see how various forms of self-auditing can help us avoid cost inefficiency, future outages and security incidents.
 
-## Tis' but a migration
+## Tis but a migration
 
 {% capture migration %}
 Walnut Donuts offers their product suite as a SaaS, cloud-based offering for enterprise customers. At the onset of the journey, all production traffic from all over the world was hosted in a single AWS region, however for compliance with regulatory requirements we had to store and handle customer data from specific geographies within certain jurisdictions - which necessitated migrating to a multi-region infrastructure. Unfortunately, the engineering teams were the last to be informed about the migration, as it was expected the systems could be deployed as-is to new regions, and the data migrated there without much planning or software / infrastructure changes.
@@ -75,5 +75,22 @@ Collecting metrics about your system is one thing, and keeping an eye on them is
 {% endcapture %}
 {% include key-takeaway.html content=infrastructure_insights %}
 
-
 ## This is not how our users behave
+
+{% capture hackers %}
+At Bombastic.io, one of the challenges we had was that our SIEM solution did not seem to work well with the GraphQL APIs we built for our browser and mobile applications. It was not uncommon for me to receive an alert while on-call, as our Grafana alerts triggered due to suspicious activity. Then, I would call in the Security Team to have a look and maybe update their SIEM rules so that evident brute-force attacks would be blocked <i>before</i> they reach our servers. Sometimes this happened several times a day and I ended up playing cat and mouse with attackers, with them trying to fine-tune the attack rates so that they would not get detected, and me fine-tuning our alerts to still be able to capture their activity.
+{% endcapture %}
+{% include case-study-context.html content=hackers %}
+
+What we didn't know, though, was that some attackers found a way to brute-force our legacy, REST APIs still exposed for historical purposes - while bypassing the GraphQL API we paid so much attention to. Apparently, nobody really monitored what was going on there, and we only noticed an anomaly... when the attackers halted their attacks on these legacy APIs. We observed a significant drop in traffic and this attracted our attention - only to find out the systems are fine, but **we had been experiencing brute-force attacks for at least a month** - under ours and Security Team's noses!
+
+After realizing how severe this blunder was, we blew the horns for the alarm and started a more thorough investigation. We identified the paths the attackers took, and thanks to a few of their mistakes we were also able to discover a number of signatures, allowing us to identify affected users and take action. Unfortunately, the damage was done.
+
+{% capture hackers_insights %}
+Similarly to the previous scenario, collecting logs and metrics was not enough, as a lot of valuable - or even critical - insights were getting lost in the thicket of information flowing in. This could have been avoided if only we audited our SIEM and o11y stacks to see if we have alerting set up on all critical entry points to the system, and if we had the ability to spot the anomalies automatically rather than by chance.
+{% endcapture %}
+{% include key-takeaway.html content=hackers_insights %}
+
+## Summary
+
+Using all the cutting-edge technology in the world is not enough to build reliable, secure and cost-efficient systems. A degree of self-discipline is required from the Engineering Teams to build truly robust systems, ensure their quality does not degrade over time, and to detect instances of human error before they can be exploited by malicious actors. Auditing our own systems, build tools and ecosystems built around them is a critical part of maintaining them in appropriate state, as even components responsible for detecting problems are not free of them - and automating the audits is a great way to prevent humans from making another mistake.
