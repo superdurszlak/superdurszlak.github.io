@@ -59,4 +59,21 @@ Having <i>some</i> auditing and remediation procedures in place is simply not en
 
 ## We provision what we need, and quadruple that for a good measure
 
+{% capture infrastructure %}
+Bahama Estates served millions of individual customers around the world, and their systems were powered by over a hundred Java microservices running multiple instances for High Availability. For a long time, the costs of 3rd party cloud infrastructure were not considered a concern, and nobody asked questions about how we provision Kubernetes CPU and memory for our microservices. One day, DevOps Engineers approached me and asked if I am aware how much it costs the company to over-provision Kubernetes for our team. Since I did not know the answer, I resorted to building Grafana dashboards on top of resource utilization metrics to find an answer for us.
+{% endcapture %}
+{% include case-study-context.html content=infrastructure %}
+
+What I found out was not only that we were quite wasteful as a team - over-provisioning memory and CPU by **well over 200%** each, taking our peak traffic utilization as a baseline. Even more alarming was that we were no outliers, in fact teams that provisioned adequate resources were few and far between, and the rest made similar mistakes as we did - requesting far more than their services would ever use, meaning that our Kubernetes clusters were excessively scaled out, perpetually. 
+
+A brief audit had shown that in production and staging clusters, we could reduce over-provisioning by a staggering 300-400 vCPUs and 250-400 GB RAM each, if only the teams requested resources approximately matching their peak utilization, and probably more if requests would be closer to average utilization and the rest handled by resources limits. Depending on how exactly cloud computing resources were provisioned, these numbers could translate to 70-100 VMs with 4 vCPUs and at least 4GB RAM each, similar to AWS EC2 _\_\_\_.xlarge_ instances, or 35-50 more powerful ones at 8 vCPUs and no less than 8GB RAM, roughly equivalent to _\_\_\.2xlarge_ AWS EC2 VM. Depending on factors such as region, instance type, size and provisioning model, we can estimate the cost of 1vCPU + &ge;1GB RAM in [AWS](https://aws.amazon.com/ec2/pricing/on-demand/) as approximately $0.03-$0.07 per hour. Taking $0.05 as an average, and the over-provisioning as approximately 700 vCPUs and 700GB RAM total, we can estimate our wasteful approach cost the company ca. $35 per hour, $840 per day, **over $25k per month** or **over $300k per year** in compute resources alone.
+
+With that knowledge, we set out with DevOps Team to inform other Engineering Teams about the need to optimize resource utilization. Soon after, we started cutting excessive provisioning, allowing to significantly reduce the costs of our Kubernetes clusters without affecting system performance or reliability.
+
+{% capture infrastructure_insights %}
+Collecting metrics about your system is one thing, and keeping an eye on them is another. A mindful Engineering Team should not only set up metrics and logs collection and call it a day, we also need to make use of the data we collect, as it can indicate issues such as inefficient resource management.
+{% endcapture %}
+{% include key-takeaway.html content=infrastructure_insights %}
+
+
 ## This is not how our users behave
