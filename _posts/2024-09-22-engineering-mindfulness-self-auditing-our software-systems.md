@@ -32,12 +32,12 @@ All these efforts led to one of the most seamless migrations I have ever partici
 {% capture migration_insights %}
 Even though the migration audit at Walnut Donuts was rushed due to tight deadlines imposed by the regulator and initial miscommunication, at the end of the day it allowed us to avert tremendous risks to the migration effort. 
 {% endcapture %}
-{% include case-study-context.html content=migration_insights %}
+{% include key-takeaway.html content=migration_insights %}
 
 ## Secretly committed secrets
 
 {% capture secrets_overlooked %}
-At Kravitz, accidentally committing one's credentials into company repositories was something so prevalent the Security Team has written down an entire procedure on how to remove and rotate the leaked credentials - but even then, when I did that mistake too and committed some test environment API key, there was no secret scanning in place. I had to realize I did, in fact, commit that API key and then self-report to the Security Team, who guided me through manual removal of the secret from the server's git history (sic!) and rotation of the credential. Unsurprisingly, when going through the history we even managed to find some other secrets committed and later reverted - and who knows if they ever got rotated anyway...
+At Shenanigans Ltd., accidentally committing one's credentials into company repositories was something so prevalent the Security Team has written down an entire procedure on how to remove and rotate the leaked credentials - but even then, when I did that mistake too and committed some test environment API key, there was no secret scanning in place. I had to realize I did, in fact, commit that API key and then self-report to the Security Team, who guided me through manual removal of the secret from the server's git history (sic!) and rotation of the credential. Unsurprisingly, when going through the history we even managed to find some other secrets committed and later reverted - and who knows if they ever got rotated anyway...
 {% endcapture %}
 {% include case-study-context.html content=secrets_overlooked %}
 
@@ -48,7 +48,14 @@ The story was entirely different with Turing Systems, though. There, Security Te
 
 Acknowledging that a company lags behind in terms of security is a hard pill to swallow, however it is a crucial first step towards improving the situation. In the world where companies, hospitals and government organizations fall victim to security breaches, data theft and ransomware attacks building security awareness within an organization is of utmost importance.
 
+Shenanigans Ltd. might have had confidence that with all the procedures in place, they must be in a pretty good place in terms of security. What they did not seem to realize, though, was that the procedures actually discouraged Software Engineers from, following them - as the first step was for the Engineer to notice their mistakes, and then go through a laborious remediation that possibly wasn't even needed, given that the credentials would be rightly revoked and rotated as one of the remediation steps. This overconfidence can be dangerous - after all, a single leaked credential that went unnoticed is sometimes all that is needed for a severe security incident.
 
+Turing Systems, on the other hand, were forced to accept the bitter truth that they lagged behind in terms of security. What is crucial, though, is that they were at least set out on a path to address their leaks and solve the problem systemically. With automated credential leaks detection and simpler procedures, Turing Systems are far more likely to succeed in securing their systems.
+
+{% capture secrets_insights %}
+Having <i>some</i> auditing and remediation procedures in place is simply not enough to make things run smoothly. In order for a procedure to be effective, it must also be enforceable - and should not be made more complex than necessary, otherwise it is doomed to be bypassed or outright ignored. Automating audits and measuring progress with clearly defined metrics are key to turn company-wide efforts into a journey towards a goal, rather than wandering helplessly in the dark.
+{% endcapture %}
+{% include key-takeaway.html content=secrets_insights %}
 
 ## We provision what we need, and quadruple that for a good measure
 
