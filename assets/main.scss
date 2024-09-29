@@ -28,6 +28,7 @@ $desktop-font-size: 4.9mm;
 $default-font-size: 4.3mm;
 
 $primary-color: #216778;
+$primary-color-light: #e2eaeb;
 $gray-color: #3a3a3a;
 $background-color: #f8f8f8;
 $default-opacity: 0.1;
@@ -638,4 +639,12 @@ li.social-link {
     background-color: #3b5998;
     box-shadow: 0 2px 0 #224389, 1px 4px 2px rgba(0, 0, 0, 0.2);
   }
+}
+
+.highlighter-rouge .highlight {
+  background-color: $primary-color-light;
+}
+
+code {
+  background-color: $primary-color-light;
 }
