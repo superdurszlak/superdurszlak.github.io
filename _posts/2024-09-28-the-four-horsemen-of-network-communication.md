@@ -122,10 +122,10 @@ skinparam linetype ortho
 rectangle snake as "Snake Systems" {
   actor snakeUser as "User"
   agent snakeServerA as "API Gateway"
-  agent snakeServerB as "Reptiles Service"
+  agent snakeServerB as "Pythons Service"
   agent snakeServerC as "Snakes Service"
-  agent snakeServerD as "Pythons Service"
-  database snakeDatabase as "Pythons Database"
+  agent snakeServerD as "Reptiles Service"
+  database snakeDatabase as "Reptiles Database"
 
   snakeUser -d[dotted]-> snakeServerA
   snakeServerA -[dotted]-> snakeUser
@@ -144,7 +144,7 @@ rectangle snake as "Snake Systems" {
 }
 ```
 
-In Snake Systems, there is a rather prevalent architecture where network requests need to make their way through multiple layers of microservices before reaching the actual data sources. Each server responds to the caller after receiving a response from the upstream server or database. With 5 requests followed by 5 responses, any latencies present in the system compound quite significantly - for example, if all of them had a constant, 100ms, the total latency would already be a staggering _1000ms_.
+In Snake Systems, there is a rather prevalent architecture where network requests need to make their way through multiple layers of microservices before reaching the actual data sources. Each server responds to the caller after receiving a response from the upstream server or database. With 5 requests followed by 5 responses, any latencies present in the system compound quite significantly. For example, if all of them had a constant latency of 100ms, the total latency would already be a staggering _1000ms_.
 
 ```plantuml!
 !theme mono
@@ -183,11 +183,11 @@ rectangle starfish as "Starfish Systems" {
   starfishDatabaseC -[dotted]-> starfishServerC
 
 
-  starfishServerA -d[dotted]-> starfishServerD
-  starfishServerD -[dotted]-> starfishServerA
+  starfishServerA -d[dotted]-> starfishServerD: slow
+  starfishServerD -[dotted]-> starfishServerA: slow
 
-  starfishServerD -d[dotted]-> starfishDatabaseD
-  starfishDatabaseD -[dotted]-> starfishServerD
+  starfishServerD -d[dotted]-> starfishDatabaseD: slow
+  starfishDatabaseD -[dotted]-> starfishServerD: slow
 
 
   starfishServerA -d[dotted]-> starfishServerE
@@ -205,7 +205,28 @@ rectangle starfish as "Starfish Systems" {
 }
 ```
 
-In Starfish Systems, however, the architecture is entirely different - instead of going through layers and layers of servers, the architecture is pretty much flat with domain-specific services. In this scenario, let us imagine these services all need to be called by the API Gateway to repond to the caller, but since these services are queried independently, this can be done in parallel, and the gateway responds when the slowest service sends back a response.
+In Starfish Systems, however, the architecture is entirely different - instead of going through layers and layers of servers, the architecture is pretty much flat with domain-specific services. In this scenario, let us imagine these services all need to be called by the API Gateway to respond to the caller, but since these services are queried independently, this can be done in parallel, and the gateway responds when the slowest service sends back a response. Now, let us assume that in this scenario, the latencies are also fixed at 100ms for each message, except for the _slow_ ones - we will raise the bar for Starfish System and introduce a _slow_ service and database, each experiencing latencies of _200ms_ instead. Even then, with this particular part slowing down the entire system - we can calculate that, again, it would take _1000ms_ for the initial caller to receive a response to their initial request.
+
+### Topology matters
+
+When we compare the systems from the example above, they both attained their total latency of _1000ms_, though in vastly different circumstances:
+- In Snake Systems, traffic goes through multiple layers of servers, while Starfish Systems mostly fans out in parallel,
+- Snake Systems had the advantage of lower latencies, while Starfish Systems were slowed down by a bottleneck - twice as slow as the rest of the system,
+- Snake Systems have stretched logistics - the response took _1000ms_ not because of a single bottleneck as in the case of Starfish Systems, but because the cascade of requests and responses was unavoidable with such architecture,
+- If not for the _slow_ actors, which I deliberately introduced, the Starfish Systems could in fact attain better latency despite having more moving parts. Without the bottleneck, the total latency would be around _600ms_, or 40% lower than that of Snake Systems,
+- Starfish Systems matched Snake Systems in terms of latency only because it could actually parallelize its communication. If this couldn't be done for any reason, and the API Gateway had to communicate with its upstreams one at a time, the situation would be far worse - with the total latency in the vicinity of _2600ms_.
+
+Real-life distributed systems are usually a mix of all three scenarios:
+- Some layering is usually involved, at the very least by means of an API gateway as an entry point to the system for external callers - such as browser and mobile apps,
+- Distributed systems often consist of some mostly independent components, which can process requests, events and messages independently, allowing for a degree of parallelism,
+- For distributed transactions and to implement certain business processes or customer journeys, some orchestration is typically involved - that is, one service, or orchestrator, or API Gateway needs to communicate with more than one upstream in a coordinated manner.
+
+If preserving low latency for end users is crucial regardless of internal complexity of the task, it is worth considering if any parts of the lengthy process can be done in the background - asynchronously, without the need to keep the user waiting seconds to receive any response from the system. It is better to provide with them with an incomplete, but still useful answer early on, and let them await for the process to complete while keeping them updated somehow. One example could be responding to an online shopper that their payment is being processed, and giving them a tracker URL or sending email notification. Even though the payment could still be rejected by the bank or card provider, it is still a better user experience than watching a blank screen or an animated spinner until the payment is accepted.
+
+{% capture latency_insight %}
+Distributed systems are inherently susceptible to the negative effects of high and variable network latency. Even in settings which generally enjoy negligible latencies, abuse of network communication result in dangerous compounding that could affect overall system performance. If there is no way to limit or streamline network communication to reduce compounding, or when the latencies are inherently high and cannot be immediately addressed, introduction of asynchronous processing can be helpful to improve user experience.
+{% endcapture %}
+{% include key-takeaway.html content=latency_insight %}
 
 ## Security
 
