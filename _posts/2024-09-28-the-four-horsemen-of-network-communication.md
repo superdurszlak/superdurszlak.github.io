@@ -68,6 +68,14 @@ The reasons for existence of such delays are at least twofold:
 - Most importantly, the speed at which information can travel is physically limited by its carrier. Just as much as physical mail cannot travel any faster than the postman, post wagon or post aircraft carrying them, digital information cannot travel faster than electrical signals in a copper wire, or photons in an optic fiber. At least until quantum teleportation becomes a viable medium for long-distance communication, we must live with the fact that our signals will have a latency of, say, 20-50ms within one continent, and often in excess of 100-150ms if it needs to travel across the ocean.
 - As a message, or more generally TCP/IP packet travels through the network, it will be generally transmitted from sender to recipient through a number of intermediate devices, responsible for ensuring packets reach their intended destinations. Examples of such network devices acting as intermediates include your personal Wi-Fi access point, routers at your ISP's premises, and many others. In general, depending on how far (physically and/or topologically) sender and recipient are from each other, the number of intermediates vary, and the fact they need to process and retransmit the packets contributes to the overall delay.
 
+If you look closely at any professional latency report, you will notice these values are by no means _absolute_ or _definitive_ - instead, they are expressed in terms of _latency at given percentile_. The reason for this is _jitter_ - because each individual latency is a result of a multitude factors, some of them rather volatile, the latency is subject to changes. Ten packets sent from the same sender to the same recipient may arrive after varying delays, not to mention packets sent from multiple senders or to multiple recipients. Because of this, we frequently read statements such as:
+
+> We observed a latency of 120ms at p50 and 200ms at p99 over the last 2 days.
+
+What it means is that within the specified period, 50% of the time (_p50_) the latency was measured at 120ms or lower, while 99% of the time (_p99_) it would not exceed 200ms. We can also say that this connection - whatever it is - has a jitter that is not really that bad. It is not uncommon to see _p99_ latencies being many times higher than the median (_p50_)
+
+### Example - traceroute
+
 As an exercise, let us see what output would we see when running `traceroute` command to trace packets sent to various hosts:
 
 First, `google.com`:
@@ -100,9 +108,104 @@ Apparently, this server must be too far to trace its route, or perhaps behind so
 
 Now, with that knowledge we can imagine what happens when two servers exchange messages, or when a user from Alaska has a video chat with friends from Germany - there is always a delay involved between the moment one device sends a packet, and the other receives it, and there is no way to escape this. Even in my vicinity, I can see it takes 4-7ms before a packet sent from my PC reaches the first server on my ISP's side! Looking at [AWS Latency Monitoring](https://www.cloudping.co/grid/p_50/timeframe/1Y), this more or less coincides with what latency can be expected when operating within a single AWS region.
 
-If you look at the latency monitoring, 
+### What does latency mean for distributed systems? 
 
-What does it mean for distributed systems? First of all, the more distributed they are in the geographical sense, the further distances their messages need to cover, contributing to greater latencies of the system. Furthermore, by co-locating components that need to communicate with each other we can significantly improve the systems performance - rather than hosting backend servers in the USA and databases in the UK, it is probably more efficient to have a few instances of each resource in each individual region or area of operation. It also happens to make compliance with all sorts of regulations easier, and allows you to provide customers with better user experience as everything they need is close to them - see `google.com` example above.
+First of all, the more distributed they are in the geographical sense, the further distances their messages need to cover, contributing to greater latencies of the system. Furthermore, by co-locating components that need to communicate with each other we can significantly improve the systems performance - rather than hosting backend servers in the USA and databases in the UK, it is probably more efficient to have a few instances of each resource in each individual region or area of operation. It also happens to make compliance with all sorts of regulations easier, and allows you to provide customers with better user experience as everything they need is close to them - see `google.com` example above.
+
+Moreover, even with minimal latencies - say, 3-5ms within a single AWS region or 1-2ms within data center premises - they still can, and do compound. Imagine these two systems:
+
+```plantuml!
+!theme mono
+top to bottom direction
+skinparam linetype ortho
+
+rectangle snake as "Snake Systems" {
+  actor snakeUser as "User"
+  agent snakeServerA as "API Gateway"
+  agent snakeServerB as "Reptiles Service"
+  agent snakeServerC as "Snakes Service"
+  agent snakeServerD as "Pythons Service"
+  database snakeDatabase as "Pythons Database"
+
+  snakeUser -d[dotted]-> snakeServerA
+  snakeServerA -[dotted]-> snakeUser
+
+  snakeServerA -d[dotted]-> snakeServerB
+  snakeServerB -[dotted]-> snakeServerA
+
+  snakeServerB -d[dotted]-> snakeServerC
+  snakeServerC -[dotted]-> snakeServerB
+
+  snakeServerC -d[dotted]-> snakeServerD
+  snakeServerD -[dotted]-> snakeServerC
+
+  snakeServerD -d[dotted]-> snakeDatabase
+  snakeDatabase -[dotted]-> snakeServerD
+}
+```
+
+In Snake Systems, there is a rather prevalent architecture where network requests need to make their way through multiple layers of microservices before reaching the actual data sources. Each server responds to the caller after receiving a response from the upstream server or database. With 5 requests followed by 5 responses, any latencies present in the system compound quite significantly - for example, if all of them had a constant, 100ms, the total latency would already be a staggering _1000ms_.
+
+```plantuml!
+!theme mono
+top to bottom direction
+skinparam linetype ortho
+
+rectangle starfish as "Starfish Systems" {
+  actor starfishUser as "User"
+  agent starfishServerA as "API Gateway"
+  agent starfishServerB as "Arm One Service"
+  agent starfishServerC as "Arm Two Service"
+  agent starfishServerD as "Arm Three Service"
+  agent starfishServerE as "Arm Four Service"
+  agent starfishServerF as "Arm Five Service"
+  database starfishDatabaseB as "Arm One Database"
+  database starfishDatabaseC as "Arm Two Database"
+  database starfishDatabaseD as "Arm Three Database"
+  database starfishDatabaseE as "Arm Four Database"
+  database starfishDatabaseF as "Arm Five Database"
+
+  starfishUser -d[dotted]-> starfishServerA
+  starfishServerA -[dotted]-> starfishUser
+
+
+  starfishServerA -d[dotted]-> starfishServerB
+  starfishServerB -[dotted]-> starfishServerA
+
+  starfishServerB -d[dotted]-> starfishDatabaseB
+  starfishDatabaseB -[dotted]-> starfishServerB
+
+
+  starfishServerA -d[dotted]-> starfishServerC
+  starfishServerC -[dotted]-> starfishServerA
+
+  starfishServerC -d[dotted]-> starfishDatabaseC
+  starfishDatabaseC -[dotted]-> starfishServerC
+
+
+  starfishServerA -d[dotted]-> starfishServerD
+  starfishServerD -[dotted]-> starfishServerA
+
+  starfishServerD -d[dotted]-> starfishDatabaseD
+  starfishDatabaseD -[dotted]-> starfishServerD
+
+
+  starfishServerA -d[dotted]-> starfishServerE
+  starfishServerE -[dotted]-> starfishServerA
+
+  starfishServerE -d[dotted]-> starfishDatabaseE
+  starfishDatabaseE -[dotted]-> starfishServerE
+
+
+  starfishServerA -d[dotted]-> starfishServerF
+  starfishServerF -[dotted]-> starfishServerA
+
+  starfishServerF -d[dotted]-> starfishDatabaseF
+  starfishDatabaseF -[dotted]-> starfishServerF
+}
+```
+
+In Starfish Systems, however, the architecture is entirely different - instead of going through layers and layers of servers, the architecture is pretty much flat with domain-specific services. In this scenario, let us imagine these services all need to be called by the API Gateway to repond to the caller, but since these services are queried independently, this can be done in parallel, and the gateway responds when the slowest service sends back a response.
 
 ## Security
 
