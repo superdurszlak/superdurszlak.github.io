@@ -42,6 +42,101 @@ However, if you are building distributed systems, network unreliability takes pr
 
 Some Software Engineers and Architects simply choose to pretend the problem does not exist, or that it is too unlikely to be taken seriously. Some genuinely believe that they can escape the grim reality of _consistency vs availability_ dilemma by throwing enough hacks, workarounds and hotfixes at the problem, or by simply paying a hardware / software / cloud vendor who would solve the problem for them. Sadly, such wishful thinking only leads to systems that may not be too reliable, but at least they are expensive and nearly impossible to maintain.
 
+### Oblivious inconsistency
+
+Consider this system:
+
+```plantuml!
+!theme mono
+top to bottom direction
+skinparam linetype polyline
+
+cloud {
+  agent orchestrator as "Synchronous Orchestrator"
+  agent serviceA as "Service A"
+  agent serviceB as "Service B"
+  agent serviceC as "Service C"
+  agent dots as "..."
+  agent serviceJ as "Service J"
+
+  orchestrator -d[dashed]-> serviceA
+  orchestrator -d[dashed]-> serviceB
+  orchestrator -d[dashed,#red]-> serviceC
+  orchestrator -d[dashed]-> dots
+  orchestrator -d[dashed]-> serviceJ
+}
+```
+
+The orchestrator performs some business operation that coordinates multiple services, from A through J. Unfortunately, it was not design with network failures in mind, and the orchestrator only covers the happy path when all the interactions go smoothly, with no room for failure. If the failure does occur, forever - perhaps Service C malfunctions, or the server it ran broke down, or there was a random network timeout - the orchestrator ends up in an undefined state, incapable of either completing the distributed transaction, nor of undoing the work already done - since this is a _distributed_ transaction, there is no way to _rollback_ automatically as if it ran within a single DB transaction.
+
+What can Software and Support Engineers do in such a situation?
+- Undo the conundrum manually - if there is no compensation, rollback, or recovery mechanism in place, and the operation was not idempotent (which would at least allow to retry more easily) this is the only thing the broken state can be realistically fixed. However, it will take time and be labour intensive - not good from both the customer's and company's perspective.
+- Pretend it was a one-off situation and will not occur again - unfortunately, this is quite a frequent strategy of "dealing" with unreliability: to assume it would not happen again, and even if it does, it would certainly be at such a small scale it can be fixed manually. Needless to say, a major outage is sometimes required to learn from mistakes.
+- Try to "fix" the systems with workarounds, adding error-handling on top of the core business logic just to handle best known edge cases etc. - while better than pretending the problem does not exists, as it can sometimes reduce the likelihood of catastrophic failures short-term, it is not a sustainable approach and does not promote maintainability.
+- Finally, we could - and should - acknowledge that our systems _are_ going to fail from time to time, and take a systemic approach. Anticipation of failure should push as to arrive at the most reasonable trade-offs on a case-by-case basis, and to follow industry best practices and patterns to attain required consistency guarantees. Examples of such practices include:
+  - Incorporation of disaster recovery, retries and failover into the systems,
+  - Building idempotent systems, which can support safely re-trying a failed transaction,
+  - Leveraging compensation or similar strategies to automatically rollback a distributed transaction,
+  - Removing direct and synchronous communication where feasible, enhancing fault tolerance in case some components are not available.
+
+### Taking (dis)advantage of probability
+
+In the example above, the fact that an orchestrator needs to coordinate communication with 10 different services only exacerbates the issue. Let us assume for a moment that the company behind this system mandates a 4-nines availability standard, meaning that _the system must be available 99.99% of the time_. Now, when do we consider this system to be available? With this architecture, all of the components must be available. From probability calculus, we can tell that if all conditions must be met for the outcome to be successful, then the probability of a successful outcome is a product of all partial probabilities. In our case, it's the probability that each component of a system is available:
+
+$ P_{\text{system}} = \prod_{i=1}^{n} P_i $
+
+In our case, we have a single API gateway and 10 upstream services, so we can assume `n=11`. Now, let us see what happens if all components of the system follow the mandated requirement of 99.99% availability to the letter. Let us find the predicted availability of the entire system:
+
+$ P_{\text{system}} = \prod_{i=1}^{n} P_i = \prod_{i=1}^{11} 0.9999 = 0.9999^{11} \approx 0.9989 $
+
+Despite each of the 11 components does meet the availability requirements, the entire system does not - at 99.89% availability, it is far from meeting 4-nines requirements, and even missed a 3-nines standard (99.9%) by a hair. If we are generous, we can round up and say it _is_ a 3-nines system, but realistically speaking it would be classified as 99.5%. In order for the entire system to meet the 4-nines requirement, translating to just under an hour of annual downtime, individual components would have to have an availability of _99.9995%_, meaning a mere 2.5 minutes of downtime _per year_.
+
+However, probabilistic calculus can be taken to our advantage as well. Consider the following scenario:
+
+```plantuml!
+!theme mono
+top to bottom direction
+skinparam linetype polyline
+
+rectangle service as "Service" {
+  collections LB as "Load Balancer"
+  agent serviceA as "Instance A"
+  agent serviceB as "Instance B"
+  agent serviceC as "Instance C"
+  agent serviceD as "Instance D"
+  agent serviceE as "Instance E"
+
+  LB -d[dotted]-> serviceA
+  LB -d[dashed,#red]-> serviceB
+  LB -d[dashed,#darkgreen]-> serviceC
+  LB -d[dotted]-> serviceD
+  LB -d[dotted]-> serviceE
+}
+```
+
+This time, let us assume we run multiple instances of our service, all of them behind a Load Balancer that routes the traffic to available instances. In order for this setup to be available, we require the following:
+- The Load Balancer itself is available,
+- At least one instance of the service is available.
+
+For the sake of this example, let us assume the Load Balancer is already Highly Available with pre-configured failover to alternative LB instance, and guarantees a 99.99995% availability - a bit over 6-nines standard. Let us also assume our instances only meet a 2-nines standard individually, but we run 5 of them while expecting 1 to be sufficient to run the system.
+
+In case of replication, probability is our asset. Since we only need one of the instances to be available at any time, we can derive availability from the likelihood that all the instances experience downtime simultaneously and independently:
+
+$ P_{\text{replicas}} = 1 - P_{\text{failure}} = 1 - \prod_{i=1}^{n} P_{\text{i,failure}} = 1 - \prod_{i=1}^{n} (1 - P_i) $
+
+At 99% availability, the results would be as follows:
+
+$ P_{\text{replicas}} = 1 - P_{\text{failure}} = 1 - \prod_{i=1}^{5} P_{\text{i,failure}} = 1 - \prod_{i=1}^{5} (1 - 0.99) = 1 - 0.01^5 = 1 - 10^{\text{-10}} = 0.9999999999 $
+
+That is correct - the likelihood that all the instances would go down _independently_, at random is just absurdly low, and should a failure occur - it is highly unlikely to be the reason. Combined with the availability of the Load Balancer, we get the following outcome:
+
+$ P_{\text{system}} = P_{\text{instances}} \times P_{\text{LB}} = 0.9999999999 \times 0.9999995 \approx 0.99999949 $
+
+As you can see, the service instances _and_ the Load Balancer can still meet the 6-nines standard, with room to spare. In practice, the availability would likely be further limited by other factors:
+- Instance failures are often related, for instance due to misconfiguration or an uncaught software error. Testing is supposed to eliminate this, however it is not impossible to introduce critical bugs that would only become apparent in production,
+- Under high loads, especially without proper rate limiting and circuit breaking, a failure of a small number of instances can trigger a cascade of failures, as the remaining ones cannot take the added load,
+- In orchestrated cloud environments, misconfigured application deployment can lead to multiple instances of the same application running on a single worker node. In that case, node's availability is going to affect multiple instances at once.
+
 {% capture unreliability_insight %}
 Network unreliability is a severe design constraint that should never be overlooked - and with current technology, this trait of networks is going to stay with us for the foreseeable future. As long as distributed systems need to utilize unreliable networks for communication, their designs must take this trait into consideration and adapt. Otherwise, in an event of network errors the system could start to behave in unpredictable ways, or the customer data would be corrupted, or various parts of the system would strive to achieve mutually exclusive goals - preserving consistency or availability.
 {% endcapture %}
@@ -49,11 +144,32 @@ Network unreliability is a severe design constraint that should never be overloo
 
 ## Bandwidth and throughput
 
-Historically speaking, networks are invariably, inherently slow. Surely enough, you can arrange a &ge;1 Gbps optic fibre connection with your ISP and even get close to this transfer on a good day, and in data centers around the world they probably have connections capable of 100 Gbps, if not more. On the other hand, a typical wired connection is going to be _much_ slower than that, and cellular networks are typically even slower. The reason is that even if you have the best LTE or 5G signal out there, it is useful as long as the BTS providing you the service is not too overwhelmed with nearby devices. In fact, my friend who lived in Karpacz, Poland had plenty of base stations around, and yet when throngs of tourists came over to Karpacz, or when the [Economic Forum](https://www.forum-ekonomiczne.pl/en) was held there, the network became hopelessly overwhelmed, to the point calling emergency numbers would often be impossible.
+Historically speaking, networks are invariably, inherently slow. Surely enough, you can arrange a &ge;1 Gbps optic fibre connection with your ISP and even get close to this transfer on a good day, and in data centers around the world they probably have connections capable of 100 Gbps, if not more. On the other hand, a typical wired connection is going to be _much_ slower than that, and cellular networks are typically even slower. The reason is that even if you have the best LTE or 5G signal out there, it is useful as long as the BTS providing you the service is not too overwhelmed with nearby devices. In fact, my friend had plenty of base stations around when he lived in Karpacz, Poland, and yet when throngs of tourists came over to Karpacz, or when the [Economic Forum](https://www.forum-ekonomiczne.pl/en) was held there, the network would become hopelessly overwhelmed - to the point calling emergency numbers would often be impossible.
 
 Compare all of this with what computers are capable of internally. Even disk storage has become significantly faster in the last decade or so, first with widespread adoption of [SSD](https://en.wikipedia.org/wiki/Solid-state_drive) - and more recently large-scale introduction of [NVMe and PCIe consumer disks](https://eu.crucial.com/articles/about-ssd/m2-with-pcie-or-sata). Read and write speeds in excess of 1 GB/s (&thickapprox; 8 Gbps) are the norm for NVMe / PCIe disks, and this performance is quite consistent as opposed to network, where your IPS usually operates on a best-effort basis. High-end SSDs have already surpassed 12 GB/s (&thickapprox; 100 Gbps), besting the fastest optic fibre networks I have heard of so far, which are not available for an average Joe like us anyway. RAM and GPU buses are even faster, anyway, and the transfer speeds there are already approaching, if they have not yet exceeded 100 GB/s (&thickapprox; 800 Gbps), and even then MOBO-mounted RAM access is slower than what CPUs and GPUs can pull off with SoC memory and caches.
 
 What is more, the hardware resources in a PC, laptop, or Smart TV are there for almost exclusive use of the owner. They get utilized by OS, programs and services you run on them - consciously or not - meaning that you have at least rudimentary control of these resources. If there are a lot of files to copy from a USB stick to your hard disk or vice versa, or if you are rendering videos, you can simply turn off less needed programs that would compete for the same resources and are not immediately needed. In case of networks, however, the resources are shared - if not with your co-workers in an office, then with your family in case of home WiFi, or people nearby whenever you use cellular network. What is more, even if you live alone and access the Internet over the wire - the Quality of Service is limited by the infrastructure your ISP has in your are, then on how well is your town or district connected to other areas, then how well connected your country is with the rest of the world. If an entire neighborhood is connected via a 10 Gbps optic fibre, it is physically impossible that everyone could enjoy their 1 Gbps internet and push it to its limits, _simultaneously_.
+
+### When is bandwidth a problem?
+
+In my experience, there are several reasons why bandwidth could become a problem in distributed systems:
+- When edge devices (e.g. mobile) need to operate in an environment with limited network availability,
+- Since components of distributed systems need to be installed somehow, actually downloading them from all sorts of repositories or registries takes time,
+- While not too frequent in the industries I have worked with so far, it is not impossible for server's network connection to be saturated with transfers.
+
+To begin with, server-to-server communication is quite privileged - in the sense that network bandwidth is usually good enough to not to have to worry about it, at least initially. We have grown used to using rather bloated, text-based data formats to exchange information, such as [XML](https://www.w3.org/TR/1998/REC-xml-19980210/) and [JSON](https://datatracker.ietf.org/doc/html/rfc8259). Only recently we started appreciating binary formats again, and the likes of [Protocol Buffers](https://protobuf.dev/overview/) and communication based on [gRPC](https://grpc.io/) are all the rage. An end user using a limited, low-bandwidth cellular network is in a far more precarious position - with a throughput measured in low megabits or even hundreds of kilobits per second, and oftentimes with limits on transfer usage imposed by their provider. In their case, excessive bandwidth usage is visible from day one, rather than after attaining a certain scale.
+
+In day-to-day Software Engineer's work, bandwidth can become problematic as various dependencies need to be downloaded on different occasions:
+- When you are setting up your local development environment, and whenever dependencies require an update,
+- When they cause build times in CI/CD pipelines to go up, as the pipeline is busy for seconds or minutes just downloading Java libraries or OCI base images,
+- During deployments, when all the application artifacts need to be uploaded to their target environments before they can actually run there.
+
+The best way to manage this problem is to be mindful about your project dependencies:
+- Do not keep dependencies if they are not needed - as obvious as it sounds, almost every project has some overlooked dependencies that could be removed,
+- Use lightweight alternatives - a hallmark example is using Alpine / Distro-less base images as opposed to full Linux images, which has the added benefit of being somewhat more secure than running a full-fledged distro with SSH and other services,
+- Avoid needless re-downloading - it is often possible to limit the number of cases a dependency or artifact requires downloading by reasonable caching, and in case of OCI images intermediate images can be pre-built with dependencies required by final image.
+
+Lastly, one needs to be considerate about bandwidth usage induced by the systems they are building. This may be difficult to notice at a lower scale, but as the traffic keeps growing sending large JSON or XML payloads back and forth between servers can become problematic. To give one example, if a server send and receives 10MB payloads for each request, it means approximately 80 Mbps throughput in each direction just to handle a single request per second! At 100 rps, the throughput would already be 8 Gbps. It is quite likely that network bandwidth would become problematic - therefore, one could consider limiting payloads size. This can be done by limiting redundancy, increasing granularity (if feasible), introducing a more information-dense format, such as binary, and finally by utilizing compression.
 
 {% capture throughput_insight %}
 Networks can approach SSD drive transfers on a good day, though they will usually struggle to keep up for extended periods, and they are orders of magnitude slower than other media in a typical personal computer or server. This means that whenever large amounts of data need to be transferred from one destination to another, network is going to be the limiting factor. What is more, network infrastructure is shared with multiple participants, and overall usage of available bandwidth has significant impact on throughput attainable by individual participants.
