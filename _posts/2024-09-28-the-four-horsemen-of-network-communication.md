@@ -60,3 +60,53 @@ Networks can approach SSD drive transfers on a good day, though they will usuall
 {% endcapture %}
 {% include key-takeaway.html content=throughput_insight %}
 
+## Latency and jitter
+
+Putting aside the sheer speed at which data can be transferred across a network, another limiting factor is how long it takes before a message of any kind reaches its recipient. This message can be as little as an ACK during SSL handshake, or as much as a SOAP response with 20 MB worth of XML payload - nevertheless, there is always a delay involved in network communication. In fact, it becomes more visible with growing frequency, not size of the messages involved - with multiple messages being exchanged between the participants, the delays can build up significantly before the communication is concluded.
+
+The reasons for existence of such delays are at least twofold:
+- Most importantly, the speed at which information can travel is physically limited by its carrier. Just as much as physical mail cannot travel any faster than the postman, post wagon or post aircraft carrying them, digital information cannot travel faster than electrical signals in a copper wire, or photons in an optic fiber. At least until quantum teleportation becomes a viable medium for long-distance communication, we must live with the fact that our signals will have a latency of, say, 20-50ms within one continent, and often in excess of 100-150ms if it needs to travel across the ocean.
+- As a message, or more generally TCP/IP packet travels through the network, it will be generally transmitted from sender to recipient through a number of intermediate devices, responsible for ensuring packets reach their intended destinations. Examples of such network devices acting as intermediates include your personal Wi-Fi access point, routers at your ISP's premises, and many others. In general, depending on how far (physically and/or topologically) sender and recipient are from each other, the number of intermediates vary, and the fact they need to process and retransmit the packets contributes to the overall delay.
+
+As an exercise, let us see what output would we see when running `traceroute` command to trace packets sent to various hosts:
+
+First, `google.com`:
+
+```bash
+~ traceroute google.com
+traceroute to google.com (142.250.186.206), 30 hops max, 60 byte packets
+ 1  _gateway (192.168.0.1)  0.395 ms  0.485 ms  0.560 ms
+ 2  kra-bng2.neo.tpnet.pl (83.1.4.240)  6.608 ms  6.648 ms  6.683 ms
+ 3-12 (...)
+13  209.85.252.117 (209.85.252.117)  23.511 ms 209.85.255.35 (209.85.255.35)  24.598 ms 142.250.239.81 (142.250.239.81)  23.634 ms
+14  142.250.239.81 (142.250.239.81)  24.546 ms waw07s05-in-f14.1e100.net (142.250.186.206)  24.665 ms  24.620 ms
+```
+This host must be located not too far from Kraków - `waw[...]` prefix would even suggest it may be somewhere in Warsaw.
+
+Then, let us try to hit a more remote server - I found out there is a Brazilian newspaper _O Globo_ hosted on `oglobo.globo.com`:
+
+```bash
+~ traceroute oglobo.globo.com       
+traceroute to oglobo.globo.com (201.7.177.244), 30 hops max, 60 byte packets
+ 1  _gateway (192.168.0.1)  0.422 ms  0.531 ms  0.617 ms
+ 2  kra-bng2.neo.tpnet.pl (83.1.4.240)  3.377 ms  3.417 ms  3.494 ms
+3-9 (...)
+10  boca-b3-link.ip.twelve99.net (62.115.123.29)  137.755 ms  137.776 ms  137.793 ms
+11-29  * * *
+30  * * *
+```
+
+Apparently, this server must be too far to trace its route, or perhaps behind some firewall preventing this information from reaching me. Even then, we can clearly see these packets were sent much further - the 10th hop took place after nearly 140ms, and there were 20 more before `traceroute` gave up.
+
+Now, with that knowledge we can imagine what happens when two servers exchange messages, or when a user from Alaska has a video chat with friends from Germany - there is always a delay involved between the moment one device sends a packet, and the other receives it, and there is no way to escape this. Even in my vicinity, I can see it takes 4-7ms before a packet sent from my PC reaches the first server on my ISP's side! Looking at [AWS Latency Monitoring](https://www.cloudping.co/grid/p_50/timeframe/1Y), this more or less coincides with what latency can be expected when operating within a single AWS region.
+
+If you look at the latency monitoring, 
+
+What does it mean for distributed systems? First of all, the more distributed they are in the geographical sense, the further distances their messages need to cover, contributing to greater latencies of the system. Furthermore, by co-locating components that need to communicate with each other we can significantly improve the systems performance - rather than hosting backend servers in the USA and databases in the UK, it is probably more efficient to have a few instances of each resource in each individual region or area of operation. It also happens to make compliance with all sorts of regulations easier, and allows you to provide customers with better user experience as everything they need is close to them - see `google.com` example above.
+
+## Security
+
+
+
+## Summary
+
