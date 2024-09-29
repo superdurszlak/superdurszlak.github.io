@@ -79,6 +79,8 @@ What can Software and Support Engineers do in such a situation?
   - Leveraging compensation or similar strategies to automatically rollback a distributed transaction,
   - Removing direct and synchronous communication where feasible, enhancing fault tolerance in case some components are not available.
 
+A mature Engineering team should make conscious decisions on when to strive for system consistency, and when to focus on system availability - balancing these two traits to meet product requirements.
+
 ### Taking (dis)advantage of probability
 
 In the example above, the fact that an orchestrator needs to coordinate communication with 10 different services only exacerbates the issue. Let us assume for a moment that the company behind this system mandates a 4-nines availability standard, meaning that _the system must be available 99.99% of the time_. Now, when do we consider this system to be available? With this architecture, all of the components must be available. From probability calculus, we can tell that if all conditions must be met for the outcome to be successful, then the probability of a successful outcome is a product of all partial probabilities. In our case, it's the probability that each component of a system is available:
@@ -346,7 +348,45 @@ Distributed systems are inherently susceptible to the negative effects of high a
 
 ## Security
 
+As we have already established, networks are primarily shared resources. As such, we cannot always control who is using the network with us, and even when we do - we do not always know their intentions. Control over a network is not given forever, too - with new threats emerging every other day, employees falling victim to malware and being phished or even blackmailed to take actions they would not take under normal circumstances. What is more, your organization's network is likely connected to the external world in one way or another, and with multiple offices it is likely that some traffic needs to cross the public networks in order to reach one destination from another.
 
+Most organizations these days already have at least basic security practices in place, with their premises networks and remote employees connected via Virtual Private Network to ensure secure and encrypted traffic as it is being transmitted over untrusted media. The networks are protected by firewalls and SIEM solutions looking out for suspicious activity. Nevertheless, I am not qualified enough to discuss these topics in-depth - let us explore other, everyday aspects of network (in)security in the context of distributed systems.
+
+### Encryption frenzy
+
+Let us face it, HTTP is _not_ a secure protocol, as virtually everything sent over HTTP is sent in plaintext - including sensitive information such as credentials and authentication tokens. This is why a browser will warn you if you attempt to visit an HTTP rather than HTTPS website - if you happen to send your login and password there, and someone happens to be sniffing the network traffic, they could capture these credentials without anyone noticing.
+
+Therefore, it is virtually mandatory to use encrypted HTTPS traffic as an alternative, except for situations where all communication is contained within a hermetic, trusted environment - say, a Virtual Private Cloud, inaccessible from the outside world except for a limited number of ingresses where SSL/TLS termination occurs. Otherwise, using secure protocols is a must even within a _somewhat_ trusted company network, providing another layer of defense in case the network itself is compromised.
+
+In case of distributed systems consisting of multiple components, handling HTTPS termination at each individual application could be problematic and would require far more maintenance. Additionally, it could become problematic with legacy applications which may simply not support HTTPS at all. Because of that, SSL/TLS termination before the traffic actually enters the application is often - but not always - an acceptable compromise.
+
+### Impostors
+
+Another category of threats are all sorts of malicious actors, who can attempt to cause harm in various ways:
+- By pretending they are someone they are not,
+- By trying to appear to be more privileged than they are,
+- By getting in between two applications communicating with each other, acting as a [man in the middle](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
+
+The first two groups are typically addressed by means of authentication - such as client and service tokens - supporting scopes or permissions for authorization purposes, and verifying if the caller authenticating themselves is in fact permitted to perform an action - before executing it. [OAuth 2.0](https://oauth.net/2/) is an example of industry-standard protocols built with exactly this purpose in mind.
+
+MITM is more difficult to address, as the attacker can assume the identity of a genuine client communicating with a genuine server, while staying concealed. The feasibility from the attack stems from a simple fact - that we focus on establishing a secure connection, to the point we forget to double-check _who_ are we connecting to. Simply switching from HTTP to HTTPS does not solve this problem - or, at least, no by itself. Since anyone can issue a certificate for themselves, or even sign it with a moderately trustworthy Root CA, it becomes crucial for _both_ client and server to verify each other's identity. A good example of this is [mTLS](https://www.cloudflare.com/learning/access-management/what-is-mutual-tls/), which involves both parties presenting each other with a certificate they already know and trust. Since both already hold a list of trusted certificates, they can verify if the other party's identity can be trusted, and if yes they would encrypt traffic with the trusted public certificate. The recipient of such encrypted traffic needs the original private key in order to decrypt it, leaving little room for tampering.
+
+While it would be difficult to require individual users to issue certificates for themselves, they can still install trusted public certificates, so that the identity of the websites they visit can be verified. In some scenarios, mutual authentication based on certificates or public/private key pairs can still be attained with individual users - an example of this is using SSH keys as an authentication method for GitHub. For service-to-service communication, mTLS is a viable option worth considering - especially when communication needs to leave trusted environments such as a single Kubernetes cluster. However, in my experience mTLS may prove labour-intensive and error prone if configured in the applications directly.
+
+### Blind spots
+
+As a result of their sheer complexity, distributed systems are often ridden with security blind spots, which can later be exploited by the attackers:
+- Network services needlessly running in the containers,
+- Dangling open ports which were left there for debugging, or by accident,
+- Forgotten or poorly documented components which may not receive sufficient attention, and be neglected in terms of security.
+
+The end result is that we leave attack surfaces quite needlessly, and often do not even realize that. This is especially dangerous when a system is highly complex, with a large number of legacy components which barely receive any maintenance. The situation is only exacerbated if the system has a large number of components that require security patching - those who were involved in patching [Log4Shell](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) in their systems certainly remember how frantic it was to patch and deploy a multitude of services in the most busy time of the year for multiple companies.
+
+{% capture security_insight %}
+Distributed systems are susceptible to a multitude of security threats, especially if they cannot be fully disconnected from external networks - not necessarily public. The fact they must communicate over often insecure networks, and usually have multiple components requiring attention and maintenance, it is no wonder they may fall victim to a plethora of attacks.
+{% endcapture %}
+{% include key-takeaway.html content=security_insight %}
 
 ## Summary
 
+In this post, we have explored some of the most significant challenges for distributed systems, stemming from the fact they are bound to use network communication. One needs to keep in mind that this list is not even complete - in fact, due to the usage of networks and typical complexity of distributed systems, the list of things that can possibly go wrong is virtually endless.
