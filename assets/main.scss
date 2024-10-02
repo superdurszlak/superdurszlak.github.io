@@ -354,6 +354,13 @@ svg.plantuml {
   margin-right: auto;
 }
 
+mjx-container {
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
 .page-content {
   text-align: justify;
   text-align-last: left;
