@@ -8,24 +8,42 @@
   {% for post in paginator.posts %}
     {% include post-card.html post=post %}
   {% endfor %}
+  {% if paginator.total_pages > 1 %}
+  <div class="pagination">
+      {% if paginator.next_page %}
+      <div class="previous-pages">
+        <a href="{{ paginator.first_page_path }}">&#8810;</a>
+        <a href="{{ paginator.previous_page_path }}">&lt;</a>
+      </div>
+      {% endif %}
+      {% if paginator.next_page %}
+      <div class="next-pages">
+        <a href="{{ paginator.next_page_path }}">&gt;</a>
+        <a href="{{ paginator.last_page_path }}">&#8811;</a>
+      </div>
+      {% endif %}
+  </div>
+  {% endif %}
 </noscript>
 
-{% if paginator.total_pages > 1 %}
-<div class="pagination">
-    <a href="{{ paginator.first_page_path }}">&#8810;</a>
-    <a href="{{ paginator.previous_page_path }}">&lt;</a>
-    <span>Showing {{ paginator.per_page }} posts</span>
-    <a href="{{ paginator.next_page_path }}">&gt;</a>
-    <a href="{{ paginator.last_page_path }}">&#8811;</a>
-</div>
-{% endif %}
 
-{{ paginator.page }}
+<div id="pagination-js" class="pagination">
+  <div class="previous-pages">
+    <a id="first-page" class="pagination-link">&#8810;</a>
+    <a id="previous-page" class="pagination-link">&lt;</a>
+  </div>
+  <div class="next-pages">
+    <a id="next-page" class="pagination-link">&gt;</a>
+    <a id="last-page" class="pagination-link">&#8811;</a>
+  </div>
+</div>
 
 <script>
     window.store = {
       "pagination": {
         "page": {{ paginator.page | jsonify }},
+        "per_page": {{ paginator.per_page | jsonify }},
+        "total_pages": {{ paginator.total_pages | jsonify }},
         "baseUrl": "{{ paginator.first_page_path }}"
       },
       "posts": {
@@ -47,8 +65,8 @@
       }
     };
   </script>
-<script src="/assets/js/redirect-pagination.js"></script>
+<script src="/assets/js/redirect-pagination.js" type="module"></script>
 {% if paginator.page == 1 %}
   <script src="https://unpkg.com/lunr/lunr.js"></script>
-  <script src="/assets/js/static-search.js"></script> 
+  <script src="/assets/js/static-search.js" type="module"></script> 
 {% endif %}

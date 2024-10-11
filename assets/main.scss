@@ -455,6 +455,24 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   color: $gray-color;
 }
 
+#pagination-js.pagination {
+  display: flex;
+  visibility: hidden;
+  font-size: 1.5em;
+  a {
+    font-weight: normal;
+    color: $primary-color;
+    margin: 0 0.125em;
+    padding: 0 0.25em;
+    border-radius: 0.5em;
+    background-color: $primary-transparent-color;
+  }
+}
+
+:is(.previous-pages, .next-pages) {
+  margin: 0 0.25em;
+}
+
 .search-bar {
   display: flex;
   align-items: center;

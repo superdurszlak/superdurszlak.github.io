@@ -1,3 +1,5 @@
+import { urlWithPageNum } from './url-with-page-num.js';
+
 (function () {
 
   function postList(results, store) {
@@ -11,6 +13,51 @@
     return listings;
   }
 
+  function paginateResults(results, pagination) {
+    const pageParam = parseInt(getQueryVariable("page")) || 1;
+    const page = Math.min(pageParam, pagination.total_pages);
+    const pageIndex = Math.max(page, 1) - 1;
+
+    const per_page = pagination.per_page;
+    const offset = pageIndex * per_page;
+    const limit = offset + per_page;
+    return {
+      results: results.slice(offset, limit),
+      previousPage: Math.max(page - 1, 1),
+      nextPage: Math.min(page + 1, pagination.total_pages),
+      lastPage: pagination.total_pages
+    }
+  }
+
+  function enablePaginationLinks(paginatedResults) {
+    const links = [
+      {
+        id: "first-page",
+        url: urlWithPageNum(1)
+      },
+      {
+        id: "previous-page",
+        url: urlWithPageNum(paginatedResults.previousPage)
+      },
+      {
+        id: "next-page",
+        url: urlWithPageNum(paginatedResults.nextPage)
+      },
+      {
+        id: "last-page",
+        url: urlWithPageNum(paginatedResults.lastPage)
+      }
+    ];
+
+    links.forEach((element) => {
+      const link = document.getElementById(element.id);
+      link.href = element.url;
+    });
+
+    const pagination = document.getElementById("pagination-js");
+    pagination.style.visibility = "visible";
+  }
+
   function noResults() {
     return "<li>No results found. Try a different search term.</li>";
   }
@@ -18,8 +65,12 @@
   function displaySearchResults(results, store) {
     var searchResults = document.getElementById("search-results");
 
+    const pagination = store.pagination;
+
     if (results.length) {
-      searchResults.innerHTML = postList(results, store);
+      const paginatedResults = paginateResults(results, pagination);
+      searchResults.innerHTML = postList(paginatedResults.results, store.posts);
+      enablePaginationLinks(paginatedResults);
     } else {
       searchResults.innerHTML = noResults();
     }
@@ -60,7 +111,7 @@
   });
 
   if (!searchTerm) {
-    return displaySearchResults(allResults, window.store.posts);
+    return displaySearchResults(allResults, window.store);
   } else {
     document.getElementById("search-box").setAttribute("value", searchTerm);
 
@@ -78,6 +129,6 @@
       allResults.forEach((result) => this.add(result));
     });
     results = lunrIndex.search(searchTerm); // Get lunr to perform a search
-    displaySearchResults(results, window.store.posts);
+    displaySearchResults(results, window.store);
   }
 })();
