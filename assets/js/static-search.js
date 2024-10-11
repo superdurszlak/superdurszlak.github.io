@@ -46,20 +46,21 @@
   }
 
   var searchTerm = getQueryVariable("query");
-  var allResults = Object.keys(window.store).map((key) => {
+  var allResults = Object.keys(window.store.posts).map((key) => {
+    const post = window.store.posts[key];
     return {
       id: key,
       ref: key,
-      title: window.store[key].title,
-      tags: window.store[key].tags,
-      author: window.store[key].author,
-      category: window.store[key].category,
-      content: window.store[key].content,
+      title: post.title,
+      tags: post.tags,
+      author: post.author,
+      category: post.category,
+      content: post.content,
     };
   });
 
   if (!searchTerm) {
-    return displaySearchResults(allResults, window.store);
+    return displaySearchResults(allResults, window.store.posts);
   } else {
     document.getElementById("search-box").setAttribute("value", searchTerm);
 
@@ -77,6 +78,6 @@
       allResults.forEach((result) => this.add(result));
     });
     results = lunrIndex.search(searchTerm); // Get lunr to perform a search
-    displaySearchResults(results, window.store);
+    displaySearchResults(results, window.store.posts);
   }
 })();

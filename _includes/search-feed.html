@@ -5,29 +5,47 @@
 {%- endif -%}
 
 <noscript>
-  {% for post in site.posts %}
+  {% for post in paginator.posts %}
     {% include post-card.html post=post %}
   {% endfor %}
+
+  <div class="pagination">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path }}">Previous</a>
+    {% endif %}
+  
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path }}">Next</a>
+    {% endif %}
+  </div>
 </noscript>
+
+{{ paginator.page }}
 
 <script>
     window.store = {
-      {% for post in site.posts %}
-        {% capture card_html %}
-          {% include post-card.html post=post %}
-        {% endcapture %}
-        "{{ post.url | slugify }}": {
-          "title": "{{ post.title | xml_escape }}",
-          "author": "{{ post.author | xml_escape }}",
-          "category": "{{ post.category | xml_escape }}",
-          "content": {{ post.content | strip_html | jsonify }},
-          "url": "{{ post.url | xml_escape }}",
-          "tags": {{ post.tags | jsonify }},
-          "html": {{ card_html | strip_newlines | jsonify }}
-        }
-        {% unless forloop.last %},{% endunless %}
-      {% endfor %}
+      "page": {{ paginator.page | jsonify }},
+      "posts": {
+        {% for post in site.posts %}
+          {% capture card_html %}
+            {% include post-card.html post=post %}
+          {% endcapture %}
+          "{{ post.url | slugify }}": {
+            "title": "{{ post.title | xml_escape }}",
+            "author": "{{ post.author | xml_escape }}",
+            "category": "{{ post.category | xml_escape }}",
+            "content": {{ post.content | strip_html | jsonify }},
+            "url": "{{ post.url | xml_escape }}",
+            "tags": {{ post.tags | jsonify }},
+            "html": {{ card_html | strip_newlines | jsonify }}
+          }
+          {% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      }
     };
   </script>
+<script src="/assets/js/redirect-pagination.js"></script>
+{% if paginator.page == 1 %}
   <script src="https://unpkg.com/lunr/lunr.js"></script>
-  <script src="/assets/js/static-search.js"></script>
+  <script src="/assets/js/static-search.js"></script> 
+{% endif %}
