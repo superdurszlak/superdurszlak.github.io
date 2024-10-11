@@ -8,23 +8,26 @@
   {% for post in paginator.posts %}
     {% include post-card.html post=post %}
   {% endfor %}
-
-  <div class="pagination">
-    {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path }}">Previous</a>
-    {% endif %}
-  
-    {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path }}">Next</a>
-    {% endif %}
-  </div>
 </noscript>
+
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+    <a href="{{ paginator.first_page_path }}">&#8810;</a>
+    <a href="{{ paginator.previous_page_path }}">&lt;</a>
+    <span>Showing {{ paginator.per_page }} posts</span>
+    <a href="{{ paginator.next_page_path }}">&gt;</a>
+    <a href="{{ paginator.last_page_path }}">&#8811;</a>
+</div>
+{% endif %}
 
 {{ paginator.page }}
 
 <script>
     window.store = {
-      "page": {{ paginator.page | jsonify }},
+      "pagination": {
+        "page": {{ paginator.page | jsonify }},
+        "baseUrl": "{{ paginator.first_page_path }}"
+      },
       "posts": {
         {% for post in site.posts %}
           {% capture card_html %}

@@ -1,8 +1,9 @@
 (function () {
-  const pageNum = window.store.page || 1;
+  const pageNum = window.store.pagination.page || 1;
 
   if (pageNum > 1) {
-    const redirect = `/?${searchPathWithPageNum(pageNum)}`;
+    const baseUrl = window.store.pagination.baseUrl || "/";
+    const redirect = `${baseUrl}?${searchPathWithPageNum(pageNum)}`;
 
     window.location.href = redirect;
   }
