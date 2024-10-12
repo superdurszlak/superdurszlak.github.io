@@ -133,7 +133,7 @@ import { urlWithPageNum } from "./url-with-page-num.js";
 
       allResults.forEach((result) => this.add(result));
     });
-    results = lunrIndex.search(searchTerm); // Get lunr to perform a search
+    const results = lunrIndex.search(searchTerm); // Get lunr to perform a search
     displaySearchResults(results, window.store);
   }
 })();
