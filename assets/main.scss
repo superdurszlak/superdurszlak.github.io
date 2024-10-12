@@ -456,7 +456,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
 }
 
 #pagination-js {
-  display: none;
+  visibility: hidden;
 }
 
 .pagination {

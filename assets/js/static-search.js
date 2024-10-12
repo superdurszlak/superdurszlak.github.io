@@ -60,7 +60,7 @@ import { urlWithPageNum } from "./url-with-page-num.js";
     });
 
     const pagination = document.getElementById("pagination-js");
-    pagination.style.display = "flex";
+    pagination.style.visibility = "visible";
   }
 
   function noResults() {
