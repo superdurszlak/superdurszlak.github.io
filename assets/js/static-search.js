@@ -57,7 +57,6 @@ import { urlWithPageNum } from "./url-with-page-num.js";
       const link = document.getElementById(element.id);
       link.href = element.url;
       link.setAttribute("data-disabled", element.disabled.toString());
-      console.log(element, link);
     });
 
     const pagination = document.getElementById("pagination-js");
