@@ -455,6 +455,46 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   color: $gray-color;
 }
 
+#pagination-js {
+  visibility: hidden;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5em;
+
+  .previous-pages {
+    justify-self: flex-start;
+    margin: 0 0.25em;
+  }
+
+  .next-pages {
+    justify-self: flex-end;
+    margin: 0 0.25em;
+  }
+
+  a {
+    font-weight: normal;
+    color: $primary-color;
+    margin: 0 0.125em;
+    padding: 0 0.25em;
+    border-radius: 0.5em;
+    background-color: $primary-transparent-color;
+    &:visited {
+      color: $primary-color;
+    }
+
+    &[data-disabled="true"] {
+      color: $gray-color;
+      background-color: $gray-transparent-color;
+      pointer-events: none;
+      cursor: not-allowed;
+      text-decoration: none;
+    }
+  }
+}
+
 .search-bar {
   display: flex;
   align-items: center;
@@ -616,31 +656,31 @@ li.social-link {
   background-color: $gray-transparent-color;
   padding: $half-margin;
   cursor: pointer;
-  
+
   &[data-sharer="linkedin"] {
     color: white;
-    background-color: #007AB5;
-    box-shadow: 0 2px 0 #005E8C, 1px 4px 2px rgba(0, 0, 0, 0.2);
+    background-color: #007ab5;
+    box-shadow: 0 2px 0 #005e8c, 1px 4px 2px rgba(0, 0, 0, 0.2);
   }
-  
+
   &[data-sharer="x"] {
     color: black;
     background-color: #00aced;
     box-shadow: 0 2px 0 #0084b4, 1px 4px 2px rgba(0, 0, 0, 0.2);
   }
-  
+
   &[data-sharer="hackernews"] {
     color: black;
-    background-color: #FF6700;
-    box-shadow: 0 2px 0 #C65000, 1px 4px 2px rgba(0, 0, 0, 0.2);
+    background-color: #ff6700;
+    box-shadow: 0 2px 0 #c65000, 1px 4px 2px rgba(0, 0, 0, 0.2);
   }
-  
-  &[data-sharer="reddit"] {  
+
+  &[data-sharer="reddit"] {
     color: #335f89;
-    background-color: #CEE3F8;
-    box-shadow: 0 2px 0 #A2C6E8, 1px 4px 2px rgba(0, 0, 0, 0.2);
+    background-color: #cee3f8;
+    box-shadow: 0 2px 0 #a2c6e8, 1px 4px 2px rgba(0, 0, 0, 0.2);
   }
-  
+
   &[data-sharer="facebook"] {
     color: whitesmoke;
     background-color: #3b5998;

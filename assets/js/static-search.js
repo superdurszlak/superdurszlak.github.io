@@ -1,5 +1,6 @@
-(function () {
+import { urlWithPageNum } from "./url-with-page-num.js";
 
+(function () {
   function postList(results, store) {
     var listings = results
       .map((element) => {
@@ -11,6 +12,57 @@
     return listings;
   }
 
+  function paginateResults(results, pagination) {
+    const pageParam = parseInt(getQueryVariable("page")) || 1;
+    const page = Math.min(pageParam, pagination.total_pages);
+    const pageIndex = Math.max(page, 1) - 1;
+
+    const per_page = pagination.per_page;
+    const offset = pageIndex * per_page;
+    const limit = offset + per_page;
+    return {
+      results: results.slice(offset, limit),
+      page: page,
+      previousPage: Math.max(page - 1, 1),
+      nextPage: Math.min(page + 1, pagination.total_pages),
+      lastPage: pagination.total_pages,
+    };
+  }
+
+  function enablePaginationLinks(results) {
+    const links = [
+      {
+        id: "first-page",
+        url: urlWithPageNum(1),
+        disabled: results.page <= 1,
+      },
+      {
+        id: "previous-page",
+        url: urlWithPageNum(results.previousPage),
+        disabled: results.page <= results.previousPage,
+      },
+      {
+        id: "next-page",
+        url: urlWithPageNum(results.nextPage),
+        disabled: results.page >= results.nextPage,
+      },
+      {
+        id: "last-page",
+        url: urlWithPageNum(results.lastPage),
+        disabled: results.page >= results.lastPage,
+      },
+    ];
+
+    links.forEach((element) => {
+      const link = document.getElementById(element.id);
+      link.href = element.url;
+      link.setAttribute("data-disabled", element.disabled.toString());
+    });
+
+    const pagination = document.getElementById("pagination-js");
+    pagination.style.visibility = "visible";
+  }
+
   function noResults() {
     return "<li>No results found. Try a different search term.</li>";
   }
@@ -18,8 +70,12 @@
   function displaySearchResults(results, store) {
     var searchResults = document.getElementById("search-results");
 
+    const pagination = store.pagination;
+
     if (results.length) {
-      searchResults.innerHTML = postList(results, store);
+      const paginatedResults = paginateResults(results, pagination);
+      searchResults.innerHTML = postList(paginatedResults.results, store.posts);
+      enablePaginationLinks(paginatedResults);
     } else {
       searchResults.innerHTML = noResults();
     }
@@ -46,15 +102,16 @@
   }
 
   var searchTerm = getQueryVariable("query");
-  var allResults = Object.keys(window.store).map((key) => {
+  var allResults = Object.keys(window.store.posts).map((key) => {
+    const post = window.store.posts[key];
     return {
       id: key,
       ref: key,
-      title: window.store[key].title,
-      tags: window.store[key].tags,
-      author: window.store[key].author,
-      category: window.store[key].category,
-      content: window.store[key].content,
+      title: post.title,
+      tags: post.tags,
+      author: post.author,
+      category: post.category,
+      content: post.content,
     };
   });
 

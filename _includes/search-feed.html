@@ -5,29 +5,74 @@
 {%- endif -%}
 
 <noscript>
-  {% for post in site.posts %}
+  {% for post in paginator.posts %}
     {% include post-card.html post=post %}
   {% endfor %}
+  {% if paginator.total_pages > 1 %}
+  {% assign disable_previous = "true" %}
+  {% assign disable_next = "true" %}
+  {% if paginator.previous_page %}
+    {% assign disable_previous = "false" %}
+  {% endif %}
+  {% if paginator.next_page %}
+    {% assign disable_next = "false" %}
+  {% endif %}
+  {{ disable_previous }}
+  {{ disable_next }}
+  <div class="pagination">
+    <div class="previous-pages">
+      <a data-disabled="{{ disable_previous }}" href="{{ paginator.first_page_path | default: '/' }}">&#8810;</a>
+      <a data-disabled="{{ disable_previous }}" href="{{ paginator.previous_page_path | default: '/' }}">&lt;</a>
+    </div>
+    <div class="next-pages">
+      <a data-disabled="{{ disable_next }}" href="{{ paginator.next_page_path | default: '/' }}">&gt;</a>
+      <a data-disabled="{{ disable_next }}" href="{{ paginator.last_page_path | default: '/' }}">&#8811;</a>
+    </div>
+  </div>
+  {% endif %}
 </noscript>
+
+
+<div id="pagination-js" class="pagination">
+  <div class="previous-pages">
+    <a id="first-page">&#8810;</a>
+    <a id="previous-page">&lt;</a>
+  </div>
+  <div class="next-pages">
+    <a id="next-page">&gt;</a>
+    <a id="last-page">&#8811;</a>
+  </div>
+</div>
 
 <script>
     window.store = {
-      {% for post in site.posts %}
-        {% capture card_html %}
-          {% include post-card.html post=post %}
-        {% endcapture %}
-        "{{ post.url | slugify }}": {
-          "title": "{{ post.title | xml_escape }}",
-          "author": "{{ post.author | xml_escape }}",
-          "category": "{{ post.category | xml_escape }}",
-          "content": {{ post.content | strip_html | jsonify }},
-          "url": "{{ post.url | xml_escape }}",
-          "tags": {{ post.tags | jsonify }},
-          "html": {{ card_html | strip_newlines | jsonify }}
-        }
-        {% unless forloop.last %},{% endunless %}
-      {% endfor %}
+      "pagination": {
+        "page": {{ paginator.page | jsonify }},
+        "per_page": {{ paginator.per_page | jsonify }},
+        "total_pages": {{ paginator.total_pages | jsonify }},
+        "baseUrl": "{{ paginator.first_page_path }}"
+      },
+      "posts": {
+        {% for post in site.posts %}
+          {% capture card_html %}
+            {% include post-card.html post=post %}
+          {% endcapture %}
+          "{{ post.url | slugify }}": {
+            "title": "{{ post.title | xml_escape }}",
+            "author": "{{ post.author | xml_escape }}",
+            "category": "{{ post.category | xml_escape }}",
+            "content": {{ post.content | strip_html | jsonify }},
+            "url": "{{ post.url | xml_escape }}",
+            "tags": {{ post.tags | jsonify }},
+            "html": {{ card_html | strip_newlines | jsonify }}
+          }
+          {% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      }
     };
   </script>
+<script src="/assets/js/redirect-pagination.js" type="module"></script>
+{% if paginator.page == 1 %}
   <script src="https://unpkg.com/lunr/lunr.js"></script>
-  <script src="/assets/js/static-search.js"></script>
+  <script src="/assets/js/static-search.js" type="module"></script> 
+{% endif %}
