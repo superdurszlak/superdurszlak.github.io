@@ -1,7 +1,6 @@
-import { urlWithPageNum } from './url-with-page-num.js';
+import { urlWithPageNum } from "./url-with-page-num.js";
 
 (function () {
-
   function postList(results, store) {
     var listings = results
       .map((element) => {
@@ -23,39 +22,46 @@ import { urlWithPageNum } from './url-with-page-num.js';
     const limit = offset + per_page;
     return {
       results: results.slice(offset, limit),
+      page: page,
       previousPage: Math.max(page - 1, 1),
       nextPage: Math.min(page + 1, pagination.total_pages),
-      lastPage: pagination.total_pages
-    }
+      lastPage: pagination.total_pages,
+    };
   }
 
-  function enablePaginationLinks(paginatedResults) {
+  function enablePaginationLinks(results) {
     const links = [
       {
         id: "first-page",
-        url: urlWithPageNum(1)
+        url: urlWithPageNum(1),
+        disabled: results.page <= 1,
       },
       {
         id: "previous-page",
-        url: urlWithPageNum(paginatedResults.previousPage)
+        url: urlWithPageNum(results.previousPage),
+        disabled: results.page <= results.previousPage,
       },
       {
         id: "next-page",
-        url: urlWithPageNum(paginatedResults.nextPage)
+        url: urlWithPageNum(results.nextPage),
+        disabled: results.page >= results.nextPage,
       },
       {
         id: "last-page",
-        url: urlWithPageNum(paginatedResults.lastPage)
-      }
+        url: urlWithPageNum(results.lastPage),
+        disabled: results.page >= results.lastPage,
+      },
     ];
 
     links.forEach((element) => {
       const link = document.getElementById(element.id);
       link.href = element.url;
+      link.setAttribute("data-disabled", element.disabled.toString());
+      console.log(element, link);
     });
 
     const pagination = document.getElementById("pagination-js");
-    pagination.style.visibility = "visible";
+    pagination.style.display = "flex";
   }
 
   function noResults() {

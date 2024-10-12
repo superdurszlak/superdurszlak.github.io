@@ -9,19 +9,25 @@
     {% include post-card.html post=post %}
   {% endfor %}
   {% if paginator.total_pages > 1 %}
+  {% assign disable_previous = "true" %}
+  {% assign disable_next = "true" %}
+  {% if paginator.previous_page %}
+    {% assign disable_previous = "false" %}
+  {% endif %}
+  {% if paginator.next_page %}
+    {% assign disable_next = "false" %}
+  {% endif %}
+  {{ disable_previous }}
+  {{ disable_next }}
   <div class="pagination">
-      {% if paginator.next_page %}
-      <div class="previous-pages">
-        <a href="{{ paginator.first_page_path }}">&#8810;</a>
-        <a href="{{ paginator.previous_page_path }}">&lt;</a>
-      </div>
-      {% endif %}
-      {% if paginator.next_page %}
-      <div class="next-pages">
-        <a href="{{ paginator.next_page_path }}">&gt;</a>
-        <a href="{{ paginator.last_page_path }}">&#8811;</a>
-      </div>
-      {% endif %}
+    <div class="previous-pages">
+      <a data-disabled="{{ disable_previous }}" href="{{ paginator.first_page_path | default: '/' }}">&#8810;</a>
+      <a data-disabled="{{ disable_previous }}" href="{{ paginator.previous_page_path | default: '/' }}">&lt;</a>
+    </div>
+    <div class="next-pages">
+      <a data-disabled="{{ disable_next }}" href="{{ paginator.next_page_path | default: '/' }}">&gt;</a>
+      <a data-disabled="{{ disable_next }}" href="{{ paginator.last_page_path | default: '/' }}">&#8811;</a>
+    </div>
   </div>
   {% endif %}
 </noscript>
@@ -29,12 +35,12 @@
 
 <div id="pagination-js" class="pagination">
   <div class="previous-pages">
-    <a id="first-page" class="pagination-link">&#8810;</a>
-    <a id="previous-page" class="pagination-link">&lt;</a>
+    <a id="first-page">&#8810;</a>
+    <a id="previous-page">&lt;</a>
   </div>
   <div class="next-pages">
-    <a id="next-page" class="pagination-link">&gt;</a>
-    <a id="last-page" class="pagination-link">&#8811;</a>
+    <a id="next-page">&gt;</a>
+    <a id="last-page">&#8811;</a>
   </div>
 </div>
 
