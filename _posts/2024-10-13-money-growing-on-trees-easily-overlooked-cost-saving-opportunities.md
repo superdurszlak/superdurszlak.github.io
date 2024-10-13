@@ -70,6 +70,23 @@ Excessive cardinality is another example where organizations are paying for feat
 
 ## Massive logs ingest
 
+{% capture log_ingest %}
+At Coinworth, we ran hundreds of microservices maintained by a plethora of individual teams. As it happens, each of these microservices had its own logging to instrument traffic handled by them. For some time, I was a member of one team owning only a handful of services, however they were dealing with massive traffic. Being at the center of the business as Tier 1 services, they produced equally massive amount of log data. In one case, the team's efforts to reduce costs included third-party log processing billing - by eliminating excessive logging, such as some uninformative _INFO_ level logs led to cutting the log processing costs by 20%, which translated to dozens, if not hundreds of thousands of USD in savings. 
+{% endcapture %}
+{% include case-study-context.html content=log_ingest %}
+
+There are several reasons why excessive logging:
+- From the costs perspective, it leads to over-spending on log processing provided by 3rd party vendor, or forces the organization to maintain more powerful log processing solution with more hardware resources, which also costs money. 
+- On the other hand, applications churning out plenty of not-so-useful logs essentially generate noise that makes troubleshooting harder. Spending time on writing queries to filter out redundant logs - rather than irrelevant for a particular search - is a good indicator our logs might be of poor quality.
+- Lastly, the sheer volume of logs may lead to running out of processing quotas with our vendor, or to running out of storage space, forcing us to cut down on logs retention. The volume also contributes to more time-consuming and costly logs processing. Worst case scenario is when after running out of quotas, the log server would simply drop new logs altogether, regardless of their criticality.
+
+All in all, it is better to emit fewer logs providing more condensed, and well-formatted (for ease of processing) logs that to try to log everything, or log pieces of information we will not only find useless, but we will actively avoid as they prevent us from gathering useful insights.
+
+{% capture log_ingest %}
+As Software Engineers, we need to balance the need for logging with cost effectiveness and physical limitations of our logging solutions. The logs should be relevant, information dense, easy to process, and the volume should be manageable. This helps us save money and our time, while also decreasing the likelihood of non-technical decision-makers introducing more drastic measures.
+{% endcapture %}
+{% include key-takeaway.html content=log_ingest %}
+
 ## Maintenance cost and overhead
 
 ## Resource-hungry tech stack
