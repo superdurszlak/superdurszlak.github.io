@@ -5,9 +5,9 @@ case_study: true
 jargon_heavy: true
 stock: money-on-tree
 tags: 
-  - "cost"
-  - "saving"
+  - "cost-saving"
   - "optimization"
+  - "efficiency"
   - "distributed-systems"
   - "microservices"
 ---
@@ -120,6 +120,20 @@ As Software Engineers, we should be mindful about the trade-offs of various tech
 ## Unrestricted scalability
 
 ## Barely used applications
+
+{% capture barely_used_applications %}
+One of the issues we suffered from at Coinsworth was that in some domains, the microservices became excessively granular. While the system in general would serve millions of customers every day, some serviced were so infrequently used, and so narrow in scope in fact, that 99% of the time they would simply idle. Nevertheless, they turned out to be given just as much dedicated compute resources as microservices that truly did the heavy lifting.
+{% endcapture %}
+{% include case-study-context.html content=barely_used_applications %}
+
+The problem is that with dedicated resources reserved for a particular application, if they are not used by this particular application, nobody else can come and put them to a better use. Likewise, since they were already provisioned by the cloud vendor, they would be billed regardless of the extent to which they were truly utilized. 
+
+Deploying minuscule, low-traffic applications with dedicated, powerful resources is a highly inefficient approach, and if it becomes widespread it can incur non-trivial costs for compute resources which cannot ever be fully utilized.
+
+{% capture barely_used_applications_insight %}
+One way to minimize the negative impact of running multiple applications with extremely low traffic and/or resource requirements is to run them on shared resources - for instance, by utilizing orchestration. This way, even if they do not require much in terms of compute resources, many such applications can run on a single, normal-sized node, ensuring more efficient utilization. Another approach is to opt for serverless / FaaS architecture in case of rarely used, small microservices - while function invocations can be expensive at scale, when traffic is low this may prove more economical in the long run.
+{% endcapture %}
+{% include key-takeaway.html content=barely_used_applications_insight %}
 
 ## Summary
 
