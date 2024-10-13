@@ -119,6 +119,29 @@ As Software Engineers, we should be mindful about the trade-offs of various tech
 
 ## Unrestricted scalability
 
+{% capture unrestricted_scalability %}
+Baffled Waffles already had problems with Software Engineers over-provisioning Kubernetes resources for their microservices. This was made possible by the fact that the Kubernetes clusters would simply scale out endlessly - the more resources Software Engineers would request, the more our clusters would scale out. This means that this over-provisioning never became quite visible for Software Engineers, who would rarely if ever suffer from failures to provision requested resources or some throttling.
+{% endcapture %}
+{% include case-study-context.html content=unrestricted_scalability %}
+
+Scalability is an immensely powerful feature of cloud-based microservices, as it allows organizations to adapt to changing demand for their services. It does not mean, however, that this scaling should be completely unrestricted - sometimes it simply makes sense to put a cap on how much an infrastructure or software components can scale up or out. Imposing some limits on resource utilization by the clients or Software Engineers can save us headache when invoices are sent.
+
+In some cases, scalability is not even strictly needed. One example of such needless scaling could be situations where a microservice starts to choke, but the real problem is its underlying database's throughput rather than the application itself. In such cases, scaling out an application could even be counter-productive, as it could put even more strain on an already struggling database. It could also happen that the service's API is being abused by another application or some third party.
+
+More practical solution to such issues would be to carry out an audit and act accordingly to the root cause:
+- Introduce caching (if possible) to reduce needless processing,
+- Impose rate limits to reduce the risk and scale of abuse,
+- Address bottlenecks case-by-case:
+  - If an application runs out of DB connection pool, increase the pool's size to allow serving more simultaneous requests by the same instance of application,
+  - If an underlying database struggles, investigate its load and whether they way it is used could be optimized - for instance, by improving indexes,
+  - If it is not feasible to further optimize, consider replication or a database cluster instead of a single instance,
+- Ultimately, when the application's capacity truly becomes a bottleneck, it is time to scale it out.
+
+{% capture unrestricted_scalability_insight %}
+There is a number of ways to increase a microservice's capacity to handle more traffic before having to resort to scaling out. If you consider increasing the number of instances as a solution for your application's struggles, explore if other options are available first, and whether scaling out would solve the problem in the first place. This approach, as opposed to scaling out blindly, will not only help you utilize resources more efficiently, but also give you confidence that whatever decision is made, it is well-grounded.
+{% endcapture %}
+{% include key-takeaway.html content=unrestricted_scalability_insight %}
+
 ## Barely used applications
 
 {% capture barely_used_applications %}
