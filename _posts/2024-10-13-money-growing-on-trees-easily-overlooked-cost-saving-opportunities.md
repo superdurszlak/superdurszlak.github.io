@@ -16,7 +16,15 @@ tags:
 
 Distributed systems and especially microservices are often a go-to solution for organizations seeking modernity, scalability and growth opportunities. What is often overlooked, though, is that as the scale of our infrastructure keeps growing, so does the scale of any inefficiencies introduced along the way. While few would find it worth investigating whether service's upkeep could be cut from USD 200 down to USD 100 per month, the sum becomes non-trivial if we could cut the costs of running hundreds of microservices, several instances each.
 
-In this post, we will explore a number of examples where teams or organizations realized (or not) they are over-spending on their infrastructure at scale.
+Building distributed systems, including cloud-based microservices, is a challenging and rather expensive journey - even if done efficiently. If we overlook some of the major inefficiencies, however, the high cost may become simply prohibitive, necessitating a mindful approach. In this post, we will explore a number of examples where teams or organizations realized (or not) they are over-spending on their infrastructure at scale:
+- Over-provisioning of resources,
+- Unshared cloud resources,
+- Excessive metrics cardinality,
+- Massive logs ingest,
+- Maintenance cost and overhead,
+- Resource-hungry tech stack,
+- Unrestricted scalability,
+- Barely used applications.
 
 ## Over-provisioning of resources
 
@@ -27,7 +35,7 @@ At Baffled Waffles, we deployed plenty of Java microservices in Kubernetes clust
 
 It is deceptively easy for Software Engineers to provision compute resources in the cloud. In fact, this is the very reason why I personally consider cloud computing superior to classic ways of managing infrastructure - more on this in [Cloud Transformation misconceptions](/posts/cloud-transformation-misconceptions/). In case of cloud infrastructure from third-party vendors, it is in their best interest to make provisioning of resources even easier, with dedicated dashboards, plentiful integrations, a wide range of compute resource types, usage-based billing and whatnot.
 
-As helpful as it is, it also makes over-provisioning of resources exceptionally easy - after all, if something is so easy to do, few would think how much it actually costs to do so. Over-provisioning once is negligible and not worth investigation, however at scale it can - and does - incur excessive costs which cannot be overlooked.
+As helpful as it is, it also makes over-provisioning of resources exceptionally easy - after all, if something is so easy to do, few would think how much it actually costs to do so. Individually, such over-provisioning might be negligible and not worth investigation, however at scale it often incurs excessive costs which cannot be overlooked.
 
 {% capture over_provisioning_insight %}
 When provisioning compute resources in the cloud, whether Virtual Machines or via Kubernetes resources allocations, be mindful to provision only what you need. Nobody gets hurt because of a few bucks of over-spending, however at scale the over-spending on infrastructure can become non-trivial, and impact the organization's competitiveness.
@@ -41,7 +49,7 @@ While working for Coinworth, I realized our team deployed containerized applicat
 {% endcapture %}
 {% include case-study-context.html content=unshared_resources %}
 
-The problem here is primarily that since each individual application had its own, dedicated compute resources, they were all deployed with _prepare for the worst_ mindset. If they need a lot of CPU power at startup time, each would be given a relatively powerful CPU. During runtime, though, they would barely use any of their assigned resources. As they would not share resources with each other, this would be done over and over again.
+The problem here is primarily that since each individual application had its own, dedicated compute resources, they were all deployed with _prepare for the worst_ mindset. Applications might be provisioned with plenty of CPU power simply because they are demanding at startup time. During runtime, though, they could barely use any of their assigned resources. As they would not share resources with each other, this would be done over and over again.
 
 There are two primary ways to avoid this conundrum:
 - Orchestrate your containers on shared compute infrastructure - with Kubernetes, Nomad or similar,
@@ -134,7 +142,7 @@ More practical solution to such issues would be to carry out an audit and act ac
 - Address bottlenecks case-by-case:
   - If an application runs out of DB connection pool, increase the pool's size to allow serving more simultaneous requests by the same instance of application,
   - If an underlying database struggles, investigate its load and whether they way it is used could be optimized - for instance, by improving indexes,
-  - If it is not feasible to further optimize, consider replication or a database cluster instead of a single instance,
+  - If it is not feasible to further optimize a single database instance, consider replication to offload read-only transactions, or a database cluster for overall scalability improvement,
 - Ultimately, when the application's capacity truly becomes a bottleneck, it is time to scale it out.
 
 {% capture unrestricted_scalability_insight %}
