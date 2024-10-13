@@ -11,8 +11,6 @@ tags:
   - "case-study"
 ---
 
-## Abstract
-
 Whether your organization is a tech company or not, you have probably heard of *Cloud Transformation*, if not participated in one. In this article, I will cover a number of examples on how misunderstandings led the companies adopting cloud-based computing to struggle. Hopefully, awareness of such pitfalls could help you navigate your own efforts.
 
 In a nutshell, *Cloud Transformation* is an organization's strategic effort to adopt cloud computing for its external or internal operations and can be considered another stage of modernization, similar to and often following *Digital Transformation*. While, principally, such efforts should be taken with certain practical benefits in mind, it is not unheard of companies committing to *Cloud Transformation* simply to be perceived as modern and cutting-edge by the customers and/or shareholders.
