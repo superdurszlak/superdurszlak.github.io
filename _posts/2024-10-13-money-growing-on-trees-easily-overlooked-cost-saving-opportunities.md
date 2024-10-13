@@ -82,12 +82,24 @@ There are several reasons why excessive logging:
 
 All in all, it is better to emit fewer logs providing more condensed, and well-formatted (for ease of processing) logs that to try to log everything, or log pieces of information we will not only find useless, but we will actively avoid as they prevent us from gathering useful insights.
 
-{% capture log_ingest %}
+{% capture log_ingest_insight %}
 As Software Engineers, we need to balance the need for logging with cost effectiveness and physical limitations of our logging solutions. The logs should be relevant, information dense, easy to process, and the volume should be manageable. This helps us save money and our time, while also decreasing the likelihood of non-technical decision-makers introducing more drastic measures.
 {% endcapture %}
-{% include key-takeaway.html content=log_ingest %}
+{% include key-takeaway.html content=log_ingest_insight %}
 
 ## Maintenance cost and overhead
+
+{% capture maintenance_overhead %}
+Many of us will remember last weeks of 2021 forever, due to the infamous [Log4Shell](https://en.wikipedia.org/wiki/Log4Shell) vulnerability that affected numerous companies around the world. At this time, I was working for Glennham Microsystems, yet another company operating on hundreds of Java microservices. When Log4shell came out at the onset of pre-Christmas code freeze, we were in serious trouble. Company policies would impose top-heavy approval process for each change deployed during code freeze, some services had some changes merged into deployment branches but not deployed before code freeze for one reason or another, and the sheer number of applications that required patching proved problematic, even if an individual patch was trivial. Subsequent releases and new vulnerabilities found in Log4j made the upgrades even more nervous.
+{% endcapture %}
+{% include case-study-context.html content=maintenance_overhead %}
+
+In some aspects, microservices make it way easier to maintain extensive software - smaller applications are arguably easier to run, configure and work on if considered in isolation from other parts of the system. On the other hand, however, they can drastically increase the maintenance cost, and maintaining dependencies of each individual microservice often gets neglected. Another contributing factor is lack of proper tooling - without [Dependabot](https://github.com/dependabot) or other automated patching tools, it becomes especially painful to upgrade vulnerable dependencies across dozens, if not hundreds of applications.
+
+{% capture maintenance_overhead_insight %}
+Building excessively granular microservices is bound to increase maintenance overhead of a distributed system. This becomes especially apparent when large number of individual applications is combined with insufficient tooling or when urgent security patching is required. It often leads to neglect or hectic, risky moves - therefore, it is worth considering if such granularity is truly needed.
+{% endcapture %}
+{% include key-takeaway.html content=maintenance_overhead_insight %}
 
 ## Resource-hungry tech stack
 
