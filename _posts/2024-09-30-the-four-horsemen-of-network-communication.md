@@ -12,7 +12,7 @@ tags:
 
 ## Abstract
 
-As already discussed in [On distributed systems](/on-distributed-systems/), one of the hallmark characteristics of a distributed system is that it requires at least occasional network communication to get the job done. 
+As already discussed in [On distributed systems](/posts/on-distributed-systems/), one of the hallmark characteristics of a distributed system is that it requires at least occasional network communication to get the job done. 
 
 The ability to perform computational (or any other, really) tasks in a distributed, but mostly coordinated and orderly manner is what makes distributed systems stand out, and what allows them to accomplish feats simply impossible for a single physical computer. This is a double-edged sword, however, and in this post we will explore how networking can sometimes scar the very masterpiece created with its powers. Unfortunately, networks have a number of traits that are less than desirable. More often than not, they make networking a liability just as much as a feature:
 - Questionable reliability,
