@@ -9,8 +9,6 @@ tags:
   - "microservices"
 ---
 
-## Abstract
-
 In my experience, large companies tend to base their Cloud Transformation efforts on several foundations:
 - Java applications as a go-to for backend systems,
 - Building backend systems in microservices architecture - whether they are truly micro-, or rather macro- or nano- is another topic,
