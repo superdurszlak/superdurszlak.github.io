@@ -103,6 +103,20 @@ Building excessively granular microservices is bound to increase maintenance ove
 
 ## Resource-hungry tech stack
 
+{% capture resource_hungry_stack %}
+In multiple companies, including Baffled Waffles, Coinworth and Glennham Microsystems, I have seen Java-based microservices implemented with Spring Boot framework. As it turns out, it is rather typical to run these services with at least one full, dedicated vCPU core to initialize the application in reasonable time, and then at least 1-2GB of RAM, depending on application size and traffic. Meanwhile, similar microservices with similar workloads, but written in NodeJS tended to utilize 0.1-0.2 worth of vCPU core quite consistently, and peaked at 300MB RAM.
+{% endcapture %}
+{% include case-study-context.html content=resource_hungry_stack %}
+
+While Java by itself performs quite well, especially with all the optimizations that had been added to JRE over the years, it happens to be quite resource hungry when paired with massive, runtime-intensive frameworks such as Spring / Spring Boot. Once the application is fully started, it does not require much in terms of computing power, meaning that with shared vCPU resources it is possible to optimize CPU resource utilization. On the other hand, high usage of RAM is rather consistent, and makes it difficult to avoid over-provisioning of compute resources for the sake of fitting all the Java applications in.
+
+You can read more on Java inefficiencies in cloud computing in [Does Java make a good fit for microservices?](/posts/does-java-make-a-good-fit-for-microservices/) - this is not to say, however, that Java is the only programming language. It is more related to some of it's Virtual Machine defaults, and resource-hungry frameworks such as Spring / Spring Boot. Simply avoiding a particular programming does not guarantee applications would magically become efficient.
+
+{% capture resource_hungry_stack_insight %}
+As Software Engineers, we should be mindful about the trade-offs of various technologies we consider for our distributed systems and microservices. In case of compute resource requirements being disadvantageous for a tech stack we decide on, we must find ways to balance these disadvantages, and take efforts to make the best out of particular technology's strengths while minimizing the impact of its deficiencies.
+{% endcapture %}
+{% include key-takeaway.html content=resource_hungry_stack_insight %}
+
 ## Unrestricted scalability
 
 ## Barely used applications
