@@ -54,6 +54,20 @@ Writing software that would fully utilize their compute resources before running
 
 ## Excessive metrics cardinality
 
+{% capture metrics_cardinality %}
+Another cost inefficiency we spotted at Baffled Waffles were metrics cardinality. We were exploring the possibility to use SaaS metrics server rather than self-hosted one, since in the latter case we found tuning the server for scalability challenging. As it turned out, metrics server vendor would bill us by the number of data series, and this value was dependent on cardinality - essentially, how many possible combinations of various label values were there.
+{% endcapture %}
+{% include case-study-context.html content=metrics_cardinality %}
+
+Our investigation with the SRE team has shown that due to generous labelling, the cardinality of our metrics reached hundreds of thousands, if not millions already. When we started investigating actual metrics-based dashboards and queries we actually used for monitoring, it turned out the cardinality we truly needed was a fraction of this - maybe several thousand.
+
+What this meant was that without cutting on cardinality of ingested data, we would be spending considerable sums on series which we would never use directly - only aggregated with other, similar series. This also meant additional, needless processing, possibly impacting performance. Filtering out unused label dimensions in metrics collectors helped us cut down on the numbers significantly.
+
+{% capture metrics_cardinality_insight %}
+Excessive cardinality is another example where organizations are paying for features they never use. Cutting on cardinality costs can help reduce costs in case on series-based billing, while also reducing computational cost of metrics processing - so it should also be beneficial in case of self-hosted metrics servers. Similar measures could also be applied to other observability data where cardinality matters - such as labelled logs processing and distributed tracing.
+{% endcapture %}
+{% include key-takeaway.html content=metrics_cardinality_insight %}
+
 ## Massive logs ingest
 
 ## Maintenance cost and overhead
