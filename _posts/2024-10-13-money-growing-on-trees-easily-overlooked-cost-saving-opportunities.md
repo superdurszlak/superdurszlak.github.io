@@ -160,4 +160,6 @@ One way to minimize the negative impact of running multiple applications with ex
 
 ## Summary
 
-While by no means exhaustive, the examples of cost inefficiencies 
+While by no means exhaustive, these examples of cost inefficiencies should give an idea of how cost inefficiencies manifests themselves in distributed systems, most notably in cloud-based microservice architecture, and how they could be addressed.
+
+Moreover, these particular case studies show that cost reduction does not necessarily mean giving up the quality - on the contrary, in case of distributed systems it is not uncommon for cost optimization and quality improvements to go hand in hand. If the root cause of cost inefficiency is over-engineering, over-provisioning or unsuitable architecture, addressing these issues can be in fact beneficial for Software Engineers building and maintaining these systems.
