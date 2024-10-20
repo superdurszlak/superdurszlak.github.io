@@ -27,7 +27,7 @@ There are many ways corporate environment can become confusing for an autistic i
 - Channels which may not be suitable for neurodivergent people,
 - Unexpressed expectations,
 - Corporate ladder and development path not matching one's individual development,
-- Stiff performance review process,
+- Unfavorable performance review process,
 - Inconsistent standards.
 
 ## Positive / negative tone avoidance
@@ -145,9 +145,18 @@ The communication about expectations can be further improved by providing a logi
 
 Lastly, if my strengths and abilities contrast with what is expected of me, it is better to establish a way to contribute with my strengths without crossing the line. Otherwise, if my abilities are forcibly suppressed by corporate culture and policies, while my weaknesses are left exposed and punished, I am bound to feel unappreciated and unable to contribute, greatly undermining my motivation and commitment. Regardless of compensation and job title, I find it deeply disturbing if I have to deliberately conceal my qualifications simply because a person with certain job title is not allowed to have those. 
 
-## Stiff performance review process
+## Unfavorable performance review process
 
+Performance score in most corporate environments I found myself in was usually divided into two parts:
+- How an individual contributes,
+- How an individual behaves.
 
+The final score is then based on these two factors somehow - sometimes the result is averaged out, in other companies the lower of the two would be taken as a final score. 
+
+### How do I fare in such assessment framework as an autist?
+
+While technical contributions are _the very area_ I should in theory shine in - due to my strong technical skills, and ease of grasping highly technical concepts - behavioral assessment is one I consistently lag behind due to my lack of social skills. The reality is even more unfavorable, though:
+- Since the technical part is typically based on accomplishing OKRs rather than factors such as peer feedback, and the personal OKRs become easily outdated as the team's priorities shift and take precedence - I often end up over-delivering as a team member, while still underperforming from OKRs and performance review perspective. Taking the performance review rules to the letter, I typically give myself the lowest or second lowest performance score even in technical areas, since I find it appropriate given my failure to deliver personal OKRs.
 
 ## Inconsistent standards
 
@@ -155,7 +164,20 @@ One of the most important corporate rules I learned throughout my career could b
 
 > No matter who did what, no matter what happened, it is your fault and you would be held responsible for that.
 
-This might sound surprisingly brutal and immoral, however it is what it is. Regardless of circumstances, as an autist _I am the person who stands out_ one way or another, and this makes the likes of us easy targets for blaming, holding responsible for things, and punishing to set an example for others. After all, we are a minority, unlikely to speak up, and even then not in the most diplomatic or persuasive way. Plus, due to our inherent traits mentioned above, we also happen to not be the most likeable individual, so few would stand up for us anyway.
+There are cases when I did indeed misbehave, when I crossed the line without realizing, or assumed behaviors I find unacceptable today were the norm to be followed. In fact, there were probably more such situations than I can remember, and this is still more than I would be comfortable to admit. There were cases, however, where even after years I cannot think of what did I do wrong or how could I have averted the negative consequences.
+
+### When does this get out of hand?
+
+There are cases, however, when someone is crossing the line so blatantly I was baffled the blame would still be put on me. To give a few examples:
+- I got into rather heated arguments with Security Team at once company, since I reported a severe security incident to them and they decided to deny it. Being a data-driven and persistent creature, I resorted to preparing reports and extracting evidence, while Security Team would insist the data is made up with no counter-evidence. In the meantime, my Line Manager would forbid me _to say negative things to her_ (such as escalating this situation) and punish me by calling me _two-faced_ in my performance review.
+- On another occasion, I was tasked with rewriting a number of FaaS components with a deadline measured in weeks, no genuine onboarding to the project, and mostly absent Team Leader - me and the other guy were new hires. Upon investigation, I informed him that the state we found the system to be in makes the deadline infeasible - to the point the only few tests in existence have not compiled for months. He chose to agree superficially, but then ignore my feedback and insist on the deadlines. When I decided to leave the company after probation ended - as a farewell, I was told by the Team Leader that my insistence on testing was a sign of entitlement.
+- Lastly, at one company I crossed the line with some System Architects by speaking up about a number of significant design flaws in technical decisions they already made or insisted on making. As a result, one of the System Architects got furious at me, and started yelling at me and insulting me in front of a witness. Our Line Manager chose to have a conversation with me and reprimand me, as _I should not provoke this person_, and ideally I should refrain of providing input or feedback in the next five or so years. Needless to say, I knew immediately I do not belong there and should seek a new job, even if I get labeled a job skipper for this.
+
+### Can the standards for autists be improved?
+
+This might sound surprisingly brutal, however it is what it is. Regardless of circumstances, as an autist, _I am the person who stands out_, one way or another. This tendency to stand out despite best efforts to fit in makes the likes of us easy targets for blaming, holding responsible for things, and punishing to set an example for others. And, frankly, it makes perfect sense to me - it is true that I get under someone's skin every so often, it is true that I am not exactly a likeable individual, and it is true that oftentimes the problem wouldn't be there if I weren't there in the first place.
+
+A possible, though unlikely scenario could be to create a more supporting work environment. One where an autist could discuss their hardships with peers and manager, and find a way to contribute and communicate with colleagues in such a way nobody would feel offended, and neurotypicals and neurodivergents could have a chance to better understand each other. After all, we are a minority, unlikely to speak up, and even then not in the most diplomatic or persuasive way. Plus, due to our inherent traits, we also happen to not be the most likeable individuals, so few would be willing to advocate for us anyway.
 
 ## Summary
 
