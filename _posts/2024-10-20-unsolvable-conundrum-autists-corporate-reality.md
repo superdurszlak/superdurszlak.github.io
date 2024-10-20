@@ -194,6 +194,6 @@ A possible, though unlikely scenario could be to create a more supporting work e
 
 ## Summary
 
-Life of an autistic person is not easy in corporate reality. Everyday struggles experienced by neurodiverse people, including autists, contribute to elevated stress levels and often prevents us from being our best selves. As a result, it may lead to frequent job changes - as in my case, hampered professional development, and in extreme cases, even unemployment and being excluded from the job market entirely.
+Life of an autistic person is not easy in a typical corporate reality. Everyday struggles experienced by neurodiverse people, including autists, contribute to elevated stress levels and often prevents us from being our best selves. As a result, it may lead to frequent job changes - as in my case, hampered professional development, and in extreme cases, even unemployment and being excluded from the job market entirely.
 
 I can only hope that over the next few decades, workplaces would become more inclusive and understanding for neurodivergent individuals. As of now, I see a rather opposite trend, with employers setting the bar ever higher in terms of social and interpersonal skills, and punishing employees who fail to meet these standards. Hopefully, the next generations of employees would not have to experience such struggles themselves. 
