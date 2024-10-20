@@ -134,6 +134,7 @@ In some corporate cultures, there are certain expectations about what you should
 In short, the outcomes are rather similar to other aspects of indirectness and implicit communication:
 - If something is not clearly expected to be done, an autist may remain oblivious to it, or simply choose not to do it. After all, if something is not required explicitly, it must be rather unimportant, and perhaps optional.
 - Likewise, if an expectation is set in a rather indirect and cushioned way, we may underappreciate its importance. For instance, if a requirement is critical and must not be refused, but it is put into words that suggest otherwise do soften the message, I would not be able to read one's mind and realize its actual criticality.
+- When I get asked a question, or somebody asks me for code review or feedback, I respond honestly and speak my mind. I will do my best to phrase it in a respectful and constructive manner, avoiding aggressive or derogatory phrasing - however, criticism would remain criticism. If a person is sensitive to negative feedback, or expects me to answer in a certain way, disappointment is unavoidable.
 - It works in the opposite way, too. It was often pointed out that at my level, I should not get involved or give feedback about certain technical aspects. I find such feedback confusing and not quite understandable - if I get hired for a technical role, and happen to have certain experience in certain technical aspect, it is rather natural for me that I should use it to contribute, rather than pretend I do not have certain qualifications.
 
 ### What can help an autist do a better job at meeting expectations?
@@ -150,6 +151,11 @@ Lastly, if my strengths and abilities contrast with what is expected of me, it i
 
 ## Inconsistent standards
 
+One of the most important corporate rules I learned throughout my career could be phrased as follows:
+
+> No matter who did what, no matter what happened, it is your fault and you would be held responsible for that.
+
+This might sound surprisingly brutal and immoral, however it is what it is. Regardless of circumstances, as an autist _I am the person who stands out_ one way or another, and this makes the likes of us easy targets for blaming, holding responsible for things, and punishing to set an example for others. After all, we are a minority, unlikely to speak up, and even then not in the most diplomatic or persuasive way. Plus, due to our inherent traits mentioned above, we also happen to not be the most likeable individual, so few would stand up for us anyway.
 
 ## Summary
 
