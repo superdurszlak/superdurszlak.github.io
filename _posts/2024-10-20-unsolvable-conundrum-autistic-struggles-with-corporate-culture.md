@@ -26,7 +26,6 @@ There are many ways corporate environment can become confusing for an autistic i
 - Messages defying actual actions,
 - Channels which may not be suitable for neurodivergent people,
 - Unexpressed expectations,
-- Corporate ladder and development path not matching one's individual development,
 - Unfavorable performance review process,
 - Inconsistent standards.
 
