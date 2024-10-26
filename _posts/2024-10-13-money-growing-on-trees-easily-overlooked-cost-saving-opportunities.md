@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Money growing on trees: Easily overlooked cost-saving opportunities"
+title: "Money growing on trees - Easily overlooked cost-saving opportunities"
 case_study: true
 jargon_heavy: true
 stock: money-on-tree

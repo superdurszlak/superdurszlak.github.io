@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ivory Jenga - how organizations struggle with granularity"
+title: "Ivory Jenga - How organizations struggle with granularity"
 case_study: true
 jargon_heavy: true
 stock: jenga

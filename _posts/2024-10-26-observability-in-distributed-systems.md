@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Observability in distributed systems"
+title: "Sensors and gauges - Observability in distributed systems"
 jargon_heavy: true
 stock: avionics
 tags: 
