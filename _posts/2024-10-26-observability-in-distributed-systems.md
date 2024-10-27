@@ -241,6 +241,17 @@ rpc_duration_seconds_count 2693
 Each block has a number of distinct elements. Taking `http_request_duration_seconds` as an example:
 * `# HELP http_request_duration_seconds [...]` line documents a metric,
 * `# TYPE http_request_duration_seconds histogram` defines the type of metric, in this case a histogram
-* The following lines, from `http_request_duration_seconds_bucket{le="0.05"} 24054` to `http_request_duration_seconds_bucket{le="+Inf"} 144320` describe individual bucket cutoff values as a label: `le="..."` and their respective counts,
+* The next 5 lines describe individual bucket cutoff values as a label: `le="..."` and their respective counts,
 * `http_request_duration_seconds_sum 53423` is a sum of all observed values aggregated in this histogram,
 * Lastly, `http_request_duration_seconds_count 144320` is the count of observed values.
+
+### Metrics labelling and cardinality
+
+Similarly to log contexts, metrics are usually annotated with labels, which contextualize metric values. Some metrics, such as CPU utilization, rarely require sophisticated labelling at an application level to be useful, while others are virtually useless without being broken up across at least one dimension with labels. A good example of such metric is **HTTP request duration**, which is informative only if collected for each HTTP endpoint separately.
+
+As another analogy to log context, metrics labels can be added at various stages:
+* When application is instrumented with metrics,
+* When log collector gathers metrics from a particular application, host, Kubernetes pod, namespace etc, and labels them accordingly,
+* When metrics server receives metrics from various metrics collectors responsible for various environments, or various parts of a system.
+
+Unlike log context, which enhances log entries without increasing the number of log events, labelling often introduces dimensionality to otherwise scalar metrics. For each unique label value - or each unique combination of values in case of multiple labels - the metrics exporter exposes a separate metric value, which then needs to be collected and stored in metrics server in a separate time series.
