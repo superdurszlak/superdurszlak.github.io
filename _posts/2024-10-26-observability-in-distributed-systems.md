@@ -125,3 +125,19 @@ For these reasons, it is not uncommon for logging to become highly problematic, 
 * Excessive logging of some context and accidental inclusion of sensitive metadata may lead to severe security risks - for instance, when Authorization headers or cookies appear in logs,
 * In some cases, it is useful or even desirable to include additional context related to user interaction - such as some request parameters or other properties. However, logging such information liberally may lead to privacy and compliance issues in case e.g. PII data would be logged, or may needlessly disclose confidential customer data to unauthorized parties,
 * Excessive logging might lead to loss of logs in case log ingest quotas have hard limits - if an incident occurs after a system hits such a limit, one of the crucial tools to investigate the incident is not available.
+
+### Logging good practices for distributed systems
+
+There is a number of aspects deserving particular attention when instrumenting distributed systems with logs:
+* Use structured logs across the entire system, with log format of choice - as long as it suits your log processing needs,
+* Ensure log context is included in a consistent manner across the system - during incidents, nobody should end up scratching their head, and struggling to write a log search query that would find TraceId across 5 competing log structures in the system,
+* Align on what context should be logged in given situations - handling HTTP requests, database or message queue interactions to name a few - and under what keys. This allows to process logs from various parts of a system in a consistent manner, and ensures one does not lose track of important information,
+* Frequently processed log line contents are good candidates for inclusion in log context,
+* Instead of logging in every single function of each application, prioritize critical points such as side effects and I/O to limit how much log lines individual components produce,
+* Apply reasonable log levels when logging, and reserve higher log levels for events that indeed require the most attention,
+* Ensure that log lines are concise and information-dense.
+
+{% capture logging_insight %}
+Logs are the most fundamental element of a distributed system's instrumentation, and typically are the first element of system's observability stack to be implemented. Because of their critical role, especially during incidents, organizations need to be mindful when implementing logging - so that they provide as much value as possible, without compromising compliance, security or budget. 
+{% endcapture %}
+{% include key-takeaway.html content=logging_insight %}
