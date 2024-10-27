@@ -144,7 +144,7 @@ Logs are the most fundamental element of a distributed system's instrumentation,
 
 ## Metrics
 
-[Metrics](https://opentelemetry.io/docs/concepts/signals/metrics/) describe a set of measurements and indicators, which are typically continuously exposed by an application at runtime. In a typical application instrumented with metrics, they are exposed via some API (oftentimes an HTTP endpoint) as a set of values annotated with metric name, type, and relevant labels or attributes. Due to their nature, metrics are primarily used to supply measurements of quantifiable characteristics of a component or system, which are then periodically collected and sent to a metrics server to be processed as time series.
+[Metrics](https://opentelemetry.io/docs/concepts/signals/metrics/) describe a set of measurements and indicators, which are typically continuously exposed by an application at runtime. In a typical application instrumented with metrics, they are either pushed by application instrumentation to a metrics server/collector, or exposed via some API (oftentimes an HTTP endpoint) as a set of values annotated with metric name, type, and relevant labels or attributes. Due to their nature, metrics are primarily used to supply measurements of quantifiable characteristics of a component or system, which are then periodically collected and sent to a metrics server to be processed as time series.
 
 ### Types of metrics
 
@@ -153,4 +153,94 @@ The three most basic, and frequently used kinds of metrics are:
 - Gauges - unlike counters, they are not monotonic and normally are not meant to be converted to deltas. Gauges are useful to measure certain values rather than observe events. Good examples of gauge usage is to observe CPU and memory utilization.
 - Histograms - expose statistical data that cannot be easily expressed or processed as counters and gauges. Histogram metrics typically expose bucketed values, with buckets corresponding to certain percentiles, denoting the number of occurrences within the bucket, or below the bucket's upper bound. This way, histogram metrics allow to gain useful statistical insights, such as distribution of request latency by HTTP endpoint.
 
-### Metrics format
+### Pull vs push semantics
+
+Some metrics implementations, such as Prometheus, opt for pull semantics where metrics exporter only exposes the metrics. It is done in such a way that metrics collector pulls (or scrapes) the metrics from an exporter:
+
+```plantuml!
+!theme mono
+top to bottom direction
+skinparam linetype ortho
+
+
+agent collector as "Metrics collector"
+node server as "Metrics server"
+agent exporter as "Metrics exporter"
+
+exporter -r[dashed]- endpoint
+collector -l-> endpoint : pull
+collector -r-> server : send
+```
+
+An alternative approach is push semantics, seen in StatsD and OpenTelemetry, where the metrics exporter is responsible for sending the metrics data over to metrics collector - or metrics server directly, if collector is omitted:
+
+```plantuml!
+!theme mono
+top to bottom direction
+skinparam linetype ortho
+
+agent collector as "Metrics collector"
+node server as "Metrics server"
+agent exporter as "Metrics exporter"
+
+collector -l[dashed]- endpoint
+exporter -r-> endpoint : push
+collector -r-> server : send
+```
+
+### Metric data formats
+
+Metrics come in a plethora of formats depending on metrics exporter and server, as well as pull and push semantics. Examples include:
+- [Graphite](https://graphite.readthedocs.io/en/latest/feeding-carbon.html),
+- [Prometheus](https://github.com/prometheus/docs/blob/main/content/docs/instrumenting/exposition_formats.md),
+- [OpenTelemetry / OTLP](https://opentelemetry.io/docs/specs/otlp/),
+- [StatsD format](https://github.com/statsd/statsd?tab=readme-ov-file#usage).
+
+Implementations of metrics data formats vary from plaintext, such as Prometheus, through text-based formats as in Graphite, to Protocol Buffer schemas seen in OpenTelemetry.
+
+A [Prometheus example](https://github.com/prometheus/docs/blob/main/content/docs/instrumenting/exposition_formats.md#text-format-example) showcases how metrics can be structured:
+```
+# HELP http_requests_total The total number of HTTP requests.
+# TYPE http_requests_total counter
+http_requests_total{method="post",code="200"} 1027 1395066363000
+http_requests_total{method="post",code="400"}    3 1395066363000
+
+# Escaping in label values:
+msdos_file_access_time_seconds{path="C:\\DIR\\FILE.TXT",error="Cannot find file:\n\"FILE.TXT\""} 1.458255915e9
+
+# Minimalistic line:
+metric_without_timestamp_and_labels 12.47
+
+# A weird metric from before the epoch:
+something_weird{problem="division by zero"} +Inf -3982045
+
+# A histogram, which has a pretty complex representation in the text format:
+# HELP http_request_duration_seconds A histogram of the request duration.
+# TYPE http_request_duration_seconds histogram
+http_request_duration_seconds_bucket{le="0.05"} 24054
+http_request_duration_seconds_bucket{le="0.1"} 33444
+http_request_duration_seconds_bucket{le="0.2"} 100392
+http_request_duration_seconds_bucket{le="0.5"} 129389
+http_request_duration_seconds_bucket{le="1"} 133988
+http_request_duration_seconds_bucket{le="+Inf"} 144320
+http_request_duration_seconds_sum 53423
+http_request_duration_seconds_count 144320
+
+# Finally a summary, which has a complex representation, too:
+# HELP rpc_duration_seconds A summary of the RPC duration in seconds.
+# TYPE rpc_duration_seconds summary
+rpc_duration_seconds{quantile="0.01"} 3102
+rpc_duration_seconds{quantile="0.05"} 3272
+rpc_duration_seconds{quantile="0.5"} 4773
+rpc_duration_seconds{quantile="0.9"} 9001
+rpc_duration_seconds{quantile="0.99"} 76656
+rpc_duration_seconds_sum 1.7560473e+07
+rpc_duration_seconds_count 2693
+```
+
+Each block has a number of distinct elements. Taking `http_request_duration_seconds` as an example:
+* `# HELP http_request_duration_seconds [...]` line documents a metric,
+* `# TYPE http_request_duration_seconds histogram` defines the type of metric, in this case a histogram
+* The following lines, from `http_request_duration_seconds_bucket{le="0.05"} 24054` to `http_request_duration_seconds_bucket{le="+Inf"} 144320` describe individual bucket cutoff values as a label: `le="..."` and their respective counts,
+* `http_request_duration_seconds_sum 53423` is a sum of all observed values aggregated in this histogram,
+* Lastly, `http_request_duration_seconds_count 144320` is the count of observed values.
