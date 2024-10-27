@@ -295,8 +295,19 @@ In case of alerting, a set of rules is set up against available metrics and chec
 * Slack, Discord or other messaging app,
 * Dedicated incident management solution, such as PagerDuty.
 
-This makes metrics immensely useful for system monitoring without human beings actively watching metrics to capture anomalies such as:
+This makes metrics immensely useful for continuous and automated system monitoring, without human beings actively watching metrics to capture anomalies, such as:
 * Unusual error rates,
 * Hardware resources being exhausted,
 * Increasing event processing lag,
 * Breaching Service Level Objectives, e.g. p99 latency on a certain endpoint.
+
+Similar measures can be taken by utilizing and processing logs, however this approach has several drawbacks:
+* Logs may require significant processing to provide insights readily available if a system is instrumented with metrics,
+* With logs being highly flexible and often containing a lot of freeform text, alert rules based on metrics computed from logs can be prone to inconsistency of logs and changes in log contents.
+
+Therefore, metrics are often the second stage of distributed system instrumentation efforts, improving system's observability in areas where logging proves insufficient or tedious.
+
+{% capture metrics_insight %}
+Metrics provide the maintainers of distributed systems with crucial insights about the state the system finds itself in rather than what particular operations it is performing. These insights are immensely useful when assessing the healthiness of various parts of the system, however they require caution as excess cardinality is a real risk.
+{% endcapture %}
+{% include key-takeaway.html content=metrics_insight %}
