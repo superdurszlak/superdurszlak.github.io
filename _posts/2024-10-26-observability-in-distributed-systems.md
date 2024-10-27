@@ -78,10 +78,12 @@ While log contexts may include just about any items imaginable, in virtually any
 * Location from which the log was emitted, such as Java class name,
 * Trace ID, correlating various log entries across any applications related to a single execution, such as triggered by a request or event,
 * Request ID, which is often found in systems utilizing request-based communication internally or externally,
+* Event ID, in case of event-triggered actions,
 * Span ID and parent Span ID, positioning log in the context of execution tree,
 * Other traceability metadata,
 * Log level, to distinguish informational, debugging, warning, error and other logs by their importance,
 * Application name / identifier,
+* Request URL,
 * Hostname,
 * IP address,
 * Container ID - in case of containerized applications,
@@ -112,6 +114,14 @@ There are a few practical symptoms that might indicate a need to revisit applica
 * Relying heavily on log queries that perform log message transforms to extract useful context - indicating that the actual context included in log entries might be insufficient,
 * Inappropriate logs levels, either too high or too low compared to actual severity of an event causing this log to be emitted,
 * Inconsistency of log context, leading to some logs having certain high-importance context while others lack it, or keeping context under a different key - possibly due to a typo or inconsistent usage of letter case,
+* It is important to include some error context to facilitate troubleshooting, however including long stack traces in their entirety may lead to cluttered logs or even break log processors, which might have limits on log line length,
 * The log volume and/or log processing costs get out of hand, causing difficulties with facilitating log processing, or log processing bills that are beyond the organization's budget.
 
-### Controlling log volume
+### Logging-related risks
+
+Among logs, metrics and traces, logs are probably the most commonly found type of instrumentation. Not every system is instrumented with traces, and even metrics are not always there, however logging is nearly universal. It also tends to be the most flexible instrumentation, allowing Software Engineers to put just about any content in log messages at any time and spot in their codebase.
+
+For these reasons, it is not uncommon for logging to become highly problematic, if not dangerous for the organizations. Examples of such situations include:
+* Excessive logging of some context and accidental inclusion of sensitive metadata may lead to severe security risks - for instance, when Authorization headers or cookies appear in logs,
+* In some cases, it is useful or even desirable to include additional context related to user interaction - such as some request parameters or other properties. However, logging such information liberally may lead to privacy and compliance issues in case e.g. PII data would be logged, or may needlessly disclose confidential customer data to unauthorized parties,
+* Excessive logging might lead to loss of logs in case log ingest quotas have hard limits - if an incident occurs after a system hits such a limit, one of the crucial tools to investigate the incident is not available.
