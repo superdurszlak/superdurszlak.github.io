@@ -245,7 +245,7 @@ Each block has a number of distinct elements. Taking `http_request_duration_seco
 * `http_request_duration_seconds_sum 53423` is a sum of all observed values aggregated in this histogram,
 * Lastly, `http_request_duration_seconds_count 144320` is the count of observed values.
 
-### Metrics labelling and cardinality
+### Metrics labelling
 
 Similarly to log contexts, metrics are usually annotated with labels, which contextualize metric values. Some metrics, such as CPU utilization, rarely require sophisticated labelling at an application level to be useful, while others are virtually useless without being broken up across at least one dimension with labels. A good example of such metric is **HTTP request duration**, which is informative only if collected for each HTTP endpoint separately.
 
@@ -254,4 +254,25 @@ As another analogy to log context, metrics labels can be added at various stages
 * When log collector gathers metrics from a particular application, host, Kubernetes pod, namespace etc, and labels them accordingly,
 * When metrics server receives metrics from various metrics collectors responsible for various environments, or various parts of a system.
 
-Unlike log context, which enhances log entries without increasing the number of log events, labelling often introduces dimensionality to otherwise scalar metrics. For each unique label value - or each unique combination of values in case of multiple labels - the metrics exporter exposes a separate metric value, which then needs to be collected and stored in metrics server in a separate time series.
+Metrics labels tend to be quite diverse compared to log context. Different metrics may require different approach to labelling: 
+* Histograms could almost universally leverage buckets or quantiles, which would make little sense in case of a CPU utilization gauge,
+* Host level metrics such as free memory might benefit from different labels than K8s cluster level metrics, or application endpoint metrics; Nevertheless, some labels might sometimes prove useful in all three contexts,
+* Some metrics and labels are highly specific - for instance, JVM metrics and JVM memory region labels are of little use outside of JVM applications.
+
+### Handling metrics cardinality
+
+Unlike log context, which enhances log entries without increasing the number of log events, labelling often introduces dimensionality to otherwise scalar metrics. For each unique label value - or each unique combination of values in case of multiple labels - the metrics exporter exposes a separate metric value, which then needs to be collected and stored in metrics server in a separate time series. A measure of how many individual values are exposed by an individual component, or a system, is called [cardinality](https://en.wikipedia.org/wiki/Cardinality).
+
+As the system instrumentation grows in terms of number of collected metrics, instrumented components, label keys and possible label values, the number of time series that metrics server needs to handle also grows - and for each individual metrics, its cardinality can be as high as a product of its individual labels cardinalities across the instrumented system:
+
+$ \|S_{\text{metric}}\| = \prod_{i=1}^{n} \|S_{\text{i}}\| = \|S_1\| \times \|S_2\| \times ... \times \|S_n\| $
+
+If we take a metric with 10 labels, each having only 2 possible values we get:
+
+$ \|S_{\text{metric}}\| = \prod_{i=1}^{n} \|S_{\text{i}}\| = \prod_{i=1}^{10} 2 = 2^{10} = 1024 $
+
+As you can see, the total cardinality of a metric can grow rapidly even when individual labels have very few possible values. For this reason, it is often highly impractical to enforce a large, common set of mandatory labels across large sets of individual metrics in a distributed system - beyond a limited number of basic, virtually universal labels. Common examples include labels describing:
+* Application name or other identifier,
+* Hostname and/or IP address,
+* Kubernetes-related metadata - in case of systems deployed using it,
+* Environment, if metrics from multiple environments are sent to a single metrics server.
