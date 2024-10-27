@@ -276,3 +276,27 @@ As you can see, the total cardinality of a metric can grow rapidly even when ind
 * Hostname and/or IP address,
 * Kubernetes-related metadata - in case of systems deployed using it,
 * Environment, if metrics from multiple environments are sent to a single metrics server.
+
+This way, systems can be instrumented with less up-front cardinality. Moreover, it is often practical to revisit how metrics are actually used, and filter out unnecessary labels accordingly. This should help reduce the number of time series in a metric server, which usually improves performance and/or helps limit the cost in case of vendor-provided metrics servers.
+
+### Metrics utilization
+
+There are two primary use cases that utilize metrics:
+* Real-time metrics visualization on dashboards,
+* Reports showing historical metrics data,
+* Metrics-based alert rules.
+
+In case of dashboards and reports, metrics are typically shown in visual or tabular form - such as graphs, pie charts and gauges. An example [Grafana Cloud](https://grafana.com/solutions/kubernetes/?pg=dashboards&plcmt=featured-dashboard-1) dashboard for Kubernetes is a good example:
+
+![Sample Kubernetes container metrics dashboard by Grafana Cloud](https://grafana.com/media/solutions/kubernetes/container-insights.png?pg=dashboards&plcmt=featured-dashboard-1)
+
+In case of alerting, a set of rules is set up against available metrics and check periodically if metrics meet a condition. When an alert rule is triggered, notification would be sent via a specified communication channel, such as:
+* Email,
+* Slack, Discord or other messaging app,
+* Dedicated incident management solution, such as PagerDuty.
+
+This makes metrics immensely useful for system monitoring without human beings actively watching metrics to capture anomalies such as:
+* Unusual error rates,
+* Hardware resources being exhausted,
+* Increasing event processing lag,
+* Breaching Service Level Objectives, e.g. p99 latency on a certain endpoint.
