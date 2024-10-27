@@ -141,3 +141,16 @@ There is a number of aspects deserving particular attention when instrumenting d
 Logs are the most fundamental element of a distributed system's instrumentation, and typically are the first element of system's observability stack to be implemented. Because of their critical role, especially during incidents, organizations need to be mindful when implementing logging - so that they provide as much value as possible, without compromising compliance, security or budget. 
 {% endcapture %}
 {% include key-takeaway.html content=logging_insight %}
+
+## Metrics
+
+[Metrics](https://opentelemetry.io/docs/concepts/signals/metrics/) describe a set of measurements and indicators, which are typically continuously exposed by an application at runtime. In a typical application instrumented with metrics, they are exposed via some API (oftentimes an HTTP endpoint) as a set of values annotated with metric name, type, and relevant labels or attributes. Due to their nature, metrics are primarily used to supply measurements of quantifiable characteristics of a component or system, which are then periodically collected and sent to a metrics server to be processed as time series.
+
+### Types of metrics
+
+The three most basic, and frequently used kinds of metrics are:
+- Counters - their values, with the exception of application restarts, are typically monotonic, and increment every time a certain event occurs within an application - such as receiving a request. On metrics server side, they are frequently converted to deltas between measurements, allowing to compute user-facing metrics such as rates of certain events - for instance, sending back certain HTTP status codes or encountering an error.
+- Gauges - unlike counters, they are not monotonic and normally are not meant to be converted to deltas. Gauges are useful to measure certain values rather than observe events. Good examples of gauge usage is to observe CPU and memory utilization.
+- Histograms - expose statistical data that cannot be easily expressed or processed as counters and gauges. Histogram metrics typically expose bucketed values, with buckets corresponding to certain percentiles, denoting the number of occurrences within the bucket, or below the bucket's upper bound. This way, histogram metrics allow to gain useful statistical insights, such as distribution of request latency by HTTP endpoint.
+
+### Metrics format
