@@ -10,7 +10,7 @@ tags:
   - "microservices"
 ---
 
-Imagine a world where a pilot would have to fly an over 500-ton, 4-engined Airbus A380 with virtually no flight instruments, only a primitive joystick and maybe a headlight for night landings. Imagine a captain tasked with navigating a coral reef, full of underwater ridges, or sneaking underneath polar ice sheet, all the while commanding a submarine lacking a sonar and basic instruments, compass, depth indicator and a periscope. Imagine a construction equipment operator required to excavate a 400m long, 3m deep ditch - only the excavator they are manning only has a number of peepholes in solid metal cabin walls instead of proper windows.
+Imagine a world where a pilot would have to fly an over 500-ton, 4-engined Airbus A380 with virtually no flight instruments, only a primitive joystick and maybe a headlight for night landings. Imagine a captain navigating through a coral reef full of underwater ridges, or maneuvering beneath the polar ice sheet, all while commanding a submarine without sonar and basic instruments. Imagine a construction equipment operator required to excavate a 400m long, 3m deep ditch - although the excavator they are manning only has a number of peepholes in solid metal cabin walls instead of proper windows.
 
 Does any of this sound like an impossible, if not suicidal mission to you? Now, imagine we are talking not about a single airplane, a single submarine or a single piece of construction equipment - but rather a myriad of them. Tens, if not hundreds of individual airplanes, submarines and excavators working towards a common goal; All the while struggling to maintain situational awareness and get the job done without crashing into each other, or into the ground, and ideally without any collateral damage.
 
@@ -62,7 +62,7 @@ Due to limitations of unstructured logs, it is far more useful to use a certain 
 { "timestamp": "2024-10-26T09:11:34.493Z", "msg": "Application failed to start", "level": "INFO", pid: "ERROR", "threadId": "main" }
 ```
 
-While it is far less readable for humans in a raw form, it makes bulk processing of logs, log analysis and correlation far easier - compared to unstructured logs. Enforcing a particular, consistent format makes parsing much easier, meaning that contextual information can be extracted programmatically with minimal risk of errors and mistakes. For readability reasons, it is not uncommon for distributed system components to have two modes of logging:
+While it is far less readable for humans in a raw form, it makes bulk processing of logs, log analysis and correlation far easier - compared to unstructured logs. Enforcing a particular, consistent format makes parsing much easier, meaning that contextual information can be extracted programmatically with minimal risk of errors and mistakes. For readability, it is not uncommon for distributed system components to have two modes of logging:
 * Unstructured logs, used in local development to troubleshoot the component ad-hoc while running it on a local device, and typically disabled upon deployment,
 * Structured logs, to be collected and processed by dedicated log processing and analysis tools, such as [Splunk](https://www.splunk.com/) or [Logstash](https://www.elastic.co/logstash) when application is deployed to environments.
 
@@ -106,7 +106,7 @@ As the primary use of logs is troubleshooting and analyzing the systems during a
   * Debug traces are typically used when running the application locally and/or in tests, and are by far the most frequently emitted, granularity is often desirable,
   * Info logs should mark key operations such as side-effects and milestones, typically on a happy path,
   * Warn logs are frequently used to indicate anomalous and possibly undesired behaviors, which are not considered failures - though might require attention, especially if the frequency spikes,
-  * Error logs are often reserved for outright failures, unexpected errors such as upstream service unavailability or inability to connect to a database - indicating a more serious problem that requires attention.
+  * Error logs are often reserved for outright failures, unexpected errors such as the unavailability of an upstream service or failure to connect to a database - indicating attention is required.
 
 There are a few practical symptoms that might indicate a need to revisit application logging:
 * Software and Support Engineers deliberately filtering out unwanted log entries when troubleshooting,
@@ -122,7 +122,7 @@ There are a few practical symptoms that might indicate a need to revisit applica
 Among logs, metrics and traces, logs are probably the most commonly found type of instrumentation. Not every system is instrumented with traces, and even metrics are not always there, however logging is nearly universal. It also tends to be the most flexible instrumentation, allowing Software Engineers to put just about any content in log messages at any time and spot in their codebase.
 
 For these reasons, it is not uncommon for logging to become highly problematic, if not dangerous for the organizations. Examples of such situations include:
-* Excessive logging of some context and accidental inclusion of sensitive metadata may lead to severe security risks - for instance, when Authorization headers or cookies appear in logs,
+* Excessive logging of specific data points and accidental inclusion of sensitive metadata may lead to severe security risks - for instance, when Authorization headers or cookies appear in logs,
 * In some cases, it is useful or even desirable to include additional context related to user interaction - such as some request parameters or other properties. However, logging such information liberally may lead to privacy and compliance issues in case e.g. PII data would be logged, or may needlessly disclose confidential customer data to unauthorized parties,
 * Excessive logging might lead to loss of logs in case log ingest quotas have hard limits - if an incident occurs after a system hits such a limit, one of the crucial tools to investigate the incident is not available.
 
@@ -302,7 +302,7 @@ This makes metrics immensely useful for continuous and automated system monitori
 * Breaching Service Level Objectives, e.g. p99 latency on a certain endpoint.
 
 Similar measures can be taken by utilizing and processing logs, however this approach has several drawbacks:
-* Logs may require significant processing to provide insights readily available if a system is instrumented with metrics,
+* Logs often need substantial processing to yield insights easily accessible via metrics,
 * With logs being highly flexible and often containing a lot of freeform text, alert rules based on metrics computed from logs can be prone to inconsistency of logs and changes in log contents.
 
 Therefore, metrics are often the second stage of distributed system instrumentation efforts, improving system's observability in areas where logging proves insufficient or tedious.
@@ -367,7 +367,7 @@ There are various approaches to trace sampling:
 * Sampling traces which meet specific criteria,
 * Setting separate sampling policies for traces meeting various criteria.
 
-It is not uncommon to prioritize certain traces when sampling. Most notably, traces related to failed and slow requests are typically found more useful than traces showing no anomalies, and may have significantly higher sampling percentages.
+It is not uncommon to prioritize certain traces when sampling. Most notably, traces related to failed and slow requests are typically found more useful than traces showing no anomalies, and may have significantly higher sampling percentages. Additionally, and important aspect is to maintain a consistent and sane approach to sampling - for instance, if we configure both exporter and collector to sample 1% of all traces, instead of desired 1% we would only get 0.01% of sampled traces.
 
 ### Trace format
 
@@ -406,4 +406,24 @@ This [simplified example]() from OpenTelemetry shows what span metadata might lo
 The most important properties of a span include:
 * Span ID, trace ID and parent span ID,
 * Timestamps for start and end time,
-* Attributes, or labels bearing additional context
+* Span name, providing a human-readable reference,
+* Attributes, or labels bearing additional context, such as request URL, HTTP method, hostname etc.
+
+After aggregation and sending to trace server, such as [Grafana Tempo](https://grafana.com/oss/tempo/), traces can then be analyzed and visualized as shown in an example from [documentation](https://grafana.com/docs/grafana/latest/panels-visualizations/visualizations/traces/):
+
+![A screenshot of Grafana Explore view of a trace, from Grafana documentation](https://grafana.com/static/img/docs/panels/traces/screenshot-traces-traceid-panel.png)
+
+{% capture traces_insight %}
+Distributed traces have a potential to substantially improve the organization's ability to gain insights about their systems, and especially when looking for performance bottlenecks. However, they only complement logs and metrics, and are usually last to be added to the system's observability solution.
+{% endcapture %}
+{% include key-takeaway.html content=traces_insight %}
+
+## Summary
+
+In this post, we have explored how the three basic building blocks of distributed system's observability stack contribute to Engineering Teams' ability to maintain and troubleshoot the system.
+
+Logs are the most basic, and arguably critical part of application instrumentation, allowing to troubleshoot particular scenarios during incidents. As such, they are frequently first to be introduced in any system.
+
+Metrics often come second after logs, and provide and ability to monitor the state of the distributed system and its infrastructure. Moreover, combined with alerting solutions they allow to continuously monitor a system and react when the first symptoms of an incident are visible.
+
+Traces, on the other hand, are complementary to the first two, and are often implemented last if at all. The provide insights about particular executions that are not retrievable from metrics, while accessing them via logs is often tedious - assuming the logs actually have enough context to facilitate such search effort.
