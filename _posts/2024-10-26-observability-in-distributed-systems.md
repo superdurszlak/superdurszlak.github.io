@@ -311,3 +311,99 @@ Therefore, metrics are often the second stage of distributed system instrumentat
 Metrics provide the maintainers of distributed systems with crucial insights about the state the system finds itself in rather than what particular operations it is performing. These insights are immensely useful when assessing the healthiness of various parts of the system, however they require caution as excess cardinality is a real risk.
 {% endcapture %}
 {% include key-takeaway.html content=metrics_insight %}
+
+## Traces
+
+[Traces](https://opentelemetry.io/docs/concepts/signals/traces/) are perhaps the least frequently used type of instrumentation among the three. In fact, I have personally seen traces being utilized at any scale, and only a handful of cases where the organization would genuinely invest in instrumenting their systems with distributed tracing.
+
+Traces are signals that allow to track how operations are executed in the context of a particular invocation, and structure this execution as a tree of units of work - called spans. Each span in a trace corresponds to a certain stage of execution, such as:
+* Outbound HTTP request,
+* Database transaction,
+* Filesystem access,
+* Computing results.
+
+In short, traces help provide context that is missed entirely by metrics - which do not meter individual invocations in principle - and which is often generally available in system logs, however cannot be easily obtained without complex, compute-intensive log processing.
+
+### What are traces useful for?
+
+It is sometimes rather tedious to comb through system logs from multiple distributed system components, in order to find the reason why API requests are sometimes so slow, or at which point is the execution failing. In such cases, it is usually easier to retrieve traces related to this particular execution, and then analyze the span tree, looking for possible reasons.
+
+Furthermore, since traces are emitted at a particular point in time, similarly to logs, and are by design correlated with a specific execution, it is natural to use them in conjunction with logs and metrics from the same time window, and relevant to this execution. Consider the following examples:
+* Distributed traces show that a number of slow requests occurred, exceeding agreed SLOs by a considerable margin. The traces span tree indicates a particular database interaction is slowing down the request, and upon investigation of metrics of the database involved, evidence of CPU throttling is found.
+* A number of traces is sampled for requests that failed with a bizarre error body. It is visible in these traces' span trees that a certain request to an upstream service is failing consistently, and surrounding logs are investigated. The investigation shows the requests had been failing because the application's keystore has some self-signed certificates besides the certificate issued by the organization and trusted by the upstream service.
+
+### How traces are collected?
+
+Similarly to metrics, trace collection is handled by trace exporters and collectors. The exporter, such as [OpenTelemetry](https://opentelemetry.io/docs/specs/otlp/), [Zipkin](https://zipkin.io/) or [Jaeger](https://www.jaegertracing.io/), typically pushes the traces to the trace collector, which then aggregates traces from various sources and sends to a trace server:
+
+```plantuml!
+!theme mono
+top to bottom direction
+skinparam linetype ortho
+
+agent collector as "Traces collector"
+node server as "Traces server"
+agent exporter as "Traces exporter"
+
+collector -r[dashed]- endpoint
+exporter -l-> endpoint : push
+collector -d-> server : send
+collector -u[dotted]-> collector: aggregate
+```
+
+Due to the aggregation step, the traces are often sent to the server with a certain delay, allowing to collect related trace information from possibly multiple exporters, until completion of a trace. This is often done by setting a certain timeout - if no new trace information, such as spans, are sent in for a set amount of time, the trace is closed and sent to the server.
+
+### Trace sampling
+
+Unlike logs and metrics, which are usually ingested as whole, traces are frequently sampled down. There are several reasons for this approach:
+* If every operation was traced, this would have produced tremendous amounts of tracing information, a case similar to excessive logging or excessive metrics cardinality,
+* Most of the time, not all traces are truly needed. Some traces can be safely discarded without negative impact on traces usefulness,
+* Traces are most useful when investigating undesired behaviors, and thus collecting all traces for the bulk of execution is impractical.
+
+For these reasons, traces are typically sampled down to limit their volume, either by exporter or collector (or sometimes both). Since multiple sources may emit span information related to the same trace, ensuring they are sampled or rejected consistently requires either delegating the decision to trace collector - if there is only one - or passing down the information on sampling decision, such as `sampled` flag.
+
+There are various approaches to trace sampling:
+* Sampling a set percentage of traces,
+* Sampling traces which meet specific criteria,
+* Setting separate sampling policies for traces meeting various criteria.
+
+It is not uncommon to prioritize certain traces when sampling. Most notably, traces related to failed and slow requests are typically found more useful than traces showing no anomalies, and may have significantly higher sampling percentages.
+
+### Trace format
+
+This [simplified example]() from OpenTelemetry shows what span metadata might look like:
+```json
+{
+  "name": "hello-greetings",
+  "context": {
+    "trace_id": "5b8aa5a2d2c872e8321cf37308d69df2",
+    "span_id": "5fb397be34d26b51"
+  },
+  "parent_id": "051581bf3cb55c13",
+  "start_time": "2022-04-29T18:52:58.114304Z",
+  "end_time": "2022-04-29T22:52:58.114561Z",
+  "attributes": {
+    "http.route": "some_route2"
+  },
+  "events": [
+    {
+      "name": "hey there!",
+      "timestamp": "2022-04-29T18:52:58.114561Z",
+      "attributes": {
+        "event_attributes": 1
+      }
+    },
+    {
+      "name": "bye now!",
+      "timestamp": "2022-04-29T18:52:58.114585Z",
+      "attributes": {
+        "event_attributes": 1
+      }
+    }
+  ]
+}
+```
+The most important properties of a span include:
+* Span ID, trace ID and parent span ID,
+* Timestamps for start and end time,
+* Attributes, or labels bearing additional context
