@@ -21,7 +21,7 @@ At this point, it might appear unimaginable, and rightly so. Unfortunately, this
 According to [OpenTelemetry](https://opentelemetry.io/docs/concepts/observability-primer/#what-is-observability), _observability_ means an ability to gain insights about the state of a system without having to know its internal structure and details, or to analyze its internal states. In other words, any data deliberately emitted by a system could be considered part of _instrumentation_ enabling observability, when: 
 * It contributes to a better understanding of how the system functions,
 * The data can be accessed and processed with the purpose of analyzing the state of a system,
-* It enables troubleshooting of a live system, even in the system of newly encountered problems.
+* It enables troubleshooting of a live system, even in case of newly encountered problems.
 
 The data, or signals, emitted by an instrumented system are typically divided into three distinct categories:
 * Logs,
