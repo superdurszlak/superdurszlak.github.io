@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Engineering mindfulness: Self-auditing our software systems"
+title: "Engineering mindfulness - Self-auditing our software systems"
 case_study: true
 jargon_heavy: true
 stock: metrics-screen
