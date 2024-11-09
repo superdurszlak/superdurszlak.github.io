@@ -10,6 +10,7 @@ tags:
   - "efficiency"
   - "distributed-systems"
   - "microservices"
+  - "case-study"
 ---
 
 Distributed systems, and especially microservices are often a go-to solution for organizations seeking modernity, scalability and growth opportunities. What is often overlooked, though, is that as the scale of our infrastructure keeps growing, so does the scale of any inefficiencies introduced along the way. While few would find it worth investigating whether service's upkeep could be cut from USD 200 down to USD 100 per month, the sum becomes non-trivial if we could cut the costs of running hundreds of microservices, several instances each.

@@ -123,6 +123,13 @@ redirect_from:
 # Stock photos
 stocks_dir: /assets/stock/
 stocks:
+  - name: angkor-wat
+    alt: Photo of ruins of Angkor Wat temple complex
+    credit: >
+      Photo by 
+      <a href="https://unsplash.com/@kristensturdivant?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Kristen Sturdivant</a> 
+      on 
+      <a href="https://unsplash.com/photos/grey-concrete-ruins-near-green-trees-at-daytime-iom3iQIn-LI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   - name: autism-letters
     alt: Photo of colorful letters lined up to form 'Autism' word, surrounded by scattered letters
     credit: >
