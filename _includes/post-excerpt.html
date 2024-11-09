@@ -1,4 +1,4 @@
-{% assign post_words = include.post.content | strip_html | split: ' ' %}
+{% assign post_words = include.post.content | strip_html | strip | split: ' ' %}
 
 {% assign excerpt_limit = site.excerpt_limit | default: 40 %}
 
