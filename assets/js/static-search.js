@@ -13,19 +13,22 @@ import { urlWithPageNum } from "./url-with-page-num.js";
   }
 
   function paginateResults(results, pagination) {
+    const per_page = pagination.per_page;
+    const total_pages = Math.min(pagination.total_pages, Math.ceil(results.length / per_page));
+
     const pageParam = parseInt(getQueryVariable("page")) || 1;
-    const page = Math.min(pageParam, pagination.total_pages);
+    const page = Math.min(pageParam, total_pages);
     const pageIndex = Math.max(page, 1) - 1;
 
-    const per_page = pagination.per_page;
     const offset = pageIndex * per_page;
     const limit = offset + per_page;
+    
     return {
       results: results.slice(offset, limit),
       page: page,
       previousPage: Math.max(page - 1, 1),
-      nextPage: Math.min(page + 1, pagination.total_pages),
-      lastPage: pagination.total_pages,
+      nextPage: Math.min(page + 1, total_pages),
+      lastPage: total_pages,
     };
   }
 
