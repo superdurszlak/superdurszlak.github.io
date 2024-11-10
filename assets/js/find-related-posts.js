@@ -11,7 +11,10 @@
       return matchesByTags(result.tags, postTags);
     })
     .map((result) => {
-      return result.html;
+      return result.html
+      .replace(/\{\{[^\}^\%]*\}\}/g, '') // replace '{{ text }}'
+      .replace(/\{\%[^\}^\%]*\%\}/g, '') // replace '{% text %}'
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, (_, capture) => capture || "(link)") // replace markdown links
     });
 
 
