@@ -53,6 +53,8 @@ $thumbnail-tablet: 128px;
 
 @import "{{ site.theme }}";
 
+@import "./scss/themes.scss";
+
 html {
   font-size: $default-font-size;
 
