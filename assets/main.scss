@@ -260,25 +260,6 @@ a.tag {
   color: var(--secondary-color);
 }
 
-.site-nav {
-  color: var(--primary-color);
-  background-color: var(--primary-accent-color);
-  border-color: var(--primary-color)
-}
-
-.site-nav .menu-icon {
-  color: var(--primary-color);
-}
-
-.site-nav a.page-link {
-  font-size: 1.25em;
-  color: var(--primary-color);
-  white-space: nowrap;
-  &:visited {
-    color: var(--primary-color);
-  }
-}
-
 a:is(.post-link, .site-title) {
   font-weight: bold;
   color: var(--primary-color);
@@ -474,10 +455,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   flex-grow: 1;
   width: auto;
   height: 100%;
-  margin: $half-margin $base-margin;
-  @include respond-to(mobile) {
-    margin-right: $double-margin;
-  }
+  margin: $half-margin;
 }
 
 .search-bar form {
@@ -499,6 +477,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   color: var(--secondary-color);
   margin-right: 0.5em;
   width: 100%;
+  min-width: 5em;
   &::placeholder {
     color: var(--primary-color);
     font-style: italic;
@@ -511,6 +490,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   border-style: none;
   align-items: center;
   height: 100%;
+  min-width: 3em;
   padding: 0;
   cursor: pointer;
 }
@@ -526,7 +506,7 @@ img.icon {
   max-height: $header-height;
   width: 100%;
   z-index: 1000;
-  background-color: var(--primary-accent-color);
+  background-color: var(--background-color);
   border-width: 0;
   border-bottom-width: 0.25em;
   border-color: var(--primary-color);
@@ -537,6 +517,9 @@ img.icon {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include respond-to(mobile) {
+    overflow-x: scroll;
+  }
 }
 
 .site-title {

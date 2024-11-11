@@ -1,7 +1,9 @@
 @use "./sizing" as *;
 
+$contrast-slight: 125%;
 $contrast-boost: 150%;
 $contrast-border: $thin-border;
+$full-invert: invert(100%) hue-rotate(180deg);
 
 :root {
   --primary-color: #216778;
@@ -22,15 +24,15 @@ html[data-theme="light"] {
 }
 
 html[data-theme="dark"] {
-  --primary-color: #6db3c4;
-  --primary-accent-color: #1c2a2e;
-  --secondary-color: #c5c5c5;
+  --primary-color: #69c0d6;
+  --primary-accent-color: #04151a;
+  --secondary-color: #d6d6d6;
   --background-color: #2e2e2e;
-  --primary-box-color: #1c2a2e;
+  --primary-box-color: #04151a;
   --secondary-box-color: #1f1f1f;
 
   :is(img.icon, img.banner, svg.svg-icon, svg.plantuml) {
-    filter: invert(100%) hue-rotate(180deg);
+    filter: $full-invert contrast($contrast-slight);
   }
 }
 
@@ -48,7 +50,7 @@ html[data-theme="light-contrast"] {
 }
 
 html[data-theme="dark-contrast"] {
-  --primary-color: #64CDE7;
+  --primary-color: #64cde7;
   --primary-accent-color: #216778;
   --secondary-color: #f8f8f8;
   --background-color: #080808;
@@ -56,7 +58,7 @@ html[data-theme="dark-contrast"] {
   --secondary-box-color: #303030;
 
   :is(img.icon, img.banner, svg.svg-icon, svg.plantuml) {
-    filter: invert(100%) hue-rotate(180deg) contrast($contrast-boost);
+    filter: $full-invert contrast($contrast-boost);
   }
 }
 
@@ -67,7 +69,7 @@ html[data-theme="dark-contrast"] {
 
   .social-link {
     filter: contrast($contrast-boost);
-    
+
     button {
       border-width: $contrast-border;
       border-color: currentColor;
@@ -76,8 +78,13 @@ html[data-theme="dark-contrast"] {
   }
 
   :is(.previous-post, .next-post, .note, .post-listing) {
-      border-color: currentColor;
-      border-style: solid;
-      border-width: $contrast-border;
+    border-color: currentColor;
+    border-style: solid;
+    border-width: $contrast-border;
+  }
+
+  .menu-item {
+    border-color: currentColor;
+    border-style: solid;
   }
 }
