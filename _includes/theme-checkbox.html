@@ -1,22 +1,15 @@
 <div class="theme-selector">
   <input type="radio" id="theme-light" name="theme" class="theme-option" value="light" checked>
-  <label for="theme-light">Light Theme</label>
+  <label for="theme-light">Light</label>
   
   <input type="radio" id="theme-dark" name="theme" class="theme-option" value="dark">
-  <label for="theme-dark">Dark Theme</label>
+  <label for="theme-dark">Dark</label>
   
-  <input type="radio" id="theme-blue" name="theme" class="theme-option" value="blue">
-  <label for="theme-blue">Blue Theme</label>
+  <input type="radio" id="theme-light-contrast" name="theme" class="theme-option" value="light-contrast">
+  <label for="theme-blue">Light Hi-Contrast</label>
+  
+  <input type="radio" id="theme-dark-contrast" name="theme" class="theme-option" value="dark-contrast">
+  <label for="theme-blue">Dark Hi-Contrast</label>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const themeButtons = document.querySelectorAll('.theme-option');
-
-    themeButtons.forEach(button => {
-      button.addEventListener('change', (event) => {
-        document.documentElement.setAttribute('data-theme', event.target.value);
-      });
-    });
-  });
-</script>
+<script src="/assets/js/site-theme.js"></script>
