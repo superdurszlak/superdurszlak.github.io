@@ -296,7 +296,7 @@ a.tag {
 
 .site-nav {
   color: var(--primary-color);
-  background-color: var(--background-color);
+  background-color: var(--primary-accent-color);
   border-color: var(--primary-color)
 }
 
@@ -523,7 +523,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
 }
 
 .search-box {
-  background-color: var(--primary-box-color);
+  background-color: var(--background-color);
   border-color: var(--primary-color);
   border-radius: $border-radius;
   border-width: 0.25mm;
@@ -560,7 +560,7 @@ img.icon {
   max-height: $header-height;
   width: 100%;
   z-index: 1000;
-  background-color: var(--background-color);
+  background-color: var(--primary-accent-color);
   border-width: 0;
   border-bottom-width: 0.25em;
   border-color: var(--primary-color);
