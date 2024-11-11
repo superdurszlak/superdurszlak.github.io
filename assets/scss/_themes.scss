@@ -27,7 +27,7 @@ html[data-theme="dark"] {
   --primary-box-color: #1c2a2e;
   --secondary-box-color: #2e2e2e;
 
-  :is(img.search-icon, img.banner, svg.plantuml) {
+  :is(img.icon, img.banner, svg.svg-icon, svg.plantuml) {
     filter: invert(100%) hue-rotate(180deg);
   }
 }
@@ -40,7 +40,7 @@ html[data-theme="light-contrast"] {
   --primary-box-color: #9cf3ff;
   --secondary-box-color: #f8f8f8;
 
-  :is(img.search-icon, img.banner, svg.plantuml) {
+  :is(img.icon, img.banner, svg.svg-icon, svg.plantuml) {
     filter: contrast($contrast-boost);
   }
 }
@@ -53,7 +53,7 @@ html[data-theme="dark-contrast"] {
   --primary-box-color: #044353;
   --secondary-box-color: #303030;
 
-  :is(img.search-icon, img.banner, svg.plantuml) {
+  :is(img.icon, img.banner, svg.svg-icon, svg.plantuml) {
     filter: invert(100%) hue-rotate(180deg) contrast($contrast-boost);
   }
 }

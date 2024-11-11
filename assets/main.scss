@@ -294,6 +294,16 @@ a.tag {
   color: var(--secondary-color);
 }
 
+.site-nav {
+  color: var(--primary-color);
+  background-color: var(--background-color);
+  border-color: var(--primary-color)
+}
+
+.site-nav .menu-icon {
+  color: var(--primary-color);
+}
+
 .site-nav a.page-link {
   font-size: 1.25em;
   color: var(--primary-color);
@@ -539,7 +549,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   cursor: pointer;
 }
 
-.search-icon {
+img.icon {
   height: 3em;
 }
 
