@@ -1,0 +1,86 @@
+#a11y-trigger {
+  display: none;
+}
+
+#a11y-trigger:not(checked) ~ .a11y-selector {
+  display: none;
+}
+
+#a11y-trigger:checked ~ .a11y-selector {
+  display: block;
+  float: right;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.menu img.icon {
+  height: 2em;
+  margin-right: 0.3em;
+}
+
+.menu :is(a.page-link, span) {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: var(--primary-color);
+  white-space: nowrap;
+  &:visited {
+    color: var(--primary-color);
+  }
+}
+
+.menu-button {
+  border-width: 0.1em;
+  border-radius: 0.6em;
+  padding: 0.3em;
+  border-color: var(--primary-color);
+  border-style: solid;
+  background-color: var(--background-color);
+  cursor: pointer;
+  margin: 0 1em;
+  label {
+    display: flex;
+    align-items: center;
+  }
+
+  * {
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.menu-body {
+  display: none;
+  position: absolute;
+  top: 100%; // Display below the header
+  right: 0; // Align to the right
+  background-color: var(--primary-accent-color);
+  border-width: 0.25em;
+  border-top-width: 0;
+  border-color: var(--primary-color);
+  border-style: solid;
+  padding: 0.6em;
+  border-radius: 0 0 0.6em 0.6em;
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; // Right-align content
+    padding: 5px;
+    width: 150px;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    img {
+      height: 24px; // Scale icon to match the button height
+      margin-right: 10px;
+    }
+  }
+}
+
+// Use the adjacent sibling combinator to show the menu when the checkbox is checked
+.menu-toggle:checked ~ .menu-body {
+  display: block;
+}
