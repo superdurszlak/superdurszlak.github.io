@@ -1,18 +1,22 @@
 <div class="theme-selector">
-  <input type="checkbox" id="theme-toggle" class="theme-toggle">
-  <label for="theme-toggle" class="theme-label">Select Theme</label>
-  <div class="theme-options">
-    <input type="radio" id="theme-light" name="theme" class="theme-option" checked>
-    <label for="theme-light">Light Theme</label>
-    
-    <input type="radio" id="theme-dark" name="theme" class="theme-option">
-    <label for="theme-dark">Dark Theme</label>
-    
-    <input type="radio" id="theme-blue" name="theme" class="theme-option">
-    <label for="theme-blue">Blue Theme</label>
-  </div>
+  <input type="radio" id="theme-light" name="theme" class="theme-option" value="light" checked>
+  <label for="theme-light">Light Theme</label>
+  
+  <input type="radio" id="theme-dark" name="theme" class="theme-option" value="dark">
+  <label for="theme-dark">Dark Theme</label>
+  
+  <input type="radio" id="theme-blue" name="theme" class="theme-option" value="blue">
+  <label for="theme-blue">Blue Theme</label>
 </div>
 
-<div class="themed-content">
-  <p>Welcome! Choose a theme to change the site appearance.</p>
-</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const themeButtons = document.querySelectorAll('.theme-option');
+
+    themeButtons.forEach(button => {
+      button.addEventListener('change', (event) => {
+        document.documentElement.setAttribute('data-theme', event.target.value);
+      });
+    });
+  });
+</script>
