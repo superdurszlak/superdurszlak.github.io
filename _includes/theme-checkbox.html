@@ -1,15 +1,52 @@
-<div class="theme-selector">
-  <input type="radio" id="theme-light" name="theme" class="theme-option" value="light" checked>
-  <label for="theme-light">Light</label>
+<nav class="a11y-nav">
+  <input type="checkbox" id="a11y-trigger" class="nav-trigger" />
+  <label for="a11y-trigger">
+    <span class="menu-icon">
+      A11y
+    </span>
+  </label>
+
+  <div class="a11y-selector">
+    <div class="theme-selector">
+      <span>Theme</span>
+      <input
+        type="radio"
+        id="theme-light"
+        name="theme"
+        class="theme-option"
+        value="light"
+        checked
+      />
+      <label for="theme-light">Light</label>
   
-  <input type="radio" id="theme-dark" name="theme" class="theme-option" value="dark">
-  <label for="theme-dark">Dark</label>
+      <input
+        type="radio"
+        id="theme-dark"
+        name="theme"
+        class="theme-option"
+        value="dark"
+      />
+      <label for="theme-dark">Dark</label>
   
-  <input type="radio" id="theme-light-contrast" name="theme" class="theme-option" value="light-contrast">
-  <label for="theme-blue">Light Hi-Contrast</label>
+      <input
+        type="radio"
+        id="theme-light-contrast"
+        name="theme"
+        class="theme-option"
+        value="light-contrast"
+      />
+      <label for="theme-light-contrast">Light Hi-Contrast</label>
   
-  <input type="radio" id="theme-dark-contrast" name="theme" class="theme-option" value="dark-contrast">
-  <label for="theme-blue">Dark Hi-Contrast</label>
-</div>
+      <input
+        type="radio"
+        id="theme-dark-contrast"
+        name="theme"
+        class="theme-option"
+        value="dark-contrast"
+      />
+      <label for="theme-dark-contrast">Dark Hi-Contrast</label>
+    </div>
+  </div>
+</nav>
 
 <script src="/assets/js/site-theme.js"></script>

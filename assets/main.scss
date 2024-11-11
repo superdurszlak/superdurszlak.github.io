@@ -4,6 +4,7 @@
 
 @use "{{ site.theme }}";
 @use "scss/themes";
+@use "scss/a11y-nav";
 
 @mixin respond-to($media) {
   @if $media == desktop {
@@ -423,6 +424,10 @@ li.post-listing h3 {
   border-color: var(--primary-color);
   border-style: solid;
   border-width: $thin-border;
+}
+
+img.banner {
+  border-radius: $border-radius;
 }
 
 .post-excerpt p {

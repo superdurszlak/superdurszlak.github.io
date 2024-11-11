@@ -1,0 +1,11 @@
+#a11y-trigger {
+  display: none;
+}
+
+#a11y-trigger:not(checked) ~ .a11y-selector {
+  display: none;
+}
+
+#a11y-trigger:checked ~ .a11y-selector {
+  display: block;
+}

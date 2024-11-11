@@ -23,6 +23,10 @@ html[data-theme='dark'] {
   --background-color: #3a3a3a;
   --primary-box-color: #344246;
   --secondary-box-color: #484848;
+
+  img:is(.search-icon, .banner) {
+    filter: invert(100%) hue-rotate(180deg);
+  }
 }
 
 html[data-theme='light-contrast'] {
@@ -32,6 +36,10 @@ html[data-theme='light-contrast'] {
   --background-color: #f8f8f8;
   --primary-box-color: #9cf3ff;
   --secondary-box-color: #f8f8f8;
+
+  img:is(.search-icon, .banner) {
+    filter: contrast(200%);
+  }
 }
 
 html[data-theme='dark-contrast'] {
@@ -41,4 +49,8 @@ html[data-theme='dark-contrast'] {
   --background-color: #080808;
   --primary-box-color: #044353;
   --secondary-box-color: #303030;
+
+  img:is(.search-icon, .banner) {
+    filter: invert(100%) hue-rotate(180deg) contrast(200%);
+  }
 }
