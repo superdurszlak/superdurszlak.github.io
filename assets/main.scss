@@ -1,6 +1,8 @@
 ---
 ---
 
+
+@use "{{ site.theme }}";
 @use "scss/themes";
 
 @mixin respond-to($media) {
@@ -18,8 +20,6 @@
     }
   }
 }
-
-@import "{{ site.theme }}";
 
 $desktop-content-width: 70%;
 $default-content-width: 80%;
@@ -81,7 +81,7 @@ body {
   }
 
   :is(.previous-post, .next-post) {
-    background-color: var(--primary-transparent-color);
+    background-color: var(--primary-box-color);
     border-radius: $border-radius;
     padding: $half-margin;
     max-width: 45%;
@@ -170,7 +170,7 @@ body {
   padding: $half-margin 0;
   position: relative;
   color: var(--primary-color);
-  background-color: var(--primary-transparent-color);
+  background-color: var(--primary-box-color);
   width: 100%;
   border-radius: $border-radius;
   margin-bottom: $base-margin;
@@ -205,7 +205,7 @@ body {
 
 .warning {
   color: var(--secondary-color);
-  background-color: var(--secondary-transparent-color);
+  background-color: var(--secondary-box-color);
 
   &::before {
     background-color: var(--secondary-color);
@@ -362,11 +362,11 @@ mjx-container {
 }
 
 li.post-listing:nth-child(2n - 1) {
-  background-color: var(--primary-transparent-color);
+  background-color: var(--primary-box-color);
 }
 
 li.post-listing:nth-child(2n) {
-  background-color: var(--secondary-transparent-color);
+  background-color: var(--secondary-box-color);
   .post-thumbnail img {
     border-color: var(--secondary-color);
   }
@@ -469,14 +469,14 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
     margin: 0 0.125em;
     padding: 0 0.25em;
     border-radius: 0.5em;
-    background-color: var(--primary-transparent-color);
+    background-color: var(--primary-box-color);
     &:visited {
       color: var(--primary-color);
     }
 
     &[data-disabled="true"] {
       color: var(--secondary-color);
-      background-color: var(--secondary-transparent-color);
+      background-color: var(--secondary-box-color);
       pointer-events: none;
       cursor: not-allowed;
       text-decoration: none;
@@ -506,7 +506,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
 }
 
 .search-box {
-  background-color: var(--primary-transparent-color);
+  background-color: var(--primary-box-color);
   border-color: var(--primary-color);
   border-radius: $border-radius;
   border-width: 0.25mm;
@@ -576,7 +576,7 @@ table {
 thead tr th {
   color: var(--primary-color);
   font-weight: bold;
-  background-color: var(--primary-transparent-color);
+  background-color: var(--primary-box-color);
   border-color: var(--primary-color);
   border-width: $thin-border;
   border-style: solid;
@@ -590,7 +590,7 @@ tbody tr td {
 }
 
 tbody tr:nth-child(2n) {
-  background-color: var(--secondary-transparent-color);
+  background-color: var(--secondary-box-color);
 }
 
 .stock-photo {
@@ -642,7 +642,7 @@ li.social-link {
   border-radius: $border-radius;
   flex: 0 0 100%;
   border-style: none;
-  background-color: var(--secondary-transparent-color);
+  background-color: var(--secondary-box-color);
   padding: $half-margin;
   cursor: pointer;
 
