@@ -1,5 +1,7 @@
+@use "./sizing" as *;
+
 $contrast-boost: 150%;
-$contrast-border: 0.1em;
+$contrast-border: $thin-border;
 
 :root {
   --primary-color: #216778;
@@ -23,9 +25,9 @@ html[data-theme="dark"] {
   --primary-color: #6db3c4;
   --primary-accent-color: #1c2a2e;
   --secondary-color: #c5c5c5;
-  --background-color: #3a3a3a;
+  --background-color: #2e2e2e;
   --primary-box-color: #1c2a2e;
-  --secondary-box-color: #2e2e2e;
+  --secondary-box-color: #1f1f1f;
 
   :is(img.icon, img.banner, svg.svg-icon, svg.plantuml) {
     filter: invert(100%) hue-rotate(180deg);
