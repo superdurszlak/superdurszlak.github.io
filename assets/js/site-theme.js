@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (highContrastHeuristicMatches()) {
-      mode += "contrast";
+      mode += "-contrast";
     }
 
     return mode;
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function browserDarkModeMatches() {}
 
   function highContrastHeuristicMatches() {
-    const heuristicColor = "rgb(0.25, 0.25, 0.25)";
+    const heuristicColor = "rgb(0, 0, 0)";
     const div = document.createElement("div");
     div.style.backgroundColor = heuristicColor;
     document.body.appendChild(div);
