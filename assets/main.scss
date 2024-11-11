@@ -1,7 +1,6 @@
 ---
 ---
 
-
 @use "{{ site.theme }}";
 @use "scss/themes";
 @use "scss/a11y-nav";
@@ -649,7 +648,8 @@ li.social-link {
   color: var(--secondary-color);
   border-radius: $border-radius;
   flex: 0 0 100%;
-  border-style: none;
+  border-style: solid;
+  border-width: 0;
   background-color: var(--secondary-box-color);
   padding: $half-margin;
   cursor: pointer;

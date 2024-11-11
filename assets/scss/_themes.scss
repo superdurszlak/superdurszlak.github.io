@@ -1,3 +1,6 @@
+$contrast-boost: 150%;
+$contrast-border: 0.1em;
+
 :root {
   --primary-color: #216778;
   --primary-accent-color: #e2eaeb;
@@ -7,7 +10,7 @@
   --secondary-box-color: #e5e5e5;
 }
 
-html[data-theme='light'] {
+html[data-theme="light"] {
   --primary-color: #216778;
   --primary-accent-color: #e2eaeb;
   --secondary-color: #3a3a3a;
@@ -16,41 +19,63 @@ html[data-theme='light'] {
   --secondary-box-color: #e5e5e5;
 }
 
-html[data-theme='dark'] {
-  --primary-color: #9dc0c5;
-  --primary-accent-color: #344246;
-  --secondary-color: #c9c9c9;
+html[data-theme="dark"] {
+  --primary-color: #6db3c4;
+  --primary-accent-color: #1c2a2e;
+  --secondary-color: #c5c5c5;
   --background-color: #3a3a3a;
-  --primary-box-color: #344246;
-  --secondary-box-color: #484848;
+  --primary-box-color: #1c2a2e;
+  --secondary-box-color: #2e2e2e;
 
-  img:is(.search-icon, .banner) {
+  :is(img.search-icon, img.banner, svg.plantuml) {
     filter: invert(100%) hue-rotate(180deg);
   }
 }
 
-html[data-theme='light-contrast'] {
-  --primary-color: #002731;
+html[data-theme="light-contrast"] {
+  --primary-color: #005b74;
   --primary-accent-color: #9cf3ff;
-  --secondary-color: #000000;
+  --secondary-color: #171717;
   --background-color: #f8f8f8;
   --primary-box-color: #9cf3ff;
   --secondary-box-color: #f8f8f8;
 
-  img:is(.search-icon, .banner) {
-    filter: contrast(200%);
+  :is(img.search-icon, img.banner, svg.plantuml) {
+    filter: contrast($contrast-boost);
   }
 }
 
-html[data-theme='dark-contrast'] {
-  --primary-color: #c2f8ff;;
+html[data-theme="dark-contrast"] {
+  --primary-color: #64CDE7;
   --primary-accent-color: #216778;
   --secondary-color: #f8f8f8;
   --background-color: #080808;
   --primary-box-color: #044353;
   --secondary-box-color: #303030;
 
-  img:is(.search-icon, .banner) {
-    filter: invert(100%) hue-rotate(180deg) contrast(200%);
+  :is(img.search-icon, img.banner, svg.plantuml) {
+    filter: invert(100%) hue-rotate(180deg) contrast($contrast-boost);
+  }
+}
+
+:is(html[data-theme="light-contrast"], html[data-theme="dark-contrast"]) {
+  img.picture {
+    filter: contrast($contrast-boost);
+  }
+
+  .social-link {
+    filter: contrast($contrast-boost);
+    
+    button {
+      border-width: $contrast-border;
+      border-color: currentColor;
+      box-shadow: none;
+    }
+  }
+
+  :is(.previous-post, .next-post, .note, .post-listing) {
+      border-color: currentColor;
+      border-style: solid;
+      border-width: $contrast-border;
   }
 }
