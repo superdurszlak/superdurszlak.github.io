@@ -517,6 +517,7 @@ img.icon {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow-x: hidden;
   @include respond-to(mobile) {
     overflow-x: scroll;
   }

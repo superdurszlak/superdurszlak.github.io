@@ -57,33 +57,14 @@ function setGiscusTheme(giscusTheme) {
 }
 
 function getDefaultPreference() {
-  var mode = "light";
-
   if (
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches
   ) {
-    mode = "dark";
+   return "dark";
   }
 
-  if (highContrastHeuristicMatches()) {
-    mode += "-contrast";
-  }
-
-  return mode;
+  return "light";
 }
 
 function browserDarkModeMatches() {}
-
-function highContrastHeuristicMatches() {
-  const heuristicColor = "rgb(0, 0, 0)";
-  const div = document.createElement("div");
-  div.style.backgroundColor = heuristicColor;
-  document.body.appendChild(div);
-
-  const computedColor = window.getComputedStyle(div).backgroundColor;
-  document.body.removeChild(div);
-
-  // If the computed color has changed, it indicates the browser forces high contrast or other mode
-  return computedColor !== heuristicColor;
-}
