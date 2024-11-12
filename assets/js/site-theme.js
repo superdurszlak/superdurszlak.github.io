@@ -16,6 +16,8 @@ const giscusThemeMapping = {
 const themeKey = "theme";
 
 document.addEventListener("DOMContentLoaded", () => {
+  enableThemeDropdown();
+
   const themeButtons = document.querySelectorAll(".theme-option");
 
   const preSelected = localStorage.getItem(themeKey) || "browser";
@@ -53,7 +55,6 @@ function setGiscusTheme(giscusTheme) {
     },
   };
   iframe.contentWindow.postMessage(message, "https://giscus.app");
-  console.log("done setting theme to ", giscusTheme);
 }
 
 function getDefaultPreference() {
@@ -67,4 +68,9 @@ function getDefaultPreference() {
   return "light";
 }
 
-function browserDarkModeMatches() {}
+function enableThemeDropdown() {
+  const menu = document.getElementById("theme-menu");
+  if(menu) {
+    menu.style.display = "block"
+  }
+}
