@@ -1,0 +1,113 @@
+@use "./media" as *;
+@use "./sizing" as *;
+
+#a11y-trigger {
+  display: none;
+}
+
+#a11y-trigger:not(checked) ~ .a11y-selector {
+  display: none;
+}
+
+#a11y-trigger:checked ~ .a11y-selector {
+  display: block;
+  float: right;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.menu img.icon {
+  height: 2em;
+  min-width: 2em;
+}
+
+.menu :is(a.page-link, span) {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: var(--primary-color);
+  white-space: nowrap;
+  &:visited {
+    color: var(--primary-color);
+  }
+}
+
+.menu-button {
+  border-width: 0.1em;
+  min-width: 2em;
+  border-radius: $border-radius;
+  padding: 0.3em;
+  border-color: var(--primary-color);
+  border-style: solid;
+  background-color: var(--background-color);
+  cursor: pointer;
+  margin: 0 $half-margin;
+  label {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+    img.icon ~ span {
+      margin-left: $half-margin;
+      @include respond-to(mobile) {
+        display: none;
+      }
+    }
+  }
+
+  * {
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.menu-body {
+  display: none;
+  position: absolute;
+  top: 100%; // Display below the header
+  right: 0; // Align to the right
+  background-color: var(--background-color);
+  border-width: 0.25em;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-color: var(--primary-color);
+  border-style: solid;
+  padding: $half-margin;
+  border-bottom-left-radius: $border-radius;
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; // Right-align content
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+}
+
+.menu-toggle:checked ~ .menu-body {
+  display: block;
+}
+
+.menu-item:has(.theme-option) {
+  border-radius: $border-radius;
+  padding: calc($half-margin / 2);
+  margin: calc($half-margin / 2) 0;
+  margin-right: $half-margin;
+  border-width: $thin-border;
+  border-color: var(--background-color);
+  border-style: solid;
+}
+
+.menu-item:has(.theme-option:checked) {
+  background-color: var(--primary-color);
+  border-color: var(--background-color);
+  span {
+    color: var(--background-color);
+  }
+}
+
+.theme-option {
+  display: none;
+}
