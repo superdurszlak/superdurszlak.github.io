@@ -7,7 +7,6 @@
 @use "scss/media" as *;
 @use "scss/sizing" as *;
 
-
 html {
   font-size: $default-font-size;
 
@@ -50,7 +49,10 @@ body {
 
   :is(.previous-post, .next-post) {
     background-color: var(--primary-box-color);
+    border-color: var(--primary-color);
+    border-width: $thin-border;
     border-radius: $border-radius;
+
     padding: $half-margin;
     max-width: 45%;
     flex: 0 1 auto;
@@ -140,6 +142,7 @@ body {
   color: var(--primary-color);
   background-color: var(--primary-box-color);
   width: 100%;
+  border-width: $thin-border;
   border-radius: $border-radius;
   margin-bottom: $base-margin;
 
@@ -251,6 +254,12 @@ h3 {
 a {
   font-weight: bold;
   color: var(--primary-color);
+  &:hover {
+    color: var(--secondary-color);
+  }
+  &:visited {
+    color: var(--secondary-color);
+  }
   cursor: pointer;
 }
 
@@ -322,10 +331,12 @@ mjx-container {
 
 li.post-listing:nth-child(2n - 1) {
   background-color: var(--primary-box-color);
+  border-color: var(--primary-color);
 }
 
 li.post-listing:nth-child(2n) {
   background-color: var(--secondary-box-color);
+  border-color: var(--secondary-color);
   .post-thumbnail img {
     border-color: var(--secondary-color);
   }
@@ -335,6 +346,7 @@ li.post-listing {
   display: block;
   padding: $base-margin $border-radius;
   border-radius: $border-radius;
+  border-width: $thin-border;
   margin: 0.5em 0;
 }
 
@@ -384,6 +396,18 @@ li.post-listing h3 {
 
 img.banner {
   border-radius: $border-radius;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  @include respond-to(mobile) {
+    width: 90%;
+  }
+  @include respond-to(tablet) {
+    width: 70%;
+  }
+  @include respond-to(desktop) {
+    width: 50%;
+  }
 }
 
 .post-excerpt p {
@@ -432,11 +456,11 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
     color: var(--primary-color);
     margin: 0 0.125em;
     padding: 0 0.25em;
-    border-radius: 0.5em;
+    border-radius: $half-margin;
+    border-width: $thin-border;
+    border-style: solid;
+    border-color: var(--background-color);
     background-color: var(--primary-box-color);
-    &:visited {
-      color: var(--primary-color);
-    }
 
     &[data-disabled="true"] {
       color: var(--secondary-color);
@@ -490,13 +514,17 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   border-style: none;
   align-items: center;
   height: 100%;
-  min-width: 3em;
   padding: 0;
   cursor: pointer;
 }
 
 img.icon {
-  height: 3em;
+  height: $icon-size;
+  min-width: $icon-size;
+}
+
+.svg-icon {
+  fill: var(--primary-color)
 }
 
 .site-header {
@@ -508,7 +536,7 @@ img.icon {
   z-index: 1000;
   background-color: var(--background-color);
   border-width: 0;
-  border-bottom-width: 0.25em;
+  border-bottom-width: $thin-border;
   border-color: var(--primary-color);
   border-style: solid;
 }
@@ -518,16 +546,13 @@ img.icon {
   justify-content: space-between;
   align-items: center;
   overflow-x: hidden;
-  @include respond-to(mobile) {
-    overflow-x: scroll;
-  }
 }
 
 .site-title {
   font-size: 1.5em;
 
   @include respond-to(mobile) {
-    font-size: 1.25em;
+    display: none;
   }
 }
 
@@ -646,7 +671,12 @@ li.social-link {
 }
 
 .highlighter-rouge .highlight {
-  background-color: var(--primary-accent-color);
+  background-color: var(--primary-box-color);
+  border-color: var(--primary-color);
+
+  span:not(.p, .nl) {
+    color: var(--primary-color)
+  }
 }
 
 code {

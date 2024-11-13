@@ -31,8 +31,8 @@ html[data-theme="dark"] {
   --primary-box-color: #04151a;
   --secondary-box-color: #1f1f1f;
 
-  :is(img.icon, img.banner, svg.svg-icon, svg.plantuml) {
-    filter: $full-invert contrast($contrast-slight);
+  :is(img.icon, img.banner, svg.plantuml) {
+    filter: invert(100%) hue-rotate(180deg) contrast($contrast-slight);
   }
 }
 
@@ -41,50 +41,66 @@ html[data-theme="light-contrast"] {
   --primary-accent-color: #9cf3ff;
   --secondary-color: #171717;
   --background-color: #f8f8f8;
-  --primary-box-color: #9cf3ff;
+  --primary-box-color: #e2ffff;
   --secondary-box-color: #f8f8f8;
+  img.picture {
+    filter: contrast($contrast-boost);
+  }
 
-  :is(img.icon, img.banner, svg.svg-icon, svg.plantuml) {
+  :is(img.icon, img.banner, svg.plantuml) {
     filter: contrast($contrast-boost);
   }
 }
 
 html[data-theme="dark-contrast"] {
-  --primary-color: #64cde7;
-  --primary-accent-color: #216778;
+  --primary-color: #CBCB00;
+  --primary-accent-color: #747400;
   --secondary-color: #f8f8f8;
   --background-color: #080808;
-  --primary-box-color: #044353;
+  --primary-box-color: #282800;
   --secondary-box-color: #303030;
 
-  :is(img.icon, img.banner, svg.svg-icon, svg.plantuml) {
-    filter: $full-invert contrast($contrast-boost);
-  }
-}
 
-:is(html[data-theme="light-contrast"], html[data-theme="dark-contrast"]) {
   img.picture {
     filter: contrast($contrast-boost);
   }
 
-  .social-link {
-    filter: contrast($contrast-boost);
+  :is(img.icon, img.banner, svg.plantuml) {
+    filter: invert(100%) hue-rotate(57deg) contrast($contrast-boost) saturate(250%);
+  }
+}
 
+:is(html[data-theme="light-contrast"], html[data-theme="dark-contrast"]) {
+  code {
+    border-color: var(--primary-color);
+    background-color: var(--primary-box-color);
+    color: var(--secondary-color);
+  }
+
+  .social-link {
     button {
       border-width: $contrast-border;
-      border-color: currentColor;
+      border-color: var(--primary-color);
+      background-color: var(--primary-box-color);
+      color: var(--primary-color);
       box-shadow: none;
     }
   }
 
   :is(.previous-post, .next-post, .note, .post-listing) {
-    border-color: currentColor;
     border-style: solid;
-    border-width: $contrast-border;
   }
 
   .menu-item {
-    border-color: currentColor;
+    border-color: var(--primary-color);
+  }
+
+  .menu-button {
+    border-style: solid;
+  }
+
+  .pagination a {
+    border-color: var(--primary-color);
   }
 }
 
