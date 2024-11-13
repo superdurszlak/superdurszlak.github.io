@@ -16,6 +16,9 @@ module Jekyll
   
         # Process SVGs or other elements in the document
         doc.css('svg.plantuml').each do |svg|
+          if svg.parent['class']&.include?('plantuml-shrinkwrap')
+            next # Skip processing this SVG element
+          end
           process_svg(svg, doc)
         end
   
@@ -29,9 +32,14 @@ module Jekyll
         wrapper = Nokogiri::XML::Node.new('div', doc)
         wrapper['class'] = 'plantuml-wrapper'  # Add a class to the wrapper div
 
+        shrinkwrap = Nokogiri::XML::Node.new('div', wrapper)
+        shrinkwrap['class'] = 'plantuml-shrinkwrap'  # Add a class to the shrinkwrap div
+
         # Insert the SVG into the wrapper
-        svg.add_previous_sibling(wrapper)
-        wrapper.add_child(svg)
+        svg.add_previous_sibling(shrinkwrap)
+        shrinkwrap.add_child(svg)
+        shrinkwrap.add_previous_sibling(wrapper)
+        wrapper.add_child(shrinkwrap)
         Jekyll.logger.debug self.marker, "Added wrapper div to PlantUML diagram"
       end
 

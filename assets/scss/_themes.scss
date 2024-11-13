@@ -47,8 +47,12 @@ html[data-theme="light-contrast"] {
     filter: contrast($contrast-boost);
   }
 
-  :is(img.icon, img.banner, svg.plantuml) {
+  :is(img.icon, img.banner) {
     filter: contrast($contrast-boost);
+  }
+
+  svg.plantuml {
+    filter: saturate(0%) contrast($contrast-boost);
   }
 }
 
@@ -65,8 +69,12 @@ html[data-theme="dark-contrast"] {
     filter: contrast($contrast-boost);
   }
 
-  :is(img.icon, img.banner, svg.plantuml) {
+  :is(img.icon, img.banner) {
     filter: invert(100%) hue-rotate(57deg) contrast($contrast-boost) saturate(250%);
+  }
+
+  svg.plantuml {
+    filter: invert(100%) saturate(0%) contrast($contrast-boost);
   }
 }
 

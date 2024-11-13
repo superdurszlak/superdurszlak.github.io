@@ -296,12 +296,13 @@ a:visited:is(.site-title) {
 
 .plantuml-wrapper {
   width: 100%;
-  display: block;
+  display: grid;
+  place-items: center;
   overflow-x: auto;
 }
 
-svg.plantuml {
-  display: block;
+.plantuml-shrinkwrap {
+  display: inline-block;
   margin-bottom: $base-margin;
   border-width: $thin-border;
   border-radius: $border-radius;
@@ -309,6 +310,13 @@ svg.plantuml {
   border-style: solid;
   margin-left: auto;
   margin-right: auto;
+}
+
+svg.plantuml {
+  display: block;
+  border-radius: $border-radius;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 mjx-container {
