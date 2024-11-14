@@ -32,7 +32,7 @@ module Jekyll
       end
 
       def self.marker()
-        return PlantumlRatioProcessor.name
+        return FixAriaAnchor.name
       end
     end
   end

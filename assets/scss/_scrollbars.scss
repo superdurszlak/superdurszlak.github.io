@@ -1,0 +1,25 @@
+@use "./themes" as *;
+@use "./sizing" as *;
+
+/* The entire scrollbar */
+::-webkit-scrollbar {
+  width: $scrollbar-thickness; /* Width of the scrollbar */
+  height: $scrollbar-thickness; /* Height of the scrollbar for horizontal scroll */
+}
+
+/* The track (background) of the scrollbar */
+::-webkit-scrollbar-track {
+  background: var(--primary-box-color); /* Color of the track */
+  border-radius: $scrollbar-radius; /* Optional: rounded corners */
+}
+
+/* The draggable thumb of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);; /* Color of the thumb */
+  border-radius: $scrollbar-radius; /* Optional: rounded corners */
+}
+
+/* Hover effect for the thumb */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);; /* Darker shade for hover state */
+}

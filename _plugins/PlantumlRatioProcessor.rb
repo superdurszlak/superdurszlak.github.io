@@ -32,7 +32,7 @@ module Jekyll
         wrapper = Nokogiri::XML::Node.new('div', doc)
         wrapper['class'] = 'plantuml-wrapper'  # Add a class to the wrapper div
 
-        shrinkwrap = Nokogiri::XML::Node.new('div', wrapper)
+        shrinkwrap = Nokogiri::XML::Node.new('div', doc)
         shrinkwrap['class'] = 'plantuml-shrinkwrap'  # Add a class to the shrinkwrap div
 
         # Insert the SVG into the wrapper

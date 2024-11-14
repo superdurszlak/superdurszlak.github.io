@@ -35,11 +35,10 @@
 
 .menu-button {
   border-width: $thin-border;
-  min-width: 2em;
   border-radius: $border-radius;
   padding: 0.3em;
-  border-color: var(--primary-color);
-  border-style: none;
+  border-color: var(--background-color);
+  border-style: solid;
   border-width: $thin-border;
   background-color: var(--background-color);
   cursor: pointer;
@@ -93,8 +92,8 @@
 
 .menu-item:has(.theme-option) {
   border-radius: $border-radius;
-  padding: calc($half-margin / 2);
-  margin: calc($half-margin / 2) 0;
+  padding: 0 0.3em;
+  margin: 0.3em 0;
   margin-right: $half-margin;
   border-width: $thin-border;
   border-color: var(--background-color);
