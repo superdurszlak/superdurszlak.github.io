@@ -202,12 +202,14 @@ body {
 
 h1 {
   margin-bottom: $base-margin;
+  font-size: 1.75em;
   @include respond-to(mobile) {
     font-size: 1.5em;
   }
 }
 
-h2 {
+h2, h2.footer-heading {
+  font-size: 1.5em;
   @include respond-to(mobile) {
     font-size: 1.25em;
   }
@@ -233,6 +235,7 @@ h2:not(.footer-heading) {
 h3 {
   margin-top: $base-margin;
   margin-bottom: $half-margin;
+  font-size: 1.25em;
 
   @include respond-to(mobile) {
     font-size: 1.12em;
@@ -297,6 +300,10 @@ a:visited:is(.site-title) {
 
 .footer-col p {
   color: var(--secondary-color);
+}
+
+.footer-col-wrapper {
+  font-size: 1em;
 }
 
 .plantuml-wrapper {
@@ -543,6 +550,8 @@ img.icon {
 
 .svg-icon {
   fill: var(--primary-color);
+  height: 1em;
+  width: 1em;
 }
 
 .site-header {
