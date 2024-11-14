@@ -127,6 +127,6 @@ html[data-theme="dark-contrast"] {
   }
 }
 
-#theme-menu {
+:is(#theme-menu, #a11y-menu) {
   display: none;
 }

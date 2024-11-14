@@ -96,7 +96,7 @@
   border-style: solid;
 }
 
-.menu-item:has(.theme-option:checked) {
+.menu-item:has(.menu-option:checked) {
   background-color: var(--primary-color);
   border-color: var(--background-color);
   span {
@@ -104,6 +104,6 @@
   }
 }
 
-.theme-option {
+.menu-option {
   display: none;
 }
