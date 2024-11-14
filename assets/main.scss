@@ -538,6 +538,7 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
 img.icon {
   height: $icon-size;
   min-width: $icon-size;
+  border-radius: 0;
 }
 
 .svg-icon {
