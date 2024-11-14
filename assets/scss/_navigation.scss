@@ -75,22 +75,20 @@
   border-style: solid;
   padding: $half-margin;
   border-bottom-left-radius: $border-radius;
-
-  .menu-item {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; // Right-align content
-    border: none;
-    background: none;
-    cursor: pointer;
-  }
 }
 
 .menu-toggle:checked ~ .menu-body {
   display: block;
 }
 
-.menu-item:has(.theme-option) {
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; // Right-align content
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 100%;
   border-radius: $border-radius;
   padding: 0 0.3em;
   margin: 0.3em 0;

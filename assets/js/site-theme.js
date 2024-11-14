@@ -18,13 +18,21 @@ const themeKey = "theme";
 document.addEventListener("DOMContentLoaded", () => {
   enableThemeDropdown();
 
-  const themeButtons = document.querySelectorAll(".theme-option");
+  const themeButtons = document.querySelectorAll(".menu-item");
 
   const preSelected = localStorage.getItem(themeKey) || "browser";
   setThemes(preSelected);
 
   themeButtons.forEach((button) => {
-    button.addEventListener("change", (event) => setThemes(event.target.value));
+    const radio = button.querySelector(".theme-option");
+
+    if (radio) {
+      button.addEventListener("click", (_) => radio.click());
+
+      radio.addEventListener("change", (event) =>
+        setThemes(event.target.value)
+      );
+    }
   });
 });
 
