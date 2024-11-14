@@ -36,7 +36,6 @@ function toggleInputsOnButtonClick() {
         return;
       }
       const input = button.querySelector(".menu-option");
-      console.log(event, button, input);
       if (input) {
         if(input.type === "radio") {
           input.checked = true;
@@ -65,14 +64,12 @@ function updateLocalStorageState() {
 
   const largeFontEnabled = isLargeFontEnabled();
   localStorage.setItem(fontSizeKey, largeFontEnabled);
-  console.log("HTML state", theme, contrastEnabled, largeFontEnabled)
 }
 
 function loadAppearanceFromLocalStorage() {
   const themeSelection = localStorage.getItem(themeKey) || defaultChoice;
   const contrastSelection = localStorage.getItem(contrastKey) === "true";
   const fontSizeSelection = localStorage.getItem(fontSizeKey) === "true";
-  console.log("Local storage state", themeSelection, contrastSelection, fontSizeSelection)
 
   setThemeChoice(themeSelection);
   setContrastChoice(contrastSelection);
@@ -83,7 +80,7 @@ function loadAppearanceFromLocalStorage() {
     getThemeFromChoice(themeSelection)
   );
   document.documentElement.setAttribute("data-contrast", contrastSelection);
-  document.documentElement.setAttribute("data-font-size", fontSizeSelection);
+  document.documentElement.setAttribute("data-large-font", fontSizeSelection);
 
   setThemes(themeSelection, contrastSelection);
 }
@@ -102,13 +99,11 @@ function getThemeFromChoice(choice) {
 
 function isContrastEnabled() {
   const toggle = getContrastToggle();
-  console.log(toggle);
   return toggle ? toggle.value : false;
 }
 
 function isLargeFontEnabled() {
   const toggle = getFontSizeToggle();
-  console.log(toggle);
   return toggle ? toggle.value : false;
 }
 

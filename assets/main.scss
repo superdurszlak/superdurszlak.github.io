@@ -2,17 +2,17 @@
 ---
 
 @use "{{ site.theme }}";
-@use "scss/themes";
+@use "scss/appearance";
 @use "scss/navigation";
 @use "scss/scrollbars";
 @use "scss/media" as *;
 @use "scss/sizing" as *;
 
 html {
-  font-size: $default-font-size;
+  font-size: var(--default-font-size);
 
   @include respond-to(desktop) {
-    font-size: $desktop-font-size;
+    font-size: var(--desktop-font-size);
   }
 }
 
@@ -688,6 +688,7 @@ li.social-link {
   background-color: var(--primary-box-color);
   border-color: var(--primary-color);
   border-radius: $border-radius;
+  font-size: 1em;
 
   span:not(.p, .nl) {
     color: var(--primary-color);
@@ -695,5 +696,6 @@ li.social-link {
 }
 
 code {
+  font-size: 1em;
   background-color: var(--primary-accent-color);
 }

@@ -1,5 +1,9 @@
 @use "./sizing" as *;
 
+$large-font-multiplier: 1.4;
+
+$desktop-font-size: 4.9mm;
+$default-font-size: 4.3mm;
 $contrast-slight: 125%;
 $contrast-boost: 150%;
 $contrast-border: $thin-border;
@@ -12,9 +16,21 @@ $full-invert: invert(100%) hue-rotate(180deg);
   --background-color: #f8f8f8;
   --primary-box-color: #e2eaeb;
   --secondary-box-color: #e5e5e5;
+  --default-font-size: 4.3mm;
+  --desktop-font-size: 4.9mm;
 }
 
-html[data-theme="light"] {
+html[data-large-font="false"] {
+  --default-font-size: 4.3mm;
+  --desktop-font-size: 4.9mm;
+}
+
+html[data-large-font="true"] {
+  --default-font-size: 6.02mm;
+  --desktop-font-size: 6.86mm;
+}
+
+html[data-theme="light"][data-contrast="false"] {
   --primary-color: #216778;
   --primary-accent-color: #e2eaeb;
   --secondary-color: #3a3a3a;
@@ -23,7 +39,7 @@ html[data-theme="light"] {
   --secondary-box-color: #e5e5e5;
 }
 
-html[data-theme="dark"] {
+html[data-theme="dark"][data-contrast="false"] {
   --primary-color: #69c0d6;
   --primary-accent-color: #04151a;
   --secondary-color: #d6d6d6;
@@ -36,7 +52,7 @@ html[data-theme="dark"] {
   }
 }
 
-html[data-theme="light-contrast"] {
+html[data-theme="light"][data-contrast="true"] {
   --primary-color: #005b74;
   --primary-accent-color: #9cf3ff;
   --secondary-color: #171717;
@@ -56,7 +72,7 @@ html[data-theme="light-contrast"] {
   }
 }
 
-html[data-theme="dark-contrast"] {
+html[data-theme="dark"][data-contrast="true"] {
   --primary-color: #cbcb00;
   --primary-accent-color: #747400;
   --secondary-color: #f8f8f8;
@@ -78,7 +94,7 @@ html[data-theme="dark-contrast"] {
   }
 }
 
-:is(html[data-theme="light-contrast"], html[data-theme="dark-contrast"]) {
+html[data-contrast="true"] {
   code {
     border-color: var(--primary-color);
     background-color: var(--primary-box-color);
@@ -126,6 +142,8 @@ html[data-theme="dark-contrast"] {
     border-color: var(--secondary-color);
   }
 }
+
+
 
 :is(#theme-menu, #a11y-menu) {
   display: none;
