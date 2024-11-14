@@ -17,31 +17,36 @@ const themeKey = "theme";
 const contrastKey = "contrast";
 const fontSizeKey = "fontSize";
 
+loadAppearanceFromLocalStorage();
+
 document.addEventListener("DOMContentLoaded", () => {
   enableThemeDropdown();
+
   enableA11yDropdown();
 
   toggleInputsOnButtonClick();
-
-  const themeButtons = document.querySelectorAll("#theme-menu .menu-item");
-  const a11yButtons = document.querySelectorAll("#a11y-menu .menu-item");
-
-  const preSelectedTheme = localStorage.getItem(themeKey) || "browser";
-  setThemes(preSelectedTheme);
 });
 
 function toggleInputsOnButtonClick() {
   const allButtons = document.querySelectorAll(".menu-item");
 
   allButtons.forEach((button) => {
-    const input = button.querySelector(".menu-option");
-
-    if (input) {
-      button.addEventListener("click", (_) => {
+    button.addEventListener("click", (event) => {
+      if (!button.contains(event.target)) {
+        return;
+      }
+      const input = button.querySelector(".menu-option");
+      console.log(event, button, input);
+      if (input) {
+        if(input.type === "radio") {
+          input.checked = true;
+        } else if (input.type === "checkbox") {
+          input.value = !(input.value === "true");
+        }
         input.click();
-        reloadAppearance();
-      });
-    }
+      }
+      reloadAppearance();
+    });
   });
 }
 
@@ -53,25 +58,30 @@ function reloadAppearance() {
 
 function updateLocalStorageState() {
   const theme = getSelectedTheme();
-  localStorage.setAttribute(themeKey, theme);
+  localStorage.setItem(themeKey, theme);
 
   const contrastEnabled = isContrastEnabled();
-  localStorage.setAttribute(contrastKey, contrastEnabled);
+  localStorage.setItem(contrastKey, contrastEnabled);
 
   const largeFontEnabled = isLargeFontEnabled();
-  localStorage.setAttribute(fontSizeKey, largeFontEnabled);
+  localStorage.setItem(fontSizeKey, largeFontEnabled);
+  console.log("HTML state", theme, contrastEnabled, largeFontEnabled)
 }
 
 function loadAppearanceFromLocalStorage() {
-  const themeSelection = localStorage.getAttribute(themeKey) || defaultChoice;
-  const contrastSelection = localStorage.getAttribute(contrastKey) === "true";
-  const fontSizeSelection = localStorage.getAttribute(fontSizeKey) === "true";
+  const themeSelection = localStorage.getItem(themeKey) || defaultChoice;
+  const contrastSelection = localStorage.getItem(contrastKey) === "true";
+  const fontSizeSelection = localStorage.getItem(fontSizeKey) === "true";
+  console.log("Local storage state", themeSelection, contrastSelection, fontSizeSelection)
 
   setThemeChoice(themeSelection);
   setContrastChoice(contrastSelection);
   setFontSizeChoice(fontSizeSelection);
-  
-  document.documentElement.setAttribute("data-theme", theme);
+
+  document.documentElement.setAttribute(
+    "data-theme",
+    getThemeFromChoice(themeSelection)
+  );
   document.documentElement.setAttribute("data-contrast", contrastSelection);
   document.documentElement.setAttribute("data-font-size", fontSizeSelection);
 
@@ -83,16 +93,22 @@ function getSelectedTheme() {
     '#theme-menu input[name="theme"]:checked'
   );
   const choice = selection ? selection.value : defaultChoice;
+  return getThemeFromChoice(choice);
+}
+
+function getThemeFromChoice(choice) {
   return (themeChoiceMapping[choice] || getDefaultPreference)();
 }
 
 function isContrastEnabled() {
   const toggle = getContrastToggle();
+  console.log(toggle);
   return toggle ? toggle.value : false;
 }
 
 function isLargeFontEnabled() {
   const toggle = getFontSizeToggle();
+  console.log(toggle);
   return toggle ? toggle.value : false;
 }
 
@@ -105,31 +121,31 @@ function setThemeChoice(choice) {
 
 function setContrastChoice(choice) {
   const toggle = getContrastToggle();
-  if(toggle) {
+  if (toggle) {
     toggle.value = choice;
   }
 }
 
 function setFontSizeChoice(choice) {
   const toggle = getFontSizeToggle();
-  if(toggle) {
+  if (toggle) {
     toggle.value = choice;
   }
 }
 
 function getContrastToggle() {
-  return document.getElementById("#contrast-setting");
+  return document.getElementById("contrast-setting");
 }
 
 function getFontSizeToggle() {
-  return document.getElementById("#font-size-setting");
+  return document.getElementById("font-size-setting");
 }
 
 function setThemes(themeSelection, contrastEnabled) {
   const theme = (themeChoiceMapping[themeSelection] || getDefaultPreference)();
   const giscusThemeKey = contrastEnabled ? `${theme}-contrast` : theme;
   const giscusTheme = giscusThemeMapping[giscusThemeKey];
-  
+
   setSiteTheme(theme);
   setGiscusTheme(giscusTheme);
 }

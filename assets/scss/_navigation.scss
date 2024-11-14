@@ -96,7 +96,7 @@
   border-style: solid;
 }
 
-.menu-item:has(.menu-option:checked) {
+.menu-item:has(:is(.menu-option:checked, .menu-option[value="true"])) {
   background-color: var(--primary-color);
   border-color: var(--background-color);
   span {
