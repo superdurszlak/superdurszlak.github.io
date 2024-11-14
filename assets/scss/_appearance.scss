@@ -143,7 +143,12 @@ html[data-contrast="true"] {
   }
 }
 
-
+html[data-large-font="true"] {
+  svg.plantuml {
+    transform: scale(2);
+    transform-origin: top left;
+  }
+}
 
 :is(#theme-menu, #a11y-menu) {
   display: none;

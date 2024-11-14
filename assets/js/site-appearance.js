@@ -31,6 +31,7 @@ function toggleInputsOnButtonClick() {
   const allButtons = document.querySelectorAll(".menu-item");
 
   allButtons.forEach((button) => {
+    button.removeEventListener("click", (_) => {});
     button.addEventListener("click", (event) => {
       if (!button.contains(event.target)) {
         return;
@@ -42,9 +43,8 @@ function toggleInputsOnButtonClick() {
         } else if (input.type === "checkbox") {
           input.value = !(input.value === "true");
         }
-        input.click();
+        reloadAppearance();
       }
-      reloadAppearance();
     });
   });
 }
@@ -163,7 +163,7 @@ function setGiscusTheme(giscusTheme) {
       },
     },
   };
-  iframe.contentWindow.postMessage(message, "https://giscus.app");
+  iframe.contentWindow.postMessage(message, window.origin);
 }
 
 function getDefaultPreference() {

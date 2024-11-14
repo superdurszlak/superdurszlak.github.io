@@ -55,7 +55,7 @@
     }
   }
 
-  * {
+  :is(label, span, img) {
     cursor: pointer;
     user-select: none;
   }
@@ -94,6 +94,8 @@
   border-width: $thin-border;
   border-color: var(--background-color);
   border-style: solid;
+  font-size: 1em;
+  cursor: pointer;
 }
 
 .menu-item:has(:is(.menu-option:checked, .menu-option[value="true"])) {
