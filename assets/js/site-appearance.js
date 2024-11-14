@@ -148,7 +148,7 @@ function setThemes(themeSelection, contrastEnabled) {
 
 function setDiagramsSize(useLargeFont) {
   const ratio = useLargeFont ? 2.0 : 1.0;
-  document.querySelectorAll("svg.plantuml").forEach((diagram) => {
+  document.querySelectorAll(".plantuml").forEach((diagram) => {
     diagram.style.width = `calc(${ratio} * ${diagram.width.baseVal.valueAsString})`;
     diagram.style.height = `calc(${ratio} * ${diagram.height.baseVal.valueAsString})`;
   });

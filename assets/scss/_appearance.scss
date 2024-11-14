@@ -47,7 +47,7 @@ html[data-theme="dark"][data-contrast="false"] {
   --primary-box-color: #04151a;
   --secondary-box-color: #1f1f1f;
 
-  :is(img.icon, img.banner, svg.plantuml) {
+  :is(img.icon, img.banner, .plantuml) {
     filter: invert(100%) hue-rotate(180deg) contrast($contrast-slight);
   }
 }
@@ -67,7 +67,7 @@ html[data-theme="light"][data-contrast="true"] {
     filter: contrast($contrast-boost);
   }
 
-  svg.plantuml {
+  .plantuml {
     filter: grayscale(100%) contrast($contrast-boost);
   }
 }
@@ -89,7 +89,7 @@ html[data-theme="dark"][data-contrast="true"] {
       saturate(250%);
   }
 
-  svg.plantuml {
+  .plantuml {
     filter: invert(100%) grayscale(100%) contrast($contrast-boost);
   }
 }
