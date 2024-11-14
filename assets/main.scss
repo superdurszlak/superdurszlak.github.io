@@ -538,7 +538,7 @@ img.icon {
 }
 
 .svg-icon {
-  fill: var(--primary-color)
+  fill: var(--primary-color);
 }
 
 .site-header {
@@ -686,7 +686,7 @@ li.social-link {
   border-radius: $border-radius;
 
   span:not(.p, .nl) {
-    color: var(--primary-color)
+    color: var(--primary-color);
   }
 }
 

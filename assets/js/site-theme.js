@@ -62,7 +62,7 @@ function getDefaultPreference() {
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches
   ) {
-   return "dark";
+    return "dark";
   }
 
   return "light";
@@ -70,7 +70,7 @@ function getDefaultPreference() {
 
 function enableThemeDropdown() {
   const menu = document.getElementById("theme-menu");
-  if(menu) {
-    menu.style.display = "block"
+  if (menu) {
+    menu.style.display = "block";
   }
 }

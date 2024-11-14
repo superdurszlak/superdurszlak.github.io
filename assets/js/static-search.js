@@ -14,7 +14,10 @@ import { urlWithPageNum } from "./url-with-page-num.js";
 
   function paginateResults(results, pagination) {
     const per_page = pagination.per_page;
-    const total_pages = Math.min(pagination.total_pages, Math.ceil(results.length / per_page));
+    const total_pages = Math.min(
+      pagination.total_pages,
+      Math.ceil(results.length / per_page)
+    );
 
     const pageParam = parseInt(getQueryVariable("page")) || 1;
     const page = Math.min(pageParam, total_pages);
@@ -22,7 +25,7 @@ import { urlWithPageNum } from "./url-with-page-num.js";
 
     const offset = pageIndex * per_page;
     const limit = offset + per_page;
-    
+
     return {
       results: results.slice(offset, limit),
       page: page,

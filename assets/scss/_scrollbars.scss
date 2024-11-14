@@ -15,11 +15,11 @@
 
 /* The draggable thumb of the scrollbar */
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-color);; /* Color of the thumb */
+  background: var(--primary-color); /* Color of the thumb */
   border-radius: $scrollbar-radius; /* Optional: rounded corners */
 }
 
 /* Hover effect for the thumb */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-color);; /* Darker shade for hover state */
+  background: var(--secondary-color); /* Darker shade for hover state */
 }
