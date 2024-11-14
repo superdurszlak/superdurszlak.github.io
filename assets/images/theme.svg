@@ -62,7 +62,7 @@
                id="g4"
                transform="translate(-0.74659827,1.4664602)">
               <path
-                 style="fill:#cddbde;fill-opacity:1;stroke:#216778;stroke-width:2.11667;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+                 style="fill:none;fill-opacity:1;stroke:#216778;stroke-width:2.11667;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
                  d="m 22.049214,13.631964 c 3.318662,1.916031 4.936596,5.822059 3.944786,9.523546 -0.99181,3.701487 -4.34611,6.27527 -8.178171,6.27527 -3.832061,0 -7.186361,-2.573782 -8.1781721,-6.275269 -0.9918108,-3.701487 0.6262281,-7.607607 3.9448911,-9.523637"
                  id="path4"
                  sodipodi:nodetypes="csssc" />
@@ -76,11 +76,6 @@
                  d="m 17.815832,32.60578 v 1.828006"
                  id="path13"
                  sodipodi:nodetypes="cc" />
-              <path
-                 style="fill:none;fill-opacity:1;stroke:#216778;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-                 d="m 15.699166,14.325452 v 2.116667 c 0,0 2.326891,9.794042 -2.116667,4.233333 -2.207296,-2.762231 10.596464,-2.927718 8.466666,0 -4.039502,5.552887 -2.116666,-4.233333 -2.116666,-4.233333 v -2.116667"
-                 id="path14"
-                 sodipodi:nodetypes="ccsscc" />
             </g>
             <path
                style="fill:none;stroke:#216778;stroke-width:2.03452;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"

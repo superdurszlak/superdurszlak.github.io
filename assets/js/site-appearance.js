@@ -38,7 +38,7 @@ function toggleInputsOnButtonClick() {
       }
       const input = button.querySelector(".menu-option");
       if (input) {
-        if(input.type === "radio") {
+        if (input.type === "radio") {
           input.checked = true;
         } else if (input.type === "checkbox") {
           input.value = !(input.value === "true");
@@ -83,6 +83,7 @@ function loadAppearanceFromLocalStorage() {
   document.documentElement.setAttribute("data-large-font", fontSizeSelection);
 
   setThemes(themeSelection, contrastSelection);
+  setDiagramsSize(fontSizeSelection);
 }
 
 function getSelectedTheme() {
@@ -143,6 +144,14 @@ function setThemes(themeSelection, contrastEnabled) {
 
   setSiteTheme(theme);
   setGiscusTheme(giscusTheme);
+}
+
+function setDiagramsSize(useLargeFont) {
+  const ratio = useLargeFont ? 2.0 : 1.0;
+  document.querySelectorAll("svg.plantuml").forEach((diagram) => {
+    diagram.style.width = `calc(${ratio} * ${diagram.width.baseVal.valueAsString})`;
+    diagram.style.height = `calc(${ratio} * ${diagram.height.baseVal.valueAsString})`;
+  });
 }
 
 function setSiteTheme(theme) {
