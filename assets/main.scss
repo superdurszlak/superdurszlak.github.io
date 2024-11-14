@@ -399,18 +399,20 @@ li.post-listing h3 {
   }
 }
 
+img {
+  border-radius: $border-radius;
+}
+
 .post-thumbnail img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: $border-radius;
   border-color: var(--primary-color);
   border-style: solid;
   border-width: $thin-border;
 }
 
 img.banner {
-  border-radius: $border-radius;
   display: block;
   margin-left: auto;
   margin-right: auto;

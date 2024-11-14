@@ -43,8 +43,8 @@ html[data-theme="light-contrast"] {
   --background-color: #f8f8f8;
   --primary-box-color: #e2ffff;
   --secondary-box-color: #f8f8f8;
-  img.picture {
-    filter: contrast($contrast-boost);
+  img.picture, p img, li img, tr img {
+    filter: contrast($contrast-slight);
   }
 
   :is(img.icon, img.banner) {
@@ -64,8 +64,8 @@ html[data-theme="dark-contrast"] {
   --primary-box-color: #282800;
   --secondary-box-color: #303030;
 
-  :is(img.picture, p img) {
-    filter: contrast($contrast-boost) grayscale(100%) brightness(125%);
+  :is(img.picture, p img, li img, tr img) {
+    filter: contrast($contrast-slight) grayscale(100%);
   }
 
   :is(img.icon, img.banner) {

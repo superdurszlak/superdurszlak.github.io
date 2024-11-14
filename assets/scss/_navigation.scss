@@ -41,7 +41,6 @@
   border-style: solid;
   border-width: $thin-border;
   background-color: var(--background-color);
-  cursor: pointer;
   margin: 0 $half-margin;
   label {
     display: flex;
@@ -87,7 +86,6 @@
   justify-content: flex-end; // Right-align content
   border: none;
   background: none;
-  cursor: pointer;
   width: 100%;
   border-radius: $border-radius;
   padding: 0 0.3em;
