@@ -9,5 +9,11 @@
   <script src="/assets/js/clean-mathjax-styles.js"></script>
   <script src="/assets/js/lose-button-focus.js"></script>
   <script src="/assets/js/site-appearance.js"></script>
+  <script>
+    // Show the search bar when JavaScript is enabled
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelector('#search-bar').style.visibility = 'visible';
+    });
+  </script>
   {%- feed_meta -%}
 </head>
