@@ -17,6 +17,8 @@ const themeKey = "theme";
 const contrastKey = "contrast";
 const fontSizeKey = "fontSize";
 
+loadAppearanceFromLocalStorage();
+
 onTerminalElementLoaded(loadAppearanceFromLocalStorage);
 
 document.addEventListener("DOMContentLoaded", () => {
