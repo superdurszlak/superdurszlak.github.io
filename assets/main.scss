@@ -47,7 +47,7 @@ body {
     padding: $half-margin;
     max-width: 45%;
     flex: 0 1 auto;
-    white-space: nowrap;Update main.scss
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin: $base-margin 0;
@@ -370,8 +370,9 @@ li.post-listing h3 {
   @include respond-to(mobile) {
     aspect-ratio: 1.5;
   }
+
   @media (max-width: 640px) {
-    aspect-ratio: 2;
+    aspect-ratio: 1;
   }
 }
 
