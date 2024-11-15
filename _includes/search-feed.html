@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<script>
+<script defer>
     window.store = {
       "pagination": {
         "page": {{ paginator.page | jsonify }},
@@ -73,6 +73,6 @@
   </script>
 <script src="/assets/js/redirect-pagination.js" type="module"></script>
 {% if paginator.page == 1 %}
-  <script src="https://unpkg.com/lunr/lunr.js"></script>
-  <script src="/assets/js/static-search.js" type="module"></script> 
+  <script src="https://unpkg.com/lunr/lunr.js" defer></script>
+  <script src="/assets/js/static-search.js" type="module" defer></script> 
 {% endif %}
