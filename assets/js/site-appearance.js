@@ -17,19 +17,35 @@ const themeKey = "theme";
 const contrastKey = "contrast";
 const fontSizeKey = "fontSize";
 
-// Initial pass before DOM is loaded - to ensure consistent theme from the beginning
-loadAppearanceFromLocalStorage();
+onTerminalElementLoaded(loadAppearanceFromLocalStorage);
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Secondary pass after DOM is loaded - to ensure attributes of toggles and checkboxes are properly set
-  loadAppearanceFromLocalStorage();
-
   enableThemeDropdown();
 
   enableA11yDropdown();
 
   toggleInputsOnButtonClick();
 });
+
+function onTerminalElementLoaded(action) {
+  const observer = new MutationObserver((mutationsList) => {
+    const terminalElementLoaded = mutationsList
+      .filter((mutation) => mutation.type === "childList")
+      .map((mutation) => Array.from(mutation.addedNodes))
+      .flat()
+      .find((node) => node.id === "end-of-doc-marker");
+
+    if (terminalElementLoaded) {
+      action();
+      observer.disconnect();
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+}
 
 function toggleInputsOnButtonClick() {
   const allButtons = document.querySelectorAll(".menu-item");
@@ -153,8 +169,12 @@ function setThemes(themeSelection, contrastEnabled) {
 function setDiagramsSize(useLargeFont) {
   const ratio = useLargeFont ? 2.0 : 1.0;
   document.querySelectorAll(".plantuml").forEach((diagram) => {
-    diagram.style.width = `calc(${ratio} * ${diagram.width?.baseVal?.valueAsString || 0})`;
-    diagram.style.height = `calc(${ratio} * ${diagram.height?.baseVal?.valueAsString || 0})`;
+    diagram.style.width = `calc(${ratio} * ${
+      diagram.width?.baseVal?.valueAsString || 0
+    })`;
+    diagram.style.height = `calc(${ratio} * ${
+      diagram.height?.baseVal?.valueAsString || 0
+    })`;
   });
 }
 
@@ -165,18 +185,25 @@ function setSiteTheme(theme) {
 function setGiscusTheme(giscusTheme) {
   if (!giscusTheme) return;
 
+  const script = document.getElementById("giscus-script");
+
+  if (script) {
+    script.setAttribute("data-theme", giscusTheme);
+  }
+
   const iframe = document.querySelector("iframe.giscus-frame");
 
-  if (!iframe) return;
-
-  const message = {
-    giscus: {
-      setConfig: {
-        theme: giscusTheme,
+  if (iframe) {
+    const message = {
+      giscus: {
+        setConfig: {
+          theme: giscusTheme,
+        },
       },
-    },
-  };
-  iframe.contentWindow.postMessage(message, window.origin);
+    };
+
+    iframe.contentWindow.postMessage(message, "https://giscus.app");
+  }
 }
 
 function getDefaultPreference() {
