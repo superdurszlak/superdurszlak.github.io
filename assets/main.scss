@@ -368,7 +368,7 @@ li.post-listing h3 {
 .post-list {
   aspect-ratio: 2;
   @include respond-to(mobile) {
-    aspect-ratio: 0.5;
+    aspect-ratio: 1;
   }
 }
 
