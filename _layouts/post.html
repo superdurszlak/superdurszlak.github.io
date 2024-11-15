@@ -35,7 +35,8 @@ layout: default
 {% include social-share.html page=page %}
 
 {% if site.giscus.enabled %}
-<script src="https://giscus.app/client.js"
+<script id="giscus-script"
+        src="https://giscus.app/client.js"
         data-repo="{{ site.giscus.data_repo }}"
         data-repo-id="{{ site.giscus.data_repo_id }}"
         data-category="{{ site.giscus.data_category }}"
