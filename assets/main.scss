@@ -2,17 +2,17 @@
 ---
 
 @use "{{ site.theme }}";
-@use "scss/themes";
+@use "scss/appearance";
 @use "scss/navigation";
+@use "scss/scrollbars";
 @use "scss/media" as *;
 @use "scss/sizing" as *;
 
-
 html {
-  font-size: $default-font-size;
+  font-size: var(--default-font-size);
 
   @include respond-to(desktop) {
-    font-size: $desktop-font-size;
+    font-size: var(--desktop-font-size);
   }
 }
 
@@ -34,6 +34,7 @@ html {
 
 body {
   font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   background-color: var(--background-color);
   color: var(--secondary-color);
 }
@@ -50,7 +51,11 @@ body {
 
   :is(.previous-post, .next-post) {
     background-color: var(--primary-box-color);
+    border-color: var(--background-color);
+    border-style: solid;
+    border-width: $thin-border;
     border-radius: $border-radius;
+
     padding: $half-margin;
     max-width: 45%;
     flex: 0 1 auto;
@@ -140,7 +145,10 @@ body {
   color: var(--primary-color);
   background-color: var(--primary-box-color);
   width: 100%;
+  border-width: $thin-border;
   border-radius: $border-radius;
+  border-style: solid;
+  border-color: var(--background-color);
   margin-bottom: $base-margin;
 
   &::before {
@@ -194,12 +202,14 @@ body {
 
 h1 {
   margin-bottom: $base-margin;
+  font-size: 1.75em;
   @include respond-to(mobile) {
     font-size: 1.5em;
   }
 }
 
-h2 {
+h2, h2.footer-heading {
+  font-size: 1.5em;
   @include respond-to(mobile) {
     font-size: 1.25em;
   }
@@ -225,6 +235,7 @@ h2:not(.footer-heading) {
 h3 {
   margin-top: $base-margin;
   margin-bottom: $half-margin;
+  font-size: 1.25em;
 
   @include respond-to(mobile) {
     font-size: 1.12em;
@@ -252,6 +263,12 @@ a {
   font-weight: bold;
   color: var(--primary-color);
   cursor: pointer;
+  &:hover {
+    color: var(--secondary-color);
+  }
+  &:visited {
+    color: var(--secondary-color);
+  }
 }
 
 a.tag {
@@ -285,14 +302,19 @@ a:visited:is(.site-title) {
   color: var(--secondary-color);
 }
 
+.footer-col-wrapper {
+  font-size: 1em;
+}
+
 .plantuml-wrapper {
   width: 100%;
-  display: block;
+  display: grid;
+  place-items: center;
   overflow-x: auto;
 }
 
-svg.plantuml {
-  display: block;
+.plantuml-shrinkwrap {
+  display: inline-block;
   margin-bottom: $base-margin;
   border-width: $thin-border;
   border-radius: $border-radius;
@@ -302,7 +324,16 @@ svg.plantuml {
   margin-right: auto;
 }
 
+.plantuml {
+  display: block;
+  border-radius: $border-radius;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 mjx-container {
+  font-size: 1.25em;
+  position: inherit;
   max-width: 100%;
   display: block;
   overflow-x: auto;
@@ -335,6 +366,9 @@ li.post-listing {
   display: block;
   padding: $base-margin $border-radius;
   border-radius: $border-radius;
+  border-width: $thin-border;
+  border-style: solid;
+  border-color: var(--background-color);
   margin: 0.5em 0;
 }
 
@@ -372,18 +406,32 @@ li.post-listing h3 {
   }
 }
 
+img {
+  border-radius: $border-radius;
+}
+
 .post-thumbnail img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: $border-radius;
   border-color: var(--primary-color);
   border-style: solid;
   border-width: $thin-border;
 }
 
 img.banner {
-  border-radius: $border-radius;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  @include respond-to(mobile) {
+    width: 90%;
+  }
+  @include respond-to(tablet) {
+    width: 70%;
+  }
+  @include respond-to(desktop) {
+    width: 50%;
+  }
 }
 
 .post-excerpt p {
@@ -432,11 +480,11 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
     color: var(--primary-color);
     margin: 0 0.125em;
     padding: 0 0.25em;
-    border-radius: 0.5em;
+    border-radius: $half-margin;
+    border-width: $thin-border;
+    border-style: solid;
+    border-color: var(--background-color);
     background-color: var(--primary-box-color);
-    &:visited {
-      color: var(--primary-color);
-    }
 
     &[data-disabled="true"] {
       color: var(--secondary-color);
@@ -490,13 +538,20 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
   border-style: none;
   align-items: center;
   height: 100%;
-  min-width: 3em;
   padding: 0;
   cursor: pointer;
 }
 
 img.icon {
-  height: 3em;
+  height: $icon-size;
+  min-width: $icon-size;
+  border-radius: 0;
+}
+
+.svg-icon {
+  fill: var(--primary-color);
+  height: 1em;
+  width: 1em;
 }
 
 .site-header {
@@ -508,7 +563,7 @@ img.icon {
   z-index: 1000;
   background-color: var(--background-color);
   border-width: 0;
-  border-bottom-width: 0.25em;
+  border-bottom-width: $thin-border;
   border-color: var(--primary-color);
   border-style: solid;
 }
@@ -518,16 +573,13 @@ img.icon {
   justify-content: space-between;
   align-items: center;
   overflow-x: hidden;
-  @include respond-to(mobile) {
-    overflow-x: scroll;
-  }
 }
 
 .site-title {
   font-size: 1.5em;
 
   @include respond-to(mobile) {
-    font-size: 1.25em;
+    display: none;
   }
 }
 
@@ -609,7 +661,8 @@ li.social-link {
   border-radius: $border-radius;
   flex: 0 0 100%;
   border-style: solid;
-  border-width: 0;
+  border-width: $thin-border;
+  border-color: currentColor;
   background-color: var(--secondary-box-color);
   padding: $half-margin;
   cursor: pointer;
@@ -617,38 +670,41 @@ li.social-link {
   &[data-sharer="linkedin"] {
     color: white;
     background-color: #007ab5;
-    box-shadow: 0 2px 0 #005e8c, 1px 4px 2px rgba(0, 0, 0, 0.2);
   }
 
   &[data-sharer="x"] {
     color: black;
     background-color: #00aced;
-    box-shadow: 0 2px 0 #0084b4, 1px 4px 2px rgba(0, 0, 0, 0.2);
   }
 
   &[data-sharer="hackernews"] {
     color: black;
     background-color: #ff6700;
-    box-shadow: 0 2px 0 #c65000, 1px 4px 2px rgba(0, 0, 0, 0.2);
   }
 
   &[data-sharer="reddit"] {
     color: #335f89;
     background-color: #cee3f8;
-    box-shadow: 0 2px 0 #a2c6e8, 1px 4px 2px rgba(0, 0, 0, 0.2);
   }
 
   &[data-sharer="facebook"] {
     color: whitesmoke;
     background-color: #3b5998;
-    box-shadow: 0 2px 0 #224389, 1px 4px 2px rgba(0, 0, 0, 0.2);
   }
 }
 
 .highlighter-rouge .highlight {
-  background-color: var(--primary-accent-color);
+  background-color: var(--primary-box-color);
+  border-color: var(--primary-color);
+  border-radius: $border-radius;
+  font-size: 1em;
+
+  span:not(.p, .nl) {
+    color: var(--primary-color);
+  }
 }
 
 code {
+  font-size: 1em;
   background-color: var(--primary-accent-color);
 }

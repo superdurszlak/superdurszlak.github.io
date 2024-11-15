@@ -31,9 +31,27 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="path1" />
+     inkscape:current-layer="g3" />
   <defs
-     id="defs1" />
+     id="defs1">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect1"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 | F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1"
+       radius="0"
+       unit="px"
+       method="auto"
+       mode="F"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+  </defs>
   <g
      inkscape:label="Warstwa 1"
      inkscape:groupmode="layer"
@@ -47,23 +65,16 @@
         <g
            id="g3"
            transform="translate(-0.25945881,-0.25888186)">
-          <g
-             id="path1"
-             style="stroke:none;stroke-width:1.05829;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-             transform="matrix(1.0000399,0,0,1.0000399,-0.00406815,-0.00403652)">
-            <path
-               style="color:#000000;fill:#cddbde;fill-opacity:1;stroke:#cddbde;stroke-width:1.05829;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-               d="M 18.520832,10.054166 A 8.4666662,8.4666662 0 0 1 10.054166,18.520832 8.4666662,8.4666662 0 0 1 1.5874996,10.054166 8.4666662,8.4666662 0 0 1 10.054166,1.5874996 8.4666662,8.4666662 0 0 1 18.520832,10.054166 Z"
-               id="path5" />
-            <path
-               style="color:#000000;fill:#216778;stroke:none;stroke-width:1.05829;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-               d="M 10.054688,0 C 4.5207336,-1.3072333e-7 -1.3072333e-7,4.5207336 0,10.054688 c 1.3072332e-7,5.533953 4.5207337,10.052734 10.054688,10.052734 5.533953,0 10.052734,-4.518781 10.052734,-10.052734 C 20.107422,4.5207337 15.588641,1.3072332e-7 10.054688,0 Z m 0,3.1757813 c 3.818058,0 6.878906,3.0608481 6.878906,6.8789067 0,3.818058 -3.060848,6.878906 -6.878906,6.878906 -3.8180586,0 -6.8789067,-3.060848 -6.8789067,-6.878906 -1e-7,-3.8180588 3.0608479,-6.8789068 6.8789067,-6.8789067 z"
-               id="path6" />
-          </g>
           <path
-             d="m 19.255473,16.261254 c -0.399169,0.588987 -0.853445,1.137678 -1.35501,1.63924 v 0 c -0.501563,0.501565 -1.050253,0.955842 -1.639241,1.355011 l 13.989885,13.987818 a 2.1167494,2.1167495 0 0 0 2.992185,0 2.1167494,2.1167495 0 0 0 0,-2.992184 z"
-             style="fill:#216778;stroke:none;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-             id="path12" />
+             id="path16"
+             style="fill:#216778;stroke-linecap:round;stroke-linejoin:round"
+             d="M 19.906755 24.396951 L 28.441634 32.93183 A 3.175 3.175 0 0 0 32.931799 32.93183 A 3.175 3.175 0 0 0 32.931799 28.441148 L 24.397436 19.906786 C 23.268895 21.728026 21.727997 23.268413 19.906755 24.396951 z " />
+          <circle
+             style="fill:none;stroke:#216778;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+             id="path1"
+             cx="12.694273"
+             cy="12.694304"
+             r="11.1125" />
         </g>
       </g>
     </g>

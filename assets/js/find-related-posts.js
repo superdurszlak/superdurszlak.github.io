@@ -12,22 +12,19 @@
     })
     .map((result) => {
       return result.html
-      .replace(/\{\{[^\}^\%]*\}\}/g, '') // replace '{{ text }}'
-      .replace(/\{\%[^\}^\%]*\%\}/g, '') // replace '{% text %}'
-      .replace(/\[([^\]]*)\]\([^)]*\)/g, (_, capture) => capture || "(link)") // replace markdown links
+        .replace(/\{\{[^\}^\%]*\}\}/g, "") // replace '{{ text }}'
+        .replace(/\{\%[^\}^\%]*\%\}/g, "") // replace '{% text %}'
+        .replace(/\[([^\]]*)\]\([^)]*\)/g, (_, capture) => capture || "(link)"); // replace markdown links
     });
 
+  const relatedPostsUl = document.getElementById("related-posts");
 
-  const relatedPostsUl = document.getElementById('related-posts');
-  
-  relatedPostsUl.innerHTML = shuffleResults(relatedPosts)
-    .slice(0, 3)
-    .join("");
+  relatedPostsUl.innerHTML = shuffleResults(relatedPosts).slice(0, 3).join("");
 
   enableRelatedPosts();
 
   function enableRelatedPosts() {
-    document.getElementById('related-posts-wrapper').style['display'] = 'block';
+    document.getElementById("related-posts-wrapper").style["display"] = "block";
   }
 
   function matchesByTags(foundTags, relevantTags) {

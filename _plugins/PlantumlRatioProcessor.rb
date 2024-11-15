@@ -15,8 +15,11 @@ module Jekyll
         doc = Nokogiri::HTML(content)
   
         # Process SVGs or other elements in the document
-        doc.css('svg.plantuml').each do |svg|
-          process_svg(svg, doc)
+        doc.css('.plantuml').each do |plantuml|
+          if plantuml.parent['class']&.include?('plantuml-shrinkwrap')
+            next # Skip processing this plantuml element
+          end
+          process_svg(plantuml, doc)
         end
   
         # Save the modified HTML back to the same file
@@ -24,14 +27,19 @@ module Jekyll
         Jekyll.logger.debug self.marker, "Processed #{file_path}"
       end
   
-      def self.process_svg(svg, doc)
-        # SVG processing logic
+      def self.process_svg(plantuml, doc)
+        # plantuml processing logic
         wrapper = Nokogiri::XML::Node.new('div', doc)
         wrapper['class'] = 'plantuml-wrapper'  # Add a class to the wrapper div
 
-        # Insert the SVG into the wrapper
-        svg.add_previous_sibling(wrapper)
-        wrapper.add_child(svg)
+        shrinkwrap = Nokogiri::XML::Node.new('div', doc)
+        shrinkwrap['class'] = 'plantuml-shrinkwrap'  # Add a class to the shrinkwrap div
+
+        # Insert the plantuml into the wrapper
+        plantuml.add_previous_sibling(shrinkwrap)
+        shrinkwrap.add_child(plantuml)
+        shrinkwrap.add_previous_sibling(wrapper)
+        wrapper.add_child(shrinkwrap)
         Jekyll.logger.debug self.marker, "Added wrapper div to PlantUML diagram"
       end
 
