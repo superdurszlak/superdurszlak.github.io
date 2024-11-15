@@ -65,32 +65,36 @@
   display: none;
   position: absolute;
   top: 100%; // Display below the header
-  right: 0; // Align to the right
+  right: calc((100% - var(--content-width)) / 2); // Align to the right
   background-color: var(--background-color);
   border-width: $thin-border;
-  border-top-width: 0;
-  border-right-width: 0;
   border-color: var(--primary-color);
   border-style: solid;
   padding: $half-margin;
   border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
 }
 
 .menu-toggle:checked ~ .menu-body {
   display: block;
 }
 
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .menu-item {
   display: flex;
+  flex: 1 1 auto;
   align-items: center;
   justify-content: flex-end; // Right-align content
   border: none;
   background: none;
-  width: 100%;
   border-radius: $border-radius;
-  padding: 0 0.3em;
+  padding: 0 $half-margin;  
   margin: 0.3em 0;
-  margin-right: $half-margin;
   border-width: $thin-border;
   border-color: var(--background-color);
   border-style: solid;

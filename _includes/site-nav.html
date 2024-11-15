@@ -11,14 +11,16 @@
     </label>
     {%- if page_paths -%}
     <div class="menu-body">
-      {%- for path in page_paths -%}
-        {%- assign my_page = site.pages | where: "path", path | first -%}
-        {%- if my_page.title and my_page.show_in_nav -%}
-        <div class="menu-item">
-          <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
-        </div>
-        {%- endif -%}
-      {%- endfor -%}
+      <div class="menu-container">
+        {%- for path in page_paths -%}
+          {%- assign my_page = site.pages | where: "path", path | first -%}
+          {%- if my_page.title and my_page.show_in_nav -%}
+          <div class="menu-item">
+            <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+          </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
     </div>
     {%- endif -%}
     </div>

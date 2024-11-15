@@ -17,19 +17,7 @@ html {
 }
 
 .wrapper {
-  max-width: $default-content-width;
-
-  @include respond-to(desktop) {
-    max-width: $desktop-content-width;
-  }
-
-  @include respond-to(tablet) {
-    max-width: $tablet-content-width;
-  }
-
-  @include respond-to(mobile) {
-    max-width: $mobile-content-width;
-  }
+  max-width: var(--content-width);
 }
 
 body {
