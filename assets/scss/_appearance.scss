@@ -9,6 +9,22 @@ $contrast-border: $thin-border;
 $full-invert: invert(100%) hue-rotate(180deg);
 
 :root {
+  --content-width: 80%;
+
+  @include respond-to(desktop) {
+    --content-width: 70%;
+  }
+
+  @include respond-to(tablet) {
+    --content-width: 80%;
+  }
+
+  @include respond-to(mobile) {
+    --content-width: 90%;
+  }
+}
+
+:root {
   --primary-color: #216778;
   --primary-accent-color: #e2eaeb;
   --secondary-color: #3a3a3a;
