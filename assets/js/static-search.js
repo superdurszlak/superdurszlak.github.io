@@ -1,6 +1,6 @@
 import { urlWithPageNum } from "./url-with-page-num.js";
 
-(function () {
+document.addEventListener("DOMContentLoaded", (_) => {
   function postList(results, store) {
     var listings = results
       .map((element) => {
@@ -142,4 +142,4 @@ import { urlWithPageNum } from "./url-with-page-num.js";
     const results = lunrIndex.search(searchTerm); // Get lunr to perform a search
     displaySearchResults(results, window.store);
   }
-})();
+});

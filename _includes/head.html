@@ -2,18 +2,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  {%- seo -%} 
-  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url}}"> 
-  <link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url}}"> 
-  <script defer data-domain="superdurszlak.dev" src="https://plausible.io/js/script.js"></script>
-  <script src="/assets/js/clean-mathjax-styles.js"></script>
-  <script src="/assets/js/lose-button-focus.js"></script>
+  <meta http-equiv="Cache-Control" content="public, max-age=3600" />
+  {%- seo -%}
+  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url}}" />
+  <link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url}}" />
+  <script
+    defer
+    data-domain="superdurszlak.dev"
+    src="https://plausible.io/js/script.js"
+  ></script>
+  <script src="/assets/js/clean-mathjax-styles.js" defer></script>
+  <script src="/assets/js/lose-button-focus.js" defer></script>
   <script src="/assets/js/site-appearance.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script>
-  <script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"
+    defer
+  ></script>
+  <script defer>
     // Show the search bar when JavaScript is enabled
-    document.addEventListener("DOMContentLoaded", function() {
-      document.querySelector('#search-bar').style.visibility = 'visible';
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelector("#search-bar").style.visibility = "visible";
     });
   </script>
   {%- feed_meta -%}
