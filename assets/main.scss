@@ -349,6 +349,7 @@ mjx-container {
 .post-meta {
   color: var(--secondary-color);
   font-style: oblique;
+  font-size: 0.8em;
 }
 
 li.post-listing:nth-child(2n - 1) {
@@ -545,6 +546,10 @@ li.post-listing:nth-child(2n) :is(.post-excerpt, .tags) span {
 img.icon {
   height: $icon-size;
   min-width: $icon-size;
+  border-radius: 0;
+}
+
+img.emoji {
   border-radius: 0;
 }
 
