@@ -1,8 +1,6 @@
 @use "./sizing" as *;
 @use "./media" as *;
 
-$large-font-multiplier: 1.4;
-
 $desktop-font-size: 4.9mm;
 $default-font-size: 4.3mm;
 $contrast-slight: 125%;
@@ -171,6 +169,11 @@ html[data-large-font="true"] {
   img.emoji {
     height: 1em;
     width: auto;
+  }
+  
+  .svg-icon {
+    transform-origin: top left;
+    transform: scale(1.4);
   }
 }
 
