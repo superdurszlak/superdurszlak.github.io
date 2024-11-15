@@ -167,6 +167,11 @@ html[data-large-font="true"] {
       user-select: none;
     }
   }
+
+  img.emoji {
+    height: 1em;
+    width: auto;
+  }
 }
 
 :is(#theme-menu, #a11y-menu) {

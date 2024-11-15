@@ -17,9 +17,13 @@ const themeKey = "theme";
 const contrastKey = "contrast";
 const fontSizeKey = "fontSize";
 
+// Initial pass before DOM is loaded - to ensure consistent theme from the beginning
 loadAppearanceFromLocalStorage();
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Secondary pass after DOM is loaded - to ensure attributes of toggles and checkboxes are properly set
+  loadAppearanceFromLocalStorage();
+
   enableThemeDropdown();
 
   enableA11yDropdown();
@@ -91,7 +95,7 @@ function getSelectedTheme() {
     '#theme-menu input[name="theme"]:checked'
   );
   const choice = selection ? selection.value : defaultChoice;
-  return getThemeFromChoice(choice);
+  return choice;
 }
 
 function getThemeFromChoice(choice) {
@@ -109,7 +113,7 @@ function isLargeFontEnabled() {
 }
 
 function setThemeChoice(choice) {
-  const toggle = document.querySelector(`#theme-menu input[name="${choice}"]`);
+  const toggle = document.querySelector(`#theme-menu input[value="${choice}"]`);
   if (toggle) {
     toggle.checked = true;
   }
@@ -149,8 +153,8 @@ function setThemes(themeSelection, contrastEnabled) {
 function setDiagramsSize(useLargeFont) {
   const ratio = useLargeFont ? 2.0 : 1.0;
   document.querySelectorAll(".plantuml").forEach((diagram) => {
-    diagram.style.width = `calc(${ratio} * ${diagram.width.baseVal.valueAsString})`;
-    diagram.style.height = `calc(${ratio} * ${diagram.height.baseVal.valueAsString})`;
+    diagram.style.width = `calc(${ratio} * ${diagram.width?.baseVal?.valueAsString || 0})`;
+    diagram.style.height = `calc(${ratio} * ${diagram.height?.baseVal?.valueAsString || 0})`;
   });
 }
 
