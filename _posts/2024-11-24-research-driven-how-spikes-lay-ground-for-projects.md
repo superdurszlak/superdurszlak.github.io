@@ -91,3 +91,17 @@ Though this is a highly opinionated statement, I firmly believe the responsibili
 - All people are biased one way or another - if one person takes full responsibility for project research, their biases may affect the project direction in profound ways, as the person's research might become targeted at confirming the existing biases.
 
 Having said that, it is up to the team to decide how the research work should be distributed, and whether it should be done in an organized or organic manner. The team may find it desirable to trust the most experienced team members with carrying out spikes, or use them as a growth opportunity for juniors. It is also a matter of the team's ways of working to determine if one person should pick up similar topics to become a team's [Subject Matter Expert](https://en.wikipedia.org/wiki/Subject-matter_expert), or related topics should be researched by multiple people to promote knowledge sharing.
+
+## Carrying out a spike
+
+Once the preparations for a spike are complete, and the spike task is picked up by somebody, the most critical part begins. There are multiple factors affecting the quality of the spike outcomes:
+- How reliable the author was in terms of researching the topic,
+- How well structured and approachable the spike output is,
+- How insightful the outcomes are,
+- Whether the author was aware of his biases and acknowledged them,
+- Whether the spike outputs are relevant to the spike task's scope,
+- Whether the conclusions take both advantages and disadvantages into consideration, or are framed to promote the author's opinions.
+
+Understandably, it is not always possible to not be opinionated beforehand about the subject, and there is always more that could be done about the research. However, it is vital to stay as neutral as feasible and let the findings drive the outcomes and conclusions, not vice versa.
+
+### 
