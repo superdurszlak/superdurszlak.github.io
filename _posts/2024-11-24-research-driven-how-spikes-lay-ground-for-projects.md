@@ -81,3 +81,13 @@ In my experience, when one's starting point is in the _unknown unknowns_ quadran
 - The scope of such spike may be overwhelming for a person responsible for it.
 
 Therefore, it may be a good idea to begin with a spike to provide broad research of the topic and available options, do a rough comparison, and pick the most promising candidate(s) for further research. Then, one or more spikes are needed to evaluate in depth the options picked in the first stage. The work can be split between multiple team members to improve knowledge sharing, promote inclusion and avoid overwhelming one person with all of the burden.
+
+### Who should be responsible?
+
+Though this is a highly opinionated statement, I firmly believe the responsibility for carrying out spikes should be shared across the team. There are multiple reasons for this:
+- Being burdened with all of the project research can be exhausting. As a person who often contributed 50% or more of project-related spikes and documentation, I often felt overwhelmed after long streaks of research despite enjoying such activities.
+- If only one, or very few persons are responsible for project research, it can lead to alignment issues within the team and ivory tower effects.
+- It can lead to siloing, where one person builds up internal knowledge and assumptions they take for granted - and over time the documentation might miss important bits of information.
+- All people are biased one way or another - if one person takes full responsibility for project research, their biases may affect the project direction in profound ways, as the person's research might become targeted at confirming the existing biases.
+
+Having said that, it is up to the team to decide how the research work should be distributed, and whether it should be done in an organized or organic manner. The team may find it desirable to trust the most experienced team members with carrying out spikes, or use them as a growth opportunity for juniors. It is also a matter of the team's ways of working to determine if one person should pick up similar topics to become a team's [Subject Matter Expert](https://en.wikipedia.org/wiki/Subject-matter_expert), or related topics should be researched by multiple people to promote knowledge sharing.
