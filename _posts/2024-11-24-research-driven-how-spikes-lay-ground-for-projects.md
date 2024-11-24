@@ -98,6 +98,7 @@ Once the preparations for a spike are complete, and the spike task is picked up 
 - How well structured and approachable the spike output is,
 - How reliable the author was in terms of researching the topic,
 - How insightful the outcomes are,
+- Whether alternatives were taken into consideration,
 - Whether the spike outputs are relevant to the spike task's scope,
 - Whether the author was aware of his biases and acknowledged them,
 - Whether the conclusions take both advantages and disadvantages into consideration, or are framed to promote the author's opinions.
@@ -161,9 +162,53 @@ Finally, the _references_ included in the introduction part should point to reso
 
 #### Research section(s)
 
+These is the part where the analytical aspect of the spike is most exposed. 
+
+In case of a Proof of Concept, the research section would be committed to describing:
+- How the PoC was set up, 
+- Under what circumstances it was evaluated
+- What outcomes were observed, 
+- How do the outcomes compare to the baseline, if available.
+
+In case of comparing various available options, there would be multiple sections or sub-sections dedicated to each option. In this case, the sections should include:
+- References to internal and/or external documentation - ideally as close to original sources as possible,
+- Brief summary of each option, describing its background and general information about it,
+- Examples of how it can be applied - may include code snippets, links to external source code such as sample projects etc.
+
+Moreover, regardless of the spike type, the research should include the following information:
+- Sub-sections dedicated to how the option or PoC aligns with respective spike objectives and constraints,
+- Advantages of applying the PoC or given option,
+- Disadvantages of applying the PoC or given option.
+
+The advantages and disadvantages can either be summarized in a separate sub-section, or broken up and outlined in relevant sub-sections. It is vital to consider _both_ the advantages and disadvantages of each solution - the Software Engineering industry is full of trade-offs, and the picture is almost never black-and-white. A reliable researcher should transparently and thoroughly document both pros and cons of each solution, regardless of their personal preferences and gut feelings. Otherwise, the spike outcomes could be considerably biased, and the document would raise red flags for readers and reviewers - and rightly so. 
+
+#### Conclusions
+
+This is the closing section of a spike document, that should summarize the findings and provide guidance on the next steps.
+
+In case of spikes exploring multiple options, it is useful to include a _comparison_ sub-section that would briefly compare the available options in each respective aspect, as well as overall. Such an information-dense summary can then be easily referenced without losing out too many details. While the format of such comparison is up to the team and/or author to decide, I find the tabular format to be particularly useful, for instance:
+
+> Memory-related crash resolution alternatives:
+>
+> | Aspect / solution     | Carry out GC fine-tuning                 | Find and fix memory leaks         | Increase memory limits                             |
+> |-----------------------|------------------------------------------|-----------------------------------|----------------------------------------------------|
+> | Time to production    | \\+ should be doable within 1-2 weeks    | \\- likely time-consuming         | \\+ can be done in less than a day                 \
+> |                       | \\- may run into unpredictable problems  | \\- difficult to estimate         | \\+ maintenance chore, can bypass release schedule |
+> | Root cause resolution | \\+ improves memory management           | \\+ resolves suspected root cause | \\- does not solve the root cause                  \
+> |                       | \\- does not solve suspected memory leak |                                   | \\- temporary measure only                         |
+
+The next useful sub-section is a _summary_, briefly describing the author's conclusions considering the research findings. An example of such summary could be as follows:
+
+> The research has shown the increase in memory utilization is likely caused by one or more memory leaks introduced in the application, which must have been introduced shortly before May. A long-term solution would be to find and resolve such memory leaks, so that the memory utilization does not increase indefinitely. However, this activity may be time-consuming, therefore as a short-term solution it is worth considering to increase memory limits and/or fine-tune application's garbage collector.
+
+If the spike is meant to be an input for decision-making, it is worth providing _recommendations_ for the person or team responsible for making the decision, for instance:
+
+> Given the time constraints and possible gains, it 
+
 #### Spike document structure example
 
 This Markdown snippet roughly reflects the actual structure of documents I typically write down, although I find Confluence to be a more common option:
+
 ```markdown
 # Spike title
 
@@ -228,7 +273,9 @@ Summarize the available options, their pros and cons in various aspects, e.g. in
 
 ## Summary
 
-Summarize the findings, such as whether the PoC was successful or which options seem to be promising, and which seem to be dead ends.
+Summarize the findings, such as:
+* whether the PoC was successful 
+* which options seem to be promising, and which seem to be dead ends.
 
 ## Recommendations
 
