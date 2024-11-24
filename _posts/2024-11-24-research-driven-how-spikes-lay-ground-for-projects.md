@@ -95,13 +95,72 @@ Having said that, it is up to the team to decide how the research work should be
 ## Carrying out a spike
 
 Once the preparations for a spike are complete, and the spike task is picked up by somebody, the most critical part begins. There are multiple factors affecting the quality of the spike outcomes:
-- How reliable the author was in terms of researching the topic,
 - How well structured and approachable the spike output is,
+- How reliable the author was in terms of researching the topic,
 - How insightful the outcomes are,
-- Whether the author was aware of his biases and acknowledged them,
 - Whether the spike outputs are relevant to the spike task's scope,
+- Whether the author was aware of his biases and acknowledged them,
 - Whether the conclusions take both advantages and disadvantages into consideration, or are framed to promote the author's opinions.
 
 Understandably, it is not always possible to not be opinionated beforehand about the subject, and there is always more that could be done about the research. However, it is vital to stay as neutral as feasible and let the findings drive the outcomes and conclusions, not vice versa.
 
-### 
+### How to structure spike outcomes?
+
+It is quite customary to write down a document covering the spike's findings, regardless of whether the spike was focused on exploring external resources, or carrying out a Proof of Concept. An approachable document structure improves readability, clarity and overall quality of the outcomes, and help maintain the flow of the document.
+
+Over the years of carrying out spikes for various project, I have worked out a spike document structure that works well in this regard and often gets replicated as I introduce it:
+1. Table of Contents,
+2. Introduction, including:
+  - Problem statement,
+  - Objectives,
+  - Constraints,
+  - References to general internal and external literature.
+3. Research section:
+  - One sub-section per considered option or scenario,
+  - References to specific, detailed internal and external literature,
+  - References to PoC sources (if present),
+  - Written description of the findings,
+  - Diagrams and/or images (if relevant).
+4. Conclusions:
+  - Comparison of available options or considered scenarios (if present),
+  - Summary of the findings,
+  - Recommendations for decision-making (if needed),
+  - A list of action items (if relevant).
+
+While not fully exhaustive, this structure works reasonably well and can be applied quite flexibly to various spike subtypes. It's structure helps navigate through the document, and omit parts the reader is not interested in - not all readers have time or will to read the entire document, and thus may choose to skip the details. For a more thorough reader or reviewer, references to documentation can be helpful for a deep dive into the topic, while the document itself only summarizes each aspect.
+
+#### Introduction
+
+Introduction outlines 
+
+#### Spike document structure example
+
+This Markdown snippet roughly reflects the actual structure of documents I typically write down, although I find Confluence to be a more common option:
+```markdown
+# Spike title
+
+## ToC
+
+* Auto-generated ToC items
+* ...
+
+## Problem statement
+
+Describe what was the original problem that led to this spike
+
+## Objectives
+
+Describe what goals need to be achieved, how the spike needs to contribute to its resolution, and what gaps should it fill in - such as input for decision-making or PoC.
+
+## Constraints
+
+Describe the limitations that had to be considered in the spike., including:
+- Company policies at the time,
+- Technical decisions already made,
+- Project constraints such as limited headcount,
+- Time constraints, such as a requirement that a resolution must be implemented within several weeks,
+- Budget constraints, such as maximum licensing costs (if applicable).
+
+
+
+```
