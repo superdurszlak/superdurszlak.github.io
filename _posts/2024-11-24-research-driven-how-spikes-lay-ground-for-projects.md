@@ -30,3 +30,36 @@ At a basic level, a spike is an activity within a software project aimed at prov
 - Oftentimes, a spike is expected to include a Proof of Concept or at least documented examples of the solution being applied.
 - The outputs of a spike are then used as and input for decision-making (see Architecture Decision Records) and/or to define the scope and/or constraints of work items that follow.
 
+## Preparing for a spike
+
+To make the best out of a spike, it is vital to be well prepared before carrying it out. One cannot just _do a spike_ without defining what is the goal of the spike, what needs to be done, and in what time frame.
+
+### Clarify expectations
+
+A well defined spike task includes the following elements:
+- References to relevant other spikes, ADRs and documentation, to set the context for research,
+- A problem statement for the spike to address,
+- Expected scope, that is how broadly / deeply the research should go,
+- Project constraints and evaluation criteria that need to be considered,
+- Time box for this particular spike, typically expressed in days,
+- Expected outputs, such as a piece of documentation, PoC, creation of action items or follow-up spikes, recommendations for the team etc.
+
+With such inputs, a spike can be carried out efficiently, and bring tangible results that the team can action on later, or base the decisions on the research done.
+
+### Establish the knowns and unknowns
+
+Let us reference the famous [Rumsfeld Matrix](https://www.theuncertaintyproject.org/tools/rumsfeld-matrix) in the context of spikes and research:
+
+|  Awareness  | Knowledge                              ||
+|-------------|--------------------|--------------------|
+|             | **Known**          | **Unknown**        |
+| **Known**   | **Known Knowns**   | **Known Unknowns** \
+|             |                    |                    \
+|             | The facts and assumptions we are aware of. | The gaps we are aware of but don’t fully understand. |
+| **Unknown** | **Unknown Knowns** | **Unknown Unknowns** \
+|             |                    |                      \
+|             | Things we don’t realize we know but could leverage. | The true surprises we don’t know exist. |
+
+Most of the time, the goal of the spike is to improve the team's knowledge and/or awareness, especially by improving the knowledge gaps:
+- Improving awareness of _unknown unknowns_ so that they become _known unknowns_ - if the team has poor awareness with regard to the topic, it is usually more efficient to start with a spike to establish a basic understanding of the topic, establish what are the options and industry standards with regard to the subject.
+- Gathering knowledge and/or experience to turn _unknown knowns_ into _known knowns_ - once the team has built an awareness in the subject, and acknowledges its gaps, there is a room for a spike to explore a topic in-depth, gather available examples and/or prepare a PoC on how the subject could be addressed.
