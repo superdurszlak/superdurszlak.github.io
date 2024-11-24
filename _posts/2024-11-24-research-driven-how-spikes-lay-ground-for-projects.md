@@ -115,7 +115,7 @@ Over the years of carrying out spikes for various project, I have worked out a s
   - Objectives,
   - Constraints,
   - References to general internal and external literature.
-3. Research section:
+3. Research section(s):
   - One sub-section per considered option or scenario,
   - References to specific, detailed internal and external literature,
   - References to PoC sources (if present),
@@ -159,16 +159,18 @@ Finally, the _references_ included in the introduction part should point to reso
 - A link to the work item in the tracker that created this spike,
 - Additional relevant links.
 
+#### Research section(s)
+
 #### Spike document structure example
 
 This Markdown snippet roughly reflects the actual structure of documents I typically write down, although I find Confluence to be a more common option:
 ```markdown
 # Spike title
 
-## ToC
-
 * Auto-generated ToC items
 * ...
+
+# Introduction
 
 ## Problem statement
 
@@ -186,6 +188,54 @@ Describe the limitations that had to be considered in the spike.
 
 Links to relevant resources.
 
+# Research
 
+## Option A (B, C ...)
+
+Include the following
+* Links to resources relevant to the option
+* Summary of the option
+
+### Topic-specific subsection(s)
+
+Describe how the option fits into the considered aspect in each sub-section.
+
+### Advantages
+
+Describe what are the advantages of the option.
+
+### Disadvantages
+
+Describe what are the disadvantages of the option.
+
+### Examples / outcomes
+
+If possible, provide examples of how the option can be applied, or if there is a PoC, the outcomes of it.
+
+# Conclusions
+
+## Comparison
+
+Summarize the available options, their pros and cons in various aspects, e.g. in a table:
+
+| Aspect   | Option A | Option B | ...
+| -------- | -------- | -------- | ...
+| Factor X | + pros   | + pros   | ...
+|          | - cons   | - cons   | ...
+| Factor Y | + pros   | + pros   | ...
+|          | - cons   | - cons   | ...
+|   ...    |   ...    |   ...    | ...
+
+## Summary
+
+Summarize the findings, such as whether the PoC was successful or which options seem to be promising, and which seem to be dead ends.
+
+## Recommendations
+
+If needed, provide recommendations for the decision makers based on the findings.
+
+## Action items
+
+If needed, provide action items that should be taken as a follow up of the spike.
 
 ```
