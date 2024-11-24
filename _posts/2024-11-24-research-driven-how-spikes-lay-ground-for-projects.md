@@ -74,3 +74,10 @@ Most of the time, the goal of the spike is to improve the team's knowledge and/o
 2. Gathering knowledge and/or experience to turn _unknown knowns_ into _known knowns_ - once the team has built an awareness in the subject, and acknowledges its gaps, there is a room for a spike to explore a topic in-depth, gather available examples and/or prepare a PoC on how the subject could be addressed.
 
 Generally speaking, I find spikes to be a good fit to address these two areas. With regard to _unknown knowns_, it is better handled with chores and housekeeping than with spikes, as it might indicate excessive tribal knowledge in the team and missing, outdated or poorly accessible project documentation. Addressing such issues with spikes may feel unwieldy, and may even make the situation worse if the results of the spike would suffer from accessibility issues.
+
+In my experience, when one's starting point is in the _unknown unknowns_ quadrant, it is more practical to split the spike into stages, rather than expect to get to _known knows_ state with a single spike. Otherwise, the results may be disappointing:
+- The spike may take unacceptable time to complete if the research is to be thorough.
+- With time constraints, the research would be too narrow-scoped to gain a good understanding of the subject.
+- The scope of such spike may be overwhelming for a person responsible for it.
+
+Therefore, it may be a good idea to begin with a spike to provide broad research of the topic and available options, do a rough comparison, and pick the most promising candidate(s) for further research. Then, one or more spikes are needed to evaluate in depth the options picked in the first stage. The work can be split between multiple team members to improve knowledge sharing, promote inclusion and avoid overwhelming one person with all of the burden.
