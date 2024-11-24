@@ -130,7 +130,7 @@ Over the years of carrying out spikes for various project, I have worked out a s
 
 While not fully exhaustive, this structure works reasonably well and can be applied quite flexibly to various spike subtypes. It's structure helps navigate through the document, and omit parts the reader is not interested in - not all readers have time or will to read the entire document, and thus may choose to skip the details. For a more thorough reader or reviewer, references to documentation can be helpful for a deep dive into the topic, while the document itself only summarizes each aspect.
 
-#### Introduction
+### Introduction
 
 Introduction sets the context for the entire spike document, providing the readers with the driving factors of a spike.
 
@@ -160,7 +160,7 @@ Finally, the _references_ included in the introduction part should point to reso
 - A link to the work item in the tracker that created this spike,
 - Additional relevant links.
 
-#### Research section(s)
+### Research section(s)
 
 These is the part where the analytical aspect of the spike is most exposed. 
 
@@ -182,7 +182,7 @@ Moreover, regardless of the spike type, the research should include the followin
 
 The advantages and disadvantages can either be summarized in a separate sub-section, or broken up and outlined in relevant sub-sections. It is vital to consider _both_ the advantages and disadvantages of each solution - the Software Engineering industry is full of trade-offs, and the picture is almost never black-and-white. A reliable researcher should transparently and thoroughly document both pros and cons of each solution, regardless of their personal preferences and gut feelings. Otherwise, the spike outcomes could be considerably biased, and the document would raise red flags for readers and reviewers - and rightly so. 
 
-#### Conclusions
+### Conclusions
 
 This is the closing section of a spike document, that should summarize the findings and provide guidance on the next steps.
 
@@ -199,7 +199,7 @@ In case of spikes exploring multiple options, it is useful to include a _compari
 
 The next useful sub-section is a _summary_, briefly describing the author's conclusions considering the research findings. An example of such summary could be as follows:
 
-> The research has shown the increase in memory utilization is likely caused by one or more memory leaks introduced in the application, which must have been introduced shortly before May. A long-term solution would be to find and resolve such memory leaks, so that the memory utilization does not increase indefinitely. However, this activity may be time-consuming, therefore as a short-term solution it is worth considering to increase memory limits and/or fine-tune application's garbage collector.
+> The research has shown the increase in memory utilization is likely caused by one or more memory leaks in the application, which must have been introduced shortly before May. A long-term solution would be to find and resolve such memory leaks, so that the memory utilization does not increase indefinitely. However, this activity may be time-consuming, therefore as a short-term solution it is worth considering to increase memory limits and/or fine-tune application's garbage collector.
 
 If the spike is meant to be an input for decision-making, it is worth providing _recommendations_ for the person or team responsible for making the decision, for instance:
 
@@ -213,7 +213,7 @@ If the spike is expected to be followed with actions instead of input for decisi
 
 Once the spike is concluded, these action items would often be used to create follow-up work items in a tracker, such as [Jira](https://marketplace.atlassian.com/product/jira) or [Asana](https://asana.com).
 
-#### Spike document structure example
+### Spike document structure example
 
 This Markdown snippet roughly reflects the actual structure of documents I typically write down, although I find Confluence to be a more common option:
 
@@ -294,3 +294,37 @@ If needed, provide recommendations for the decision makers based on the findings
 If needed, provide action items that should be taken as a follow up of the spike.
 
 ```
+
+## What are the next steps?
+
+When the active part of the spike is concluded, it is time for a spike review.
+
+Similarly to code contributions and ADRs, spike outputs should be reviewed by the team to ensure consistent quality. Additionally, a review is a great opportunity for the team to get acknowledged with the findings. While knowledge bases rarely provide robust tooling for reviews, the generally available features should suffice, for instance:
+- Inline and document comments in Confluence,
+- Code review tools in case the document is checked into a git repository.
+
+Lastly, once the spike is reviewed and closed, the spike results should actually be used by the team and decision-makers, for the commitment to be useful in the first place.
+
+### Spike review
+
+The primary goal of the review is to make sure the output meets the desired standards. When reviewing a spike document, or asking for a spike review, I generally expect following aspects to be considered and reviewed:
+- Structure and stylistic correctness - while a spike document is not a work of art or a piece of poetry, it needs to be reasonably well written and structured for good readability, 
+- Thoroughness of research - to ensure there are as few gaps and blind spots as possible,
+- Relevancy of the PoC or research - it should be verified how well the analysis covers the objectives and constraints,
+- Objectivity - the reviewers need to look out for biases, and call them out if they skew the outputs in a significant manner,
+- Factual correctness - as mistakes, misunderstandings and human errors happen, the reviewers should proofread the outputs to look out for inconsistencies and factual errors,
+- Cross-references - the document collecting spike outputs should cross-reference source documents and other relevant references, otherwise the context is partially lost, and the contents cannot be verified.
+
+### Taking action
+
+The value of a spike is in it's outputs usefulness for future work and decision-making. If a spike gets carried out, but then its outputs are never read or used later - it is essentially a wasted effort. Moreover, dismissing the spike outputs does not help foster a meritocratic and inclusive culture. After all, if the team's inputs are not even considered when making a decision, it says a lot about how the team's contributions are perceived and respected.
+
+There are a few major ways the outputs of a spike can, and should be utilized:
+- Creating follow-up action items, such as new development tasks, and more spikes if needed,
+- Utilizing the findings as an input for decisions to be made by the team or decision-makers.
+
+In case of follow-up action items, the outputs of the spike that created said action items should be linked to ensure the context is easily accessible. Likewise, if decisions are documented in an Architecture Decision Record, the spike that provided input for the decision should be cross-referenced for clarity and transparency.
+
+## Summary
+
+Spikes are a great utility to conduct research that helps drive projects to better results. If handled well by the team, they foster a more inclusive, meritocratic culture, while also improving knowledge sharing and team's alignment with decisions made. By adopting spikes and utilizing their outputs in decision-making processes, teams are able to make better informed decisions.
