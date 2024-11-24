@@ -21,3 +21,12 @@ In some corporate cultures, technical decisions are made based on authority - th
 - Such arrangements create little room for innovation, inclusion and meritocracy - after all, a lower-ranking team member with relevant skills or experience probably would not get a chance to participate.
 
 Therefore, I find it far more productive, healthy and inclusive to drive project-related decisions with thorough research, which in software engineering practice is often framed as a concept of [Spike](https://en.wikipedia.org/wiki/Spike_(software_development)). Such research helps make better-grounded decisions, while also turning decision-making into a more impersonal, team activity. In my experience, it helps with making objectively better decisions while also improving team alignment, since team members can feel included and can trace back the rationale of project decisions, especially if followed by an [Architecture Decision Record](https://adr.github.io/) referencing relevant spikes.
+
+## What is a spike, then?
+
+At a basic level, a spike is an activity within a software project aimed at providing input to action on later, rather than deliverables. While the details, definitions and ceremonies around spikes differ from methodology to methodology and from organization to organization, they usually aim at researching a topic, and delivering a document and/or PoC covering the research done. Following aspects are fairly typical for a spike regardless of particular software development methodology:
+- Spikes tend to be time-boxed, in order to avoid getting stuck and researching indefinitely. Usually the time constraint spans from one day to several days, unless the problem at hand is critical and requires researching until resolution is found.
+- In most cases, it is customary to put together a document - for instance, a Confluence or Markdown page - describing the scope and findings of a spike for future reference.
+- Oftentimes, a spike is expected to include a Proof of Concept or at least documented examples of the solution being applied.
+- The outputs of a spike are then used as and input for decision-making (see Architecture Decision Records) and/or to define the scope and/or constraints of work items that follow.
+
