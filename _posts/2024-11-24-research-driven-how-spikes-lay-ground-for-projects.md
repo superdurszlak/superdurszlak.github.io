@@ -14,8 +14,8 @@ tags:
 
 All but the most trivial software projects require at least some research to be done, and technical decisions to be made throughout the project's lifecycle - especially at its onset.
 
-In some corporate cultures, technical decisions are made based on authority - the decision was made by _the big man_, such as a System Architect or a certain Manager, and thus is not to be challenged or asked about. Such decisions are frequently made in the privacy of an ivory tower, and the teams responsible for the projects rarely have a chance to learn about the _why_ part - let alone being able to speak up and bring their perspective to the table. Such authority-based arrangements often suffer from various issues:
-- The decision-maker is often biased with his personal opinions, habits and prejudice, and the process gives little room for feedback, if any.
+In some corporate cultures, technical decisions are made based on authority - the decision was made by _"the big man"_, such as a System Architect or a certain Manager, and thus is not to be challenged or asked about. Such decisions are frequently made in the privacy of an ivory tower, and the teams responsible for the projects rarely have a chance to learn about the _why_ part - let alone being able to speak up and bring their perspective to the table. Such authority-based arrangements often suffer from various issues:
+- The decision-makers are often biased by their personal opinions, habits and prejudice, and the process gives little room for feedback, if any.
 - The validity of a decision becomes tightly coupled with the decision-maker as a person, meaning that questioning a decision often hurts decision-makers ego, triggering unhealthy response to feedback.
 - Since the team has not had a chance to participate in decision-making and give their input - at least openly and formally - it is quite natural for the team to be poorly aligned with the decision.
 - Such arrangements create little room for innovation, inclusion and meritocracy - after all, a lower-ranking team member with relevant skills or experience probably would not get a chance to participate.
@@ -36,9 +36,9 @@ To make the best out of a spike, it is vital to be well prepared before carrying
 
 ### Knowledge base
 
-Most of the organizations have at least ona destination for documentation and other reference resources. Some may have multiple - which may lead to confusion if it is not clear which should be used as the team's knowledge base. This may lead to undesirable consequences:
+Most organizations have at least one destination for documentation and other reference resources. Some may have multiple - which may lead to confusion if it is not clear which should be used as the team's knowledge base. This may lead to undesirable consequences:
 - Lost knowledge, as the team members struggle to find relevant documents,
-- Overall confusion, as whenever a document is needed one needs to consider and/or consult which knowledge base should be referenced,
+- Overall confusion, as whenever a document is needed one needs to consider and/or consult which knowledge base to reference,
 - Documents on related topic can be created independently, but never cross-referencing each other, leading to more confusion as future work could be based on either without taking the full context into consideration.
 
 In general, it is typically practical for a team to keep a single knowledge base to serve as a destination for internal project documentation. This might mean a dedicated documentation repository, Confluence Space, a dedicated directory tree within a broader Confluence Space etc. In any case, the next step to improve structure of such knowledge base is to create a dedicated destination for spike results - oftentimes another sub-directory, nested in project knowledge base. Furthermore, to improve accessibility of such knowledge base - and spike repository - is to cross-reference it frequently, for instance to provide context for work items. This way, team members can more easily access pieces of documentation relevant to the task at hand.
@@ -85,7 +85,7 @@ Therefore, it may be a good idea to begin with a spike to provide broad research
 ### Who should be responsible?
 
 Though this is a highly opinionated statement, I firmly believe the responsibility for carrying out spikes should be shared across the team. There are multiple reasons for this:
-- Being burdened with all of the project research can be exhausting. As a person who often contributed 50% or more of project-related spikes and documentation, I often felt overwhelmed after long streaks of research despite enjoying such activities.
+- Being burdened with all of the project research can be exhausting. Having contributed over 50% of spikes and documentation in some projects, I often felt overwhelmed.
 - If only one, or very few persons are responsible for project research, it can lead to alignment issues within the team and ivory tower effects.
 - It can lead to siloing, where one person builds up internal knowledge and assumptions they take for granted - and over time the documentation might miss important bits of information.
 - All people are biased one way or another - if one person takes full responsibility for project research, their biases may affect the project direction in profound ways, as the person's research might become targeted at confirming the existing biases.
@@ -100,7 +100,7 @@ Once the preparations for a spike are complete, and the spike task is picked up 
 - How insightful the outcomes are,
 - Whether alternatives were taken into consideration,
 - Whether the spike outputs are relevant to the spike task's scope,
-- Whether the author was aware of his biases and acknowledged them,
+- Whether the author was aware of their biases and acknowledged them,
 - Whether the conclusions take both advantages and disadvantages into consideration, or are framed to promote the author's opinions.
 
 Understandably, it is not always possible to not be opinionated beforehand about the subject, and there is always more that could be done about the research. However, it is vital to stay as neutral as feasible and let the findings drive the outcomes and conclusions, not vice versa.
@@ -136,9 +136,9 @@ Introduction sets the context for the entire spike document, providing the reade
 
 The _problem statement_ states what issue, challenge, requirement or incident led to this spike being carried out. It can describe the observations made beforehand that led to the conclusion a spike is needed. An example of a problem statement could be as follows:
 
-> According to our metrics reports **\[dashboard link\]**, the application resource utilization has been increasing over the last 3 months, leading to more frequent crashes caused by exhausted memory. Increased frequency of crashes led to reduced availability of the application - from 99.97% in May to 99.62% in August, getting close to the agreed SLO of 99.5% weekly availability.
+> According to our metrics reports, the application resource utilization has been increasing over the last 3 months, leading to more frequent crashes caused by exhausted memory. Increased frequency of crashes led to reduced availability of the application - from 99.97% in May to 99.62% in August, getting close to the agreed SLO of 99.5% weekly availability.
 
-The _objectives_ describe what goals need to be achieved as a result of this spike, wWhat are the expected outputs, and what knowledge gaps should be filled. The objectives of a spike could be defined as follows:
+The _objectives_ describe what goals need to be achieved as a result of this spike, what are the expected outputs, and what knowledge gaps should be filled. The objectives of a spike could be defined as follows:
 
 > As a goal of this spike, we need to identify the root causes of increased memory utilization and come up with resolution to them, and/or with measures to prevent application availability from degrading any further.
 
@@ -277,7 +277,7 @@ Summarize the available options, their pros and cons in various aspects, e.g. in
 |          | - cons   | - cons   | ...
 | Factor Y | + pros   | + pros   | ...
 |          | - cons   | - cons   | ...
-|   ...    |   ...    |   ...    | ...
+| ...      | ...      | ...      | ...
 
 ## Summary
 
@@ -311,13 +311,13 @@ The primary goal of the review is to make sure the output meets the desired stan
 - Structure and stylistic correctness - while a spike document is not a work of art or a piece of poetry, it needs to be reasonably well written and structured for good readability, 
 - Thoroughness of research - to ensure there are as few gaps and blind spots as possible,
 - Relevancy of the PoC or research - it should be verified how well the analysis covers the objectives and constraints,
-- Objectivity - the reviewers need to look out for biases, and call them out if they skew the outputs in a significant manner,
+- Objectivity - the reviewers should identify biases, and address them if they skew the outputs in a significant manner,
 - Factual correctness - as mistakes, misunderstandings and human errors happen, the reviewers should proofread the outputs to look out for inconsistencies and factual errors,
 - Cross-references - the document collecting spike outputs should cross-reference source documents and other relevant references, otherwise the context is partially lost, and the contents cannot be verified.
 
 ### Taking action
 
-The value of a spike is in it's outputs usefulness for future work and decision-making. If a spike gets carried out, but then its outputs are never read or used later - it is essentially a wasted effort. Moreover, dismissing the spike outputs does not help foster a meritocratic and inclusive culture. After all, if the team's inputs are not even considered when making a decision, it says a lot about how the team's contributions are perceived and respected.
+The value of a spike is in its outputs usefulness for future work and decision-making. If a spike gets carried out, but then its outputs are never read or used later - it is essentially a wasted effort. Moreover, dismissing the spike outputs does not help foster a meritocratic and inclusive culture. After all, if the team's inputs are not even considered when making a decision, it says a lot about how the team's contributions are perceived and respected.
 
 There are a few major ways the outputs of a spike can, and should be utilized:
 - Creating follow-up action items, such as new development tasks, and more spikes if needed,
