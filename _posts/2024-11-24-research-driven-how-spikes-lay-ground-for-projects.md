@@ -26,7 +26,7 @@ Therefore, I find it far more productive, healthy and inclusive to drive project
 
 At a basic level, a spike is an activity within a software project aimed at providing input to action on later, rather than deliverables. While the details, definitions and ceremonies around spikes differ from methodology to methodology and from organization to organization, they usually aim at researching a topic, and delivering a document and/or PoC covering the research done. Following aspects are fairly typical for a spike regardless of particular software development methodology:
 - Spikes tend to be time-boxed, in order to avoid getting stuck and researching indefinitely. Usually the time constraint spans from one day to several days, unless the problem at hand is critical and requires researching until resolution is found.
-- In most cases, it is customary to put together a document - for instance, a Confluence or Markdown page - describing the scope and findings of a spike for future reference.
+- In most cases, it is customary to put together a document - for instance, a [Confluence](https://www.atlassian.com/software/confluence) or [GitHub Docs](https://docs.github.com/en/get-started/writing-on-github) page - describing the scope and findings of a spike for future reference.
 - Oftentimes, a spike is expected to include a Proof of Concept or at least documented examples of the solution being applied.
 - The outputs of a spike are then used as and input for decision-making (see Architecture Decision Records) and/or to define the scope and/or constraints of work items that follow.
 
@@ -203,7 +203,15 @@ The next useful sub-section is a _summary_, briefly describing the author's conc
 
 If the spike is meant to be an input for decision-making, it is worth providing _recommendations_ for the person or team responsible for making the decision, for instance:
 
-> Given the time constraints and possible gains, it 
+> Given the time constraints and possible gains, it is recommended to start with increasing memory limits by 10-25%, followed by GC fine-tuning. These efforts should secure the application's SLOs short-term. Meantime, we should investigate and resolve suspected memory limits as a long-term solution.
+
+If the spike is expected to be followed with actions instead of input for decisions, such _action items_ should be listed, for instance:
+
+> - [x] Increase memory limits by at least 10%;
+> - [ ] Create a task to fine-tune GC to work around memory leak;
+> - [ ] Create a task to find and fix memory leaks in the application;
+
+Once the spike is concluded, these action items would often be used to create follow-up work items in a tracker, such as [Jira](https://marketplace.atlassian.com/product/jira) or [Asana](https://asana.com).
 
 #### Spike document structure example
 
