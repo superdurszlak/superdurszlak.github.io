@@ -131,7 +131,33 @@ While not fully exhaustive, this structure works reasonably well and can be appl
 
 #### Introduction
 
-Introduction outlines 
+Introduction sets the context for the entire spike document, providing the readers with the driving factors of a spike.
+
+The _problem statement_ states what issue, challenge, requirement or incident led to this spike being carried out. It can describe the observations made beforehand that led to the conclusion a spike is needed. An example of a problem statement could be as follows:
+
+> According to our metrics reports **\[dashboard link\]**, the application resource utilization has been increasing over the last 3 months, leading to more frequent crashes caused by exhausted memory. Increased frequency of crashes led to reduced availability of the application - from 99.97% in May to 99.62% in August, getting close to the agreed SLO of 99.5% weekly availability.
+
+The _objectives_ describe what goals need to be achieved as a result of this spike, wWhat are the expected outputs, and what knowledge gaps should be filled. The objectives of a spike could be defined as follows:
+
+> As a goal of this spike, we need to identify the root causes of increased memory utilization and come up with resolution to them, and/or with measures to prevent application availability from degrading any further.
+
+The constraints focus what limitations does the team need to take into consideration. The spike constraints may include:
+- Company policies at the time,
+- Technical decisions already made,
+- Project constraints such as limited headcount,
+- Time constraints, such as a requirement that a resolution must be implemented within several weeks,
+- Budget constraints, such as maximum licensing costs (if applicable).
+
+In our example, the constraints could be described as:
+
+> We estimate that at the current pace, the SLO would be breached in early October. For this reason, the resolution must be applicable within this time frame. Given the applications release schedule, the change must be ready for release before the end of September release cutoff. If root cause resolution cannot be delivered in this time frame, we need to come up with temporary measures first.
+
+Finally, the _references_ included in the introduction part should point to resources relevant to the spike as whole, rather than specific solutions considered. Examples include:
+- Links to policies,
+- Cross-references to related spikes and ADRs,
+- Links to relevant documentation,
+- A link to the work item in the tracker that created this spike,
+- Additional relevant links.
 
 #### Spike document structure example
 
@@ -150,16 +176,15 @@ Describe what was the original problem that led to this spike
 
 ## Objectives
 
-Describe what goals need to be achieved, how the spike needs to contribute to its resolution, and what gaps should it fill in - such as input for decision-making or PoC.
+Describe what goals need to be achieved.
 
 ## Constraints
 
-Describe the limitations that had to be considered in the spike., including:
-- Company policies at the time,
-- Technical decisions already made,
-- Project constraints such as limited headcount,
-- Time constraints, such as a requirement that a resolution must be implemented within several weeks,
-- Budget constraints, such as maximum licensing costs (if applicable).
+Describe the limitations that had to be considered in the spike.
+
+## References
+
+Links to relevant resources.
 
 
 
