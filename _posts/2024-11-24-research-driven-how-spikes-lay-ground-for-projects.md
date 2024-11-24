@@ -34,6 +34,15 @@ At a basic level, a spike is an activity within a software project aimed at prov
 
 To make the best out of a spike, it is vital to be well prepared before carrying it out. One cannot just _do a spike_ without defining what is the goal of the spike, what needs to be done, and in what time frame.
 
+### Knowledge base
+
+Most of the organizations have at least ona destination for documentation and other reference resources. Some may have multiple - which may lead to confusion if it is not clear which should be used as the team's knowledge base. This may lead to undesirable consequences:
+- Lost knowledge, as the team members struggle to find relevant documents,
+- Overall confusion, as whenever a document is needed one needs to consider and/or consult which knowledge base should be referenced,
+- Documents on related topic can be created independently, but never cross-referencing each other, leading to more confusion as future work could be based on either without taking the full context into consideration.
+
+In general, it is typically practical for a team to keep a single knowledge base to serve as a destination for internal project documentation. This might mean a dedicated documentation repository, Confluence Space, a dedicated directory tree within a broader Confluence Space etc. In any case, the next step to improve structure of such knowledge base is to create a dedicated destination for spike results - oftentimes another sub-directory, nested in project knowledge base. Furthermore, to improve accessibility of such knowledge base - and spike repository - is to cross-reference it frequently, for instance to provide context for work items. This way, team members can more easily access pieces of documentation relevant to the task at hand.
+
 ### Clarify expectations
 
 A well defined spike task includes the following elements:
@@ -61,5 +70,7 @@ Let us reference the famous [Rumsfeld Matrix](https://www.theuncertaintyproject.
 |             | Things we don’t realize we know but could leverage. | The true surprises we don’t know exist. |
 
 Most of the time, the goal of the spike is to improve the team's knowledge and/or awareness, especially by improving the knowledge gaps:
-- Improving awareness of _unknown unknowns_ so that they become _known unknowns_ - if the team has poor awareness with regard to the topic, it is usually more efficient to start with a spike to establish a basic understanding of the topic, establish what are the options and industry standards with regard to the subject.
-- Gathering knowledge and/or experience to turn _unknown knowns_ into _known knowns_ - once the team has built an awareness in the subject, and acknowledges its gaps, there is a room for a spike to explore a topic in-depth, gather available examples and/or prepare a PoC on how the subject could be addressed.
+1. Improving awareness of _unknown unknowns_ so that they become _known unknowns_ - if the team has poor awareness with regard to the topic, it is usually more efficient to start with a spike to establish a basic understanding of the topic, establish what are the options and industry standards with regard to the subject.
+2. Gathering knowledge and/or experience to turn _unknown knowns_ into _known knowns_ - once the team has built an awareness in the subject, and acknowledges its gaps, there is a room for a spike to explore a topic in-depth, gather available examples and/or prepare a PoC on how the subject could be addressed.
+
+Generally speaking, I find spikes to be a good fit to address these two areas. With regard to _unknown knowns_, it is better handled with chores and housekeeping than with spikes, as it might indicate excessive tribal knowledge in the team and missing, outdated or poorly accessible project documentation. Addressing such issues with spikes may feel unwieldy, and may even make the situation worse if the results of the spike would suffer from accessibility issues.
