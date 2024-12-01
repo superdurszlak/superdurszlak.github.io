@@ -53,3 +53,25 @@ Moreover, masking does not alleviate the underlying struggles of an autistic ind
 Masking is a strategy some autistic individuals apply in order to appear neurotypical, or at least less autistic than we truly are. It is a strategy that takes its toll on an individual's health, and puts us at a higher risk of anxiety, depression, and suicide - an ultimate price for their environments' convenience.
 {% endcapture %}
 {% include key-takeaway.html content=destructive_masking_insight %}
+
+## Direct communication is crucial
+
+{% capture direct_communication %}
+I frequently come across as blunt and rude - on one hand, I fail to recognize non-verbal and nuanced signs, such as when someone uses gestures, tone of voice, metaphors and sarcasm to convey their message indirectly. On the other - when communicating, I tend to speak my mind and communicate directly, at best softening up my statements and cushioning them to some extent. However, if communicating directly is a taboo - such as in some indirect cultures - even cushioned messages are received as arrogant and disrespectful. 
+{% endcapture %}
+{% include case-study-context.html content=direct_communication %}
+
+One of the most frequently observed autistic traits - and one contributing to our general struggles with social interactions - is the direct and literal we process messages and information. It is inherently difficult for to not only notice, but also interpret all of the non-verbal, nuanced social cues that might have a myriad of meanings depending on context - and the sheer complexity of such interactions is simply overwhelming for us. Interacting with an autistic individual and expecting them to correctly interpret such communication is draining for both sides:
+- An autistic may understand - or choose to understand - such message literally, but since the intended message was conveyed indirectly, it leads to misunderstandings;
+- Otherwise, they might recognize that their interlocutor conveyed an indirect message or gave social cues - however, the autistic person may see various possibilities and struggle to choose a correct interpretation, or may be oblivious of possible other interpretations altogether;
+- If they decide to interpret the social cue, it is likely they miss some context the other person knew and took for granted. In that case, the response of an autistic individual would likely be inconsistent with expectations;
+- Another way for an autistic individual might be to ask for clarification and explanation - however, it might lead to conflict as the other person may find this ask to be offensive, breaking a taboo, annoying or questioning their authority in case of superior-subordinate relationship;
+
+In all of these cases, an autistic individual is at a significant risk of mis-communicating with the other person. Regardless of the response, it may, and often does lead to conflicts, which in some cases may escalate. Not being able to properly interpret indirect messages and social cues, an autistic individual has no way of responding in a safe and constructive manner if their interlocutor does not acknowledge the necessity of direct communication.
+
+Likewise, autistic individuals are often misunderstood by neurotypical individuals, who expect hidden meanings and nuances, often seeing them where they are not meant to be. The meaning is laid out in plain sight, however our communication would be combed through for intentions and indirect messages. Our eye contact avoidance or unusual tone of voice can affect how our messages would be interpreted, leading to further misunderstandings and conflicts.
+
+{% capture direct_communication_insight %}
+For autistic individuals, it is easier to communicate with neurotypical people if direct and verbal communication is accepted. We struggle with indirectness and nuances, and are often misunderstood by interlocutors looking out for cues we could have accidentally made, while not intending to do so.
+{% endcapture %}
+{% include key-takeaway.html content=direct_communication_insight %}
