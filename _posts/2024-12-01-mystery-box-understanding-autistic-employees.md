@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mystery Box - Communication with autistic employees"
+title: "Mystery Box - Understanding autistic employees"
 highly_subjective: true
 case_study: true
 stock: telephones
@@ -15,7 +15,7 @@ Communication between neurotypical and neurodivergent individuals is often diffi
 
 In this post, I attempt to share an autistic perspective on various work-related situations, expectations and communication with neurotypical bosses, colleagues and interviewers. Please be mindful that autistic community is immensely diverse - my experiences is not representative of the entire autistic population. Not all of us experience the same difficulties, and not to the same degree - however, my observations of autistic communities I joined indicates there is some degree of similarity, and parallels can often be drawn.
 
-## It is not our choice to be autistic
+## Can we choose if/when to be autistic?
 
 {% capture autism_not_a_choice %}
 Throughout my life, I have been asked, ordered, or threatened to stop behaving and reacting the way I did, or to start displaying more neurotypical behaviors and mindset - now, as a late-diagnosed individual, I know for certain these behaviors are quite typical of Autism Spectrum Disorder. Examples include direct communication style, understanding messages at face value, and various forms of stimming - that is, behaviors that help reduce stress and may be more or less noticeable to others, for instance playing with all sorts of fidgets, such as pen or pencil. Failing to meet these expectations often led to punishments, hostility, and retribution.
@@ -32,6 +32,24 @@ The belief, or hope that autism can be "cured" or reversed is what lets predator
 - Suffering from co-morbidities, such as OCD, anxiety, depression to name a few.
 
 {% capture autism_not_a_choice_insight %}
-Autism and other types of neurodivergence stem from neurological differences. It is not an individual's choice to have them or not.
+Autism and other types of neurodivergence stem from neurological differences, including brain structure, and brain activity. It is not an individual's choice to have them or not.
 {% endcapture %}
 {% include key-takeaway.html content=autism_not_a_choice_insight %}
+
+## Masking is self-destructive
+
+{% capture destructive_masking %}
+In my case, there is no verbal impairment, and my over-sensitivities are usually manageable, however I still do struggle with social interactions, and have significant difficulty reading between the lines, noticing an interpreting social cues. Typical of milder cases of autism, I can mask my autism to some extent, though it is frequently ineffective. Most notably, I try to withstand stressful situations and stimuli while suppressing my body's stress responses, and attempt to leverage rules, patterns and logic to reason about social interactions.
+{% endcapture %}
+{% include case-study-context.html content=destructive_masking %}
+
+Neurotypical environments, especially school and workplace, require neurodivergent individuals to behave in neurotypical ways and suppress their individual traits in order to be tolerated. Some autistic individuals are capable of camouflaging their autistic traits in order to meet these expectations - especially those with milder autism, better developed cognitive abilities, and not suffering from verbal impairment. At face value, it may seem tempting to require autistics to mask in order to fit in - after all, neurotypical peers and superiors would not need to leave their comfort zone and adapt to neurodivergence.
+
+Unfortunately, according to [National Autistic Society](https://www.autism.org.uk/advice-and-guidance/topics/behaviour/masking) masking is a highly unhealthy coping strategy that is not only physically and emotionally draining, but also has detrimental effects on individual's health. It puts an autistic person at an elevated risk of developing depression and anxiety disorders - which are already frequent in autistic population. Likewise, while being on the autism spectrum already makes an individual several times more likely to experience suicidal thoughts, and attempt to take their life, suicidal thoughts and behaviors are again even more prevalent in case of masking autistics. Being able to mask means being able to recognize we are not tolerated, let alone accepted, by the society and our environment - a highly depressing thought.
+
+Moreover, masking does not alleviate the underlying struggles of an autistic individual. We apply masking to avoid attracting negative attention, and retribution to our non-neurotypical ways of communication. Internally, we remain just as autistic as we would be without masking - and emulating neurotypical behavior is physically and emotionally draining. It is also only partially effective - the more severe an individual's autistic traits are, the more needs to be done in order to mask them, and the more difficult it is to learn masking strategies in the first place.
+
+{% capture destructive_masking_insight %}
+Masking is a strategy some autistic individuals apply in order to appear neurotypical, or at least less autistic than we truly are. It is a strategy that takes its toll on an individual's health, and puts us at a higher risk of anxiety, depression, and suicide - an ultimate price for their environments' convenience.
+{% endcapture %}
+{% include key-takeaway.html content=destructive_masking_insight %}
