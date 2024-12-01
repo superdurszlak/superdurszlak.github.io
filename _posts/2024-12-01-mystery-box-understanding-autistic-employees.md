@@ -75,3 +75,29 @@ Likewise, autistic individuals are often misunderstood by neurotypical individua
 For autistic individuals, it is easier to communicate with neurotypical people if direct and verbal communication is accepted. We struggle with indirectness and nuances, and are often misunderstood by interlocutors looking out for cues we could have accidentally made, while not intending to do so.
 {% endcapture %}
 {% include key-takeaway.html content=direct_communication_insight %}
+
+## We miss unwritten rules and implied expectations
+
+{% capture unwritten_rules %}
+I often attract negative attention by breaking rules and not meeting expectations I was oblivious to. During job interviews, if I get asked to share how do I address conflicts and/or why am I looking for a new job, I would provide a detailed explanation with examples, something fellow autistics refer to as "info-dumping" - only to be later rejected for lack of social skills and professionalism. Likewise, I struggle when I get hired for specific skills, and then am implicitly expected to not apply them if it challenges the status quo. It is simply unnatural for me to be asked to meet certain formal expectations, but then expected to follow implicit rules that negate formal ones.
+{% endcapture %}
+{% include case-study-context.html content=unwritten_rules %}
+
+Possibly due to literal understanding of communication, and impaired ability to interpret indirectness and social cues, autistic individuals often struggle with what we perceive as lack of integrity - when the rules and expectations set up for us differ from what is actually expected. This is a fairly typical situation in various social contexts:
+- Setting up expectations for social interactions, such as getting involved in small talk or not talking about certain subjects;
+- Vague requirements and scope of work, with an expectation that the assignee would know all of the necessary context to guess the details;
+- Scolding an autistic individual for inappropriate behavior, without explaining what would be expected instead;
+- Rules that are in place but never followed;
+- Rules that are known to members of the community, but not laid out openly.
+
+Such interactions have a highly negative effect on autistic individuals, for multiple reasons:
+- Similarly to indirect communication, we struggle to respond properly in such contexts;
+- Failing to follow unwritten rules and guess the expectations correctly typically attracts a lot of negative attention;
+- We often face other negative consequences, such as punishments, public shaming, bullying, ostracizing;
+- Without being introduced to such rules and expectations, we are often unable to avoid such situations in the future;
+- This is typically a repeating pattern, leading to chronic stress, anxiety, social withdrawal, as well as social and professional marginalization.
+
+{% capture unwritten_rules_insight %}
+Autistic individuals are frequently oblivious to rules they have not been introduced to in a clear manner, and struggle meeting expectations if they were not presented to them. Similarly, it is immensely confusing to be introduced to a rule or expectation we are implicitly expected not to follow. Setting up rules and expectations openly is crucial for effective cooperation with autistic individuals, and integrating them into the community.
+{% endcapture %}
+{% include key-takeaway.html content=unwritten_rules_insight %}
