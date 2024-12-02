@@ -15,7 +15,7 @@ Communication between neurotypical and neurodivergent individuals is often diffi
 
 In this post, I attempt to share an autistic perspective on various work-related situations, expectations and communication with neurotypical bosses, colleagues and interviewers. Please be mindful that autistic community is immensely diverse - my experiences is not representative of the entire autistic population. Not all of us experience the same difficulties, and not to the same degree - however, my observations of autistic communities I joined indicates there is some degree of similarity, and parallels can often be drawn.
 
-## Can we choose if/when to be autistic?
+## Can we choose when to be autistic?
 
 {% capture autism_not_a_choice %}
 Throughout my life, I have been asked, ordered, or threatened to stop behaving and reacting the way I did, or to start displaying more neurotypical behaviors and mindset - now, as a late-diagnosed individual, I know for certain these behaviors are quite typical of Autism Spectrum Disorder. Examples include direct communication style, understanding messages at face value, and various forms of stimming - that is, behaviors that help reduce stress and may be more or less noticeable to others, for instance playing with all sorts of fidgets, such as pen or pencil. Failing to meet these expectations often led to punishments, hostility, and retribution.
@@ -101,3 +101,33 @@ Such interactions have a highly negative effect on autistic individuals, for mul
 Autistic individuals are frequently oblivious to rules they have not been introduced to in a clear manner, and struggle meeting expectations if they were not presented to them. Similarly, it is immensely confusing to be introduced to a rule or expectation we are implicitly expected not to follow. Setting up rules and expectations openly is crucial for effective cooperation with autistic individuals, and integrating them into the community.
 {% endcapture %}
 {% include key-takeaway.html content=unwritten_rules_insight %}
+
+## Negative perception
+
+{% capture negative_perception %}
+I tend to both give negative impression, and to be especially sensitive to negative signals from others. There are multiple contributing factors - my tone of voice, which often comes across as upset or rude despite my neutral attitude; my limited and rarely joyful facial expression; co-morbidities to autism, most notably anxiety and depression; and finally, learned patterns of negative interactions, which make me anticipate further negative interactions.
+{% endcapture %}
+{% include case-study-context.html content=negative_perception %}
+
+Coming across as negative is another trait that seems to be fairly common among individuals on the autism spectrum. It is vital to acknowledge there are multiple reasons for that:
+- Frequent co-morbidities, especially depression and anxiety disorders, make us susceptible to perceiving reality in a pessimistic way;
+- Functioning in, and perpetually adapting to a neurotypical society and workplace is an exhausting, never-ending effort that burdens our psyche, leaving little energy for joy;
+- We run into plentiful negative situations, which neurotypical individuals can often dodge or de-escalate, leading to elevated stress levels;
+- Many autistic individuals have experienced long-term bullying as children and adolescents, which leaves them traumatized in their adult lives;
+- Higher-functioning autistic individuals, who are capable of finding employment, are typically fully aware of rejection and ostracism they are facing, recognizing certain patterns in behaviors.
+
+These traits and experiences often make us perceive the external world in a negative light. Moreover, our past and current experiences only confirm and reinforce this pessimistic attitude, making it difficult to change the perspective. In workplace settings, we are frequently expected to suppress our autistic traits in order to appear professional and be tolerated - which further contributes to negative perception of reality, which appears to us as oppressive. For these reasons, high-functioning autistic individuals are often highly sensitive to negative communication, such as criticism and rudeness - to us, these are obvious signs of imminent threat, rather than a signal that someone had a bad day.
+
+Additionally, the necessity to survive in an oppressive, if not hostile environment for extended periods makes it difficult for autistic individuals to treat depression and anxiety. If these conditions develop in an autistic individual, it is immensely difficult for them to treat them effectively - without being able to address the causes:
+- Being on the autism spectrum in the first place;
+- Experiencing negative situations related to their autism, such as public shaming, ostracism, workplace bullying and harassment;
+- Functioning in an environment that finds their inherent traits unacceptable.
+
+{% capture negative_perception_insight %}
+Coming across as negative is a common trait of autistic individuals, especially if they are high-functioning. At the same time, it is deeply rooted in their past experiences, pattern recognition, and possibly depression and other disorders. Improving mental well-being of autistic individual, similarly to other vulnerable groups, necessitates a safe and inclusive work environment.
+{% endcapture %}
+{% include key-takeaway.html content=negative_perception_insight %}
+
+## Summary
+
+It is difficult for autistic and allistic individuals to communicate effectively with each other. These difficulties stem from various factors, from autistics' struggles with indirect messages, implied expectations, and a baggage of difficult experiences, to over-interpreting autistic behaviors and communication by neurotypical individuals. Autistic people are at a disadvantage in this regard - we are a minority and expected to adapt to a largely neurotypical society, while our condition makes it immensely difficult, if not impossible to meet this expectation.
