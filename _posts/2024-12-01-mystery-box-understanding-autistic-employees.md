@@ -31,6 +31,8 @@ The belief, or hope that autism can be "cured" or reversed is what lets predator
 - Being both misunderstood and struggling to understand others,
 - Suffering from co-morbidities, such as OCD, anxiety, depression to name a few.
 
+An extreme scenario is a meltdown or shutdown - a situation where an autistic individual is overwhelmed with stimuli, emotions and/or stress to the point they cannot control themselves anymore. One possible outcome is visible and verbal, uncontrolled reactions - screaming, covering our eyes or ears, escaping, even physical aggression towards ourselves or others. The other may manifest itself as an inability to speak, process verbal and/or sensory inputs, overall numbness, inability to make decision or desire to withdraw and hide in a safe place. 
+
 {% capture autism_not_a_choice_insight %}
 Autism and other types of neurodivergence stem from neurological differences, including brain structure, and brain activity. It is not an individual's choice to have them or not.
 {% endcapture %}
@@ -130,4 +132,6 @@ Coming across as negative is a common trait of autistic individuals, especially 
 
 ## Summary
 
-It is difficult for autistic and allistic individuals to communicate effectively with each other. These difficulties stem from various factors, from autistics' struggles with indirect messages, implied expectations, and a baggage of difficult experiences, to over-interpreting autistic behaviors and communication by neurotypical individuals. Autistic people are at a disadvantage in this regard - we are a minority and expected to adapt to a largely neurotypical society, while our condition makes it immensely difficult, if not impossible to meet this expectation.
+It is challenging for autistic and allistic individuals to communicate effectively with each other. These difficulties stem from various factors, from autistics' struggles with indirect messages, implied expectations, and a baggage of difficult experiences, to over-interpreting autistic behaviors and communication by neurotypical individuals. Autistic people are at a disadvantage in this regard - we are a minority and expected to adapt to a largely neurotypical society, while our condition makes it immensely difficult, if not impossible to meet this expectation.
+
+Improving the situation requires a better understanding of how, and why, autistic individuals function and behave in certain ways. Building a safer and more accepting society is a far more effective strategy at alleviating negative sides of autism than stigmatization, ostracism and punishing for displaying autistic traits.
