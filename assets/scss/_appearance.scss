@@ -7,7 +7,7 @@ $contrast-slight: 125%;
 $contrast-boost: 150%;
 $contrast-border: $thin-border;
 $full-invert: invert(100%) hue-rotate(180deg);
-$color-blind-filters: "filters/color-blindness.svg";
+$color-filters: "filters/color-blindness.svg";
 
 :root {
   --content-width: 80%;
@@ -194,27 +194,27 @@ html[data-large-font="true"] {
   }
 }
 
-html[data-color-filters="protanopia"] {
+html[data-color-filter="protanopia"] {
   body {
-    filter: url($color-blind-filters + "#protanopia");
+    filter: url($color-filters + "#protanopia");
   }
 }
 
-html[data-color-filters="deuteranopia"] {
+html[data-color-filter="deuteranopia"] {
   body {
-    filter: url($color-blind-filters + "#deuteranopia");
+    filter: url($color-filters + "#deuteranopia");
   }
 }
 
-html[data-color-filters="tritanopia"] {
+html[data-color-filter="tritanopia"] {
   body {
-    filter: url($color-blind-filters + "#tritanopia");
+    filter: url($color-filters + "#tritanopia");
   }
 }
 
-html[data-color-filters="achromatopsia"] {
+html[data-color-filter="achromatopsia"] {
   body {
-    filter: url($color-blind-filters + "#achromatopsia");
+    filter: url($color-filters + "#achromatopsia");
   }
 }
 

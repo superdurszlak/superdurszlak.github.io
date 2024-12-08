@@ -11,11 +11,13 @@ const giscusThemeMapping = {
   "light-contrast": "light_high_contrast",
 };
 
-const defaultChoice = "browser";
+const defaultThemeChoice = "browser";
+const defaultColorFilterChoice = "default";
 
 const themeKey = "theme";
 const contrastKey = "contrast";
 const fontSizeKey = "fontSize";
+const colorFilterKey = "colorFilter";
 
 loadAppearanceFromLocalStorage();
 
@@ -86,16 +88,21 @@ function updateLocalStorageState() {
 
   const largeFontEnabled = isLargeFontEnabled();
   localStorage.setItem(fontSizeKey, largeFontEnabled);
+
+  const colorFilter = getSelectedColorFilter();
+  localStorage.setItem(colorFilterKey, colorFilter);
 }
 
 function loadAppearanceFromLocalStorage() {
-  const themeSelection = localStorage.getItem(themeKey) || defaultChoice;
+  const themeSelection = localStorage.getItem(themeKey) || defaultThemeChoice;
   const contrastSelection = localStorage.getItem(contrastKey) === "true";
   const fontSizeSelection = localStorage.getItem(fontSizeKey) === "true";
+  const colorFilterSelection = localStorage.getItem(colorFilterKey) || defaultColorFilterChoice;
 
   setThemeChoice(themeSelection);
   setContrastChoice(contrastSelection);
   setFontSizeChoice(fontSizeSelection);
+  setColorFilterChoice(colorFilterSelection);
 
   document.documentElement.setAttribute(
     "data-theme",
@@ -103,6 +110,7 @@ function loadAppearanceFromLocalStorage() {
   );
   document.documentElement.setAttribute("data-contrast", contrastSelection);
   document.documentElement.setAttribute("data-large-font", fontSizeSelection);
+  document.documentElement.setAttribute("data-color-filter", colorFilterSelection);
 
   setThemes(themeSelection, contrastSelection);
   setDiagramsSize(fontSizeSelection);
@@ -112,12 +120,20 @@ function getSelectedTheme() {
   const selection = document.querySelector(
     '#theme-menu input[name="theme"]:checked'
   );
-  const choice = selection ? selection.value : defaultChoice;
+  const choice = selection ? selection.value : defaultThemeChoice;
   return choice;
 }
 
 function getThemeFromChoice(choice) {
   return (themeChoiceMapping[choice] || getDefaultPreference)();
+}
+
+function getSelectedColorFilter() {
+  const selection = document.querySelector(
+    '#color-filters-menu input[name="color-filter"]:checked'
+  );
+  const choice = selection ? selection.value : defaultColorFilterChoice;
+  return choice;
 }
 
 function isContrastEnabled() {
@@ -148,6 +164,13 @@ function setFontSizeChoice(choice) {
   const toggle = getFontSizeToggle();
   if (toggle) {
     toggle.value = choice;
+  }
+}
+
+function setColorFilterChoice(choice) {
+  const toggle = document.querySelector(`#color-filters-menu input[value="${choice}"]`);
+  if (toggle) {
+    toggle.checked = true;
   }
 }
 
