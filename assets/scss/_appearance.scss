@@ -33,6 +33,8 @@ $color-filters: "filters/color-filters.svg";
   --primary-box-color: #e2eaeb;
   --secondary-box-color: #e5e5e5;
   --color-blind-scroll-hover-color: #808080;
+  --adapt-vision-impairment-suffix: "";
+  --simulate-vision-impairment-suffix: "";
   --default-font-size: 4.3mm;
   --desktop-font-size: 4.9mm;
 }
@@ -195,27 +197,75 @@ html[data-large-font="true"] {
   }
 }
 
-html[data-color-filter="protanopia"] {
-  body {
-    filter: url($color-filters + "#protanopia");
+html[data-adapt-vision-impairment="true"] {
+  &[data-color-filter="protanopia"] {
+    body {
+      filter: url($color-filters + "#protanopia-adapted");
+    }
+  }
+
+  &[data-color-filter="deuteranopia"] {
+    body {
+      filter: url($color-filters + "#deuteranopia-adapted");
+    }
+  }
+
+  &[data-color-filter="tritanopia"] {
+    body {
+      filter: url($color-filters + "#tritanopia-adapted");
+    }
+  }
+
+  &[data-color-filter="achromatopsia"] {
+    body {
+      filter: url($color-filters + "#achromatopsia");
+    }
   }
 }
 
-html[data-color-filter="deuteranopia"] {
-  body {
-    filter: url($color-filters + "#deuteranopia");
+html[data-simulate-vision-impairment="true"] {
+  &[data-color-filter="protanopia"] {
+    body {
+      filter: url($color-filters + "#protanopia-simulated");
+    }
+  }
+
+  &[data-color-filter="deuteranopia"] {
+    body {
+      filter: url($color-filters + "#deuteranopia-simulated");
+    }
+  }
+
+  &[data-color-filter="tritanopia"] {
+    body {
+      filter: url($color-filters + "#tritanopia-simulated");
+    }
+  }
+
+  &[data-color-filter="achromatopsia"] {
+    body {
+      filter: url($color-filters + "#achromatopsia");
+    }
   }
 }
 
-html[data-color-filter="tritanopia"] {
-  body {
-    filter: url($color-filters + "#tritanopia");
+html[data-adapt-vision-impairment="true"][data-simulate-vision-impairment="true"] {
+  &[data-color-filter="protanopia"] {
+    body {
+      filter: url($color-filters + "#protanopia-adapted") url($color-filters + "#protanopia-simulated");
+    }
   }
-}
 
-html[data-color-filter="achromatopsia"] {
-  body {
-    filter: url($color-filters + "#achromatopsia");
+  &[data-color-filter="deuteranopia"] {
+    body {
+      filter: url($color-filters + "#deuteranopia-adapted") url($color-filters + "#deuteranopia-simulated");
+    }
+  }
+
+  &[data-color-filter="tritanopia"] {
+    body {
+      filter: url($color-filters + "#tritanopia-adapted") url($color-filters + "#tritanopia-simulated");
+    }
   }
 }
 

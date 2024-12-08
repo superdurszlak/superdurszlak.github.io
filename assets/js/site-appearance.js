@@ -18,6 +18,8 @@ const themeKey = "theme";
 const contrastKey = "contrast";
 const fontSizeKey = "fontSize";
 const colorFilterKey = "colorFilter";
+const colorAdaptKey = "colorAdapt";
+const colorSimulateKey = "colorSimulate";
 
 loadAppearanceFromLocalStorage();
 
@@ -89,6 +91,12 @@ function updateLocalStorageState() {
   const largeFontEnabled = isLargeFontEnabled();
   localStorage.setItem(fontSizeKey, largeFontEnabled);
 
+  const colorAdaptEnabled = isColorAdaptEnabled();
+  localStorage.setItem(colorAdaptKey, colorAdaptEnabled);
+
+  const colorSimulateEnabled = isColorSimulateEnabled();
+  localStorage.setItem(colorSimulateKey, colorSimulateEnabled);
+
   const colorFilter = getSelectedColorFilter();
   localStorage.setItem(colorFilterKey, colorFilter);
 }
@@ -97,12 +105,18 @@ function loadAppearanceFromLocalStorage() {
   const themeSelection = localStorage.getItem(themeKey) || defaultThemeChoice;
   const contrastSelection = localStorage.getItem(contrastKey) === "true";
   const fontSizeSelection = localStorage.getItem(fontSizeKey) === "true";
-  const colorFilterSelection = localStorage.getItem(colorFilterKey) || defaultColorFilterChoice;
+  const colorAdaptSelection = localStorage.getItem(colorAdaptKey) === "true";
+  const colorSimulateSelection =
+    localStorage.getItem(colorSimulateKey) === "true";
+  const colorFilterSelection =
+    localStorage.getItem(colorFilterKey) || defaultColorFilterChoice;
 
   setThemeChoice(themeSelection);
   setContrastChoice(contrastSelection);
   setFontSizeChoice(fontSizeSelection);
   setColorFilterChoice(colorFilterSelection);
+  setColorAdaptChoice(colorAdaptSelection);
+  setColorSimulateChoice(colorSimulateSelection);
 
   document.documentElement.setAttribute(
     "data-theme",
@@ -110,7 +124,18 @@ function loadAppearanceFromLocalStorage() {
   );
   document.documentElement.setAttribute("data-contrast", contrastSelection);
   document.documentElement.setAttribute("data-large-font", fontSizeSelection);
-  document.documentElement.setAttribute("data-color-filter", colorFilterSelection);
+  document.documentElement.setAttribute(
+    "data-color-filter",
+    colorFilterSelection
+  );
+  document.documentElement.setAttribute(
+    "data-adapt-vision-impairment",
+    colorAdaptSelection
+  );
+  document.documentElement.setAttribute(
+    "data-simulate-vision-impairment",
+    colorSimulateSelection
+  );
 
   setThemes(themeSelection, contrastSelection);
   setDiagramsSize(fontSizeSelection);
@@ -146,6 +171,16 @@ function isLargeFontEnabled() {
   return toggle ? toggle.value : false;
 }
 
+function isColorAdaptEnabled() {
+  const toggle = getColorAdaptToggle();
+  return toggle ? toggle.value : false;
+}
+
+function isColorSimulateEnabled() {
+  const toggle = getColorSimulateToggle();
+  return toggle ? toggle.value : false;
+}
+
 function setThemeChoice(choice) {
   const toggle = document.querySelector(`#theme-menu input[value="${choice}"]`);
   if (toggle) {
@@ -167,8 +202,24 @@ function setFontSizeChoice(choice) {
   }
 }
 
+function setColorAdaptChoice(choice) {
+  const toggle = getColorAdaptToggle();
+  if (toggle) {
+    toggle.value = choice;
+  }
+}
+
+function setColorSimulateChoice(choice) {
+  const toggle = getColorSimulateToggle();
+  if (toggle) {
+    toggle.value = choice;
+  }
+}
+
 function setColorFilterChoice(choice) {
-  const toggle = document.querySelector(`#color-filters-menu input[value="${choice}"]`);
+  const toggle = document.querySelector(
+    `#color-filters-menu input[value="${choice}"]`
+  );
   if (toggle) {
     toggle.checked = true;
   }
@@ -180,6 +231,14 @@ function getContrastToggle() {
 
 function getFontSizeToggle() {
   return document.getElementById("font-size-setting");
+}
+
+function getColorAdaptToggle() {
+  return document.getElementById("adapt-vision-setting");
+}
+
+function getColorSimulateToggle() {
+  return document.getElementById("simulate-vision-setting");
 }
 
 function setThemes(themeSelection, contrastEnabled) {
