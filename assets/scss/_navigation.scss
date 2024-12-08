@@ -73,6 +73,13 @@
   padding: $half-margin;
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;
+  hr {
+    border-top-width: $thin-border;
+    border-bottom-width: 0;
+    border-color: inherit;
+    border-style: solid;
+    margin: $half-margin;
+  }
 }
 
 .menu-toggle:checked ~ .menu-body {

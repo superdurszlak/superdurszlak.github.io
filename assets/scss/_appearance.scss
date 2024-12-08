@@ -7,6 +7,7 @@ $contrast-slight: 125%;
 $contrast-boost: 150%;
 $contrast-border: $thin-border;
 $full-invert: invert(100%) hue-rotate(180deg);
+$color-blind-filters: "filters/color-blindness.svg";
 
 :root {
   --content-width: 80%;
@@ -190,6 +191,30 @@ html[data-large-font="true"] {
   .svg-icon {
     transform-origin: top left;
     transform: scale(1.4);
+  }
+}
+
+html[data-color-filters="protanopia"] {
+  body {
+    filter: url($color-blind-filters + "#protanopia");
+  }
+}
+
+html[data-color-filters="deuteranopia"] {
+  body {
+    filter: url($color-blind-filters + "#deuteranopia");
+  }
+}
+
+html[data-color-filters="tritanopia"] {
+  body {
+    filter: url($color-blind-filters + "#tritanopia");
+  }
+}
+
+html[data-color-filters="achromatopsia"] {
+  body {
+    filter: url($color-blind-filters + "#achromatopsia");
   }
 }
 
