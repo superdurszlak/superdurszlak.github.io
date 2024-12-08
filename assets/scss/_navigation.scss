@@ -100,7 +100,7 @@
   border: none;
   background: none;
   border-radius: $border-radius;
-  padding: 0 $half-margin;  
+  padding: 0 $half-margin;
   margin: 0.3em 0;
   border-width: $thin-border;
   border-color: var(--background-color);
@@ -109,7 +109,9 @@
   cursor: pointer;
 }
 
-.menu-item:has(.menu-option:is(:checked, [value="true"], [data-selected="true"])) {
+.menu-item:has(
+    .menu-option:is(:checked, [value="true"], [data-selected="true"])
+  ) {
   background-color: var(--primary-color);
   border-color: var(--background-color);
   span {
