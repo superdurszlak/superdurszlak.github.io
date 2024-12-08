@@ -252,19 +252,19 @@ html[data-simulate-vision-impairment="true"] {
 html[data-adapt-vision-impairment="true"][data-simulate-vision-impairment="true"] {
   &[data-color-filter="protanopia"] {
     body {
-      filter: url($color-filters + "#protanopia-adapted-simulated");
+      filter: url($color-filters + "#protanopia-adapted") url($color-filters + "#protanopia-simulated");
     }
   }
 
   &[data-color-filter="deuteranopia"] {
     body {
-      filter: url($color-filters + "#deuteranopia-adapted-simulated");
+      filter: url($color-filters + "#deuteranopia-adapted") url($color-filters + "#deuteranopia-simulated");
     }
   }
 
   &[data-color-filter="tritanopia"] {
     body {
-      filter: url($color-filters + "#tritanopia-adapted-simulated");
+      filter: url($color-filters + "#tritanopia-adapted") url($color-filters + "#tritanopia-simulated");
     }
   }
 }
