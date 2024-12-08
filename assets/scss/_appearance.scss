@@ -32,6 +32,7 @@ $color-filters: "filters/color-blindness.svg";
   --background-color: #f8f8f8;
   --primary-box-color: #e2eaeb;
   --secondary-box-color: #e5e5e5;
+  --color-blind-scroll-hover-color: #808080;
   --default-font-size: 4.3mm;
   --desktop-font-size: 4.9mm;
 }
@@ -187,7 +188,7 @@ html[data-large-font="true"] {
     height: 1em;
     width: auto;
   }
-  
+
   .svg-icon {
     transform-origin: top left;
     transform: scale(1.4);
@@ -215,6 +216,25 @@ html[data-color-filter="tritanopia"] {
 html[data-color-filter="achromatopsia"] {
   body {
     filter: url($color-filters + "#achromatopsia");
+  }
+}
+
+:not(html[data-color-filter="default"]) {
+  /* The track (background) of the scrollbar */
+  ::-webkit-scrollbar-track {
+    background: var(--secondary-box-color); /* Color of the track */
+  }
+
+  /* The draggable thumb of the scrollbar */
+  ::-webkit-scrollbar-thumb {
+    background: var(--secondary-color); /* Color of the thumb */
+  }
+
+  /* Hover effect for the thumb */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(
+      --color-blind-scroll-hover-color
+    ); /* Special shade for hover state */
   }
 }
 
